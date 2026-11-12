@@ -1,5 +1,5 @@
 name: Feature request
-description: Suggest an idea for Oxidian
+description: Suggest an idea for Scrapwarden
 labels: [enhancement]
 body:
   - type: textarea

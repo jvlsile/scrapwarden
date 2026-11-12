@@ -1,25 +1,25 @@
-<p align="center"><img src="docs/brand/logo-512.png" width="112" alt="Oxidian logo"></p>
+<p align="center"><img src="docs/brand/logo-512.png" width="112" alt="Scrapwarden logo"></p>
 
-# Oxidian
+# Scrapwarden
 
-[Website](https://jvlsile.github.io/oxidian/) · [English](README.md) · [Español](README.es.md)
+[Website](https://jvlsile.github.io/scrapwarden/) · [English](README.md) · [Español](README.es.md)
 
-[![CI](https://github.com/jvlsile/oxidian/actions/workflows/ci.yml/badge.svg)](https://github.com/jvlsile/oxidian/actions/workflows/ci.yml) [![Latest release](https://img.shields.io/github/v/release/jvlsile/oxidian?include_prereleases)](https://github.com/jvlsile/oxidian/releases/latest) [![License: MIT](https://img.shields.io/badge/license-MIT-5BB5A2)](LICENSE)
+[![CI](https://github.com/jvlsile/scrapwarden/actions/workflows/ci.yml/badge.svg)](https://github.com/jvlsile/scrapwarden/actions/workflows/ci.yml) [![Latest release](https://img.shields.io/github/v/release/jvlsile/scrapwarden?include_prereleases)](https://github.com/jvlsile/scrapwarden/releases/latest) [![License: MIT](https://img.shields.io/badge/license-MIT-5BB5A2)](LICENSE)
 
 **A free, self-hosted web panel to install, run, moderate and grow your Rust dedicated server.**
 Windows and Linux. English, Spanish, Portuguese and French. No cloud account, no subscription: it runs on your own machine and your data stays with you.
 
 ![Live map with roads, rails, rivers, monuments, events and players](docs/screenshots/map.png)
 
-> **🧪 Public beta.** Oxidian is new: things may break. If you find a bug, use **Report a bug** in the panel's side menu or [open an issue](https://github.com/jvlsile/oxidian/issues/new/choose); it helps a lot.
+> **🧪 Public beta.** Scrapwarden is new: things may break. If you find a bug, use **Report a bug** in the panel's side menu or [open an issue](https://github.com/jvlsile/scrapwarden/issues/new/choose); it helps a lot.
 
-> Oxidian is free and open source (MIT). If it saves you time, you can support development on [Ko-fi](https://ko-fi.com/oxidian) ❤
+> Scrapwarden is free and open source (MIT). If it saves you time, you can support development on [Ko-fi](https://ko-fi.com/scrapwarden) ❤
 
 ---
 
-## Why Oxidian
+## Why Scrapwarden
 
-Most Rust admins juggle several tools: one to install the server, a paid RCON dashboard, a Discord bot, a store plugin and a pile of scripts for wipes. Oxidian puts all of it in one panel:
+Most Rust admins juggle several tools: one to install the server, a paid RCON dashboard, a Discord bot, a store plugin and a pile of scripts for wipes. Scrapwarden puts all of it in one panel:
 
 - **Set up**: installs SteamCMD, the server, and Oxide or Carbon in one click, with a real progress bar.
 - **Run**: live console, scheduled restarts with warnings, backups, and a wipe planner that knows Facepunch's forced wipe.
@@ -38,7 +38,7 @@ Most Rust admins juggle several tools: one to install the server, a paid RCON da
 | **Players & teams** | Kick, ban, owner/moderator, give items, inventory viewer with item icons. Team-size limit alerts. |
 | **F7 report tickets** | Every in-game F7 opens a ticket, grouped by reported player. Assign, add staff notes, close with a sanction and thank the reporters. |
 | **In-game staff (`/staff`)** | A UI inside Rust for your mods and admins: reports, warn, mute, kick, ban, teleport, heal, time, weather, events. Two levels, everything logged. |
-| **Shared bans** | Oxidian acts as a server for Rust's official **Centralized Banning**: a ban on one server applies to all of them, vanilla included, no plugins. One secret key per server, optional external lists (another Oxidian, Server Armour) in alert or block mode. |
+| **Shared bans** | Scrapwarden acts as a server for Rust's official **Centralized Banning**: a ban on one server applies to all of them, vanilla included, no plugins. One secret key per server, optional external lists (another Scrapwarden, Server Armour) in alert or block mode. |
 | **Moderation** | Notes, warnings with automatic escalation, timed mutes and temp bans, word filter with wildcards. |
 | **Watch** | Alerts for suspicious headshot rates, impossible distances, antihack violations, kill streaks, shared IPs and ban evasion. Steam checks (VAC, recent game bans, account age, private profile, hours). VPN, proxy, hosting-IP and country detection. |
 | **Rates & world** | One-click PvP/PvE, gather / pickup / quarry / craft multipliers, decay, upkeep, radiation, time of day, weather and events. |
@@ -47,7 +47,7 @@ Most Rust admins juggle several tools: one to install the server, a paid RCON da
 | **Performance** | Startup timing by phase with tips to boot faster, low-FPS / high-RAM / frozen-server alerts and optional auto-restart. |
 | **Discord bot** | Game chat ↔ Discord channel, `/status`, `/players`, `/wipe` (shown in each user's Discord language), plus staff commands (`/say`, `/kick`, `/ban`, `/vip`, `/tickets`). No extra dependencies. |
 | **Public page** | A page for your players at `/server`: status, connect button, wipe countdown, rates, activity, map (without player positions), rules and links. |
-| **Tebex store** | Purchases are delivered automatically over RCON: no Tebex plugin, no open ports. `oxidian.vip {id} vip 30` grants a VIP that expires on its own. |
+| **Tebex store** | Purchases are delivered automatically over RCON: no Tebex plugin, no open ports. `scrapwarden.vip {id} vip 30` grants a VIP that expires on its own. |
 | **VIP with expiry** | Put a player in an Oxide/Carbon group for N days. Optional queue priority. Removed automatically when it expires. |
 | **Plugins & permissions** | uMod search and one-click install, upload `.cs`, enable/disable, reload, JSON config editor, update checks. Grant permissions and manage groups. |
 | **Admins** | Multiple users with roles (owner, admin, moderator, viewer), two-factor authentication (TOTP) and an activity log of who did what. |
@@ -78,11 +78,11 @@ More screenshots in [`docs/screenshots`](docs/screenshots).
 
 ## Quick start
 
-Download the [latest release](https://github.com/jvlsile/oxidian/releases/latest) (or `git clone https://github.com/jvlsile/oxidian.git`).
+Download the [latest release](https://github.com/jvlsile/scrapwarden/releases/latest) (or `git clone https://github.com/jvlsile/scrapwarden.git`).
 
 **Windows**
 
-1. Extract it, for example to `C:\Oxidian`.
+1. Extract it, for example to `C:\Scrapwarden`.
 2. Right-click **`install-windows.ps1`** → **Run with PowerShell**. It installs Node.js and the dependencies, opens the firewall ports and can register the panel to start with Windows.
 3. Open <http://localhost:8080> and create your owner account.
 
@@ -91,7 +91,7 @@ Next time, just double-click **`start-windows.bat`**.
 **Linux**
 
 ```bash
-cd oxidian
+cd scrapwarden
 sudo bash install.sh
 ```
 
@@ -111,11 +111,11 @@ The built-in **Wiki** walks you through everything else.
 
 ## Existing and rented servers
 
-**Same machine.** Install → *I already have one here*: point to the folder that contains `RustDedicated` and click **Detect**. Oxidian reads your start script (`.bat`, `.cmd`, `.sh`) and `server.cfg` to keep the same ports, identity, RCON password, name, map and seed, and keeps your other launch parameters. Nothing is reinstalled or deleted. If the server is already running, the panel attaches to it.
+**Same machine.** Install → *I already have one here*: point to the folder that contains `RustDedicated` and click **Detect**. Scrapwarden reads your start script (`.bat`, `.cmd`, `.sh`) and `server.cfg` to keep the same ports, identity, RCON password, name, map and seed, and keeps your other launch parameters. Nothing is reinstalled or deleted. If the server is already running, the panel attaches to it.
 
 **Rented server (remote mode).** Install → *Rented server (RCON)*: enter the IP, RCON port and password from your host. Everything that works over RCON is available: console, players, chat, moderation, F7 tickets, `/staff`, watch, statistics, Discord bot, Tebex, VIP, rates, world controls and the public page. Installing, backups and wipes stay with your host.
 
-**FTP/SFTP access (optional).** In remote mode, add your host's FTP, FTPS or SFTP details and the folder that contains `RustDedicated`, then press **Test**. The **Plugins** section then works as usual (uMod install, upload, enable/disable, config editor) and the panel uploads and updates `OxidianBridge.cs` itself. Without it, download `OxidianBridge.cs` from the panel and upload it to `oxide/plugins` or `carbon/plugins` with your host's file manager. Prefer SFTP: plain FTP sends the password unencrypted.
+**FTP/SFTP access (optional).** In remote mode, add your host's FTP, FTPS or SFTP details and the folder that contains `RustDedicated`, then press **Test**. The **Plugins** section then works as usual (uMod install, upload, enable/disable, config editor) and the panel uploads and updates `ScrapwardenBridge.cs` itself. Without it, download `ScrapwardenBridge.cs` from the panel and upload it to `oxide/plugins` or `carbon/plugins` with your host's file manager. Prefer SFTP: plain FTP sends the password unencrypted.
 
  Scheduled restarts warn players, save and shut the server down so your host can start it again.
 
@@ -129,7 +129,7 @@ The built-in **Wiki** walks you through everything else.
 
 ## Updating
 
-The panel checks this repository's releases every 6 hours and shows **New version** in the sidebar when one is out. It only notifies: nothing is downloaded or installed automatically. Turn it off in **Account → Panel updates** or with `OXIDIAN_NO_UPDATE_CHECK=1`.
+The panel checks this repository's releases every 6 hours and shows **New version** in the sidebar when one is out. It only notifies: nothing is downloaded or installed automatically. Turn it off in **Account → Panel updates** or with `SCRAPWARDEN_NO_UPDATE_CHECK=1`.
 
 To update, stop the panel, replace the files with the new release (keep your `data/`, `server/`, `steamcmd/` and `backups/` folders), run `npm install --omit=dev` and start it again.
 
@@ -143,9 +143,9 @@ To update, stop the panel, replace the files with the new release (keep your `da
 | 28082 | TCP | Rust+ companion app |
 | 8080 | TCP | Web panel |
 
-## The OxidianBridge plugin
+## The ScrapwardenBridge plugin
 
-With Oxide or Carbon, the panel installs and updates its companion plugin **OxidianBridge** automatically. It powers the live map, inventories, cheat detection, F7 tickets, rates, events, the chat filter, `/staff` and queue priority. It can only be used over RCON, never by players. Without a framework you still get the installer, console, players, chat, scheduled restarts, wipes, statistics, the Discord bot and the public page.
+With Oxide or Carbon, the panel installs and updates its companion plugin **ScrapwardenBridge** automatically. It powers the live map, inventories, cheat detection, F7 tickets, rates, events, the chat filter, `/staff` and queue priority. It can only be used over RCON, never by players. Without a framework you still get the installer, console, players, chat, scheduled restarts, wipes, statistics, the Discord bot and the public page.
 
 ## Security
 
@@ -178,14 +178,14 @@ Bug reports, ideas and pull requests are welcome. Please read [CONTRIBUTING.md](
 
 ## Support the project
 
-Oxidian is built in spare time and is free for everyone. If it helps you run your server:
+Scrapwarden is built in spare time and is free for everyone. If it helps you run your server:
 
 - ⭐ Star the repository
-- ☕ Support it on [Ko-fi](https://ko-fi.com/oxidian)
+- ☕ Support it on [Ko-fi](https://ko-fi.com/scrapwarden)
 - 🗣️ Tell other server owners about it
 
 ## License
 
 [MIT](LICENSE). Bundled fonts use the SIL Open Font License 1.1; dependencies have their own licenses. See [THIRD-PARTY-NOTICES.md](THIRD-PARTY-NOTICES.md).
 
-*Rust is a trademark of Facepunch Studios. Oxidian is an independent project and is not affiliated with or endorsed by Facepunch, Valve, uMod, Carbon or Tebex.*
+*Rust is a trademark of Facepunch Studios. Scrapwarden is an independent project and is not affiliated with or endorsed by Facepunch, Valve, uMod, Carbon or Tebex.*

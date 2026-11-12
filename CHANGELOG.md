@@ -4,8 +4,8 @@
 
 First public beta.
 
-- OxidianBridge 1.6.2: fixes a compile error on current Rust builds (`PlayerMetabolism.SendChangesToClient` was removed). The panel updates the plugin automatically.
-
+- The project is now called **Scrapwarden** (formerly Oxidian). The companion plugin is now `ScrapwardenBridge` 1.7.0 and its permissions use the `scrapwarden.` prefix; the panel removes the old `OxidianBridge.cs` automatically.
+- Fixed a plugin compile error on current Rust builds (`PlayerMetabolism.SendChangesToClient` was removed).
 - Installer for SteamCMD, Rust, Oxide and Carbon (Windows and Linux) with progress.
 - Import an existing server on the same machine (reads its start script and `server.cfg`) and attach to it if it's already running.
 - Remote mode: manage a rented server over RCON, with optional FTP/FTPS/SFTP access to manage plugins and upload the companion plugin automatically.
@@ -13,7 +13,7 @@ First public beta.
 - Live map with roads, rails, rivers, power lines, monuments, events and a legend.
 - Moderation: notes, warnings with automatic sanctions, timed mutes and temp bans, word filter.
 - Watch: cheat alerts, Steam profile checks (including recent game bans), ban evasion and shared IP detection.
-- Shared bans: Oxidian serves Rust's official Centralized Banning API (works on vanilla), with a secret key per server and optional external lists in alert or block mode.
+- Shared bans: Scrapwarden serves Rust's official Centralized Banning API (works on vanilla), with a secret key per server and optional external lists in alert or block mode.
 - VPN, proxy, hosting-IP and country detection (proxycheck.io or ip-api.com) with alert or kick.
 - F7 report tickets, in-game staff menu (`/staff`) and VIP with expiry and queue priority.
 - Tebex store delivery without the Tebex plugin.

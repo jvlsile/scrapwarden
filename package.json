@@ -1,5 +1,5 @@
 {
-  "name": "oxidian",
+  "name": "scrapwarden",
   "version": "1.0.0-beta.1",
   "description": "Free self-hosted web panel to install, run, moderate and grow Rust dedicated servers (Oxide/Carbon, live map, F7 tickets, Discord, Tebex).",
   "keywords": [
@@ -15,15 +15,15 @@
     "tebex",
     "discord-bot"
   ],
-  "homepage": "https://jvlsile.github.io/oxidian/",
+  "homepage": "https://jvlsile.github.io/scrapwarden/",
   "bugs": {
-    "url": "https://github.com/jvlsile/oxidian/issues"
+    "url": "https://github.com/jvlsile/scrapwarden/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jvlsile/oxidian.git"
+    "url": "https://github.com/jvlsile/scrapwarden.git"
   },
-  "funding": "https://ko-fi.com/oxidian",
+  "funding": "https://ko-fi.com/scrapwarden",
   "license": "MIT",
   "main": "server.js",
   "scripts": {

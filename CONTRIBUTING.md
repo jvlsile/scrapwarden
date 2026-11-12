@@ -1,10 +1,10 @@
-# Contributing to Oxidian
+# Contributing to Scrapwarden
 
 Thanks for helping! Bug reports, translations, ideas and pull requests are all welcome.
 
 ## Reporting bugs
 
-Open an issue with the **Bug report** template. Include your OS, framework (vanilla / Oxide / Carbon), Oxidian version and the relevant log lines. **Remove passwords, tokens, IPs and SteamIDs** before pasting anything.
+Open an issue with the **Bug report** template. Include your OS, framework (vanilla / Oxide / Carbon), Scrapwarden version and the relevant log lines. **Remove passwords, tokens, IPs and SteamIDs** before pasting anything.
 
 For security problems, do **not** open a public issue: see [SECURITY.md](SECURITY.md).
 
@@ -21,7 +21,7 @@ Project layout:
 
 - `server.js`: REST API, WebSocket and the permission table (`ACL`)
 - `lib/`: one module per feature (`rcon.js`, `watch.js`, `tickets.js`, `store.js`…)
-- `lib/bridge/OxidianBridge.cs`: the Oxide/Carbon companion plugin (bump its `[Info]` version when you change it; the panel auto-updates installed copies)
+- `lib/bridge/ScrapwardenBridge.cs`: the Oxide/Carbon companion plugin (bump its `[Info]` version when you change it; the panel auto-updates installed copies)
 - `public/`: the panel UI, the public page (`server.html`) and translations (`i18n/`)
 
 ## Guidelines
@@ -44,5 +44,5 @@ Keep them focused on one change, describe how you tested it, and make sure `node
 ## Releasing (maintainers)
 
 1. Bump `version` in `package.json` and add an entry to `CHANGELOG.md`.
-2. If `lib/bridge/OxidianBridge.cs` changed, bump its `[Info]` version too.
+2. If `lib/bridge/ScrapwardenBridge.cs` changed, bump its `[Info]` version too.
 3. Create a GitHub release tagged `vX.Y.Z` (or `vX.Y.Z-beta.N` with **Set as a pre-release** ticked) and attach a zip without `node_modules`, `data`, `server`, `steamcmd` or `backups`. Running panels will show the update notice within 6 hours. Stable versions are only notified about stable releases; beta versions are notified about both.

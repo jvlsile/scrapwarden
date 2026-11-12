@@ -97,13 +97,13 @@ for (const code of ['antihack_high', 'antihack', 'report_many', 'report', 'aim',
   add(`alert.${code}.title`); add(`alert.${code}.detail`);
 }
 
-// Servidor: E('code'), L('key'), errores de OxidianBridge, cfg.<campo>
+// Servidor: E('code'), L('key'), errores de ScrapwardenBridge, cfg.<campo>
 const backend = ['server.js', ...fs.readdirSync(path.join(root, 'lib')).filter(f => f.endsWith('.js')).map(f => 'lib/' + f)].map(read).join('\n');
 for (const m of backend.matchAll(/\bE\('([\w]+)'/g)) add('err.' + m[1]);
 for (const m of backend.matchAll(/\bfail\(res, \d+, '([\w]+)'/g)) add('err.' + m[1]);
 for (const m of backend.matchAll(/\bL\('([\w]+)'/g)) add('log.' + m[1]);
 for (const m of backend.matchAll(/\bL\(\w+ \? '([\w]+)' : '([\w]+)'/g)) { add('log.' + m[1]); add('log.' + m[2]); }
-for (const m of read('lib/bridge/OxidianBridge.cs').matchAll(/error = "(\w+)"/g)) add('err.bridge_' + m[1]);
+for (const m of read('lib/bridge/ScrapwardenBridge.cs').matchAll(/error = "(\w+)"/g)) add('err.bridge_' + m[1]);
 for (const m of read('server.js').matchAll(/^\s+(\w+): '(?:str|int|port|bool|id|platform)'/gm)) add('cfg.' + m[1]);
 ['banlist_apply_failed', 'banlist_need_public_url', 'session_expired', 'bad_request_json', 'forbidden', 'map_not_ready', 'bridge_map_render'].forEach(k => add('err.' + k));
 add('alert.kicked');

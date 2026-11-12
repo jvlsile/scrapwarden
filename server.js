@@ -1,4 +1,4 @@
-// Oxidian — panel web para instalar y administrar servidores de Rust
+// Scrapwarden — panel web para instalar y administrar servidores de Rust
 const path = require('path');
 const fs = require('fs');
 const http = require('http');
@@ -335,8 +335,8 @@ app.post('/api/remote/disable', h(() => {
 }));
 // El complemento para subirlo a mano (modo remoto o servidores gestionados por otro panel)
 app.get('/api/bridge/file', (req, res) => {
-  res.setHeader('Content-Disposition', 'attachment; filename="OxidianBridge.cs"');
-  res.type('text/plain').sendFile(path.join(__dirname, 'lib', 'bridge', 'OxidianBridge.cs'));
+  res.setHeader('Content-Disposition', 'attachment; filename="ScrapwardenBridge.cs"');
+  res.type('text/plain').sendFile(path.join(__dirname, 'lib', 'bridge', 'ScrapwardenBridge.cs'));
 });
 app.get('/api/update', h(() => update.view()));
 // Datos técnicos para reportar un fallo: sin IPs, rutas, nombres ni SteamIDs
@@ -708,7 +708,7 @@ bus.on('chatmsg', (m) => broadcast('chatmsg', m));
 
 const port = process.env.PORT || config.get().panel.port;
 httpServer.listen(port, () => {
-  console.log(`\n  Oxidian v${update.CURRENT} escuchando en http://localhost:${port}`);
+  console.log(`\n  Scrapwarden v${update.CURRENT} escuchando en http://localhost:${port}`);
   if (!auth.isSetup()) console.log('  Primer arranque: abre el panel en el navegador para crear el usuario propietario.\n');
   log('panel', L('panel_started', { port }));
   maint.startScheduler();

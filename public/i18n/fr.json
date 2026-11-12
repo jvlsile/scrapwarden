@@ -247,7 +247,7 @@
     "watch.noSuspectsText": "Les joueurs avec des alertes ou des statistiques inhabituelles apparaîtront ici.",
     "watch.highToast": "Alerte grave : {title} ({name})",
     "watch.basic": "<b>Mode basique.</b> Sans Oxide ni Carbon, seuls les IP partagées, les contournements de ban et les messages antihack du journal sont détectés. Installez un framework dans <button class='link' data-goto='install'>Installation</button> pour voir les inventaires, la visée, les distances et les signalements F7.",
-    "watch.missing": "<b>Le module OxidianBridge est manquant.</b> Il est nécessaire pour voir les inventaires et analyser la visée, les distances, les kills et les signalements F7.",
+    "watch.missing": "<b>Le module ScrapwardenBridge est manquant.</b> Il est nécessaire pour voir les inventaires et analyser la visée, les distances, les kills et les signalements F7.",
     "watch.notResponding": "<b>Le module est installé mais ne répond pas.</b> Il se charge seul en quelques secondes ; sinon, cherchez des erreurs de compilation dans la console.",
     "watch.waiting": "Le module est installé. Il enverra des données dès que le serveur sera en marche.",
     "watch.bridgeInstalled": "Module installé. Il se chargera dans quelques secondes.",
@@ -305,7 +305,7 @@
     "alert.log_kick.detail": "{line}",
     "alert.log_antihack.title": "Message antihack dans le journal",
     "alert.log_antihack.detail": "{line}",
-    "alert.test.title": "Test de Oxidian",
+    "alert.test.title": "Test de Scrapwarden",
     "alert.test.detail": "Si vous voyez ce message, les alertes arriveront dans ce salon.",
     "discord.player": "Joueur",
     "discord.severity": "Gravité",
@@ -593,7 +593,7 @@
     "log.autostart_failed": "Le démarrage automatique a échoué : {error}",
     "log.alert": "[{sev}] {title} | {name}",
     "log.discord_error": "Discord : {error}",
-    "log.bridge_installed": "Module OxidianBridge installé",
+    "log.bridge_installed": "Module ScrapwardenBridge installé",
     "err.session_expired": "Votre session a expiré. Reconnectez-vous.",
     "err.too_many_attempts": "Trop de tentatives. Patientez quelques minutes.",
     "err.not_authenticated": "Vous n'êtes pas connecté.",
@@ -644,7 +644,7 @@
     "err.stop_before_wipe": "Arrêtez le serveur avant de faire un wipe.",
     "err.alert_not_found": "Alerte introuvable.",
     "err.discord_status": "Discord a répondu avec le code {status}.",
-    "err.bridge_missing": "Le module OxidianBridge n'est pas chargé. Installez-le depuis Surveillance.",
+    "err.bridge_missing": "Le module ScrapwardenBridge n'est pas chargé. Installez-le depuis Surveillance.",
     "err.bridge_unexpected": "Réponse inattendue du serveur : {out}",
     "err.bridge_player_not_found": "Ce joueur n'est pas sur le serveur (ni connecté ni endormi).",
     "err.bridge_empty_slot": "Il n'y a aucun objet dans cet emplacement.",
@@ -735,7 +735,7 @@
     "team.title": "Équipes",
     "team.limitInfo": "Limite : {n} par équipe",
     "team.noLimit": "Pas de limite d'équipe",
-    "team.noData": "Pas encore de données. Nécessite le module OxidianBridge et le serveur en marche ; mise à jour toutes les 2 minutes.",
+    "team.noData": "Pas encore de données. Nécessite le module ScrapwardenBridge et le serveur en marche ; mise à jour toutes les 2 minutes.",
     "team.none": "Aucune équipe formée.",
     "team.team": "Équipe de {n}",
     "team.over": "Dépasse la limite de {n}",
@@ -1056,7 +1056,7 @@
     "rt.craftSub": "2x = la fabrication prend deux fois moins de temps",
     "rt.needFw": "Les multiplicateurs nécessitent Oxide ou Carbon. Les réglages vanilla fonctionnent.",
     "rt.goInstall": "Aller à Installation",
-    "rt.needBridge": "Le plugin OxidianBridge, qui applique les multiplicateurs, n’est pas détecté.",
+    "rt.needBridge": "Le plugin ScrapwardenBridge, qui applique les multiplicateurs, n’est pas détecté.",
     "rt.badgeFw": "Nécessite Oxide ou Carbon",
     "rt.badgeOk": "Plugin actif",
     "rt.badgeBridge": "Nécessite le plugin",
@@ -1094,7 +1094,7 @@
     "wd.e.airdrop": "Largage",
     "wd.e.chinook": "Chinook",
     "wd.evHint": "Les événements se comportent comme ceux de Rust : le cargo arrive par la mer, l’avion largue sa caisse et l’hélicoptère patrouille.",
-    "wd.evNeedBridge": "Les événements nécessitent Oxide ou Carbon avec le plugin OxidianBridge.",
+    "wd.evNeedBridge": "Les événements nécessitent Oxide ou Carbon avec le plugin ScrapwardenBridge.",
     "wd.offline": "Serveur arrêté",
     "wd.clock": "Heure en jeu : {h}",
     "wd.clockFrozen": "Heure en jeu : {h} (figée)",
@@ -1132,7 +1132,7 @@
     "st.sinceWipe": "Depuis le wipe du {d}",
     "st.collecting": "Collecte en cours : le panneau enregistre un échantillon toutes les 5 minutes tant que le serveur tourne.",
     "st.noData": "Pas encore de données pour cette période.",
-    "st.noKills": "Aucun kill enregistré. Nécessite Oxide ou Carbon avec le plugin OxidianBridge.",
+    "st.noKills": "Aucun kill enregistré. Nécessite Oxide ou Carbon avec le plugin ScrapwardenBridge.",
     "st.k.online": "En ligne",
     "st.k.peak": "Pic",
     "st.k.avg": "Moyenne en ligne",
@@ -1248,7 +1248,7 @@
     "err.wipe_busy": "Un wipe est déjà en cours.",
     "audit.a.wipe_plan": "Modifier le calendrier des wipes",
     "audit.a.wipe_skip": "Ignorer un wipe",
-    "rt.bridgeNotInstalled": "Le plugin OxidianBridge n’est pas installé. C’est lui qui applique les multiplicateurs et lance les événements.",
+    "rt.bridgeNotInstalled": "Le plugin ScrapwardenBridge n’est pas installé. C’est lui qui applique les multiplicateurs et lance les événements.",
     "rt.bridgeOffline": "Le plugin est installé ; il se chargera au démarrage du serveur.",
     "rt.bridgeErr": "Le plugin n’a pas pu être compilé sur votre serveur. Dernière erreur :",
     "rt.bridgeOutdated": "Vous avez la version {v} du plugin et le panneau fournit la {b}. Mettez-le à jour pour tout utiliser.",
@@ -1256,8 +1256,8 @@
     "rt.reinstallBridge": "Réinstaller le plugin",
     "rt.updateBridge": "Mettre à jour le plugin",
     "rt.bridgeInstalling": "Plugin installé : Oxide/Carbon le compile (quelques secondes)",
-    "log.bridge_auto": "Plugin OxidianBridge {to} installé automatiquement",
-    "log.bridge_updated": "Plugin OxidianBridge mis à jour de {from} à {to}",
+    "log.bridge_auto": "Plugin ScrapwardenBridge {to} installé automatiquement",
+    "log.bridge_updated": "Plugin ScrapwardenBridge mis à jour de {from} à {to}",
     "log.bridge_auto_failed": "Impossible d’installer le plugin automatiquement : {error}",
     "err.bridge_need_fw": "Installez d’abord Oxide ou Carbon.",
     "map.key.title": "Légende",
@@ -1382,12 +1382,12 @@
     "log.perf_restart_fps": "Redémarrage automatique : FPS bas",
     "log.perf_restart_failed": "Le redémarrage automatique a échoué : {error}",
     "audit.a.perf": "Modifier les réglages de performances",
-    "log.bridge_legacy_removed": "Ancien plugin RustPanelBridge supprimé (il s’appelle désormais OxidianBridge)",
+    "log.bridge_legacy_removed": "Plugin à l'ancien nom supprimé (RustPanelBridge ou OxidianBridge) ; il s'appelle désormais ScrapwardenBridge",
     "map.roads": "Routes",
     "map.rails": "Voies ferrées",
     "map.rivers": "Rivières",
     "map.power": "Lignes électriques",
-    "map.key.pathsUpdate": "Pour voir routes, voies ferrées et rivières, mettez à jour le plugin OxidianBridge (le panneau le fait à la reconnexion) et cliquez sur « Redessiner ».",
+    "map.key.pathsUpdate": "Pour voir routes, voies ferrées et rivières, mettez à jour le plugin ScrapwardenBridge (le panneau le fait à la reconnexion) et cliquez sur « Redessiner ».",
     "nav.public": "Page publique",
     "pb.title": "Page publique du serveur",
     "pb.sub": "Une page pour vos joueurs, sans connexion : état, bouton pour rejoindre, compte à rebours du wipe, rates, carte, activité, classements et règles. Partagez-la sur Discord ou dans la description du serveur.",
@@ -1472,7 +1472,7 @@
     "pub.nobody": "Personne en ligne pour le moment.",
     "pub.rules": "Règles",
     "pub.updated": "Mis à jour à {t}",
-    "pub.powered": "Propulsé par Oxidian",
+    "pub.powered": "Propulsé par Scrapwarden",
     "nav.discord": "Bot Discord",
     "dc.title": "Réglages du bot",
     "dc.enabled": "Activer le bot",
@@ -1555,7 +1555,7 @@
     "tk.h.assignee": "Responsable",
     "tk.h.updated": "Activité",
     "tk.h.status": "État",
-    "tk.bridgeNote": "Les signalements arrivent seuls quand un joueur appuie sur F7 en jeu (nécessite OxidianBridge). Ceux visant le même joueur sont regroupés dans un seul ticket jusqu’à sa fermeture.",
+    "tk.bridgeNote": "Les signalements arrivent seuls quand un joueur appuie sur F7 en jeu (nécessite ScrapwardenBridge). Ceux visant le même joueur sont regroupés dans un seul ticket jusqu’à sa fermeture.",
     "tk.badge": "{o} non assignés · {p} en cours",
     "tk.k.open": "non assignés",
     "tk.k.progress": "en cours",
@@ -1719,7 +1719,7 @@
     "stf.changed": "Niveau modifié",
     "stf.removed": "Retiré du staff",
     "stf.synced": "Permissions appliquées sur le serveur",
-    "stf.noBridge": "<b>OxidianBridge 1.6</b> ou plus récent est requis sur le serveur. Installez-le ou mettez-le à jour dans <button class='link' data-goto='watch'>Surveillance</button>.",
+    "stf.noBridge": "<b>ScrapwardenBridge 1.6</b> ou plus récent est requis sur le serveur. Installez-le ou mettez-le à jour dans <button class='link' data-goto='watch'>Surveillance</button>.",
     "stf.offline": "Le serveur n’est pas connecté : les changements seront appliqués au démarrage.",
     "stf.toolsTitle": "Ce que chaque niveau peut faire en jeu",
     "stf.toolsMod": "<li>Voir les <b>signalements F7</b> en attente et les fermer (sans sanction, avertissement ou expulsion)</li><li>Liste des connectés avec leurs avertissements</li><li><b>Aller vers</b> un joueur</li><li><b>Avertir</b>, <b>rendre muet</b> 30 min, rétablir, <b>expulser</b></li><li>Avis dans le chat à chaque F7</li>",
@@ -1730,7 +1730,7 @@
     "log.staff_added": "{name} rejoint le staff ({l})",
     "log.staff_removed": "{name} quitte le staff",
     "log.staff_ingame": "[Staff] {by} : {a} {name}",
-    "ig.title": "OXIDIAN STAFF",
+    "ig.title": "SCRAPWARDEN STAFF",
     "ig.lvl.mod": "Modérateur",
     "ig.lvl.admin": "Admin",
     "ig.tab.players": "Joueurs",
@@ -1860,13 +1860,13 @@
     "err.store_rate_limited": "Tebex demande d’attendre ; nouvel essai dans quelques minutes.",
     "err.store_http": "Tebex a répondu par une erreur ({n}).",
     "err.store_bad_command": "Commande vide ou non autorisée.",
-    "err.store_bad_vip": "Format : oxidian.vip {id} <groupe> <jours>",
+    "err.store_bad_vip": "Format : scrapwarden.vip {id} <groupe> <jours>",
     "audit.a.store_settings": "Modifier la boutique",
     "audit.a.store_delivery": "Livraison boutique",
     "vip.skipQueue": "Les VIP passent la file",
-    "vip.skipQueueHint": "Donne <code>oxidian.skipqueue</code> à tous les groupes VIP : ils entrent même quand le serveur est plein. Cela ne change pas le jeu, c’est donc ce qu’un serveur type vanilla peut vendre. Nécessite OxidianBridge 1.6.1.",
-    "vip.vanilla": "<b>Votre serveur est vanilla (sans Oxide ni Carbon).</b> Les groupes VIP en ont besoin. Vous pouvez installer Oxide avec seulement OxidianBridge, qui ne change pas le jeu, et ne vendre que la <b>priorité dans la file</b>. Vérifiez les règles de Facepunch pour les serveurs de la section Community.",
-    "sh.vanilla": "<b>Votre serveur est vanilla.</b> Sans Oxide ni Carbon, seules des commandes console classiques peuvent être livrées, et des objets ou avantages payants ne conviennent pas à un serveur vanilla. Le plus courant est de vendre la <b>priorité dans la file</b> : installez Oxide avec seulement OxidianBridge et utilisez <code>oxidian.vip {id} vip 30</code> avec « Les VIP passent la file » activé dans <b>VIP</b>.",
+    "vip.skipQueueHint": "Donne <code>scrapwarden.skipqueue</code> à tous les groupes VIP : ils entrent même quand le serveur est plein. Cela ne change pas le jeu, c’est donc ce qu’un serveur type vanilla peut vendre. Nécessite ScrapwardenBridge 1.6.1.",
+    "vip.vanilla": "<b>Votre serveur est vanilla (sans Oxide ni Carbon).</b> Les groupes VIP en ont besoin. Vous pouvez installer Oxide avec seulement ScrapwardenBridge, qui ne change pas le jeu, et ne vendre que la <b>priorité dans la file</b>. Vérifiez les règles de Facepunch pour les serveurs de la section Community.",
+    "sh.vanilla": "<b>Votre serveur est vanilla.</b> Sans Oxide ni Carbon, seules des commandes console classiques peuvent être livrées, et des objets ou avantages payants ne conviennent pas à un serveur vanilla. Le plus courant est de vendre la <b>priorité dans la file</b> : installez Oxide avec seulement ScrapwardenBridge et utilisez <code>scrapwarden.vip {id} vip 30</code> avec « Les VIP passent la file » activé dans <b>VIP</b>.",
     "upd.title": "Mises à jour du panneau",
     "upd.auto": "Me prévenir quand une nouvelle version sort",
     "upd.hint": "Consulte les versions publiées sur <b>GitHub</b> toutes les 6 heures. Il prévient seulement : il ne télécharge ni n’installe rien tout seul.",
@@ -1879,13 +1879,13 @@
     "upd.error": "Version {c} · impossible de joindre GitHub",
     "upd.upToDate": "Version {c} · à jour",
     "upd.upToDateToast": "Vous avez la dernière version",
-    "upd.toast": "Oxidian {v} est disponible",
+    "upd.toast": "Scrapwarden {v} est disponible",
     "log.update_available": "Une nouvelle version du panneau est disponible : {v}",
     "audit.a.update_check": "Avis de mise à jour",
-    "upd.betaNote": "Vous utilisez une <b>version bêta</b> : elle peut contenir des bugs. Si vous en trouvez un, <a href=\"https://github.com/jvlsile/oxidian/issues/new/choose\" target=\"_blank\" rel=\"noopener\">signalez-le sur GitHub</a> et nous le corrigerons.",
+    "upd.betaNote": "Vous utilisez une <b>version bêta</b> : elle peut contenir des bugs. Si vous en trouvez un, <a href=\"https://github.com/jvlsile/scrapwarden/issues/new/choose\" target=\"_blank\" rel=\"noopener\">signalez-le sur GitHub</a> et nous le corrigerons.",
     "bug.button": "Signaler un bug",
     "bug.title": "Signaler un bug",
-    "bug.intro": "Merci d’aider à améliorer Oxidian. <b>GitHub</b> s’ouvrira avec les informations techniques déjà remplies ; il faut un compte gratuit.",
+    "bug.intro": "Merci d’aider à améliorer Scrapwarden. <b>GitHub</b> s’ouvrira avec les informations techniques déjà remplies ; il faut un compte gratuit.",
     "bug.steps": "<li>Décrivez <b>ce que vous faisiez</b> et <b>ce qui s’est passé</b> (et ce que vous attendiez).</li><li>Si possible, ajoutez les étapes pour le reproduire et une capture d’écran.</li><li>Cliquez sur <b>Create</b>. Vous serez prévenu sur GitHub quand ce sera corrigé.</li>",
     "bug.dataLabel": "Informations incluses",
     "bug.privacy": "Aucune IP, mot de passe, nom de joueur ni SteamID n’est inclus. Vérifiez ce que vous ajoutez avant d’envoyer : le rapport est public.",
@@ -1949,10 +1949,10 @@
     "rem.worksList": "<li>Console, joueurs, chat et modération</li><li>Signalements F7, <code>/staff</code>, surveillance et profils Steam</li><li>Statistiques, alertes de performance et page publique</li><li>Bot Discord, boutique Tebex et VIP</li><li>Rates, PvP/PvE, heure, météo et événements</li><li>Carte en direct et inventaires (avec le complément)</li><li>Redémarrages planifiés avec avertissements (si l’hébergeur redémarre le serveur tout seul)</li>",
     "rem.not": "Géré par l’hébergeur",
     "rem.notList": "<li>Installer et mettre à jour Rust, Oxide ou Carbon</li><li>Les plugins et l'envoi du plugin compagnon (sauf avec un accès FTP/SFTP)</li><li>Sauvegardes et wipes</li><li>Démarrer le serveur et les paramètres de lancement</li>",
-    "rem.bridgeTitle": "Complément OxidianBridge",
-    "rem.bridgeText": "Avec Oxide ou Carbon, ajoutez l’accès FTP/SFTP et le panneau envoie <code>OxidianBridge.cs</code> lui-même. Sinon, envoyez-le dans le dossier plugins avec le gestionnaire de fichiers de votre hébergeur. Il active la carte, les inventaires, les tickets F7, <code>/staff</code> et les rates.",
+    "rem.bridgeTitle": "Complément ScrapwardenBridge",
+    "rem.bridgeText": "Avec Oxide ou Carbon, ajoutez l’accès FTP/SFTP et le panneau envoie <code>ScrapwardenBridge.cs</code> lui-même. Sinon, envoyez-le dans le dossier plugins avec le gestionnaire de fichiers de votre hébergeur. Il active la carte, les inventaires, les tickets F7, <code>/staff</code> et les rates.",
     "rem.bridgeSteps": "<li>Téléchargez le fichier avec le bouton ci-dessous.</li><li>Chez l’hébergeur, envoyez-le dans <code>oxide/plugins</code> (Oxide) ou <code>carbon/plugins</code> (Carbon).</li><li>Il se charge tout seul en quelques secondes. Recommencez quand le panneau signale une nouvelle version.</li>",
-    "rem.bridgeDl": "Télécharger OxidianBridge.cs",
+    "rem.bridgeDl": "Télécharger ScrapwardenBridge.cs",
     "rem.passSaved": "Mot de passe enregistré. N’en saisissez un autre que s’il a changé.",
     "rem.passHint": "Enregistré uniquement sur cette machine et jamais affiché.",
     "rem.st.on": "Connecté",
@@ -1963,8 +1963,8 @@
     "rem.saved": "Mode distant activé",
     "rem.disableBody": "Le panneau cesse de se connecter au serveur distant et revient au serveur de cette machine. Les données enregistrées (statistiques, tickets, VIP…) sont conservées.",
     "rem.disabled": "Mode local",
-    "rem.note.plugins": "<b>Mode distant :</b> les plugins s’envoient et se configurent depuis le panneau de l’hébergeur. Pour la carte, les inventaires et les tickets F7, envoyez <button type=\"button\" class=\"link\" onclick=\"location.href='/api/bridge/file'\">OxidianBridge.cs</button> dans le dossier des plugins.",
-    "rem.note.backups": "<b>Mode distant :</b> les sauvegardes sont faites par l’hébergeur depuis son panneau ; Oxidian n’a pas accès aux fichiers du serveur.",
+    "rem.note.plugins": "<b>Mode distant :</b> les plugins s’envoient et se configurent depuis le panneau de l’hébergeur. Pour la carte, les inventaires et les tickets F7, envoyez <button type=\"button\" class=\"link\" onclick=\"location.href='/api/bridge/file'\">ScrapwardenBridge.cs</button> dans le dossier des plugins.",
+    "rem.note.backups": "<b>Mode distant :</b> les sauvegardes sont faites par l’hébergeur depuis son panneau ; Scrapwarden n’a pas accès aux fichiers du serveur.",
     "rem.note.wipes": "<b>Mode distant :</b> le wipe se fait depuis le panneau de l’hébergeur (supprimer la carte nécessite les fichiers). Vous pouvez toujours voir ici la date du wipe forcé.",
     "rem.note.schedule": "<b>Mode distant :</b> les redémarrages préviennent dans le chat, sauvegardent et arrêtent le serveur ; l’hébergeur doit le relancer tout seul (presque tous le font). Sauvegarde et mise à jour automatiques ne s’appliquent pas.",
     "rem.note.config": "<b>Mode distant :</b> nom, description, URL, image et nombre max de joueurs s’appliquent tout de suite en RCON. Ports, carte, seed et le reste se changent dans le panneau de l’hébergeur.",
@@ -1975,7 +1975,7 @@
     "act.restartBodyRemote": "Le monde sera sauvegardé et le serveur arrêté pour que l’hébergeur le relance. S’il ne le relance pas tout seul, démarrez-le depuis son panneau.",
     "err.remote_no_process": "En mode distant, le panneau ne peut ni démarrer ni forcer l’arrêt du processus : faites-le depuis le panneau de l’hébergeur.",
     "err.remote_no_files": "En mode distant, le panneau n’a pas accès aux fichiers du serveur : utilisez le panneau de l’hébergeur.",
-    "err.remote_bridge_manual": "En mode distant, le complément s’envoie à la main : téléchargez OxidianBridge.cs et envoyez-le dans le dossier des plugins de l’hébergeur.",
+    "err.remote_bridge_manual": "En mode distant, le complément s’envoie à la main : téléchargez ScrapwardenBridge.cs et envoyez-le dans le dossier des plugins de l’hébergeur.",
     "err.import_no_dir": "Saisissez ou choisissez le dossier du serveur.",
     "err.import_relative": "Saisissez le chemin complet (par exemple C:\\rustserver ou /home/rust/server).",
     "err.import_cant_read": "Impossible d’ouvrir {dir}.",
@@ -2001,7 +2001,7 @@
     "audit.a.remote_mode": "Mode distant",
     "audit.a.remote_disable": "Désactiver le mode distant",
     "support.link": "Soutenir",
-    "support.title": "Oxidian est gratuit : s’il vous aide, vous pouvez m’offrir un café sur Ko-fi",
+    "support.title": "Scrapwarden est gratuit : s’il vous aide, vous pouvez m’offrir un café sur Ko-fi",
     "ipc.title": "VPN, proxy et pays",
     "ipc.sub": "Vérifie l’IP de chaque joueur à la connexion. Les tricheurs bannis reviennent souvent avec un nouveau compte derrière un VPN.",
     "ipc.enabled": "Vérifier l’IP à la connexion",
@@ -2045,7 +2045,7 @@
     "log.ipcheck_error": "Impossible de vérifier une IP : {error}",
     "audit.a.ipcheck_settings": "Réglages VPN et pays",
     "rf.title": "Accès aux fichiers (FTP / SFTP)",
-    "rf.sub": "Facultatif. Avec les identifiants FTP ou SFTP de votre hébergeur, le panneau peut <b>installer, activer et configurer les plugins</b> et <b>envoyer et mettre à jour OxidianBridge.cs</b> pour vous.",
+    "rf.sub": "Facultatif. Avec les identifiants FTP ou SFTP de votre hébergeur, le panneau peut <b>installer, activer et configurer les plugins</b> et <b>envoyer et mettre à jour ScrapwardenBridge.cs</b> pour vous.",
     "rf.protocol": "Protocole",
     "rf.off": "Désactivé",
     "rf.port": "Port",
@@ -2077,7 +2077,7 @@
     "err.files_empty_root": "Le dossier {root} est vide. Indiquez le dossier où se trouve le serveur Rust.",
     "audit.a.remote_files": "Modifier l'accès FTP/SFTP",
     "nav.bans": "Bans partagés",
-    "bl.intro": "Utilise le <b>Centralized Banning</b> officiel de Rust : chaque serveur demande à ce panneau si un joueur est banni quand il se connecte. Un ban sur l'un de vos serveurs vaut pour tous, <b>vanilla compris</b>, sans plugin. Vous pouvez aussi consulter les listes d'autres admins (Server Armour, un autre Oxidian…).",
+    "bl.intro": "Utilise le <b>Centralized Banning</b> officiel de Rust : chaque serveur demande à ce panneau si un joueur est banni quand il se connecte. Un ban sur l'un de vos serveurs vaut pour tous, <b>vanilla compris</b>, sans plugin. Vous pouvez aussi consulter les listes d'autres admins (Server Armour, un autre Scrapwarden…).",
     "bl.listTitle": "Liste des bans",
     "bl.searchPh": "Chercher nom, SteamID ou motif",
     "bl.h.player": "Joueur",
@@ -2133,7 +2133,7 @@
     "bl.keyDlgNeedUrl": "Copiée, mais indiquez d'abord l'adresse publique du panneau dans Réglages et copiez-la de nouveau : les autres serveurs doivent savoir comment joindre ce panneau.",
     "bl.keyDlgSecret": "La commande contient une clé secrète : ne la partagez qu'avec ceux qui vont l'utiliser.",
     "bl.srcTitle": "Listes externes",
-    "bl.srcSub": "Listes de bans d'autres admins au format Facepunch (par exemple un autre Oxidian ou celle de votre organisation Server Armour). <b>Alerter</b> crée seulement une alerte dans Surveillance ; <b>Bloquer</b> empêche la connexion. Seul le SteamID est envoyé.",
+    "bl.srcSub": "Listes de bans d'autres admins au format Facepunch (par exemple un autre Scrapwarden ou celle de votre organisation Server Armour). <b>Alerter</b> crée seulement une alerte dans Surveillance ; <b>Bloquer</b> empêche la connexion. Seul le SteamID est envoyé.",
     "bl.srcName": "Nom",
     "bl.srcMode": "Mode",
     "bl.srcAlert": "Alerter",
@@ -2188,19 +2188,19 @@
       "id": "start",
       "title": "Premiers pas",
       "goto": "install",
-      "html": "<p>Oxidian installe votre serveur Rust, le démarre et vous permet de l'administrer depuis le navigateur, sur n'importe quel appareil.</p><ol><li>Dans <b>Installation</b>, choisissez Windows ou Linux et cliquez sur <b>Installer le serveur</b>. La barre de progression affiche le pourcentage, les données téléchargées et le temps restant.</li><li>Pour utiliser des plugins, installez <b>Oxide</b> ou <b>Carbon</b> (un seul).</li><li>Vérifiez le nom, la carte et les joueurs dans <b>Réglages du serveur</b>.</li><li>Cliquez sur <b>Démarrer</b> en haut à droite. La première fois, la carte met quelques minutes à se générer ; quand l'indicateur passe à <b>En marche</b>, tout est prêt.</li></ol><p>Pour que vos amis se connectent, ouvrez les ports indiqués dans Installation et partagez la commande <code>client.connect</code> de l'en-tête (un clic suffit pour la copier).</p>"
+      "html": "<p>Scrapwarden installe votre serveur Rust, le démarre et vous permet de l'administrer depuis le navigateur, sur n'importe quel appareil.</p><ol><li>Dans <b>Installation</b>, choisissez Windows ou Linux et cliquez sur <b>Installer le serveur</b>. La barre de progression affiche le pourcentage, les données téléchargées et le temps restant.</li><li>Pour utiliser des plugins, installez <b>Oxide</b> ou <b>Carbon</b> (un seul).</li><li>Vérifiez le nom, la carte et les joueurs dans <b>Réglages du serveur</b>.</li><li>Cliquez sur <b>Démarrer</b> en haut à droite. La première fois, la carte met quelques minutes à se générer ; quand l'indicateur passe à <b>En marche</b>, tout est prêt.</li></ol><p>Pour que vos amis se connectent, ouvrez les ports indiqués dans Installation et partagez la commande <code>client.connect</code> de l'en-tête (un clic suffit pour la copier).</p>"
     },
     {
       "id": "install",
       "title": "Installation et mises à jour",
       "goto": "install",
-      "html": "<p><b>Système d'exploitation.</b> Par défaut, c'est celui de la machine du panneau. Vous pouvez choisir l'autre pour préparer un serveur et le copier ailleurs, mais il ne peut démarrer que sur le même système.</p><p><b>Barre de progression.</b> Elle affiche l'étape en cours (téléchargement de SteamCMD, réservation d'espace, téléchargement, vérification et installation), le pourcentage total, les données téléchargées et une estimation du temps restant. Elle apparaît aussi dans l'en-tête et le menu latéral pour la suivre depuis n'importe quelle section.</p><p><b>Mettre à jour.</b> Rust publie une mise à jour obligatoire le premier jeudi de chaque mois. Arrêtez le serveur et cliquez sur <b>Mettre à jour le serveur</b> ; Oxide ou Carbon sont réinstallés automatiquement. Vous pouvez aussi activer la mise à jour automatique dans le Planificateur.</p><p><b>Vérifier les fichiers</b> compare tout avec Steam et répare ce qui est endommagé ; c'est un peu plus long.</p><p><b>Framework.</b> Oxide est la référence ; Carbon est plus rapide et charge presque tous les plugins uMod. <b>Revenir en vanilla</b> les retire sans supprimer vos plugins.</p><h3>Vous avez déjà un serveur ?</h3><p>En haut de <b>Installation</b>, choisissez comment utiliser le panneau :</p><ul><li><b>J’en ai déjà un ici :</b> saisissez le dossier qui contient <code>RustDedicated</code> (ou utilisez <b>Parcourir</b>) et cliquez sur <b>Détecter</b>. Le panneau lit votre script <code>.bat</code> ou <code>.sh</code> (ports, identité, mot de passe RCON, nom, carte et seed) et le <code>server.cfg</code>, et garde les autres paramètres comme arguments supplémentaires. Rien n’est réinstallé ni supprimé. Si le serveur tourne déjà, le panneau s’y connecte ; ensuite, démarrez-le toujours depuis le panneau.</li><li><b>Serveur loué (RCON) :</b> saisissez l’IP, le port RCON et le mot de passe de votre hébergeur et cliquez sur <b>Tester</b>. Console, joueurs, chat, modération, tickets F7, <code>/staff</code>, surveillance, statistiques, Discord, Tebex, VIP, rates et page publique fonctionnent. Installation, plugins, sauvegardes et wipes sont gérés par l’hébergeur. Pour la carte et le reste qui utilise le complément, téléchargez <code>OxidianBridge.cs</code> et envoyez-le en FTP dans le dossier des plugins. Les redémarrages sauvegardent et arrêtent le serveur pour que l’hébergeur le relance.</li></ul>"
+      "html": "<p><b>Système d'exploitation.</b> Par défaut, c'est celui de la machine du panneau. Vous pouvez choisir l'autre pour préparer un serveur et le copier ailleurs, mais il ne peut démarrer que sur le même système.</p><p><b>Barre de progression.</b> Elle affiche l'étape en cours (téléchargement de SteamCMD, réservation d'espace, téléchargement, vérification et installation), le pourcentage total, les données téléchargées et une estimation du temps restant. Elle apparaît aussi dans l'en-tête et le menu latéral pour la suivre depuis n'importe quelle section.</p><p><b>Mettre à jour.</b> Rust publie une mise à jour obligatoire le premier jeudi de chaque mois. Arrêtez le serveur et cliquez sur <b>Mettre à jour le serveur</b> ; Oxide ou Carbon sont réinstallés automatiquement. Vous pouvez aussi activer la mise à jour automatique dans le Planificateur.</p><p><b>Vérifier les fichiers</b> compare tout avec Steam et répare ce qui est endommagé ; c'est un peu plus long.</p><p><b>Framework.</b> Oxide est la référence ; Carbon est plus rapide et charge presque tous les plugins uMod. <b>Revenir en vanilla</b> les retire sans supprimer vos plugins.</p><h3>Vous avez déjà un serveur ?</h3><p>En haut de <b>Installation</b>, choisissez comment utiliser le panneau :</p><ul><li><b>J’en ai déjà un ici :</b> saisissez le dossier qui contient <code>RustDedicated</code> (ou utilisez <b>Parcourir</b>) et cliquez sur <b>Détecter</b>. Le panneau lit votre script <code>.bat</code> ou <code>.sh</code> (ports, identité, mot de passe RCON, nom, carte et seed) et le <code>server.cfg</code>, et garde les autres paramètres comme arguments supplémentaires. Rien n’est réinstallé ni supprimé. Si le serveur tourne déjà, le panneau s’y connecte ; ensuite, démarrez-le toujours depuis le panneau.</li><li><b>Serveur loué (RCON) :</b> saisissez l’IP, le port RCON et le mot de passe de votre hébergeur et cliquez sur <b>Tester</b>. Console, joueurs, chat, modération, tickets F7, <code>/staff</code>, surveillance, statistiques, Discord, Tebex, VIP, rates et page publique fonctionnent. Installation, plugins, sauvegardes et wipes sont gérés par l’hébergeur. Pour la carte et le reste qui utilise le complément, téléchargez <code>ScrapwardenBridge.cs</code> et envoyez-le en FTP dans le dossier des plugins. Les redémarrages sauvegardent et arrêtent le serveur pour que l’hébergeur le relance.</li></ul>"
     },
     {
       "id": "remote",
       "title": "Serveur existant ou loué",
       "goto": "install",
-      "html": "<p><b>Installation</b> propose trois façons de commencer :</p><ul><li><b>Installer un nouveau</b> : le panneau télécharge Rust sur cette machine.</li><li><b>J’en ai déjà un ici</b> : choisissez le dossier du serveur. Le panneau lit le <code>.bat</code>/<code>.sh</code> et le <code>server.cfg</code>, détecte Oxide ou Carbon et garde la carte, les plugins et les paramètres qu'il ne gère pas. Si le serveur tourne déjà, il s'y connecte sans le redémarrer.</li><li><b>Serveur loué (RCON)</b> : saisissez l'IP, le port RCON et le mot de passe de votre hébergeur. Console, joueurs, modération, F7, statistiques, Discord, Tebex, VIP et rates fonctionnent. Démarrage, installation, sauvegardes et wipes restent chez l'hébergeur. « Redémarrer » sauvegarde et arrête le serveur pour que l'hébergeur le relance.</li></ul><p><b>Accès FTP/SFTP (facultatif)</b> : en mode distant, ajoutez les identifiants FTP ou SFTP de l'hébergeur (protocole, utilisateur, mot de passe et le dossier qui contient <code>RustDedicated</code>). Cliquez sur <b>Tester</b> : il doit trouver l'exécutable ou le dossier <code>server</code>. Vous pouvez alors installer, activer, désactiver et configurer les plugins dans <b>Plugins</b>, et le panneau envoie et met à jour <code>OxidianBridge.cs</code> lui-même. Les plugins désactivés sont gardés dans <code>oxide/plugins_disabled</code> (ou <code>carbon/…</code>).</p><p>Utilisez SFTP si l'hébergeur le propose : le FTP sans TLS envoie le mot de passe en clair.</p>"
+      "html": "<p><b>Installation</b> propose trois façons de commencer :</p><ul><li><b>Installer un nouveau</b> : le panneau télécharge Rust sur cette machine.</li><li><b>J’en ai déjà un ici</b> : choisissez le dossier du serveur. Le panneau lit le <code>.bat</code>/<code>.sh</code> et le <code>server.cfg</code>, détecte Oxide ou Carbon et garde la carte, les plugins et les paramètres qu'il ne gère pas. Si le serveur tourne déjà, il s'y connecte sans le redémarrer.</li><li><b>Serveur loué (RCON)</b> : saisissez l'IP, le port RCON et le mot de passe de votre hébergeur. Console, joueurs, modération, F7, statistiques, Discord, Tebex, VIP et rates fonctionnent. Démarrage, installation, sauvegardes et wipes restent chez l'hébergeur. « Redémarrer » sauvegarde et arrête le serveur pour que l'hébergeur le relance.</li></ul><p><b>Accès FTP/SFTP (facultatif)</b> : en mode distant, ajoutez les identifiants FTP ou SFTP de l'hébergeur (protocole, utilisateur, mot de passe et le dossier qui contient <code>RustDedicated</code>). Cliquez sur <b>Tester</b> : il doit trouver l'exécutable ou le dossier <code>server</code>. Vous pouvez alors installer, activer, désactiver et configurer les plugins dans <b>Plugins</b>, et le panneau envoie et met à jour <code>ScrapwardenBridge.cs</code> lui-même. Les plugins désactivés sont gardés dans <code>oxide/plugins_disabled</code> (ou <code>carbon/…</code>).</p><p>Utilisez SFTP si l'hébergeur le propose : le FTP sans TLS envoie le mot de passe en clair.</p>"
     },
     {
       "id": "dashboard",
@@ -2224,7 +2224,7 @@
       "id": "map",
       "title": "Carte en direct",
       "goto": "map",
-      "html": "<p>Affiche la carte de votre serveur avec la position des joueurs, mise à jour toutes les 3 secondes. Chaque équipe a sa couleur.</p><ul><li><b>Se déplacer :</b> glissez pour vous déplacer et utilisez la molette (ou + et -) pour zoomer. Le bouton d'ajustement revient à la vue complète.</li><li><b>Calques :</b> noms, joueurs endormis, événements (cargo, hélicoptère, Bradley et Chinook), monuments et grille de Rust. Au survol, vous voyez la case de la grille et les coordonnées.</li><li><b>Joueurs :</b> cliquez sur un joueur pour voir son état, sa case et ses coéquipiers, et ouvrir son inventaire, son historique, l'expulser ou le bannir. Dans Joueurs et Surveillance, le bouton de localisation vous y amène directement.</li><li><b>Rechercher :</b> tapez un nom pour centrer la carte sur ce joueur.</li></ul><p>L'image est dessinée par le serveur la première fois puis enregistrée ; elle est régénérée automatiquement après un wipe ou un changement de graine. Nécessite Oxide ou Carbon avec le module OxidianBridge.</p><p><b>Calques comme dans le jeu :</b> routes, voies ferrées, rivières et lignes électriques sont tracées sur la carte à partir des tracés réels du serveur, et les monuments ont une icône. Chaque calque s’active en haut et la légende les explique. Ils nécessitent le plugin OxidianBridge 1.5 ou plus (le panneau le met à jour tout seul) ; si la carte a été dessinée avant, cliquez sur « Redessiner ».</p>"
+      "html": "<p>Affiche la carte de votre serveur avec la position des joueurs, mise à jour toutes les 3 secondes. Chaque équipe a sa couleur.</p><ul><li><b>Se déplacer :</b> glissez pour vous déplacer et utilisez la molette (ou + et -) pour zoomer. Le bouton d'ajustement revient à la vue complète.</li><li><b>Calques :</b> noms, joueurs endormis, événements (cargo, hélicoptère, Bradley et Chinook), monuments et grille de Rust. Au survol, vous voyez la case de la grille et les coordonnées.</li><li><b>Joueurs :</b> cliquez sur un joueur pour voir son état, sa case et ses coéquipiers, et ouvrir son inventaire, son historique, l'expulser ou le bannir. Dans Joueurs et Surveillance, le bouton de localisation vous y amène directement.</li><li><b>Rechercher :</b> tapez un nom pour centrer la carte sur ce joueur.</li></ul><p>L'image est dessinée par le serveur la première fois puis enregistrée ; elle est régénérée automatiquement après un wipe ou un changement de graine. Nécessite Oxide ou Carbon avec le module ScrapwardenBridge.</p><p><b>Calques comme dans le jeu :</b> routes, voies ferrées, rivières et lignes électriques sont tracées sur la carte à partir des tracés réels du serveur, et les monuments ont une icône. Chaque calque s’active en haut et la légende les explique. Ils nécessitent le plugin ScrapwardenBridge 1.5 ou plus (le panneau le met à jour tout seul) ; si la carte a été dessinée avant, cliquez sur « Redessiner ».</p>"
     },
     {
       "id": "console",
@@ -2236,7 +2236,7 @@
       "id": "chat",
       "title": "Chat",
       "goto": "chat",
-      "html": "<p>Tout ce qui est écrit sur le serveur est conservé (jusqu'à 20 000 messages) et arrive en temps réel.</p><ul><li><b>Filtres :</b> tout, global, équipe, <b>signalés</b> (avec des mots interdits) et messages privés envoyés depuis le panneau. La recherche trouve du texte ou des noms dans tout l'historique.</li><li><b>Cliquez sur un nom</b> pour lui envoyer un message privé, voir seulement ses messages, le rendre muet, l'avertir, ouvrir sa fiche, le voir sur la carte ou l'expulser.</li><li><b>Écrire :</b> en bas, choisissez si le message va à tous ou en privé à un joueur connecté (les messages privés nécessitent le module OxidianBridge).</li></ul><p>Les messages signalés apparaissent en ambre et les messages bloqués en rouge et barrés : personne d'autre ne les a vus.</p>"
+      "html": "<p>Tout ce qui est écrit sur le serveur est conservé (jusqu'à 20 000 messages) et arrive en temps réel.</p><ul><li><b>Filtres :</b> tout, global, équipe, <b>signalés</b> (avec des mots interdits) et messages privés envoyés depuis le panneau. La recherche trouve du texte ou des noms dans tout l'historique.</li><li><b>Cliquez sur un nom</b> pour lui envoyer un message privé, voir seulement ses messages, le rendre muet, l'avertir, ouvrir sa fiche, le voir sur la carte ou l'expulser.</li><li><b>Écrire :</b> en bas, choisissez si le message va à tous ou en privé à un joueur connecté (les messages privés nécessitent le module ScrapwardenBridge).</li></ul><p>Les messages signalés apparaissent en ambre et les messages bloqués en rouge et barrés : personne d'autre ne les a vus.</p>"
     },
     {
       "id": "players",
@@ -2260,7 +2260,7 @@
       "id": "inventory",
       "title": "Visionneuse d'inventaire",
       "goto": "players",
-      "html": "<p>Ouvrez l'inventaire de n'importe quel joueur, connecté ou endormi sur la carte, avec le bouton <b>Inventaire</b> dans Joueurs, Surveillance ou l'historique.</p><ul><li>Chaque objet s’affiche avec son <b>image</b> (chargée depuis un site externe ; à changer dans Réglages › Images des objets) ou, si elle ne se charge pas, avec son nom.</li><li>Vous voyez l'inventaire (24 emplacements), les vêtements et la ceinture, avec la quantité et une barre d'état sous chaque objet (vert, ambre ou rouge).</li><li>Cliquez sur un objet pour voir son nom interne, son état, ses munitions, ses accessoires et son skin.</li><li><b>Retirer l'objet</b> le supprime ; <b>Vider l'inventaire</b> efface tout (il faut cliquer deux fois).</li></ul><p>Nécessite Oxide ou Carbon avec le module <b>OxidianBridge</b>, que le panneau installe tout seul. L'inventaire est un instantané : cliquez sur Actualiser pour voir les changements.</p>"
+      "html": "<p>Ouvrez l'inventaire de n'importe quel joueur, connecté ou endormi sur la carte, avec le bouton <b>Inventaire</b> dans Joueurs, Surveillance ou l'historique.</p><ul><li>Chaque objet s’affiche avec son <b>image</b> (chargée depuis un site externe ; à changer dans Réglages › Images des objets) ou, si elle ne se charge pas, avec son nom.</li><li>Vous voyez l'inventaire (24 emplacements), les vêtements et la ceinture, avec la quantité et une barre d'état sous chaque objet (vert, ambre ou rouge).</li><li>Cliquez sur un objet pour voir son nom interne, son état, ses munitions, ses accessoires et son skin.</li><li><b>Retirer l'objet</b> le supprime ; <b>Vider l'inventaire</b> efface tout (il faut cliquer deux fois).</li></ul><p>Nécessite Oxide ou Carbon avec le module <b>ScrapwardenBridge</b>, que le panneau installe tout seul. L'inventaire est un instantané : cliquez sur Actualiser pour voir les changements.</p>"
     },
     {
       "id": "watch",
@@ -2284,13 +2284,13 @@
       "id": "tickets",
       "title": "Signalements F7 (tickets)",
       "goto": "tickets",
-      "html": "<p>Chaque fois qu’un joueur appuie sur <b>F7</b> pour signaler quelqu’un, un <b>ticket</b> s’ouvre. Les signalements suivants visant le même joueur s’ajoutent au ticket ouvert : vous voyez d’un coup d’œil combien de joueurs différents se plaignent. Un même signalement répété en moins d’une minute ne compte qu’une fois. Nécessite OxidianBridge.</p><ul><li><b>Je m’en charge</b> : vous assigne le ticket (il passe « En cours ») pour que le reste de l’équipe sache que quelqu’un s’en occupe.</li><li><b>Notes de l’équipe</b> : notez ce que vous vérifiez ; elles restent sur le ticket.</li><li><b>Fiche du joueur</b> : historique, alertes et sanctions précédentes.</li><li><b>Fermer le ticket</b> : choisissez le résultat (sans sanction, avertissement, muet, expulsion, bannissement temporaire ou bannissement). La sanction s’applique immédiatement et reste dans la fiche du joueur comme les autres.</li></ul><p>Si vous cochez la case, les auteurs du signalement reçoivent un message privé (s’ils sont connectés) indiquant que leur signalement a été examiné ou suivi d’effet : cela les encourage à continuer. Le compteur du menu montre les tickets non assignés. Sur Discord, <code>/tickets</code> liste ceux en attente.</p>"
+      "html": "<p>Chaque fois qu’un joueur appuie sur <b>F7</b> pour signaler quelqu’un, un <b>ticket</b> s’ouvre. Les signalements suivants visant le même joueur s’ajoutent au ticket ouvert : vous voyez d’un coup d’œil combien de joueurs différents se plaignent. Un même signalement répété en moins d’une minute ne compte qu’une fois. Nécessite ScrapwardenBridge.</p><ul><li><b>Je m’en charge</b> : vous assigne le ticket (il passe « En cours ») pour que le reste de l’équipe sache que quelqu’un s’en occupe.</li><li><b>Notes de l’équipe</b> : notez ce que vous vérifiez ; elles restent sur le ticket.</li><li><b>Fiche du joueur</b> : historique, alertes et sanctions précédentes.</li><li><b>Fermer le ticket</b> : choisissez le résultat (sans sanction, avertissement, muet, expulsion, bannissement temporaire ou bannissement). La sanction s’applique immédiatement et reste dans la fiche du joueur comme les autres.</li></ul><p>Si vous cochez la case, les auteurs du signalement reçoivent un message privé (s’ils sont connectés) indiquant que leur signalement a été examiné ou suivi d’effet : cela les encourage à continuer. Le compteur du menu montre les tickets non assignés. Sur Discord, <code>/tickets</code> liste ceux en attente.</p>"
     },
     {
       "id": "bans",
       "title": "Bans partagés",
       "goto": "bans",
-      "html": "<p>Oxidian sert de serveur <b>Centralized Banning</b>, la fonction officielle de Rust : quand un joueur se connecte, le serveur demande au panneau s'il est banni. Ça marche en vanilla, sans plugin.</p><ol><li>Dans <b>Bans partagés → Réglages</b>, activez la liste. Si ce panneau gère le serveur, elle est configurée automatiquement (<code>server.bansServerEndpoint</code>).</li><li>Pour d'autres serveurs (les vôtres ou ceux d'amis), indiquez l'<b>adresse publique du panneau</b>, cliquez sur <b>Ajouter un serveur</b> et collez la commande dans sa console et son <code>server.cfg</code>. Chaque serveur a sa propre clé secrète, que vous pouvez changer ou retirer.</li></ol><p>La liste contient les bans de votre serveur (avec motif et expiration), ceux que vous ajoutez dans le panneau pour tous les serveurs et, si vous le souhaitez, les mutes. Retirer un ban du serveur débannit aussi le joueur.</p><p><b>Listes externes</b> : ajoutez l'adresse d'une autre liste au même format (un autre Oxidian, votre organisation Server Armour…). Le mode <b>Alerter</b> crée une alerte dans Surveillance ; <b>Bloquer</b> empêche la connexion. Seul le SteamID est envoyé et les réponses sont gardées 15 minutes.</p><p><b>Si le panneau tombe</b> : avec « Laisser entrer », les serveurs continuent avec leurs propres bans. Rust ne vérifie qu'à la connexion ; si vous bannissez quelqu'un déjà connecté, le panneau l'expulse de votre serveur.</p>"
+      "html": "<p>Scrapwarden sert de serveur <b>Centralized Banning</b>, la fonction officielle de Rust : quand un joueur se connecte, le serveur demande au panneau s'il est banni. Ça marche en vanilla, sans plugin.</p><ol><li>Dans <b>Bans partagés → Réglages</b>, activez la liste. Si ce panneau gère le serveur, elle est configurée automatiquement (<code>server.bansServerEndpoint</code>).</li><li>Pour d'autres serveurs (les vôtres ou ceux d'amis), indiquez l'<b>adresse publique du panneau</b>, cliquez sur <b>Ajouter un serveur</b> et collez la commande dans sa console et son <code>server.cfg</code>. Chaque serveur a sa propre clé secrète, que vous pouvez changer ou retirer.</li></ol><p>La liste contient les bans de votre serveur (avec motif et expiration), ceux que vous ajoutez dans le panneau pour tous les serveurs et, si vous le souhaitez, les mutes. Retirer un ban du serveur débannit aussi le joueur.</p><p><b>Listes externes</b> : ajoutez l'adresse d'une autre liste au même format (un autre Scrapwarden, votre organisation Server Armour…). Le mode <b>Alerter</b> crée une alerte dans Surveillance ; <b>Bloquer</b> empêche la connexion. Seul le SteamID est envoyé et les réponses sont gardées 15 minutes.</p><p><b>Si le panneau tombe</b> : avec « Laisser entrer », les serveurs continuent avec leurs propres bans. Rust ne vérifie qu'à la connexion ; si vous bannissez quelqu'un déjà connecté, le panneau l'expulse de votre serveur.</p>"
     },
     {
       "id": "plugins",
@@ -2308,19 +2308,19 @@
       "id": "vip",
       "title": "VIP avec expiration",
       "goto": "vip",
-      "html": "<p>Placez un joueur dans un groupe Oxide/Carbon (par exemple <code>vip</code>) pour quelques jours : le panneau l’en retire automatiquement à la fin. Idéal pour les VIP de boutique ou les récompenses d’événements.</p><ol><li>Dans <b>Réglages VIP</b>, indiquez vos groupes (le premier est celui par défaut). Les groupes absents sont créés automatiquement.</li><li>Dans <b>Permissions</b>, donnez à chaque groupe ce que comprend votre VIP (kits, skins, priorité dans la file…).</li><li>Dans <b>Accorder un VIP</b>, choisissez le joueur, le groupe et les jours (0 = permanent). S’il était déjà VIP, les jours s’ajoutent au temps restant.</li></ol><p>Le joueur reçoit un message à l’attribution, un avis avant l’expiration (24 h par défaut) et un autre à la fin. Si le serveur est éteint à l’expiration, le retrait se fait à la reconnexion RCON. Vous pouvez aussi prolonger ou retirer manuellement, et depuis Discord avec <code>/vip joueur jours [groupe]</code>. Chaque changement est inscrit au journal d’activité.</p><p><b>Priorité dans la file :</b> avec « Les VIP passent la file » activé, les groupes VIP reçoivent <code>oxidian.skipqueue</code> et entrent même quand le serveur est plein. C’est l’avantage adapté à un serveur type vanilla, car il ne touche pas au jeu.</p>"
+      "html": "<p>Placez un joueur dans un groupe Oxide/Carbon (par exemple <code>vip</code>) pour quelques jours : le panneau l’en retire automatiquement à la fin. Idéal pour les VIP de boutique ou les récompenses d’événements.</p><ol><li>Dans <b>Réglages VIP</b>, indiquez vos groupes (le premier est celui par défaut). Les groupes absents sont créés automatiquement.</li><li>Dans <b>Permissions</b>, donnez à chaque groupe ce que comprend votre VIP (kits, skins, priorité dans la file…).</li><li>Dans <b>Accorder un VIP</b>, choisissez le joueur, le groupe et les jours (0 = permanent). S’il était déjà VIP, les jours s’ajoutent au temps restant.</li></ol><p>Le joueur reçoit un message à l’attribution, un avis avant l’expiration (24 h par défaut) et un autre à la fin. Si le serveur est éteint à l’expiration, le retrait se fait à la reconnexion RCON. Vous pouvez aussi prolonger ou retirer manuellement, et depuis Discord avec <code>/vip joueur jours [groupe]</code>. Chaque changement est inscrit au journal d’activité.</p><p><b>Priorité dans la file :</b> avec « Les VIP passent la file » activé, les groupes VIP reçoivent <code>scrapwarden.skipqueue</code> et entrent même quand le serveur est plein. C’est l’avantage adapté à un serveur type vanilla, car il ne touche pas au jeu.</p>"
     },
     {
       "id": "store",
       "title": "Boutique Tebex",
       "goto": "store",
-      "html": "<p>Connectez une boutique <b>Tebex</b> et les achats sont livrés tout seuls, sans installer le plugin Tebex ni ouvrir de ports : le panneau consulte la file Tebex toutes les 1-2 minutes, exécute par RCON les commandes de chaque paquet et les marque comme livrées.</p><ol><li>Sur <b>creator.tebex.io</b>, créez une boutique de type Rust.</li><li>Dans <b>Game Servers → Connect Game Server → Plugin</b>, copiez la clé secrète et collez-la dans <b>Boutique</b>. Elle est vérifiée à l’enregistrement.</li><li>Ajoutez les commandes à chaque paquet. <code>{id}</code> est le SteamID de l’acheteur et <code>{username}</code> son nom.</li></ol><table><thead><tr><th>Pour donner…</th><th>Commande</th></tr></thead><tbody><tr><td>VIP qui expire seul</td><td><code>oxidian.vip {id} vip 30</code> (groupe et jours ; 0 = permanent)</td></tr><tr><td>Groupe permanent</td><td><code>oxide.usergroup add {id} vip</code></td></tr><tr><td>Une permission</td><td><code>oxide.grant user {id} kits.vip</code></td></tr><tr><td>Un objet</td><td><code>inventory.giveto {id} rifle.ak 1</code> (cochez « when the player is online »)</td></tr></tbody></table><p>Les commandes « online » attendent la connexion de l’acheteur ; les « immediately » s’exécutent aussitôt. Si le serveur est éteint, tout attend dans Tebex et est livré à son retour. Chaque livraison apparaît dans le tableau <b>Livraisons</b>, dans le journal d’activité (utilisateur <code>tebex</code>) et, si vous le souhaitez, avec un remerciement dans le chat et un avis Discord. Utilisez <code>oxide.</code> ou <code>c.</code> selon votre framework. N’utilisez pas en même temps le plugin officiel Tebex avec la même clé, sinon les achats seraient livrés deux fois.</p>"
+      "html": "<p>Connectez une boutique <b>Tebex</b> et les achats sont livrés tout seuls, sans installer le plugin Tebex ni ouvrir de ports : le panneau consulte la file Tebex toutes les 1-2 minutes, exécute par RCON les commandes de chaque paquet et les marque comme livrées.</p><ol><li>Sur <b>creator.tebex.io</b>, créez une boutique de type Rust.</li><li>Dans <b>Game Servers → Connect Game Server → Plugin</b>, copiez la clé secrète et collez-la dans <b>Boutique</b>. Elle est vérifiée à l’enregistrement.</li><li>Ajoutez les commandes à chaque paquet. <code>{id}</code> est le SteamID de l’acheteur et <code>{username}</code> son nom.</li></ol><table><thead><tr><th>Pour donner…</th><th>Commande</th></tr></thead><tbody><tr><td>VIP qui expire seul</td><td><code>scrapwarden.vip {id} vip 30</code> (groupe et jours ; 0 = permanent)</td></tr><tr><td>Groupe permanent</td><td><code>oxide.usergroup add {id} vip</code></td></tr><tr><td>Une permission</td><td><code>oxide.grant user {id} kits.vip</code></td></tr><tr><td>Un objet</td><td><code>inventory.giveto {id} rifle.ak 1</code> (cochez « when the player is online »)</td></tr></tbody></table><p>Les commandes « online » attendent la connexion de l’acheteur ; les « immediately » s’exécutent aussitôt. Si le serveur est éteint, tout attend dans Tebex et est livré à son retour. Chaque livraison apparaît dans le tableau <b>Livraisons</b>, dans le journal d’activité (utilisateur <code>tebex</code>) et, si vous le souhaitez, avec un remerciement dans le chat et un avis Discord. Utilisez <code>oxide.</code> ou <code>c.</code> selon votre framework. N’utilisez pas en même temps le plugin officiel Tebex avec la même clé, sinon les achats seraient livrés deux fois.</p>"
     },
     {
       "id": "staff",
       "title": "Staff en jeu (/staff)",
       "goto": "staff",
-      "html": "<p>Donne à vos modérateurs et admins une fenêtre dans le jeu pour travailler sans quitter Rust. Nécessite OxidianBridge 1.6 ou plus récent.</p><ol><li>Dans <b>Staff en jeu</b>, ajoutez le joueur (nom d’un joueur connecté ou SteamID64) et choisissez son niveau. Le panneau accorde <code>oxidian.mod</code> ou <code>oxidian.admin</code> sur le serveur.</li><li>En jeu, tapez <code>/staff</code>. Une fenêtre s’ouvre avec les onglets <b>Joueurs</b>, <b>Signalements</b> et, pour les admins, <b>Monde</b>.</li></ol><table><thead><tr><th>Niveau</th><th>Peut</th></tr></thead><tbody><tr><td>Modérateur</td><td>Voir et fermer les signalements F7 (sans sanction, avertissement ou expulsion), aller vers un joueur, avertir, rendre muet 30 min, rétablir la parole et expulser. Reçoit un avis dans le chat à chaque F7.</td></tr><tr><td>Admin</td><td>Tout ce qui précède, plus bannissements de 1 jour, 7 jours ou définitifs, amener un joueur, le soigner, jour/nuit, ciel dégagé/orage et événements (cargo, hélico, largage, Chinook).</td></tr></tbody></table><p>Expulser et bannir demandent un second clic. Les sanctions sont exécutées par le panneau : elles apparaissent dans la fiche du joueur et dans le journal d’activité comme <code>ingame:Nom</code>. Si quelqu’un a la permission ajoutée à la main sans être dans la liste du panneau, ses actions sont ignorées. Retirer quelqu’un de la liste lui retire les permissions.</p>"
+      "html": "<p>Donne à vos modérateurs et admins une fenêtre dans le jeu pour travailler sans quitter Rust. Nécessite ScrapwardenBridge 1.6 ou plus récent.</p><ol><li>Dans <b>Staff en jeu</b>, ajoutez le joueur (nom d’un joueur connecté ou SteamID64) et choisissez son niveau. Le panneau accorde <code>scrapwarden.mod</code> ou <code>scrapwarden.admin</code> sur le serveur.</li><li>En jeu, tapez <code>/staff</code>. Une fenêtre s’ouvre avec les onglets <b>Joueurs</b>, <b>Signalements</b> et, pour les admins, <b>Monde</b>.</li></ol><table><thead><tr><th>Niveau</th><th>Peut</th></tr></thead><tbody><tr><td>Modérateur</td><td>Voir et fermer les signalements F7 (sans sanction, avertissement ou expulsion), aller vers un joueur, avertir, rendre muet 30 min, rétablir la parole et expulser. Reçoit un avis dans le chat à chaque F7.</td></tr><tr><td>Admin</td><td>Tout ce qui précède, plus bannissements de 1 jour, 7 jours ou définitifs, amener un joueur, le soigner, jour/nuit, ciel dégagé/orage et événements (cargo, hélico, largage, Chinook).</td></tr></tbody></table><p>Expulser et bannir demandent un second clic. Les sanctions sont exécutées par le panneau : elles apparaissent dans la fiche du joueur et dans le journal d’activité comme <code>ingame:Nom</code>. Si quelqu’un a la permission ajoutée à la main sans être dans la liste du panneau, ses actions sont ignorées. Retirer quelqu’un de la liste lui retire les permissions.</p>"
     },
     {
       "id": "config",
@@ -2332,7 +2332,7 @@
       "id": "rates",
       "title": "Rates, mode PvP/PvE et monde",
       "goto": "rates",
-      "html": "<p><b>Rates et monde</b> vous permet de régler le jeu sur votre serveur sans toucher aux fichiers.</p><p><b>Mode de jeu :</b> cliquez sur PvP ou PvE. Le changement s’applique immédiatement via RCON (<code>server.pve</code>), sans redémarrage, et il est conservé pour les prochains démarrages. L’étiquette à côté du nom du serveur indique le mode et les rates actuels.</p><p><b>Multiplicateurs</b> (nécessitent Oxide ou Carbon avec le plugin OxidianBridge) :</p><ul><li><b>Récolte :</b> arbres, roches, filons et animaux.</li><li><b>Ramassage :</b> chanvre, champignons, pierres et bois au sol, cultures.</li><li><b>Carrières :</b> carrières, excavatrice et charges de prospection.</li><li><b>Vitesse de fabrication :</b> 2x prend deux fois moins de temps.</li></ul><p>Utilisez les préréglages (Vanilla, 2x, 3x, 5x, 10x) ou ajustez chaque curseur. Le plugin enregistre les valeurs et le panneau les renvoie à chaque démarrage du serveur.</p><p><b>Réglages vanilla</b> (sans plugin) : dégradation (<code>decay.scale</code>), entretien via l’armoire, radiation, stabilité et durée de piratage de la caisse verrouillée.</p><p><b>Monde</b> (serveur en marche) :</p><ul><li><b>Heure :</b> aube, midi, crépuscule ou nuit en un clic, et figer l’heure.</li><li><b>Météo :</b> dégagé, pluie, orage, brouillard ou retour à la météo automatique.</li><li><b>Événements</b> (avec le plugin) : cargo, hélicoptère de patrouille, largage et Chinook.</li></ul><p>Si l’option est active, le panneau annonce dans le chat du jeu les changements de mode et de rates. Ajoutez « 2x », « 3x »… au nom du serveur dans Réglages du serveur pour qu’il apparaisse dans la liste des serveurs.</p>"
+      "html": "<p><b>Rates et monde</b> vous permet de régler le jeu sur votre serveur sans toucher aux fichiers.</p><p><b>Mode de jeu :</b> cliquez sur PvP ou PvE. Le changement s’applique immédiatement via RCON (<code>server.pve</code>), sans redémarrage, et il est conservé pour les prochains démarrages. L’étiquette à côté du nom du serveur indique le mode et les rates actuels.</p><p><b>Multiplicateurs</b> (nécessitent Oxide ou Carbon avec le plugin ScrapwardenBridge) :</p><ul><li><b>Récolte :</b> arbres, roches, filons et animaux.</li><li><b>Ramassage :</b> chanvre, champignons, pierres et bois au sol, cultures.</li><li><b>Carrières :</b> carrières, excavatrice et charges de prospection.</li><li><b>Vitesse de fabrication :</b> 2x prend deux fois moins de temps.</li></ul><p>Utilisez les préréglages (Vanilla, 2x, 3x, 5x, 10x) ou ajustez chaque curseur. Le plugin enregistre les valeurs et le panneau les renvoie à chaque démarrage du serveur.</p><p><b>Réglages vanilla</b> (sans plugin) : dégradation (<code>decay.scale</code>), entretien via l’armoire, radiation, stabilité et durée de piratage de la caisse verrouillée.</p><p><b>Monde</b> (serveur en marche) :</p><ul><li><b>Heure :</b> aube, midi, crépuscule ou nuit en un clic, et figer l’heure.</li><li><b>Météo :</b> dégagé, pluie, orage, brouillard ou retour à la météo automatique.</li><li><b>Événements</b> (avec le plugin) : cargo, hélicoptère de patrouille, largage et Chinook.</li></ul><p>Si l’option est active, le panneau annonce dans le chat du jeu les changements de mode et de rates. Ajoutez « 2x », « 3x »… au nom du serveur dans Réglages du serveur pour qu’il apparaisse dans la liste des serveurs.</p>"
     },
     {
       "id": "schedule",
@@ -2368,7 +2368,7 @@
       "id": "account",
       "title": "Compte et langue",
       "goto": "settings",
-      "html": "<p><b>Langue du panneau :</b> changez-la depuis le sélecteur du menu latéral, l'écran de connexion ou cette section. Chaque navigateur la mémorise.</p><p><b>Langue des notifications :</b> celle que voient les joueurs dans le chat (avertissements de redémarrage et messages d'expulsion) et celle des alertes Discord.</p><p><b>Son :</b> à l'ouverture du panneau, un impact cinématographique se joue en synchro avec l'animation d'entrée : une montée pendant que le logo se dessine et un coup grave et métallique quand « PANEL » apparaît. Les navigateurs bloquent l'audio tant que vous n'avez pas interagi avec la page : s'il ne se joue pas au chargement, il se jouera à la connexion. Activez-le ou désactivez-le ici (enregistré par navigateur) et utilisez « Tester » pour l'écouter.</p><p><b>Mot de passe :</b> 8 caractères minimum. Après 5 tentatives échouées, l'accès est bloqué 5 minutes. Si un administrateur oublie le sien, un propriétaire peut le changer dans Administrateurs. Si le seul propriétaire l'oublie, arrêtez le panneau, supprimez la liste <code>\"users\"</code> de <code>data/config.json</code> et vous pourrez créer un nouveau propriétaire à la prochaine connexion.</p><p>Si vous avez mis à jour depuis une version précédente avec un seul mot de passe, votre nom d'utilisateur est <code>admin</code> avec le même mot de passe.</p><p><b>Soutenir le projet :</b> Oxidian est gratuit et open source. S’il vous aide, vous pouvez m’offrir un café sur <a href=\"https://ko-fi.com/oxidian\" target=\"_blank\" rel=\"noopener\">Ko-fi</a> (aussi via le lien ☕ en bas du menu).</p>"
+      "html": "<p><b>Langue du panneau :</b> changez-la depuis le sélecteur du menu latéral, l'écran de connexion ou cette section. Chaque navigateur la mémorise.</p><p><b>Langue des notifications :</b> celle que voient les joueurs dans le chat (avertissements de redémarrage et messages d'expulsion) et celle des alertes Discord.</p><p><b>Son :</b> à l'ouverture du panneau, un impact cinématographique se joue en synchro avec l'animation d'entrée : une montée pendant que le logo se dessine et un coup grave et métallique quand « PANEL » apparaît. Les navigateurs bloquent l'audio tant que vous n'avez pas interagi avec la page : s'il ne se joue pas au chargement, il se jouera à la connexion. Activez-le ou désactivez-le ici (enregistré par navigateur) et utilisez « Tester » pour l'écouter.</p><p><b>Mot de passe :</b> 8 caractères minimum. Après 5 tentatives échouées, l'accès est bloqué 5 minutes. Si un administrateur oublie le sien, un propriétaire peut le changer dans Administrateurs. Si le seul propriétaire l'oublie, arrêtez le panneau, supprimez la liste <code>\"users\"</code> de <code>data/config.json</code> et vous pourrez créer un nouveau propriétaire à la prochaine connexion.</p><p>Si vous avez mis à jour depuis une version précédente avec un seul mot de passe, votre nom d'utilisateur est <code>admin</code> avec le même mot de passe.</p><p><b>Soutenir le projet :</b> Scrapwarden est gratuit et open source. S’il vous aide, vous pouvez m’offrir un café sur <a href=\"https://ko-fi.com/scrapwarden\" target=\"_blank\" rel=\"noopener\">Ko-fi</a> (aussi via le lien ☕ en bas du menu).</p>"
     },
     {
       "id": "admins",
@@ -2385,7 +2385,7 @@
     {
       "id": "troubleshooting",
       "title": "Dépannage",
-      "html": "<p><b>Vous avez trouvé un bug ?</b> Cliquez sur <b>Signaler un bug</b> en bas du menu latéral : GitHub s’ouvre avec la version et les infos techniques déjà remplies, sans IP ni données de joueurs.</p><ul><li><b>Personne ne peut se connecter :</b> vérifiez les ports du pare-feu et de la box (jeu et query en UDP) et que vous partagez bien l'IP publique.</li><li><b>Le RCON ne se connecte pas :</b> attendez la fin de la génération de la carte ; sinon, vérifiez qu'aucun autre programme n'utilise le port RCON.</li><li><b>L'installation reste à 0 % :</b> SteamCMD se met à jour lui-même ; patientez quelques minutes. En cas d'échec, relancez l'installation avec Vérifier les fichiers activé.</li><li><b>Un plugin ne se charge pas :</b> cherchez l'erreur de compilation dans la console ; il s'agit souvent d'une version obsolète du plugin.</li><li><b>Les inventaires ou la surveillance ne marchent pas :</b> dans Surveillance, vérifiez que le module OxidianBridge est installé et répond.</li><li><b>FPS bas :</b> réduisez la taille de la carte ou le nombre de joueurs, vérifiez les plugins lourds et le nombre d'entités.</li></ul>"
+      "html": "<p><b>Vous avez trouvé un bug ?</b> Cliquez sur <b>Signaler un bug</b> en bas du menu latéral : GitHub s’ouvre avec la version et les infos techniques déjà remplies, sans IP ni données de joueurs.</p><ul><li><b>Personne ne peut se connecter :</b> vérifiez les ports du pare-feu et de la box (jeu et query en UDP) et que vous partagez bien l'IP publique.</li><li><b>Le RCON ne se connecte pas :</b> attendez la fin de la génération de la carte ; sinon, vérifiez qu'aucun autre programme n'utilise le port RCON.</li><li><b>L'installation reste à 0 % :</b> SteamCMD se met à jour lui-même ; patientez quelques minutes. En cas d'échec, relancez l'installation avec Vérifier les fichiers activé.</li><li><b>Un plugin ne se charge pas :</b> cherchez l'erreur de compilation dans la console ; il s'agit souvent d'une version obsolète du plugin.</li><li><b>Les inventaires ou la surveillance ne marchent pas :</b> dans Surveillance, vérifiez que le module ScrapwardenBridge est installé et répond.</li><li><b>FPS bas :</b> réduisez la taille de la carte ou le nombre de joueurs, vérifiez les plugins lourds et le nombre d'entités.</li></ul>"
     },
     {
       "id": "commands",

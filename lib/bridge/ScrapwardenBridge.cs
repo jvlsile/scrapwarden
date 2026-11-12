@@ -1,5 +1,5 @@
-// Oxidian Bridge
-// Complemento que instala Oxidian en Oxide/Carbon. Expone el inventario de los jugadores
+// Scrapwarden Bridge
+// Complemento que instala Scrapwarden en Oxide/Carbon. Expone el inventario de los jugadores
 // por RCON y envía a la consola los eventos que el panel analiza (antihack, reportes F7, impactos y muertes PvP).
 // Las líneas de evento empiezan por "RPANEL|" seguidas de JSON; el panel las oculta de la consola.
 
@@ -16,9 +16,9 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("OxidianBridge", "Oxidian", "1.6.2")]
-    [Description("Puente entre Oxidian y el servidor: inventarios, equipos, mapa en vivo, vigilancia, rates, eventos y herramientas de staff")]
-    public class OxidianBridge : RustPlugin
+    [Info("ScrapwardenBridge", "Scrapwarden", "1.7.0")]
+    [Description("Puente entre Scrapwarden y el servidor: inventarios, equipos, mapa en vivo, vigilancia, rates, eventos y herramientas de staff")]
+    public class ScrapwardenBridge : RustPlugin
     {
         private const string Prefix = "RPANEL|";
         private int _seq;
@@ -176,14 +176,14 @@ namespace Oxide.Plugins
 
         private static string Reply(object o) { return JsonConvert.SerializeObject(o); }
 
-        [ConsoleCommand("oxidian.ping")]
+        [ConsoleCommand("scrapwarden.ping")]
         private void CmdPing(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
             arg.ReplyWith(Reply(new { ok = true, version = Version.ToString() }));
         }
 
-        [ConsoleCommand("oxidian.inventory")]
+        [ConsoleCommand("scrapwarden.inventory")]
         private void CmdInventory(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
@@ -204,7 +204,7 @@ namespace Oxide.Plugins
             }));
         }
 
-        [ConsoleCommand("oxidian.inventory.remove")]
+        [ConsoleCommand("scrapwarden.inventory.remove")]
         private void CmdRemove(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
@@ -219,7 +219,7 @@ namespace Oxide.Plugins
             arg.ReplyWith(Reply(new { ok = true, removed = name }));
         }
 
-        [ConsoleCommand("oxidian.inventory.clear")]
+        [ConsoleCommand("scrapwarden.inventory.clear")]
         private void CmdClear(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
@@ -233,7 +233,7 @@ namespace Oxide.Plugins
 
         #region Equipos y armarios
 
-        [ConsoleCommand("oxidian.teams")]
+        [ConsoleCommand("scrapwarden.teams")]
         private void CmdTeams(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
@@ -272,7 +272,7 @@ namespace Oxide.Plugins
 
         #region Mapa en vivo
 
-        [ConsoleCommand("oxidian.map")]
+        [ConsoleCommand("scrapwarden.map")]
         private void CmdMap(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
@@ -336,7 +336,7 @@ namespace Oxide.Plugins
             };
         }
 
-        [ConsoleCommand("oxidian.positions")]
+        [ConsoleCommand("scrapwarden.positions")]
         private void CmdPositions(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
@@ -416,7 +416,7 @@ namespace Oxide.Plugins
             try { return Encoding.UTF8.GetString(Convert.FromBase64String(s ?? "")); } catch { return ""; }
         }
 
-        [ConsoleCommand("oxidian.chatfilter")]
+        [ConsoleCommand("scrapwarden.chatfilter")]
         private void CmdChatFilter(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
@@ -432,8 +432,8 @@ namespace Oxide.Plugins
             arg.ReplyWith(Reply(new { ok = true }));
         }
 
-        // oxidian.mute <steamid> <segundos>: 0 = indefinido, -1 = quitar
-        [ConsoleCommand("oxidian.mute")]
+        // scrapwarden.mute <steamid> <segundos>: 0 = indefinido, -1 = quitar
+        [ConsoleCommand("scrapwarden.mute")]
         private void CmdMute(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
@@ -444,8 +444,8 @@ namespace Oxide.Plugins
             arg.ReplyWith(Reply(new { ok = true }));
         }
 
-        // oxidian.pm <steamid> <texto en base64>
-        [ConsoleCommand("oxidian.pm")]
+        // scrapwarden.pm <steamid> <texto en base64>
+        [ConsoleCommand("scrapwarden.pm")]
         private void CmdPm(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
@@ -467,7 +467,7 @@ namespace Oxide.Plugins
             public float craft = 1f;
         }
 
-        private const string RatesFile = "OxidianBridge_rates";
+        private const string RatesFile = "ScrapwardenBridge_rates";
         private Rates _rates = new Rates();
         private readonly Dictionary<int, float> _bpTimes = new Dictionary<int, float>(); // itemid -> tiempo original
 
@@ -539,8 +539,8 @@ namespace Oxide.Plugins
         private void OnExcavatorGather(ExcavatorArm arm, Item item) { Scale(item, _rates.quarry); }
         private void OnSurveyGather(SurveyCharge survey, Item item) { Scale(item, _rates.quarry); }
 
-        // oxidian.rates <json en base64>
-        [ConsoleCommand("oxidian.rates")]
+        // scrapwarden.rates <json en base64>
+        [ConsoleCommand("scrapwarden.rates")]
         private void CmdRates(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
@@ -562,8 +562,8 @@ namespace Oxide.Plugins
             { "chinook", "assets/prefabs/npc/ch47/ch47scientists.entity.prefab" },
         };
 
-        // oxidian.event <cargo|heli|airdrop|chinook>
-        [ConsoleCommand("oxidian.event")]
+        // scrapwarden.event <cargo|heli|airdrop|chinook>
+        [ConsoleCommand("scrapwarden.event")]
         private void CmdEvent(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
@@ -584,12 +584,12 @@ namespace Oxide.Plugins
         #endregion
         #region Herramientas de staff en el juego (/staff)
 
-        // Dos niveles por permiso: oxidian.mod (moderador) y oxidian.admin (todo). El panel los concede y
+        // Dos niveles por permiso: scrapwarden.mod (moderador) y scrapwarden.admin (todo). El panel los concede y
         // envía por RCON los tickets, las advertencias y los textos en el idioma elegido. Las sanciones las
         // ejecuta el panel (quedan en la ficha del jugador y en el registro de actividad).
-        private const string PermMod = "oxidian.mod";
-        private const string PermAdmin = "oxidian.admin";
-        private const string PermSkipQueue = "oxidian.skipqueue";
+        private const string PermMod = "scrapwarden.mod";
+        private const string PermAdmin = "scrapwarden.admin";
+        private const string PermSkipQueue = "scrapwarden.skipqueue";
         private const string UiRoot = "oxs.root";
         private const int PageSize = 12;
 
@@ -608,7 +608,7 @@ namespace Oxide.Plugins
         // Textos de reserva si el panel aún no ha enviado los suyos
         private static readonly Dictionary<string, string> StaffFallback = new Dictionary<string, string>
         {
-            { "title", "OXIDIAN STAFF" }, { "lvl.mod", "Moderator" }, { "lvl.admin", "Admin" }, { "tab.players", "Players" },
+            { "title", "SCRAPWARDEN STAFF" }, { "lvl.mod", "Moderator" }, { "lvl.admin", "Admin" }, { "tab.players", "Players" },
             { "tab.reports", "Reports ({n})" }, { "tab.world", "World" }, { "close", "Close" }, { "prev", "‹" }, { "next", "›" },
             { "pick", "Pick a player from the list" }, { "health", "Health" }, { "warns", "Warnings" }, { "team", "Team" },
             { "muted", "Muted" }, { "sleeping", "Sleeping" }, { "reason", "Reason (optional):" },
@@ -638,7 +638,7 @@ namespace Oxide.Plugins
             permission.RegisterPermission(PermSkipQueue, this);
         }
 
-        // Prioridad en la cola: quien tenga oxidian.skipqueue (por ejemplo el grupo VIP) entra sin esperar.
+        // Prioridad en la cola: quien tenga scrapwarden.skipqueue (por ejemplo el grupo VIP) entra sin esperar.
         // No cambia el juego, así que vale también para servidores tipo vanilla.
         private object CanBypassQueue(Network.Connection connection)
         {
@@ -665,8 +665,8 @@ namespace Oxide.Plugins
             DrawStaff(player);
         }
 
-        // oxidian.staffdata <json en base64>: tickets, advertencias y textos que manda el panel
-        [ConsoleCommand("oxidian.staffdata")]
+        // scrapwarden.staffdata <json en base64>: tickets, advertencias y textos que manda el panel
+        [ConsoleCommand("scrapwarden.staffdata")]
         private void CmdStaffData(ConsoleSystem.Arg arg)
         {
             if (arg.Connection != null) return;
@@ -682,8 +682,8 @@ namespace Oxide.Plugins
             arg.ReplyWith(Reply(new { ok = true, open = _ui.Count }));
         }
 
-        // Botones de la interfaz: oxidian.staff <close|tab|page|sel|reason|act|ticket|world> …
-        [ConsoleCommand("oxidian.staff")]
+        // Botones de la interfaz: scrapwarden.staff <close|tab|page|sel|reason|act|ticket|world> …
+        [ConsoleCommand("scrapwarden.staff")]
         private void CmdStaffUi(ConsoleSystem.Arg arg)
         {
             var player = arg.Player();
@@ -830,7 +830,7 @@ namespace Oxide.Plugins
             // Cabecera y pestañas
             UiText(c, "oxs.win", T("title"), 20, CText, TextAnchor.MiddleLeft, 0.025f, 0.91f, 0.4f, 0.98f);
             UiText(c, "oxs.win", admin ? T("lvl.admin") : T("lvl.mod"), 12, admin ? "0.88 0.66 0.23 1" : "0.45 0.79 0.71 1", TextAnchor.MiddleLeft, 0.25f, 0.91f, 0.45f, 0.98f);
-            UiBtn(c, "oxs.win", "✕  " + T("close"), "oxidian.staff close", CSteel, 0.86f, 0.925f, 0.975f, 0.97f);
+            UiBtn(c, "oxs.win", "✕  " + T("close"), "scrapwarden.staff close", CSteel, 0.86f, 0.925f, 0.975f, 0.97f);
             var tabs = new List<KeyValuePair<string, string>>
             {
                 new KeyValuePair<string, string>("players", T("tab.players")),
@@ -840,7 +840,7 @@ namespace Oxide.Plugins
             for (var i = 0; i < tabs.Count; i++)
             {
                 var x = 0.025f + i * 0.17f;
-                UiBtn(c, "oxs.win", tabs[i].Value, "oxidian.staff tab " + tabs[i].Key, st.tab == tabs[i].Key ? CPatina : CPanel, x, 0.845f, x + 0.16f, 0.895f, 13);
+                UiBtn(c, "oxs.win", tabs[i].Value, "scrapwarden.staff tab " + tabs[i].Key, st.tab == tabs[i].Key ? CPatina : CPanel, x, 0.845f, x + 0.16f, 0.895f, 13);
             }
 
             if (st.tab == "reports") DrawReports(c, st, admin);
@@ -865,11 +865,11 @@ namespace Oxide.Plugins
                 var y1 = 0.98f - i * rowH;
                 int w;
                 var warn = _staff.warns != null && _staff.warns.TryGetValue(p.UserIDString, out w) && w > 0 ? "  <color=#e0a93b>⚠" + w + "</color>" : "";
-                UiBtn(c, "oxs.list", Clip(p.displayName, 22) + warn, "oxidian.staff sel " + p.UserIDString, p.UserIDString == st.sel ? CRowSel : CRow, 0.03f, y1 - rowH + 0.006f, 0.97f, y1, 12);
+                UiBtn(c, "oxs.list", Clip(p.displayName, 22) + warn, "scrapwarden.staff sel " + p.UserIDString, p.UserIDString == st.sel ? CRowSel : CRow, 0.03f, y1 - rowH + 0.006f, 0.97f, y1, 12);
             }
-            UiBtn(c, "oxs.list", T("prev"), "oxidian.staff page " + Math.Max(0, st.page - 1), CSteel, 0.03f, 0.015f, 0.2f, 0.09f);
+            UiBtn(c, "oxs.list", T("prev"), "scrapwarden.staff page " + Math.Max(0, st.page - 1), CSteel, 0.03f, 0.015f, 0.2f, 0.09f);
             UiText(c, "oxs.list", (st.page + 1) + " / " + pages + "  ·  " + list.Count, 11, CMuted, TextAnchor.MiddleCenter, 0.2f, 0.015f, 0.8f, 0.09f);
-            UiBtn(c, "oxs.list", T("next"), "oxidian.staff page " + Math.Min(pages - 1, st.page + 1), CSteel, 0.8f, 0.015f, 0.97f, 0.09f);
+            UiBtn(c, "oxs.list", T("next"), "scrapwarden.staff page " + Math.Min(pages - 1, st.page + 1), CSteel, 0.8f, 0.015f, 0.97f, 0.09f);
 
             UiBox(c, "oxs.win", "oxs.det", CPanel, 0.345f, 0.04f, 0.975f, 0.825f);
             var target = string.IsNullOrEmpty(st.sel) ? null : FindPlayer(st.sel);
@@ -892,7 +892,7 @@ namespace Oxide.Plugins
                 Parent = "oxs.reason",
                 Components =
                 {
-                    new CuiInputFieldComponent { Text = st.reason ?? "", FontSize = 12, Align = TextAnchor.MiddleLeft, Color = CText, CharsLimit = 100, Command = "oxidian.staff reason" },
+                    new CuiInputFieldComponent { Text = st.reason ?? "", FontSize = 12, Align = TextAnchor.MiddleLeft, Color = CText, CharsLimit = 100, Command = "scrapwarden.staff reason" },
                     new CuiRectTransformComponent { AnchorMin = "0.02 0", AnchorMax = "0.98 1" },
                 },
             });
@@ -908,7 +908,7 @@ namespace Oxide.Plugins
                 var x0 = 0.04f + col * 0.31f; var y1 = 0.64f - row * 0.13f;
                 var key = acts[i][0] + ":" + target.UserIDString;
                 var label = st.confirm == key ? T("confirm") : T("a." + acts[i][0]);
-                UiBtn(c, "oxs.det", label, "oxidian.staff act " + acts[i][0] + " " + target.UserIDString, st.confirm == key ? "0.62 0.18 0.14 1" : acts[i][1], x0, y1 - 0.1f, x0 + 0.29f, y1, 13);
+                UiBtn(c, "oxs.det", label, "scrapwarden.staff act " + acts[i][0] + " " + target.UserIDString, st.confirm == key ? "0.62 0.18 0.14 1" : acts[i][1], x0, y1 - 0.1f, x0 + 0.29f, y1, 13);
             }
         }
 
@@ -927,12 +927,12 @@ namespace Oxide.Plugins
                 UiBox(c, "oxs.rep", row, CRow, 0.015f, y0, 0.985f, y1);
                 UiText(c, row, "#" + tk.id + "  <b>" + Clip(tk.name, 24) + "</b>", 13, CText, TextAnchor.MiddleLeft, 0.015f, 0.5f, 0.41f, 1f);
                 UiText(c, row, T("rep.line").Replace("{n}", tk.n.ToString()).Replace("{r}", tk.r.ToString()) + "  ·  " + Clip(tk.subj, 28), 11, tk.r > 1 ? "0.91 0.52 0.30 1" : CMuted, TextAnchor.MiddleLeft, 0.015f, 0f, 0.41f, 0.5f);
-                UiBtn(c, row, T("a.tp"), "oxidian.staff act tp " + tk.sid, CSteel, 0.42f, 0.18f, 0.5f, 0.82f, 11);
+                UiBtn(c, row, T("a.tp"), "scrapwarden.staff act tp " + tk.sid, CSteel, 0.42f, 0.18f, 0.5f, 0.82f, 11);
                 for (var j = 0; j < res.Length; j++)
                 {
                     var x0 = 0.51f + j * 0.12f;
                     var key = "t" + tk.id + res[j];
-                    UiBtn(c, row, st.confirm == key ? T("confirm") : T("r." + res[j]), "oxidian.staff ticket " + tk.id + " " + res[j],
+                    UiBtn(c, row, st.confirm == key ? T("confirm") : T("r." + res[j]), "scrapwarden.staff ticket " + tk.id + " " + res[j],
                         st.confirm == key ? "0.62 0.18 0.14 1" : res[j] == "none" ? CPatina : res[j] == "warn" ? CAmber : COxide, x0, 0.18f, x0 + 0.115f, 0.82f, 11);
                 }
             }
@@ -954,7 +954,7 @@ namespace Oxide.Plugins
                 for (var i = 1; i < groups[g].Length; i++)
                 {
                     var x0 = 0.03f + (i - 1) * 0.235f;
-                    UiBtn(c, "oxs.wld", T("w." + groups[g][i]), "oxidian.staff world " + groups[g][i], g == 2 ? COxide : CSteel, x0, y1 - 0.22f, x0 + 0.22f, y1 - 0.1f, 14);
+                    UiBtn(c, "oxs.wld", T("w." + groups[g][i]), "scrapwarden.staff world " + groups[g][i], g == 2 ? COxide : CSteel, x0, y1 - 0.22f, x0 + 0.22f, y1 - 0.1f, 14);
                 }
             }
         }

@@ -1,12 +1,12 @@
-<p align="center"><img src="docs/brand/logo-512.png" width="112" alt="Logo de Oxidian"></p>
+<p align="center"><img src="docs/brand/logo-512.png" width="112" alt="Logo de Scrapwarden"></p>
 
-# Oxidian
+# Scrapwarden
 
-[Web](https://jvlsile.github.io/oxidian/?lang=es) · **Español** · [English](README.md)
+[Web](https://jvlsile.github.io/scrapwarden/?lang=es) · **Español** · [English](README.md)
 
-> **🧪 Beta pública.** Oxidian es nuevo y puede tener fallos. Si encuentras alguno, pulsa **Reportar un fallo** en el menú lateral del panel o [abre un issue](https://github.com/jvlsile/oxidian/issues/new/choose): ayuda muchísimo.
+> **🧪 Beta pública.** Scrapwarden es nuevo y puede tener fallos. Si encuentras alguno, pulsa **Reportar un fallo** en el menú lateral del panel o [abre un issue](https://github.com/jvlsile/scrapwarden/issues/new/choose): ayuda muchísimo.
 
-> El panel es gratuito y de código abierto. Si te resulta útil, puedes apoyar el proyecto en [Ko-fi](https://ko-fi.com/oxidian).
+> El panel es gratuito y de código abierto. Si te resulta útil, puedes apoyar el proyecto en [Ko-fi](https://ko-fi.com/scrapwarden).
 
 Panel web para **instalar y administrar servidores dedicados de Rust**, con instalador de plugins (uMod) y funciones de administración. Funciona en **Windows y Linux** y está disponible en **español, inglés, portugués y francés**.
 
@@ -27,15 +27,15 @@ Panel web para **instalar y administrar servidores dedicados de Rust**, con inst
 | **Moderación** | Por jugador: notas internas, advertencias con **sanciones automáticas** (expulsar, silenciar, baneo temporal o permanente al llegar a N), **silencio** y **baneo temporal** con fin automático. |
 | **Reportes F7** | Cada F7 del juego abre un **ticket** (agrupado por jugador reportado). Asignación, notas del staff, cierre con sanción (advertencia, silencio, expulsión, baneo temporal o permanente) y **mensaje de agradecimiento** a quien reportó. `/tickets` en Discord. |
 | **VIP con caducidad** | Mete a un jugador en un grupo de Oxide/Carbon durante X días y lo **saca solo al caducar**. Avisos en el juego (alta, 24 h antes y fin), ampliar o quitar, historial y `/vip` en Discord. |
-| **Tienda Tebex** | Las compras se entregan solas: el panel consulta la cola de Tebex, ejecuta los comandos de cada paquete por RCON y los marca como entregados, sin plugin ni puertos abiertos. `oxidian.vip {id} vip 30` da VIP con caducidad. Agradecimiento en el chat, aviso en Discord y tabla de entregas. |
-| **Staff en el juego** | Escribiendo `/staff` en Rust, moderadores y admins abren una ventana con jugadores, reportes F7 y (admins) mundo: advertir, silenciar, expulsar, banear, ir hacia/traer, curar, hora, clima y eventos. Dos niveles (`oxidian.mod` / `oxidian.admin`) que asigna el panel; todo queda en el registro como `ingame:Nombre`. |
+| **Tienda Tebex** | Las compras se entregan solas: el panel consulta la cola de Tebex, ejecuta los comandos de cada paquete por RCON y los marca como entregados, sin plugin ni puertos abiertos. `scrapwarden.vip {id} vip 30` da VIP con caducidad. Agradecimiento en el chat, aviso en Discord y tabla de entregas. |
+| **Staff en el juego** | Escribiendo `/staff` en Rust, moderadores y admins abren una ventana con jugadores, reportes F7 y (admins) mundo: advertir, silenciar, expulsar, banear, ir hacia/traer, curar, hora, clima y eventos. Dos niveles (`scrapwarden.mod` / `scrapwarden.admin`) que asigna el panel; todo queda en el registro como `ingame:Nombre`. |
 | **Wiki** | Guía integrada de todas las funciones, con índice y buscador, en cada idioma. |
 | **Idiomas** | Selector en el menú lateral y en la pantalla de acceso. Idioma aparte para los avisos del chat del juego y de Discord. |
 | **Mapa en vivo** | Mapa del servidor con jugadores en tiempo real (colores por equipo), durmientes, eventos (Cargo, helicóptero, Bradley, Chinook), **carreteras, vías, ríos y tendido eléctrico**, monumentos con icono, leyenda y cuadrícula de Rust. Zoom, búsqueda y acciones al hacer clic. |
 | **Equipos** | Equipos con sus miembros, alerta si superan el límite (p. ej. «Max 3») y detección de grupos que comparten armarios para saltárselo. |
 | **Perfiles de Steam** | Al conectarse, comprueba baneos VAC o de juego, antigüedad de la cuenta, perfil privado y horas en Rust. Por regla: no hacer nada, avisar o expulsar. Lista blanca. |
 | **Administradores** | Varios usuarios con roles (propietario, administrador, moderador, observador), **verificación en dos pasos (TOTP)** con códigos de recuperación y registro de actividad de quién hizo qué. |
-| **Baneos compartidos** | Oxidian hace de servidor del **Centralized Banning** oficial de Rust: un baneo en un servidor vale para todos, también en vanilla y sin plugins. Una clave secreta por servidor y listas externas opcionales (otro Oxidian, Server Armour) en modo aviso o bloqueo. |
+| **Baneos compartidos** | Scrapwarden hace de servidor del **Centralized Banning** oficial de Rust: un baneo en un servidor vale para todos, también en vanilla y sin plugins. Una clave secreta por servidor y listas externas opcionales (otro Scrapwarden, Server Armour) en modo aviso o bloqueo. |
 | **Vigilancia** | Alertas en tiempo real de posibles trampas y comportamientos extraños, ranking de jugadores a vigilar, historial por jugador y avisos en Discord. Detección de VPN, proxy, IPs de hosting y país. |
 | **Inventarios** | Visor del inventario de cualquier jugador (conectado o durmiendo) con la **imagen de cada objeto**: ropa, cinturón y mochila, con estado, munición, accesorios y skins. Quitar objetos o vaciar el inventario. |
 | **Rates y mundo** | **PvP/PvE en un clic** sin reiniciar. Multiplicadores de recolección, recogida, canteras y velocidad de crafteo con preajustes (1x, 2x, 3x, 5x, 10x). Decay, upkeep, radiación, estabilidad y tiempo de la caja bloqueada. **Hora del día**, **clima** y **eventos** (carguero, helicóptero, lanzamiento aéreo, Chinook). |
@@ -54,11 +54,11 @@ Panel web para **instalar y administrar servidores dedicados de Rust**, con inst
 
 ## Descarga
 
-Descarga la [última versión](https://github.com/jvlsile/oxidian/releases/latest) o clona el repositorio con `git clone https://github.com/jvlsile/oxidian.git`.
+Descarga la [última versión](https://github.com/jvlsile/scrapwarden/releases/latest) o clona el repositorio con `git clone https://github.com/jvlsile/scrapwarden.git`.
 
 ## Instalación en Windows
 
-1. Descomprime `oxidian.zip` en una carpeta, por ejemplo `C:\Oxidian`.
+1. Descomprime `scrapwarden.zip` en una carpeta, por ejemplo `C:\Scrapwarden`.
 2. Clic derecho en **`install-windows.ps1`** y elige **Ejecutar con PowerShell**. El script:
    - instala Node.js LTS si no lo tienes,
    - instala las dependencias del panel,
@@ -73,7 +73,7 @@ Para arrancarlo a mano en cualquier momento: doble clic en **`start-windows.bat`
 ## Instalación en Linux
 
 ```bash
-unzip oxidian.zip && cd oxidian
+unzip scrapwarden.zip && cd scrapwarden
 sudo bash install.sh
 ```
 Crea el usuario `rustserver`, instala dependencias y Node.js, deja el panel como servicio `systemd` en el puerto 8080 y abre los puertos en `ufw`.
@@ -95,17 +95,17 @@ En **Instalación → Sistema operativo del servidor** eliges para qué sistema 
 
 ## Servidores existentes y alquilados
 
-**En el mismo equipo.** Instalación → *Ya tengo uno en este equipo*: indica la carpeta donde está `RustDedicated` y pulsa **Detectar**. Oxidian lee tu script de arranque (`.bat`, `.cmd`, `.sh`) y el `server.cfg` para usar los mismos puertos, identidad, contraseña de RCON, nombre, mapa y semilla, y conserva tus demás parámetros. No se reinstala ni se borra nada. Si el servidor ya está encendido, el panel se conecta a él.
+**En el mismo equipo.** Instalación → *Ya tengo uno en este equipo*: indica la carpeta donde está `RustDedicated` y pulsa **Detectar**. Scrapwarden lee tu script de arranque (`.bat`, `.cmd`, `.sh`) y el `server.cfg` para usar los mismos puertos, identidad, contraseña de RCON, nombre, mapa y semilla, y conserva tus demás parámetros. No se reinstala ni se borra nada. Si el servidor ya está encendido, el panel se conecta a él.
 
 **Servidor alquilado (modo remoto).** Instalación → *Servidor alquilado (RCON)*: pon la IP, el puerto RCON y la contraseña de tu hosting. Funciona todo lo que va por RCON: consola, jugadores, chat, moderación, tickets F7, `/staff`, vigilancia, estadísticas, bot de Discord, Tebex, VIP, rates, mundo y web pública. Instalar, copias y wipes siguen en tu hosting.
 
-**Acceso FTP/SFTP (opcional).** En modo remoto, añade los datos FTP, FTPS o SFTP de tu hosting y la carpeta que contiene `RustDedicated`, y pulsa **Probar**. A partir de ahí **Plugins** funciona como siempre (instalar desde uMod, subir, activar/desactivar, editor de configuración) y el panel sube y actualiza `OxidianBridge.cs` solo. Sin él, descarga `OxidianBridge.cs` desde el panel y súbelo a `oxide/plugins` o `carbon/plugins` con el gestor de archivos del hosting. Mejor SFTP: el FTP sin TLS envía la contraseña sin cifrar.
+**Acceso FTP/SFTP (opcional).** En modo remoto, añade los datos FTP, FTPS o SFTP de tu hosting y la carpeta que contiene `RustDedicated`, y pulsa **Probar**. A partir de ahí **Plugins** funciona como siempre (instalar desde uMod, subir, activar/desactivar, editor de configuración) y el panel sube y actualiza `ScrapwardenBridge.cs` solo. Sin él, descarga `ScrapwardenBridge.cs` desde el panel y súbelo a `oxide/plugins` o `carbon/plugins` con el gestor de archivos del hosting. Mejor SFTP: el FTP sin TLS envía la contraseña sin cifrar.
 
  Los reinicios programados avisan, guardan y cierran el servidor para que el hosting lo vuelva a arrancar.
 
 ## Actualizar
 
-El panel mira cada 6 horas si hay una versión nueva publicada en GitHub y, si la hay, muestra **Nueva versión** en el menú lateral. Solo avisa: no descarga ni instala nada por su cuenta. Se desactiva en **Cuenta → Actualizaciones del panel** o con la variable `OXIDIAN_NO_UPDATE_CHECK=1`.
+El panel mira cada 6 horas si hay una versión nueva publicada en GitHub y, si la hay, muestra **Nueva versión** en el menú lateral. Solo avisa: no descarga ni instala nada por su cuenta. Se desactiva en **Cuenta → Actualizaciones del panel** o con la variable `SCRAPWARDEN_NO_UPDATE_CHECK=1`.
 
 Para actualizar: detén el panel, sustituye los archivos por los de la versión nueva (conserva las carpetas `data/`, `server/`, `steamcmd/` y `backups/`), ejecuta `npm install --omit=dev` y vuelve a arrancarlo.
 
@@ -121,7 +121,7 @@ Para actualizar: detén el panel, sustituye los archivos por los de la versión 
 
 ## Vigilancia e inventarios
 
-Con **Oxide o Carbon**, el panel instala automáticamente su complemento **OxidianBridge** (`oxide/plugins/OxidianBridge.cs`). Si ya tenías el framework instalado, pulsa **Instalar complemento** en Vigilancia. Este complemento:
+Con **Oxide o Carbon**, el panel instala automáticamente su complemento **ScrapwardenBridge** (`oxide/plugins/ScrapwardenBridge.cs`). Si ya tenías el framework instalado, pulsa **Instalar complemento** en Vigilancia. Este complemento:
 
 - permite ver y editar inventarios desde el panel (solo se puede usar por RCON, nunca desde el juego);
 - envía al panel los eventos que analiza la vigilancia.
@@ -170,7 +170,7 @@ Necesita una clave gratuita de la API web de Steam: <https://steamcommunity.com/
 
 ## Mapa en vivo
 
-El complemento OxidianBridge pide al servidor que dibuje el mapa (la primera vez tarda unos segundos) y el panel lo guarda en `data/map/`. Se vuelve a generar solo tras un wipe o un cambio de semilla. Las posiciones se actualizan cada 3 segundos mientras el mapa está abierto.
+El complemento ScrapwardenBridge pide al servidor que dibuje el mapa (la primera vez tarda unos segundos) y el panel lo guarda en `data/map/`. Se vuelve a generar solo tras un wipe o un cambio de semilla. Las posiciones se actualizan cada 3 segundos mientras el mapa está abierto.
 
 ## Bot de Discord
 
@@ -194,7 +194,7 @@ Actívala en **Web pública**: queda en `http://tu-ip:8080/server`. Solo muestra
 
 ## Estadísticas
 
-El panel guarda una muestra cada 5 minutos (jugadores, cola, FPS, entidades, CPU y RAM) y el tiempo jugado de cada jugador cada minuto, mientras el servidor está en marcha. Todo se queda 90 días en `data/stats.json`. Las bajas y los porcentajes a la cabeza necesitan Oxide o Carbon con el complemento OxidianBridge. «Este wipe» cuenta desde el último wipe, manual o automático.
+El panel guarda una muestra cada 5 minutos (jugadores, cola, FPS, entidades, CPU y RAM) y el tiempo jugado de cada jugador cada minuto, mientras el servidor está en marcha. Todo se queda 90 días en `data/stats.json`. Las bajas y los porcentajes a la cabeza necesitan Oxide o Carbon con el complemento ScrapwardenBridge. «Este wipe» cuenta desde el último wipe, manual o automático.
 
 ## Planificador de wipes
 
@@ -206,19 +206,19 @@ El panel guarda una muestra cada 5 minutos (jugadores, cola, FPS, entidades, CPU
 ## Rates y mundo
 
 - **PvP/PvE:** se aplica al momento con `server.pve` y se guarda para los siguientes arranques. El indicador junto al nombre del servidor muestra el modo y los rates.
-- **Multiplicadores** (necesitan Oxide o Carbon): los aplica el complemento OxidianBridge, que los guarda en `oxide/data/OxidianBridge_rates.json`; el panel los reenvía cada vez que el servidor arranca.
+- **Multiplicadores** (necesitan Oxide o Carbon): los aplica el complemento ScrapwardenBridge, que los guarda en `oxide/data/ScrapwardenBridge_rates.json`; el panel los reenvía cada vez que el servidor arranca.
 - **Ajustes de vanilla** (sin complemento): `decay.scale`, `decay.upkeep`, `server.radiation`, `server.stability` y `hackablelockedcrate.requiredhackseconds`.
 - **Mundo:** hora (`env.time`, congelar con `env.progresstime`) y clima (`weather.*`) funcionan en vanilla; los eventos necesitan el complemento.
 
 ## Tienda (Tebex)
 
-En **Tienda** pega la clave secreta de *Game Servers → Connect Game Server → Plugin* de Tebex. El panel revisa la cola cada 1-2 minutos (lo que indique Tebex) y ejecuta los comandos de cada paquete: `{id}` es el SteamID del comprador y `{username}` su nombre. Además de cualquier comando de consola, acepta `oxidian.vip {id} <grupo> <días>` para dar VIP que caduca solo. Los comandos *online* esperan a que el jugador entre; si el servidor está apagado, las compras esperan en Tebex. La clave se guarda solo en `data/config.json` y nunca vuelve a la interfaz. No uses a la vez el plugin oficial de Tebex con la misma clave.
+En **Tienda** pega la clave secreta de *Game Servers → Connect Game Server → Plugin* de Tebex. El panel revisa la cola cada 1-2 minutos (lo que indique Tebex) y ejecuta los comandos de cada paquete: `{id}` es el SteamID del comprador y `{username}` su nombre. Además de cualquier comando de consola, acepta `scrapwarden.vip {id} <grupo> <días>` para dar VIP que caduca solo. Los comandos *online* esperan a que el jugador entre; si el servidor está apagado, las compras esperan en Tebex. La clave se guarda solo en `data/config.json` y nunca vuelve a la interfaz. No uses a la vez el plugin oficial de Tebex con la misma clave.
 
 ## Reportes F7, VIP y staff en el juego
 
-- **Reportes**: con OxidianBridge cada F7 llega al panel y abre un ticket; los siguientes sobre el mismo jugador se suman. Al cerrarlo eliges la sanción, que se aplica al momento y queda en la ficha del jugador. Necesita el permiso *moderar jugadores*; expulsar y banear piden además sus permisos.
+- **Reportes**: con ScrapwardenBridge cada F7 llega al panel y abre un ticket; los siguientes sobre el mismo jugador se suman. Al cerrarlo eliges la sanción, que se aplica al momento y queda en la ficha del jugador. Necesita el permiso *moderar jugadores*; expulsar y banear piden además sus permisos.
 - **VIP**: define tus grupos en **VIP → Ajustes**, da sus permisos en **Permisos** y asigna días a cada jugador (0 = permanente). El panel guarda las fechas en `data/vip.json`; si el servidor está apagado al caducar, lo quita al reconectar. Necesita el permiso *permisos*.
-- **Staff en el juego**: añade a cada miembro en **Staff en el juego** como moderador o admin; el panel le da `oxidian.mod` u `oxidian.admin` y él escribe `/staff` en el juego. Las sanciones las ejecuta el panel (quedan en la ficha y en el registro). Quien tenga el permiso puesto a mano sin estar en la lista no puede hacer nada. Necesita OxidianBridge 1.6.
+- **Staff en el juego**: añade a cada miembro en **Staff en el juego** como moderador o admin; el panel le da `scrapwarden.mod` u `scrapwarden.admin` y él escribe `/staff` en el juego. Las sanciones las ejecuta el panel (quedan en la ficha y en el registro). Quien tenga el permiso puesto a mano sin estar en la lista no puede hacer nada. Necesita ScrapwardenBridge 1.6.
 
 ## Imágenes de los objetos
 
@@ -227,7 +227,7 @@ El servidor de Rust no incluye los iconos de los objetos, así que el visor de i
 ## Chat y moderación
 
 - **Chat**: el historial se guarda en `data/chat.json` (últimos 20 000 mensajes). Haz clic en un nombre para silenciar, advertir, banear temporalmente, enviar un privado o abrir su ficha.
-- **Filtro de palabras**: una por línea, `*` como comodín (`idiot*` cubre «idiota» e «idiotas»); no distingue mayúsculas ni tildes. Con «Bloquear» activado, el complemento OxidianBridge impide que el mensaje llegue al chat; si no, se marca y se aplica la acción elegida (advertencia, silencio o expulsión).
+- **Filtro de palabras**: una por línea, `*` como comodín (`idiot*` cubre «idiota» e «idiotas»); no distingue mayúsculas ni tildes. Con «Bloquear» activado, el complemento ScrapwardenBridge impide que el mensaje llegue al chat; si no, se marca y se aplica la acción elegida (advertencia, silencio o expulsión).
 - **Sanciones automáticas**: define pasos del tipo «a la 3.ª advertencia → baneo temporal de 60 min». Las advertencias caducan a los días que elijas.
 - **Silencio y baneo temporal**: el panel los levanta solo cuando vencen (aunque se reinicie). El silencio usa `mutechat` y, si está el complemento, también bloquea el chat de equipo.
 
@@ -249,7 +249,7 @@ En **Ajustes → Verificación en dos pasos** escanea el código QR con Google A
 ## Estructura
 
 ```
-oxidian/
+scrapwarden/
 ├── install-windows.ps1  Instalador para Windows
 ├── start-windows.bat    Arranque rápido en Windows
 ├── install.sh           Instalador para Linux
@@ -283,7 +283,7 @@ oxidian/
 │   ├── staff.js         Staff en el juego (/staff)
 │   ├── world.js         Hora, clima y eventos
 │   ├── maintenance.js   Copias, wipes, programador
-│   └── bridge/OxidianBridge.cs   Complemento para Oxide/Carbon
+│   └── bridge/ScrapwardenBridge.cs   Complemento para Oxide/Carbon
 ├── public/              Interfaz web (HTML/CSS/JS sin dependencias, fuentes incluidas)
 │   └── i18n/            Traducciones y wiki (es, en, pt, fr)
 ├── tools/check-i18n.js  Comprueba que los idiomas estén completos
@@ -293,7 +293,7 @@ oxidian/
 
 ## Licencia
 
-Oxidian se publica bajo la **licencia MIT** (ver [`LICENSE`](LICENSE)): puedes usarlo, copiarlo, modificarlo y distribuirlo, también con fines comerciales, siempre que mantengas el aviso de copyright y de licencia. Se entrega «tal cual», sin garantías.
+Scrapwarden se publica bajo la **licencia MIT** (ver [`LICENSE`](LICENSE)): puedes usarlo, copiarlo, modificarlo y distribuirlo, también con fines comerciales, siempre que mantengas el aviso de copyright y de licencia. Se entrega «tal cual», sin garantías.
 
 Las fuentes incluidas usan la licencia SIL OFL 1.1 y las dependencias tienen sus propias licencias: ver [`THIRD-PARTY-NOTICES.md`](THIRD-PARTY-NOTICES.md).
 

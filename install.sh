@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Instalador de Oxidian para Ubuntu/Debian (22.04+ recomendado)
+# Instalador de Scrapwarden para Ubuntu/Debian (22.04+ recomendado)
 # Uso: sudo bash install.sh
 set -e
 
 if [ "$EUID" -ne 0 ]; then echo "Ejecuta con sudo: sudo bash install.sh"; exit 1; fi
 
 PANEL_USER=${PANEL_USER:-rustserver}
-PANEL_DIR=${PANEL_DIR:-/opt/oxidian}
+PANEL_DIR=${PANEL_DIR:-/opt/scrapwarden}
 SRC_DIR="$(cd "$(dirname "$0")" && pwd)"
 
 echo "==> Instalando dependencias del sistema (SteamCMD necesita librerías de 32 bits)"
@@ -32,16 +32,16 @@ cd "$PANEL_DIR"
 npm install --omit=dev
 chown -R "$PANEL_USER":"$PANEL_USER" "$PANEL_DIR"
 
-# Servicio de versiones anteriores (antes de llamarse Oxidian)
+# Servicio de versiones anteriores (antes de llamarse Scrapwarden)
 if [ -f /etc/systemd/system/rust-panel.service ]; then
   systemctl disable --now rust-panel 2>/dev/null || true
   rm -f /etc/systemd/system/rust-panel.service
 fi
 
-echo "==> Creando servicio systemd oxidian"
-cat > /etc/systemd/system/oxidian.service <<EOF
+echo "==> Creando servicio systemd scrapwarden"
+cat > /etc/systemd/system/scrapwarden.service <<EOF
 [Unit]
-Description=Oxidian
+Description=Scrapwarden
 After=network-online.target
 Wants=network-online.target
 
@@ -60,7 +60,7 @@ WantedBy=multi-user.target
 EOF
 
 systemctl daemon-reload
-systemctl enable --now oxidian
+systemctl enable --now scrapwarden
 
 if command -v ufw >/dev/null; then
   echo "==> Abriendo puertos en ufw"
@@ -69,5 +69,5 @@ fi
 
 IP=$(hostname -I | awk '{print $1}')
 echo ""
-echo "✔ Oxidian instalado. Abre http://$IP:8080 para crear tu contraseña de administrador."
-echo "  Logs: journalctl -u oxidian -f"
+echo "✔ Scrapwarden instalado. Abre http://$IP:8080 para crear tu contraseña de administrador."
+echo "  Logs: journalctl -u scrapwarden -f"

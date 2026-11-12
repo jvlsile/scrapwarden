@@ -1,4 +1,4 @@
-﻿# Instalador de Oxidian para Windows 10/11 y Windows Server 2019+
+﻿# Instalador de Scrapwarden para Windows 10/11 y Windows Server 2019+
 # Uso: clic derecho > "Ejecutar con PowerShell" (como administrador)
 #   o: powershell -ExecutionPolicy Bypass -File install-windows.ps1
 
@@ -39,7 +39,7 @@ $reglas = @(
   @{ n = 'Rust juego';  p = 'UDP'; port = 28015 },
   @{ n = 'Rust query';  p = 'UDP'; port = 28017 },
   @{ n = 'Rust+ app';   p = 'TCP'; port = 28082 },
-  @{ n = 'Oxidian';  p = 'TCP'; port = $Port }
+  @{ n = 'Scrapwarden';  p = 'TCP'; port = $Port }
 )
 foreach ($r in $reglas) {
   if (-not (Get-NetFirewallRule -DisplayName $r.n -ErrorAction SilentlyContinue)) {
@@ -55,11 +55,11 @@ if ($resp -match '^[sS]') {
   $accion = New-ScheduledTaskAction -Execute $nodeExe -Argument 'server.js' -WorkingDirectory $PanelDir
   $disparo = New-ScheduledTaskTrigger -AtStartup
   $ajustes = New-ScheduledTaskSettingsSet -AllowStartIfOnBatteries -DontStopIfGoingOnBatteries -RestartCount 3 -RestartInterval (New-TimeSpan -Minutes 1) -ExecutionTimeLimit 0
-  # Tarea de versiones anteriores (antes de llamarse Oxidian)
+  # Tarea de versiones anteriores (antes de llamarse Scrapwarden)
   Unregister-ScheduledTask -TaskName 'Rust Panel' -Confirm:$false -ErrorAction SilentlyContinue
-  Register-ScheduledTask -TaskName 'Oxidian' -Action $accion -Trigger $disparo -Settings $ajustes -User 'SYSTEM' -RunLevel Highest -Force | Out-Null
-  Start-ScheduledTask -TaskName 'Oxidian'
-  Write-Host "  Tarea programada 'Oxidian' creada y en marcha."
+  Register-ScheduledTask -TaskName 'Scrapwarden' -Action $accion -Trigger $disparo -Settings $ajustes -User 'SYSTEM' -RunLevel Highest -Force | Out-Null
+  Start-ScheduledTask -TaskName 'Scrapwarden'
+  Write-Host "  Tarea programada 'Scrapwarden' creada y en marcha."
 } else {
   Write-Host "  Puedes arrancarlo cuando quieras con start-windows.bat"
   Start-Process -FilePath 'cmd.exe' -ArgumentList '/k', "cd /d `"$PanelDir`" && node server.js" -WorkingDirectory $PanelDir

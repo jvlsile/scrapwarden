@@ -1,4 +1,4 @@
-// Oxidian: frontend sin dependencias
+// Scrapwarden: frontend sin dependencias
 const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
@@ -90,7 +90,7 @@ async function initLanguages() {
 // Vuelve a pintar todo lo que se genera desde JS tras cambiar de idioma
 function rerenderAll() {
   if ($('#app').hidden) { showAuth(setupMode); return; }
-  document.title = `${t('nav.' + state.view)} | Oxidian`;
+  document.title = `${t('nav.' + state.view)} | Scrapwarden`;
   renderStatus();
   renderProgress();
   renderUpdate(state.update);
@@ -255,7 +255,7 @@ function go(view) {
   state.view = view;
   $$('.rail a[data-view]').forEach(a => { if (a.dataset.view === view) a.setAttribute('aria-current', 'page'); else a.removeAttribute('aria-current'); });
   $$('[data-section]').forEach(s => s.hidden = s.dataset.section !== view);
-  document.title = `${t('nav.' + view)} | Oxidian`;
+  document.title = `${t('nav.' + view)} | Scrapwarden`;
   history.replaceState(null, '', '#' + view);
   $('#rail').classList.remove('open');
   const loaders = { dashboard: renderMini, console: renderConsole, players: loadPlayers, watch: loadWatch, plugins: loadPlugins, config: loadConfig, schedule: loadConfig, rates: loadRates, stats: loadStats, wipes: loadWipes, perf: loadPerf, public: loadPublic, discord: loadDiscord, tickets: loadTickets, bans: loadBans, vip: loadVip, store: loadStore, staff: loadStaff, backups: loadBackups, install: loadInstall, wiki: renderWiki, settings: loadAccount, map: mapStart, admins: loadAdmins, chat: loadChat };
@@ -852,7 +852,7 @@ function firewallCommands(platform, s) {
       `New-NetFirewallRule -DisplayName "Rust game" -Direction Inbound -Protocol UDP -LocalPort ${s.port} -Action Allow`,
       `New-NetFirewallRule -DisplayName "Rust query" -Direction Inbound -Protocol UDP -LocalPort ${s.queryPort} -Action Allow`,
       `New-NetFirewallRule -DisplayName "Rust+ app" -Direction Inbound -Protocol TCP -LocalPort ${s.appPort} -Action Allow`,
-      `New-NetFirewallRule -DisplayName "Oxidian" -Direction Inbound -Protocol TCP -LocalPort ${port} -Action Allow`,
+      `New-NetFirewallRule -DisplayName "Scrapwarden" -Direction Inbound -Protocol TCP -LocalPort ${port} -Action Allow`,
       '',
       t('ins.fwRouter'),
     ].join('\n');
@@ -1193,7 +1193,7 @@ async function loadInventory() {
     }; });
   } catch (e) {
     if (!invState) return;
-    const missing = /OxidianBridge/.test(e.message);
+    const missing = /ScrapwardenBridge/.test(e.message);
     box.innerHTML = `<div class="callout"><svg class="i"><use href="#i-alert"/></svg><div class="callout-body">${esc(e.message)}${missing ? ` <button class="link" data-goto="watch">${esc(t('inv.goWatch'))}</button>` : ''}</div></div>`;
   }
 }
@@ -1764,7 +1764,7 @@ document.addEventListener('click', async (e) => {
 // ======================================================================
 const sh = { data: null, timer: null };
 const SH_EXAMPLES = [
-  ['sh.ex.vip', 'oxidian.vip {id} vip 30'],
+  ['sh.ex.vip', 'scrapwarden.vip {id} vip 30'],
   ['sh.ex.group', 'oxide.usergroup add {id} vip'],
   ['sh.ex.perm', 'oxide.grant user {id} kits.vip'],
   ['sh.ex.item', 'inventory.giveto {id} rifle.ak 1'],
@@ -1853,7 +1853,7 @@ document.addEventListener('click', async (e) => {
 function renderUpdate(u) {
   if (!u) return;
   state.update = u;
-  $('#railVer').textContent = 'v' + u.current; $('#railVer').title = 'Oxidian v' + u.current;
+  $('#railVer').textContent = 'v' + u.current; $('#railVer').title = 'Scrapwarden v' + u.current;
   $('#betaTag').hidden = !u.beta;
   $('#updBeta').hidden = !u.beta;
   $('#updPill').hidden = !u.available;
@@ -1874,14 +1874,14 @@ $('#updOn').onchange = async (e) => { const r = await act(() => api('/update', {
 // ======================================================================
 // Reportar un fallo (abre GitHub con los datos técnicos rellenados)
 // ======================================================================
-const BUG_URL = 'https://github.com/jvlsile/oxidian/issues/new';
+const BUG_URL = 'https://github.com/jvlsile/scrapwarden/issues/new';
 function diagText(d) {
   const ua = navigator.userAgent.match(/(Firefox|Edg|OPR|Chrome|Safari)\/[\d.]+/)?.[0] || 'browser';
   return [
-    `Oxidian: ${d.version}`,
+    `Scrapwarden: ${d.version}`,
     `Panel OS: ${d.os} ${d.osRelease} · Node ${d.node}`,
     `Rust server files: ${d.serverPlatform} · branch ${d.branch} · map ${d.worldSize}`,
-    `Framework: ${d.framework} · OxidianBridge: ${d.bridge}`,
+    `Framework: ${d.framework} · ScrapwardenBridge: ${d.bridge}`,
     `Server: ${d.status} · RCON ${d.rcon ? 'connected' : 'disconnected'}`,
     `Panel language: ${LANG} · Browser: ${ua}`,
     `Section: ${state.view}`,
@@ -2766,7 +2766,7 @@ async function mapLoadMeta(refresh = false) {
     $('#mapStatus').textContent = m.stale ? t('map.stale') : '';
   } catch (e) {
     mapS.meta = null;
-    empty.innerHTML = `<p><b>${esc(t('map.unavailable'))}</b>${esc(e.message)}</p>${/OxidianBridge/.test(e.message) ? `<button class="btn btn-sm" data-goto="watch">${esc(t('inv.goWatch'))}</button>` : ''}`;
+    empty.innerHTML = `<p><b>${esc(t('map.unavailable'))}</b>${esc(e.message)}</p>${/ScrapwardenBridge/.test(e.message) ? `<button class="btn btn-sm" data-goto="watch">${esc(t('inv.goWatch'))}</button>` : ''}`;
   }
 }
 
@@ -3306,7 +3306,7 @@ function renderTfa() {
 function wireRecovery(codes) {
   setTimeout(() => {
     $('#codesCopy').onclick = () => navigator.clipboard.writeText(codes.join('\n')).then(() => toast(t('ins.copied'))).catch(() => toast(t('common.copyFailed'), true));
-    $('#codesDl').onclick = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([`Oxidian - ${state.me.username}\n\n${codes.join('\n')}\n`], { type: 'text/plain' })); a.download = 'oxidian-recovery-codes.txt'; a.click(); };
+    $('#codesDl').onclick = () => { const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([`Scrapwarden - ${state.me.username}\n\n${codes.join('\n')}\n`], { type: 'text/plain' })); a.download = 'scrapwarden-recovery-codes.txt'; a.click(); };
   }, 30);
 }
 async function tfaEnable() {

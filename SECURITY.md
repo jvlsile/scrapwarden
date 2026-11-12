@@ -1,6 +1,6 @@
 # Security policy
 
-Oxidian controls game servers and stores credentials (RCON password, Discord token, Tebex and Steam keys), so security reports are taken seriously.
+Scrapwarden controls game servers and stores credentials (RCON password, Discord token, Tebex and Steam keys), so security reports are taken seriously.
 
 ## Reporting a vulnerability
 

@@ -1,5 +1,5 @@
 @echo off
-REM Oxidian para Windows. Requiere Node.js 18+ (https://nodejs.org)
+REM Scrapwarden para Windows. Requiere Node.js 18+ (https://nodejs.org)
 cd /d "%~dp0"
 where node >nul 2>nul || (echo Instala Node.js 18 o superior desde https://nodejs.org && pause && exit /b 1)
 if not exist node_modules (

@@ -24,7 +24,7 @@ body:
   - type: input
     id: version
     attributes:
-      label: Oxidian version
+      label: Scrapwarden version
       description: Shown at the bottom of the panel's side menu.
       placeholder: e.g. 1.0.0-beta.1
     validations:
