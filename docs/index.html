@@ -87,6 +87,7 @@ h1 em{font-style:normal;color:var(--pat)}
 
 /* Franja */
 .strip{border-block:1px solid var(--soft);background:var(--s950);margin-top:70px}
+.marq+.strip{margin-top:0;border-top:0;background:var(--bg)}
 .strip .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:22px;flex-wrap:wrap}
 .strip p{margin:0;color:var(--t2);font-size:16.5px}
 .strip p b{color:var(--text)}
@@ -214,6 +215,135 @@ footer small{display:block;margin-top:8px;max-width:620px}
   .spot{margin-top:64px}
   .lead{font-size:18px}
 }
+
+/* ===== Animaciones (hero, cinta y la historia) ===== */
+.anim{--amb2:#E0B252}
+.lbox{position:fixed;left:0;right:0;height:50vh;background:#050708;z-index:80;pointer-events:none;animation:lb 1.3s cubic-bezier(.77,0,.18,1) .25s forwards}
+.lbox.t{top:0;transform-origin:top}.lbox.b{bottom:0;transform-origin:bottom}
+.lbox.t::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:linear-gradient(90deg,transparent,var(--pathi),transparent);opacity:.8}
+.anim.hero2{position:relative;padding:40px 0 90px;overflow:hidden;isolation:isolate}
+.anim .gridbg{position:absolute;inset:-200px 0 0;background-image:linear-gradient(rgba(91,181,162,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(91,181,162,.07) 1px,transparent 1px);background-size:64px 64px;mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000 30%,transparent 75%);-webkit-mask-image:radial-gradient(ellipse 70% 60% at 50% 30%,#000 30%,transparent 75%);animation:gridpan 18s linear infinite}
+.anim .spot{position:absolute;left:0;top:0;width:760px;height:760px;margin:-380px 0 0 -380px;border-radius:50%;background:radial-gradient(circle,rgba(91,181,162,.14),rgba(91,181,162,.04) 35%,transparent 62%);pointer-events:none;z-index:1;transform:translate(50vw,320px);transition:transform .25s cubic-bezier(.2,.8,.2,1)}
+.anim .vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse 90% 70% at 50% 40%,transparent 50%,rgba(0,0,0,.55));z-index:1}
+.anim .glow{position:absolute;border-radius:50%;filter:blur(90px);pointer-events:none}
+.anim .glow--a{width:620px;height:620px;left:50%;top:-180px;margin-left:-310px;background:rgba(91,181,162,.16);animation:breathe 7s ease-in-out infinite}
+.anim .glow--b{width:420px;height:420px;right:-120px;top:380px;background:rgba(208,104,47,.13);animation:breathe 9s ease-in-out infinite reverse}
+.anim .ember{position:absolute;bottom:-20px;width:3px;height:3px;border-radius:50%;background:var(--oxihi);box-shadow:0 0 8px 2px rgba(232,132,76,.7);opacity:0;animation:rise linear infinite}
+.anim .hero-top{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;gap:26px;margin-top:56px}
+.anim .bootline{font:13px var(--fm);color:var(--muted);display:inline-flex;align-items:center;gap:10px;animation:fadeUp .6s .9s both}
+.anim .bootline .typ{display:inline-block;overflow:hidden;white-space:nowrap;width:0;animation:typing 1s steps(15) 1.1s forwards;color:var(--t2)}
+.anim .bootline .okk{color:var(--pat);opacity:0;animation:fadeUp .3s 2.2s forwards}
+.anim .badge{display:inline-flex;align-items:center;gap:10px;padding:7px 14px 7px 8px;border:1px solid var(--line);border-radius:99px;background:rgba(23,29,34,.7);font-size:14px;color:var(--t2);animation:fadeUp .7s .1s both}
+.anim .badge b{font:600 12px var(--fm);color:var(--ink);background:var(--pat);border-radius:99px;padding:3px 9px}
+.anim .mark{width:118px;height:118px;overflow:visible}
+.anim .mark .hx{fill:none;stroke:var(--pat);stroke-width:4;stroke-dasharray:1;stroke-dashoffset:1;animation:draw 1.4s cubic-bezier(.65,0,.35,1) .2s forwards,fillin .6s ease 1.5s forwards}
+.anim .mark .hx2{fill:none;stroke:var(--pat);stroke-width:1.4;opacity:.4;stroke-dasharray:1;stroke-dashoffset:-1;animation:draw 1.2s cubic-bezier(.65,0,.35,1) .5s forwards}
+.anim .mark .orb{fill:none;stroke:var(--pathi);stroke-width:4;transform-origin:60px 60px;transform:scale(0);animation:pop .6s cubic-bezier(.34,1.56,.64,1) 1.3s forwards}
+.anim .mark .ringspin{fill:none;stroke:var(--pat);stroke-width:1;stroke-dasharray:3 9;opacity:.5;transform-origin:60px 60px;animation:spin 24s linear infinite}
+.anim .h1{font:700 clamp(54px,9vw,128px)/.88 var(--fc);text-transform:uppercase;margin:0;letter-spacing:-.005em}
+.anim .h1 span{display:inline-block;opacity:0;transform:translateY(40px) skewY(4deg);filter:blur(8px);animation:wordin .9s cubic-bezier(.2,.8,.2,1) forwards}
+.anim .h1 span:nth-of-type(1){animation-delay:.5s}.anim .h1 span:nth-of-type(2){animation-delay:.7s}.anim .h1 span:nth-of-type(3){animation-delay:.85s}.anim .h1 span:nth-of-type(4){animation-delay:1s}
+.anim .h1 .fill{background:linear-gradient(110deg,var(--pathi) 38%,#F4FFFC 50%,var(--pathi) 62%);background-size:260% 100%;-webkit-background-clip:text;background-clip:text;color:transparent;animation:wordin .9s cubic-bezier(.2,.8,.2,1) .85s forwards,shine 6s ease-in-out 2.4s infinite}
+.anim .h1 .acc{color:transparent;-webkit-text-stroke:2px var(--pathi)}
+.anim .sub{font-size:clamp(18px,1.7vw,22px);line-height:1.55;color:var(--t2);max-width:760px;margin:0;animation:fadeUp .8s 1.1s both}
+.anim .ctas2{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;animation:fadeUp .8s 1.3s both}
+.anim .os{display:flex;gap:10px 22px;flex-wrap:wrap;justify-content:center;color:var(--muted);font-size:15px;animation:fadeUp .8s 1.5s both;list-style:none;padding:0;margin:0}
+.anim .os li{display:inline-flex;align-items:center;gap:8px}
+.anim .os svg{width:16px;height:16px;color:var(--pat)}
+.anim .stage{position:relative;z-index:2;margin:70px auto 0;max-width:1100px;perspective:1800px;animation:fadeUp 1.1s 1.6s both}
+.anim .app{border:1px solid var(--line);border-radius:14px;background:var(--s900);overflow:hidden;box-shadow:0 60px 120px -40px rgba(0,0,0,.8),0 0 0 1px rgba(255,255,255,.02),0 0 80px -20px rgba(91,181,162,.25);transform:rotateX(14deg) scale(.96);transform-origin:50% 0;animation:tilt 1.6s cubic-bezier(.2,.8,.2,1) 1.8s forwards;text-align:left}
+.anim .app-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--soft);background:var(--s950)}
+.anim .app-bar i{width:11px;height:11px;border-radius:50%;background:#2E3842}
+.anim .app-bar .url{margin-left:14px;font:13px var(--fm);color:var(--muted);background:var(--s900);border:1px solid var(--soft);border-radius:6px;padding:5px 12px}
+.anim .app-body{display:grid;grid-template-columns:200px minmax(0,1fr);min-height:440px}
+.anim .side{border-right:1px solid var(--soft);padding:16px 12px;display:flex;flex-direction:column;gap:3px;background:var(--s950)}
+.anim .side .it{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:6px;font-size:14px;color:var(--t2)}
+.anim .side .it svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.anim .side .on{background:var(--s800);color:var(--text)}
+.anim .side .cnt{margin-left:auto;font:600 11px var(--fm);background:rgba(224,178,82,.15);color:var(--amb2);padding:1px 7px;border-radius:99px}
+.anim .mainp{padding:22px;display:flex;flex-direction:column;gap:16px;min-width:0}
+.anim .srvhead{display:flex;justify-content:space-between;align-items:flex-start;gap:14px;flex-wrap:wrap}
+.anim .live{display:inline-flex;align-items:center;gap:8px;font-size:13px;color:var(--t2)}
+.anim .dot{width:9px;height:9px;border-radius:50%;background:var(--pat);box-shadow:0 0 0 0 rgba(91,181,162,.6);animation:ping 1.8s infinite}
+.anim .srvname{font:700 26px var(--fc);text-transform:uppercase;margin:4px 0 0}
+.anim .minibtns{display:flex;gap:8px}
+.anim .mb{font-size:13px;padding:7px 12px;border-radius:6px;border:1px solid var(--line);color:var(--t2)}
+.anim .mb--o{border-color:rgba(208,104,47,.5);color:var(--oxihi)}
+.anim .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.anim .kpi{border:1px solid var(--soft);border-radius:10px;padding:14px;background:var(--s850)}
+.anim .kpi small{display:block;font-size:12px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.anim .kpi b{display:block;font:700 30px var(--fc);margin:4px 0 8px}
+.anim .bars{display:flex;align-items:flex-end;gap:3px;height:30px}
+.anim .bars i{flex:1;background:var(--pat);opacity:.65;border-radius:2px 2px 0 0;animation:bar 2.4s ease-in-out infinite;transform-origin:bottom}
+.anim .bars--o i{background:var(--oxihi)}
+.anim .duo{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:12px}
+.anim .term{border:1px solid var(--soft);border-radius:10px;background:#0B0F12;padding:14px;font:12.5px/1.75 var(--fm);color:var(--t2);height:170px;overflow:hidden;position:relative}
+.anim .term p{margin:0;white-space:nowrap;opacity:0;animation:typeline 9s infinite}
+.anim .term .k1{color:var(--pathi)}.anim .term .k2{color:var(--amb2)}.anim .term .k3{color:var(--oxihi)}
+.anim .caret{display:inline-block;width:8px;height:14px;background:var(--pat);vertical-align:-2px;animation:blink 1s steps(1) infinite}
+.anim .scanline{position:absolute;left:0;right:0;height:80px;background:linear-gradient(transparent,rgba(91,181,162,.06),transparent);animation:scan 4s linear infinite;pointer-events:none}
+.anim .alerts{display:flex;flex-direction:column;gap:8px;overflow:hidden;height:170px}
+.anim .al{display:flex;gap:10px;align-items:center;border:1px solid var(--soft);border-radius:8px;padding:9px 10px;background:var(--s850);font-size:13px;animation:slidein 8s infinite;opacity:0}
+.anim .al i{flex:none;width:4px;align-self:stretch;border-radius:4px;background:var(--amb2)}
+.anim .al.hi i{background:var(--oxihi)}
+.anim .al small{display:block;color:var(--muted);font-size:12px}
+.anim .sev{margin-left:auto;font:600 11px var(--fm);padding:2px 7px;border-radius:99px;background:rgba(224,178,82,.15);color:var(--amb2)}
+.anim .hi .sev{background:rgba(208,104,47,.18);color:var(--oxihi)}
+.marq{position:relative;border-block:1px solid var(--soft);background:var(--s950);overflow:hidden;padding:20px 0;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent)}
+.marq-track{display:flex;gap:48px;width:max-content;animation:marq 45s linear infinite}
+.marq-track span{display:inline-flex;align-items:center;gap:48px;font:600 22px var(--fc);text-transform:uppercase;color:var(--t2);white-space:nowrap}
+.marq-track span::after{content:"";width:8px;height:8px;transform:rotate(45deg);background:var(--oxi)}
+.story{position:relative;padding:150px 0 140px;background:#090C0E;overflow:hidden}
+.story::before{content:"";position:absolute;inset:0;background:radial-gradient(ellipse 50% 40% at 15% 10%,rgba(208,104,47,.12),transparent 70%),radial-gradient(ellipse 50% 40% at 85% 95%,rgba(91,181,162,.10),transparent 70%);pointer-events:none}
+.story .eyebrow2{font:500 13px var(--fm);letter-spacing:.14em;text-transform:uppercase;color:var(--oxihi);display:inline-flex;align-items:center;gap:10px}
+.story .eyebrow2::before{content:"";width:22px;height:1px;background:currentColor}
+.bigtime{font:700 clamp(96px,16vw,230px)/.82 var(--fc);color:transparent;-webkit-text-stroke:1.5px rgba(232,132,76,.6);letter-spacing:-.01em;margin:22px 0 8px;display:flex;align-items:baseline;gap:.08em}
+.bigtime .blinkc{animation:tick 1s steps(1) infinite}
+.bigtime small{font:500 clamp(16px,1.6vw,22px) var(--fm);-webkit-text-stroke:0;color:var(--muted);letter-spacing:.06em;margin-left:.6em}
+.story .intro{font:500 clamp(22px,2.4vw,32px)/1.35 Barlow,sans-serif;color:var(--t2);max-width:820px;margin:0 0 70px}
+.story .intro b{color:var(--text);font-weight:600}
+.beat{display:grid;grid-template-columns:150px minmax(0,1fr) minmax(0,400px);gap:40px;align-items:center;padding:44px 0;border-top:1px solid rgba(255,255,255,.07)}
+.beat time{font:500 24px var(--fm);color:var(--oxihi);letter-spacing:.02em}
+.beat.calm time{color:var(--pathi)}
+.beat h3{font:700 clamp(30px,3.6vw,50px)/1 var(--fc);text-transform:uppercase;margin:0}
+.beat p{color:var(--t2);margin:12px 0 0;line-height:1.6;font-size:17px;max-width:520px}
+.evt{border:1px solid var(--soft);border-radius:14px;background:var(--s900);padding:16px 18px;display:flex;gap:14px;align-items:center;box-shadow:0 30px 60px -30px rgba(0,0,0,.8)}
+.evt .ei{flex:none;width:42px;height:42px;border-radius:11px;display:grid;place-items:center;background:rgba(208,104,47,.12);color:var(--oxihi)}
+.evt .ei svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.evt .ei.g{background:rgba(91,181,162,.12);color:var(--pathi)}
+.evt .ei.v{background:rgba(88,101,242,.16);color:#A9B1FF}
+.evt b{display:block;font-weight:600;font-size:15px}
+.evt small{display:block;color:var(--muted);font-size:13px;margin-top:2px}
+.evt .tagx{margin-left:auto;font:600 11px var(--fm);padding:3px 8px;border-radius:99px;background:rgba(208,104,47,.16);color:var(--oxihi);white-space:nowrap}
+.evt .tagx.g{background:rgba(91,181,162,.14);color:var(--pathi)}
+.payoff{margin-top:80px;text-align:center}
+.payoff h3{font:700 clamp(56px,9vw,140px)/.88 var(--fc);text-transform:uppercase;margin:0}
+.payoff h3 em{font-style:normal;color:var(--pathi)}
+.payoff p{color:var(--muted);margin:22px auto 0;max-width:560px;font-size:18px;line-height:1.6}
+@media (max-width:900px){.beat{grid-template-columns:1fr;gap:16px}.story{padding:100px 0}.anim .app-body{grid-template-columns:1fr}.anim .side{display:none}.anim .kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.anim .duo{grid-template-columns:1fr}}
+@media (max-width:560px){.anim .alerts{display:none}.anim .stage{margin-top:44px}.anim .hero-top{margin-top:24px}}
+@media (prefers-reduced-motion:reduce){.lbox,.anim .spot,.anim .ember{display:none}.anim .h1 span,.anim .term p,.anim .al,.anim .bootline .okk,.anim .badge,.anim .sub,.anim .ctas2,.anim .os,.anim .stage{opacity:1!important;transform:none!important;filter:none!important}.anim .app{transform:none}.anim .bootline .typ{width:auto}.anim .mark .hx,.anim .mark .hx2{stroke-dashoffset:0}.anim .mark .orb{transform:none}.anim .h1 .fill{color:var(--pathi);background:none}}
+@keyframes gridpan{to{background-position:64px 64px,64px 64px}}
+@keyframes breathe{50%{transform:scale(1.15);opacity:.8}}
+@keyframes rise{0%{transform:translate(0,0);opacity:0}10%{opacity:1}70%{opacity:.8}100%{transform:translate(40px,-760px);opacity:0}}
+@keyframes draw{to{stroke-dashoffset:0}}
+@keyframes fillin{to{fill:rgba(91,181,162,.1)}}
+@keyframes pop{to{transform:scale(1)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes wordin{to{opacity:1;transform:none;filter:none}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:none}}
+@keyframes tilt{to{transform:none}}
+@keyframes ping{70%{box-shadow:0 0 0 9px rgba(91,181,162,0)}100%{box-shadow:0 0 0 0 rgba(91,181,162,0)}}
+@keyframes bar{50%{transform:scaleY(.45)}}
+@keyframes typeline{0%{opacity:0;transform:translateX(-6px)}6%{opacity:1;transform:none}88%{opacity:1}96%,100%{opacity:0}}
+@keyframes blink{50%{opacity:0}}
+@keyframes slidein{0%{opacity:0;transform:translateX(30px)}8%{opacity:1;transform:none}85%{opacity:1}95%,100%{opacity:0}}
+@keyframes scan{from{top:-80px}to{top:100%}}
+@keyframes marq{to{transform:translateX(-50%)}}
+@keyframes tick{50%{opacity:.25}}
+@keyframes lb{0%{transform:scaleY(1)}35%{transform:scaleY(.86)}100%{transform:scaleY(0)}}
+@keyframes typing{to{width:15ch}}
+@keyframes shine{0%{background-position:100% 0}35%,100%{background-position:-60% 0}}
 </style>
 </head>
 <body>
@@ -251,32 +381,82 @@ footer small{display:block;margin-top:8px;max-width:620px}
 </header>
 
 <main id="main">
-  <div class="hero">
-    <div class="wrap hero-grid">
-      <div>
-        <span class="pill rv"><b>BETA</b><span data-t="hero.pill">Free &amp; open source · v1.0.0 beta 1</span></span>
-        <h1 class="rv" data-t-html="hero.title">Your Rust server, <em>fully under control.</em></h1>
-        <p class="lead rv" data-t="hero.lead">Oxidian is a free, self-hosted web panel that installs, runs, moderates and grows your Rust server. Live map, F7 report tickets, in-game staff tools, a Discord bot and Tebex delivery, all in one place.</p>
-        <div class="ctas rv">
+  <div class="lbox t" aria-hidden="true"></div><div class="lbox b" aria-hidden="true"></div>
+  <div class="anim hero2" id="hero">
+    <div class="gridbg" aria-hidden="true"></div>
+    <div class="spot" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="glow glow--a" aria-hidden="true"></div>
+    <div class="glow glow--b" aria-hidden="true"></div>
+    <div aria-hidden="true"><i class="ember" style="left:6%;animation-duration:9s;animation-delay:0s"></i><i class="ember" style="left:14%;animation-duration:12s;animation-delay:2s"></i><i class="ember" style="left:22%;animation-duration:8s;animation-delay:4s"></i><i class="ember" style="left:31%;animation-duration:11s;animation-delay:1s"></i><i class="ember" style="left:39%;animation-duration:13s;animation-delay:6s"></i><i class="ember" style="left:47%;animation-duration:9s;animation-delay:3s"></i><i class="ember" style="left:55%;animation-duration:10s;animation-delay:7s"></i><i class="ember" style="left:63%;animation-duration:12s;animation-delay:0.5s"></i><i class="ember" style="left:71%;animation-duration:8.5s;animation-delay:5s"></i><i class="ember" style="left:79%;animation-duration:11s;animation-delay:2.5s"></i><i class="ember" style="left:87%;animation-duration:9.5s;animation-delay:8s"></i><i class="ember" style="left:94%;animation-duration:13s;animation-delay:3.5s"></i></div>
+    <div class="wrap">
+      <div class="hero-top">
+        <div class="bootline" aria-hidden="true"><span style="color:#5BB5A2">$</span><span class="typ">oxidian --start</span><span class="okk">[ OK ]</span></div>
+        <div class="badge"><b>BETA</b><span data-t="hero.pill">Free &amp; open source · v1.0.0 beta 1</span></div>
+        <svg class="mark" viewBox="0 0 120 120" aria-hidden="true"><circle class="ringspin" cx="60" cy="60" r="58"/><path class="hx" d="M60 10l43.3 25v50L60 110l-43.3-25V35z" pathLength="1"/><path class="hx2" d="M60 26l29.4 17v34L60 94l-29.4-17V43z" pathLength="1"/><circle class="orb" cx="60" cy="60" r="15"/></svg>
+        <h1 class="h1" data-t-html="hero.h1"><span>Your</span> <span class="fill">Rust</span> <span>server,</span><br><span class="acc">under control</span></h1>
+        <p class="sub" data-t="hero.lead">Oxidian is a free, self-hosted web panel that installs, runs, moderates and grows your Rust server. Live map, F7 report tickets, in-game staff tools, a Discord bot and Tebex delivery, all in one place.</p>
+        <div class="ctas2">
           <a class="btn btn-p" href="https://github.com/jvlsile/oxidian/releases" rel="noopener"><svg><use href="#dl"/></svg><span data-t="cta.download">Download the beta</span></a>
           <a class="btn btn-g" href="https://github.com/jvlsile/oxidian" rel="noopener"><svg><use href="#gh"/></svg><span data-t="cta.github">View on GitHub</span></a>
         </div>
-        <ul class="facts rv">
+        <ul class="os">
           <li><svg><use href="#check"/></svg><span data-t="fact.free">Free forever (MIT)</span></li>
           <li><svg><use href="#check"/></svg><span data-t="fact.os">Windows &amp; Linux</span></li>
           <li><svg><use href="#check"/></svg><span data-t="fact.self">Your own or rented servers</span></li>
           <li><svg><use href="#check"/></svg><span data-t="fact.lang">EN · ES · PT · FR</span></li>
         </ul>
       </div>
-      <div class="rv">
-        <div class="shot-frame hero-shot">
-          <div class="bar"><i></i><i></i><i></i><span>localhost:8080/#map</span></div>
-          <img src="assets/shots/map.webp" width="1440" height="900" alt="Oxidian live map showing players, teams, monuments, roads, rails and events" data-t-alt="alt.hero">
+      <div class="stage" aria-hidden="true">
+        <div class="app">
+          <div class="app-bar"><i></i><i></i><i></i><span class="url">localhost:8080</span></div>
+          <div class="app-body">
+            <div class="side">
+              <div class="it on"><svg viewBox="0 0 24 24"><path d="M4 14a8 8 0 0 1 16 0"/><path d="M12 14l4-4"/></svg><span data-t="mk.dash">Overview</span></div>
+              <div class="it"><svg viewBox="0 0 24 24"><path d="M4 17l6-6-6-6"/><path d="M12 19h8"/></svg><span data-t="mk.console">Console</span></div>
+              <div class="it"><svg viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></svg><span data-t="mk.map">Live map</span></div>
+              <div class="it"><svg viewBox="0 0 24 24"><circle cx="9" cy="8" r="3.5"/><path d="M3 20a6 6 0 0 1 12 0"/></svg><span data-t="mk.players">Players</span></div>
+              <div class="it"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/></svg><span data-t="mk.watch">Watch</span><span class="cnt">3</span></div>
+              <div class="it"><svg viewBox="0 0 24 24"><path d="M5 21V4M5 4h11l-2 4 2 4H5"/></svg><span data-t="mk.tickets">Reports</span><span class="cnt">2</span></div>
+              <div class="it"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg><span data-t="mk.bans">Shared bans</span></div>
+              <div class="it"><svg viewBox="0 0 24 24"><path d="M9 3v4M15 3v4M7 7h10v5a5 5 0 0 1-10 0z"/><path d="M12 17v4"/></svg><span data-t="mk.plugins">Plugins</span></div>
+              <div class="it"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18M8 2v4M16 2v4"/></svg><span data-t="mk.wipes">Wipes</span></div>
+            </div>
+            <div class="mainp">
+              <div class="srvhead">
+                <div><span class="live"><span class="dot"></span><span data-t="mk.live">Running · up 2 h 14 min</span></span><p class="srvname">EU Vanilla Plus | Weekly | Max 3</p></div>
+                <div class="minibtns"><span class="mb" data-t="mk.restart">Restart</span><span class="mb mb--o" data-t="mk.stop">Stop</span></div>
+              </div>
+              <div class="kpis">
+                <div class="kpi"><small data-t="mk.kplayers">Players</small><b>87 / 150</b><div class="bars"><i style="height:40%"></i><i style="height:55%;animation-delay:.2s"></i><i style="height:48%;animation-delay:.4s"></i><i style="height:70%;animation-delay:.6s"></i><i style="height:64%;animation-delay:.8s"></i><i style="height:82%;animation-delay:1s"></i><i style="height:90%;animation-delay:1.2s"></i></div></div>
+                <div class="kpi"><small>FPS</small><b>256</b><div class="bars"><i style="height:80%"></i><i style="height:76%;animation-delay:.3s"></i><i style="height:88%;animation-delay:.5s"></i><i style="height:84%;animation-delay:.1s"></i><i style="height:92%;animation-delay:.7s"></i><i style="height:86%;animation-delay:.9s"></i><i style="height:90%;animation-delay:1.1s"></i></div></div>
+                <div class="kpi"><small>CPU</small><b>41 %</b><div class="bars bars--o"><i style="height:30%"></i><i style="height:45%;animation-delay:.4s"></i><i style="height:38%;animation-delay:.2s"></i><i style="height:52%;animation-delay:.6s"></i><i style="height:41%;animation-delay:.8s"></i><i style="height:48%;animation-delay:1s"></i><i style="height:44%;animation-delay:.3s"></i></div></div>
+                <div class="kpi"><small>RAM</small><b>9.8 GB</b><div class="bars"><i style="height:60%"></i><i style="height:62%;animation-delay:.5s"></i><i style="height:64%;animation-delay:.2s"></i><i style="height:66%;animation-delay:.7s"></i><i style="height:65%;animation-delay:.9s"></i><i style="height:68%;animation-delay:1.1s"></i><i style="height:70%;animation-delay:.4s"></i></div></div>
+              </div>
+              <div class="duo">
+                <div class="term">
+                  <div class="scanline"></div>
+                  <p style="animation-delay:0s"><span class="k1">[RCON]</span> &gt; status</p>
+                  <p style="animation-delay:.6s">hostname: EU Vanilla Plus | Weekly | Max 3</p>
+                  <p style="animation-delay:1.2s"><span class="k2">[Oxide]</span> Loaded plugin OxidianBridge v1.6.1</p>
+                  <p style="animation-delay:1.8s"><span class="k1">[F7]</span> <span data-t="mk.t4">New report against xX_Aimbot_Xx</span></p>
+                  <p style="animation-delay:2.4s"><span class="k3">[Panel]</span> <span data-t="mk.t5">Restart scheduled in 30 min</span></p>
+                  <p style="animation-delay:3s"><span class="k1">[RCON]</span> &gt; <span class="caret"></span></p>
+                </div>
+                <div class="alerts">
+                  <div class="al hi" style="animation-delay:0s"><i></i><div><span data-t="mk.a1">Abnormal accuracy</span><small data-t="mk.a1s">xX_Aimbot_Xx · 78% headshots</small></div><span class="sev" data-t="mk.high">HIGH</span></div>
+                  <div class="al" style="animation-delay:.8s"><i></i><div><span data-t="mk.a2">Team over the limit</span><small data-t="mk.a2s">4 players in "Max 3"</small></div><span class="sev" data-t="mk.med">MEDIUM</span></div>
+                  <div class="al hi" style="animation-delay:1.6s"><i></i><div><span data-t="mk.a3">Banned on another server</span><small data-t="mk.a3s">Shared ban list · RustLand</small></div><span class="sev" data-t="mk.high">HIGH</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
   </div>
 
+  <div class="marq" aria-hidden="true"><div class="marq-track"><span>SteamCMD</span><span>Oxide · uMod</span><span>Carbon</span><span>WebRCON</span><span>Live map</span><span>F7 tickets</span><span>Shared bans</span><span>Anti-cheat</span><span>Discord bot</span><span>Tebex</span><span>Wipe planner</span><span>2FA</span><span>SteamCMD</span><span>Oxide · uMod</span><span>Carbon</span><span>WebRCON</span><span>Live map</span><span>F7 tickets</span><span>Shared bans</span><span>Anti-cheat</span><span>Discord bot</span><span>Tebex</span><span>Wipe planner</span><span>2FA</span></div></div>
   <div class="strip">
     <div class="wrap">
       <p data-t-html="strip.text"><b>One panel instead of five tools.</b> No more juggling:</p>
@@ -289,6 +469,25 @@ footer small{display:block;margin-top:8px;max-width:620px}
       </ul>
     </div>
   </div>
+
+  <section class="story" id="story" aria-labelledby="storyT">
+    <div class="wrap" style="position:relative">
+      <span class="eyebrow2 rv" data-t="st.eyebrow">01 / Just another night</span>
+      <div class="bigtime rv" role="img" aria-label="3:47 AM">03<span class="blinkc">:</span>47<small data-t="st.am">AM</small></div>
+      <p class="intro rv" id="storyT" data-t-html="st.intro">Your server is full. <b>You're asleep.</b> And someone just loaded something they shouldn't have.</p>
+      <div class="beat rv"><time>03:47</time><div><h3 data-t="st.b1t">Too many headshots</h3><p data-t="st.b1p">78% headshots in the last 50 shots, and one pistol kill at 212 metres. Nobody on the server has noticed yet.</p></div>
+        <div class="evt"><span class="ei"><svg viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 4.5-3.4 8-8 9-4.6-1-8-4.5-8-9V6z"/><path d="M12 8v5M12 16v.5"/></svg></span><div><b data-t="mk.a1">Abnormal accuracy</b><small data-t="mk.a1s">xX_Aimbot_Xx · 78% headshots</small></div><span class="tagx" data-t="mk.high">HIGH</span></div></div>
+      <div class="beat rv"><time>03:47</time><div><h3 data-t="st.b2t">The panel notices</h3><p data-t="st.b2p">The alert pops up in Watch and lands in your team's Discord channel within seconds, with the player, the reason and their history. Two F7 reports join the same ticket.</p></div>
+        <div class="evt"><span class="ei v"><svg viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-12 7l-5 1 1-4a8 8 0 1 1 16-4z"/></svg></span><div><b>#rust-alerts</b><small data-t="st.e2">Oxidian: abnormal accuracy · xX_Aimbot_Xx</small></div><span class="tagx g" data-t="st.sent">SENT</span></div></div>
+      <div class="beat rv"><time>03:49</time><div><h3 data-t="st.b3t">Your mod checks it</h3><p data-t="st.b3p">From their phone they open the player's profile: a two-day-old account, a VPN, and the shared ban list says he was banned on a friend's server last week. No doubt left.</p></div>
+        <div class="evt"><span class="ei"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></span><div><b data-t="mk.a3">Banned on another server</b><small data-t="mk.a3s">Shared ban list · RustLand</small></div><span class="tagx" data-t="mk.high">HIGH</span></div></div>
+      <div class="beat rv"><time>03:52</time><div><h3 data-t="st.b4t">Gone. Everywhere.</h3><p data-t="st.b4p">One click: banned and kicked, with the reason in the activity log. The ban reaches all your servers at once, and the players who reported him get a thank-you in game.</p></div>
+        <div class="evt"><span class="ei g"><svg viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></svg></span><div><b data-t="st.e4">Banned by marta (moderator)</b><small data-t="st.e4s">Reason: aimbot · 3 servers · logged 03:52</small></div><span class="tagx g" data-t="st.done">DONE</span></div></div>
+      <div class="beat calm rv"><time>04:00</time><div><h3 data-t="st.b5t">And the night goes on</h3><p data-t="st.b5p">Scheduled restart with chat warnings, backup saved and server updated. All on its own.</p></div>
+        <div class="evt"><span class="ei g"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><b data-t="st.e5">04:00 restart</b><small data-t="st.e5s">Backup backup-04-00.zip · update installed</small></div><span class="tagx g">OK</span></div></div>
+      <div class="payoff"><h3 class="rv" data-t-html="st.payoff">You're still<br><em>asleep.</em></h3><p class="rv" data-t="st.payoffP">That's Oxidian: the admin teammate that never gets tired, never gets distracted and never forgets.</p></div>
+    </div>
+  </section>
 
   <section id="features">
     <div class="wrap">
@@ -489,6 +688,22 @@ footer small{display:block;margin-top:8px;max-width:620px}
       'nav.features': 'Funciones', 'nav.tour': 'Recorrido', 'nav.install': 'Instalar', 'nav.faq': 'Preguntas',
       'cta.downloadShort': 'Descargar', 'cta.download': 'Descargar la beta', 'cta.github': 'Ver en GitHub',
       'hero.pill': 'Gratis y de código abierto · v1.0.0 beta 1',
+      'hero.h1': '<span>Tu servidor</span> <span>de</span> <span class="fill">Rust</span>,<br><span class="acc">bajo control</span>',
+      'mk.dash': 'Resumen', 'mk.console': 'Consola', 'mk.map': 'Mapa en vivo', 'mk.players': 'Jugadores', 'mk.watch': 'Vigilancia', 'mk.tickets': 'Reportes', 'mk.bans': 'Baneos compartidos', 'mk.plugins': 'Plugins', 'mk.wipes': 'Wipes',
+      'mk.live': 'En marcha · activo 2 h 14 min', 'mk.restart': 'Reiniciar', 'mk.stop': 'Detener', 'mk.kplayers': 'Jugadores',
+      'mk.t4': 'Nuevo reporte contra xX_Aimbot_Xx', 'mk.t5': 'Reinicio programado en 30 min',
+      'mk.a1': 'Precisión anormal', 'mk.a1s': 'xX_Aimbot_Xx · 78 % a la cabeza', 'mk.a2': 'Equipo por encima del límite', 'mk.a2s': '4 jugadores en «Max 3»', 'mk.a3': 'Baneado en otro servidor', 'mk.a3s': 'Lista compartida · RustLand', 'mk.high': 'ALTA', 'mk.med': 'MEDIA',
+      'st.eyebrow': '01 / Una noche cualquiera', 'st.am': 'MADRUGADA',
+      'st.intro': 'Tu servidor está lleno. <b>Tú estás dormido.</b> Y alguien acaba de cargar algo que no debería.',
+      'st.b1t': 'Empieza a acertar demasiado', 'st.b1p': '78 % de impactos a la cabeza en sus últimos 50 disparos, y uno con pistola a 212 metros. Nadie del servidor se ha dado cuenta todavía.',
+      'st.b2t': 'El panel sí', 'st.b2p': 'La alerta salta en Vigilancia y llega al canal de Discord de tu equipo en segundos, con el jugador, el motivo y su historial. Dos reportes F7 se juntan en el mismo ticket.',
+      'st.e2': 'Oxidian: precisión anormal · xX_Aimbot_Xx', 'st.sent': 'ENVIADO',
+      'st.b3t': 'Tu moderador lo revisa', 'st.b3p': 'Desde el móvil abre su ficha: cuenta de dos días, conectado con VPN, y la lista de baneos compartida dice que lo banearon la semana pasada en el servidor de un amigo. No hay dudas.',
+      'st.b4t': 'Fuera. De todos.', 'st.b4p': 'Un clic: baneado y expulsado, con el motivo en el registro de actividad. El baneo llega a todos tus servidores a la vez, y quienes lo reportaron reciben un «gracias» en el juego.',
+      'st.e4': 'Baneado por marta (moderadora)', 'st.e4s': 'Motivo: aimbot · 3 servidores · registrado 03:52', 'st.done': 'HECHO',
+      'st.b5t': 'Y la noche sigue', 'st.b5p': 'Reinicio programado con avisos en el chat, copia de seguridad guardada y servidor actualizado. Todo solo.',
+      'st.e5': 'Reinicio de las 04:00', 'st.e5s': 'Copia backup-04-00.zip · actualización instalada',
+      'st.payoff': 'Tú sigues<br><em>durmiendo.</em>', 'st.payoffP': 'Eso es Oxidian: el compañero de administración que no se cansa, no se distrae y no olvida.',
       'hero.title': 'Tu servidor de Rust, <em>bajo control.</em>',
       'hero.lead': 'Oxidian es un panel web gratuito que instala, administra, modera y hace crecer tu servidor de Rust desde tu propio equipo. Mapa en vivo, tickets de reportes F7, herramientas de staff dentro del juego, bot de Discord y entregas de Tebex, todo en un sitio.',
       'fact.free': 'Gratis para siempre (MIT)', 'fact.os': 'Windows y Linux', 'fact.self': 'Servidores propios o alquilados', 'fact.lang': 'ES · EN · PT · FR',
@@ -624,6 +839,11 @@ footer small{display:block;margin-top:8px;max-width:620px}
   window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
   // Aparición suave al hacer scroll
+  // Luz que sigue al ratón en la portada
+  var hero = $('#hero'), spot = $('#hero .spot');
+  if (hero && spot && window.matchMedia && !matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    hero.addEventListener('mousemove', function (e) { var r = hero.getBoundingClientRect(); spot.style.transform = 'translate(' + (e.clientX - r.left) + 'px,' + (e.clientY - r.top) + 'px)'; });
+  }
   if ('IntersectionObserver' in window) {
     var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
     $$('.rv').forEach(function (el) { io.observe(el); });
