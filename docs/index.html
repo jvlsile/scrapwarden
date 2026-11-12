@@ -141,6 +141,12 @@ h2{font:700 clamp(38px,4.6vw,60px)/1 var(--fc);margin:16px 0 16px;text-wrap:bala
 .cmd b{color:var(--pathi);font-weight:400}
 
 /* Más funciones */
+.allgrid{columns:3 320px;column-gap:22px;margin-top:44px}
+.allgroup{break-inside:avoid;background:var(--s950);border:1px solid var(--soft);border-radius:var(--r);padding:22px 24px;margin:0 0 22px}
+.allgroup h3{font:700 22px/1.1 var(--fc);text-transform:uppercase;margin:0 0 12px;color:var(--text)}
+.allgroup ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:9px}
+.allgroup li{position:relative;padding-left:22px;color:var(--t2);font-size:15.5px;line-height:1.45}
+.allgroup li::before{content:"";position:absolute;left:2px;top:8px;width:9px;height:5px;border-left:2px solid var(--pat);border-bottom:2px solid var(--pat);transform:rotate(-45deg)}
 .more{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--soft);border:1px solid var(--soft);border-radius:var(--r);overflow:hidden;margin-top:48px}
 .more div{background:var(--bg);padding:24px 24px 22px}
 .more h4{font:600 19px Barlow;margin:0 0 6px;display:flex;align-items:center;gap:10px}
@@ -370,6 +376,7 @@ footer small{display:block;margin-top:8px;max-width:620px}
     <nav class="nav" aria-label="Sections">
       <a href="#features" data-t="nav.features">Features</a>
       <a href="#tour" data-t="nav.tour">Tour</a>
+      <a href="#all" data-t="nav.all">Everything</a>
       <a href="#install" data-t="nav.install">Install</a>
       <a href="#faq" data-t="nav.faq">FAQ</a>
     </nav>
@@ -598,6 +605,71 @@ footer small{display:block;margin-top:8px;max-width:620px}
     </div>
   </section>
 
+  <section id="all">
+    <div class="wrap">
+      <p class="eyebrow rv" data-t="all.eyebrow">The full list</p>
+      <h2 class="rv" data-t="all.title">Every feature in the panel</h2>
+      <p class="sub rv" data-t="all.sub">Free, with nothing locked behind a paywall.</p>
+      <div class="allgrid">
+        <div class="allgroup rv"><h3 data-t="ag0">Install & setup</h3><ul>
+          <li data-t="ag0.0">SteamCMD and Rust in one click (public, staging or aux branch)</li>
+          <li data-t="ag0.1">Oxide or Carbon, or back to vanilla without losing plugins</li>
+          <li data-t="ag0.2">Windows and Linux, with progress, speed and time left</li>
+          <li data-t="ag0.3">Import a server you already have (reads your .bat/.sh and server.cfg)</li>
+          <li data-t="ag0.4">Rented servers over RCON, with optional FTP/SFTP for plugins</li>
+        </ul></div>
+        <div class="allgroup rv"><h3 data-t="ag1">Server & performance</h3><ul>
+          <li data-t="ag1.0">Dashboard: players, queue, FPS, entities, CPU and RAM</li>
+          <li data-t="ag1.1">Live console with filters and command history</li>
+          <li data-t="ag1.2">Server settings: name, map, seed, size, slots and header image</li>
+          <li data-t="ag1.3">Scheduled restarts with in-game countdown and auto-update</li>
+          <li data-t="ag1.4">ZIP backups and one-click restore</li>
+          <li data-t="ag1.5">Wipe planner that knows the forced wipe, with BP wipes and new seed</li>
+          <li data-t="ag1.6">Startup timing, low-FPS, high-RAM and frozen-server alerts</li>
+          <li data-t="ag1.7">Statistics: players over time, peak hours, new vs returning, rankings</li>
+        </ul></div>
+        <div class="allgroup rv"><h3 data-t="ag2">Players & map</h3><ul>
+          <li data-t="ag2.0">Live map with teams, sleepers, events, monuments, roads and grid</li>
+          <li data-t="ag2.1">Kick, ban, give items, owner and moderator by SteamID</li>
+          <li data-t="ag2.2">Inventory viewer with real item icons (remove or clear items)</li>
+          <li data-t="ag2.3">Teams, team-size limit alerts and shared tool cupboards</li>
+          <li data-t="ag2.4">Player file: names, history, notes, warnings and Steam data</li>
+        </ul></div>
+        <div class="allgroup rv"><h3 data-t="ag3">Moderation & security</h3><ul>
+          <li data-t="ag3.0">F7 reports become tickets: assign, sanction and thank the reporters</li>
+          <li data-t="ag3.1">In-game /staff menu for your mods and admins</li>
+          <li data-t="ag3.2">Chat history, private messages and a filter that blocks before sending</li>
+          <li data-t="ag3.3">Warnings with automatic escalation, timed mutes and temp bans</li>
+          <li data-t="ag3.4">Cheat watch: headshot rate, impossible distances, antihack, kill streaks</li>
+          <li data-t="ag3.5">Steam checks: VAC, recent game bans, account age, private profile, hours</li>
+          <li data-t="ag3.6">VPN, proxy, hosting-IP and country detection</li>
+          <li data-t="ag3.7">Shared bans across all your servers (Rust Centralized Banning)</li>
+          <li data-t="ag3.8">Ban evasion and shared-IP alerts</li>
+        </ul></div>
+        <div class="allgroup rv"><h3 data-t="ag4">Community & store</h3><ul>
+          <li data-t="ag4.0">Public server page with Connect button, wipe countdown and rates</li>
+          <li data-t="ag4.1">Two-way Discord bot with slash commands for players and staff</li>
+          <li data-t="ag4.2">Tebex purchases delivered over RCON, no Tebex plugin</li>
+          <li data-t="ag4.3">VIP that expires on its own, with queue priority</li>
+          <li data-t="ag4.4">Rates, PvP/PvE, time of day, weather and events in one click</li>
+        </ul></div>
+        <div class="allgroup rv"><h3 data-t="ag5">Plugins & permissions</h3><ul>
+          <li data-t="ag5.0">Search uMod and install in one click, or upload a .cs file</li>
+          <li data-t="ag5.1">Enable, disable, reload, JSON config editor and update checks</li>
+          <li data-t="ag5.2">Grant permissions and manage groups</li>
+        </ul></div>
+        <div class="allgroup rv"><h3 data-t="ag6">Panel & team</h3><ul>
+          <li data-t="ag6.0">Owner, admin, moderator and viewer roles</li>
+          <li data-t="ag6.1">Two-factor authentication with recovery codes</li>
+          <li data-t="ag6.2">Activity log of who did what</li>
+          <li data-t="ag6.3">English, Spanish, Portuguese and French, with a built-in wiki</li>
+          <li data-t="ag6.4">Update notifications and a Report a bug button</li>
+          <li data-t="ag6.5">Runs on your machine: no account, no ads, no tracking</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
   <section id="why">
     <div class="wrap">
       <p class="eyebrow rv" data-t="why.eyebrow">Why self-hosted</p>
@@ -689,6 +761,58 @@ footer small{display:block;margin-top:8px;max-width:620px}
       'nav.features': 'Funciones', 'nav.tour': 'Recorrido', 'nav.install': 'Instalar', 'nav.faq': 'Preguntas',
       'cta.downloadShort': 'Descargar', 'cta.download': 'Descargar la beta', 'cta.github': 'Ver en GitHub',
       'hero.pill': 'Gratis y de código abierto · v1.0.0 beta 1',
+      'all.eyebrow': 'La lista completa',
+      'all.title': 'Todo lo que trae el panel',
+      'all.sub': 'Gratis y sin nada bloqueado detrás de un pago.',
+      'nav.all': 'Todo',
+      'ag0': 'Instalación',
+      'ag0.0': 'SteamCMD y Rust en un clic (rama public, staging o aux)',
+      'ag0.1': 'Oxide o Carbon, o volver a vanilla sin perder plugins',
+      'ag0.2': 'Windows y Linux, con progreso, velocidad y tiempo restante',
+      'ag0.3': 'Importa un servidor que ya tengas (lee tu .bat/.sh y server.cfg)',
+      'ag0.4': 'Servidores alquilados por RCON, con FTP/SFTP opcional para plugins',
+      'ag1': 'Servidor y rendimiento',
+      'ag1.0': 'Resumen: jugadores, cola, FPS, entidades, CPU y RAM',
+      'ag1.1': 'Consola en vivo con filtros e historial de comandos',
+      'ag1.2': 'Ajustes: nombre, mapa, semilla, tamaño, plazas e imagen de cabecera',
+      'ag1.3': 'Reinicios programados con cuenta atrás en el juego y autoactualización',
+      'ag1.4': 'Copias de seguridad ZIP y restaurar en un clic',
+      'ag1.5': 'Planificador de wipes que conoce el forzado, con wipe de planos y semilla nueva',
+      'ag1.6': 'Tiempos de arranque y alertas de FPS bajos, RAM alta y servidor congelado',
+      'ag1.7': 'Estadísticas: jugadores en el tiempo, horas punta, nuevos y que vuelven, rankings',
+      'ag2': 'Jugadores y mapa',
+      'ag2.0': 'Mapa en vivo con equipos, durmientes, eventos, monumentos, carreteras y cuadrícula',
+      'ag2.1': 'Expulsar, banear, dar objetos, owner y moderador por SteamID',
+      'ag2.2': 'Visor de inventarios con iconos reales (quitar o vaciar objetos)',
+      'ag2.3': 'Equipos, alertas de límite de equipo y armarios compartidos',
+      'ag2.4': 'Ficha del jugador: nombres, historial, notas, advertencias y datos de Steam',
+      'ag3': 'Moderación y seguridad',
+      'ag3.0': 'Los reportes F7 son tickets: asignar, sancionar y dar las gracias',
+      'ag3.1': 'Menú /staff dentro del juego para moderadores y admins',
+      'ag3.2': 'Historial de chat, mensajes privados y filtro que bloquea antes de enviar',
+      'ag3.3': 'Advertencias con sanciones automáticas, silencios y baneos temporales',
+      'ag3.4': 'Vigilancia: tiros a la cabeza, distancias imposibles, antihack, rachas',
+      'ag3.5': 'Steam: VAC, baneos de juego recientes, antigüedad, perfil privado, horas',
+      'ag3.6': 'Detección de VPN, proxy, IPs de hosting y país',
+      'ag3.7': 'Baneos compartidos entre todos tus servidores (Centralized Banning de Rust)',
+      'ag3.8': 'Alertas de evasión de baneo e IPs compartidas',
+      'ag4': 'Comunidad y tienda',
+      'ag4.0': 'Web pública del servidor con botón Conectar, cuenta atrás del wipe y rates',
+      'ag4.1': 'Bot de Discord bidireccional con comandos para jugadores y staff',
+      'ag4.2': 'Compras de Tebex entregadas por RCON, sin plugin de Tebex',
+      'ag4.3': 'VIP que caduca solo, con prioridad en la cola',
+      'ag4.4': 'Rates, PvP/PvE, hora, clima y eventos en un clic',
+      'ag5': 'Plugins y permisos',
+      'ag5.0': 'Busca en uMod e instala en un clic, o sube un .cs',
+      'ag5.1': 'Activar, desactivar, recargar, editor de configuración y comprobar actualizaciones',
+      'ag5.2': 'Dar permisos y gestionar grupos',
+      'ag6': 'Panel y equipo',
+      'ag6.0': 'Roles de propietario, admin, moderador y observador',
+      'ag6.1': 'Verificación en dos pasos con códigos de recuperación',
+      'ag6.2': 'Registro de actividad de quién hizo qué',
+      'ag6.3': 'Español, inglés, portugués y francés, con wiki integrada',
+      'ag6.4': 'Avisos de nuevas versiones y botón Reportar un fallo',
+      'ag6.5': 'Funciona en tu equipo: sin cuenta, sin anuncios, sin rastreo',
       'hero.h1': '<span>Tu servidor</span> <span>de</span> <span class="fill">Rust</span>,<br><span class="acc">bajo control</span>',
       'mk.dash': 'Resumen', 'mk.console': 'Consola', 'mk.map': 'Mapa en vivo', 'mk.players': 'Jugadores', 'mk.watch': 'Vigilancia', 'mk.tickets': 'Reportes', 'mk.bans': 'Baneos compartidos', 'mk.plugins': 'Plugins', 'mk.wipes': 'Wipes',
       'mk.live': 'En marcha · activo 2 h 14 min', 'mk.restart': 'Reiniciar', 'mk.stop': 'Detener', 'mk.kplayers': 'Jugadores',
