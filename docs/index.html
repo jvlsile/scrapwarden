@@ -1,0 +1,639 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oxidian · Free web panel for Rust servers</title>
+<meta name="description" content="Free, self-hosted web panel to install, run, moderate and grow your Rust dedicated server: live map, F7 tickets, in-game staff tools, Discord bot and Tebex delivery.">
+<meta property="og:title" content="Oxidian · Free web panel for Rust servers">
+<meta property="og:description" content="Install, run, moderate and grow your Rust server from one free, self-hosted panel.">
+<meta property="og:image" content="https://jvlsile.github.io/oxidian/brand/social-preview.png">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#0E1316">
+<link rel="icon" href="brand/logo-mark.svg" type="image/svg+xml">
+<style>
+@font-face{font-family:Barlow;font-weight:400;font-display:swap;src:url(assets/fonts/barlow-latin-400-normal.woff2) format("woff2")}
+@font-face{font-family:Barlow;font-weight:500;font-display:swap;src:url(assets/fonts/barlow-latin-500-normal.woff2) format("woff2")}
+@font-face{font-family:Barlow;font-weight:600;font-display:swap;src:url(assets/fonts/barlow-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-weight:600;font-display:swap;src:url(assets/fonts/barlow-condensed-latin-600-normal.woff2) format("woff2")}
+@font-face{font-family:"Barlow Condensed";font-weight:700;font-display:swap;src:url(assets/fonts/barlow-condensed-latin-700-normal.woff2) format("woff2")}
+@font-face{font-family:"JetBrains Mono";font-weight:400;font-display:swap;src:url(assets/fonts/jetbrains-mono-latin-400-normal.woff2) format("woff2")}
+:root{
+  --bg:#0E1316;--s950:#12171B;--s900:#171D22;--s850:#1B2228;--s800:#20282F;--s750:#27303A;
+  --line:#2C3640;--soft:#232C34;--text:#E6EBEE;--t2:#B4BFC6;--muted:#8E9AA3;
+  --pat:#5BB5A2;--pathi:#74C9B6;--patw:rgba(91,181,162,.12);--ink:#0D2621;
+  --amb:#E0A93B;--ambw:rgba(224,169,59,.12);--oxi:#D0682F;--oxihi:#E8844C;
+  --fc:"Barlow Condensed","Barlow",system-ui,sans-serif;--fm:"JetBrains Mono",ui-monospace,monospace;
+  --r:14px;--rs:9px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--bg);color:var(--text);font:400 17px/1.6 Barlow,system-ui,sans-serif;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:var(--pathi);text-decoration:none}
+a:hover{color:#9BDCCD}
+img{max-width:100%;height:auto;display:block}
+code{font:14px var(--fm);background:var(--s900);border:1px solid var(--soft);border-radius:5px;padding:1px 6px;color:var(--text)}
+.wrap{max-width:1200px;margin:0 auto;padding:0 28px}
+.skip{position:absolute;left:-999px;top:8px;background:var(--pat);color:var(--ink);padding:8px 14px;border-radius:8px;z-index:99}
+.skip:focus{left:12px}
+:focus-visible{outline:2px solid var(--pathi);outline-offset:3px;border-radius:6px}
+
+/* Barra superior */
+.top{position:sticky;top:0;z-index:50;background:rgba(14,19,22,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid transparent;transition:border-color .2s}
+.top.scrolled{border-bottom-color:var(--soft)}
+.top .wrap{display:flex;align-items:center;gap:26px;height:68px}
+.brand{display:flex;align-items:center;gap:10px;font:700 23px/1 var(--fc);color:var(--text);letter-spacing:.01em}
+.brand:hover{color:var(--text)}
+.brand svg{width:26px;height:26px}
+.beta{font:700 10.5px/1 Barlow;letter-spacing:.12em;color:var(--amb);background:var(--ambw);border:1px solid rgba(224,169,59,.35);padding:4px 6px;border-radius:4px}
+.nav{display:flex;gap:24px;margin-left:12px}
+.nav a{color:var(--t2);font-weight:500;font-size:15.5px}
+.nav a:hover{color:var(--text)}
+.top .right{margin-left:auto;display:flex;align-items:center;gap:10px}
+.lang{display:flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.lang button{background:none;border:0;color:var(--muted);font:600 13px Barlow;padding:7px 10px;cursor:pointer;letter-spacing:.04em}
+.lang button[aria-pressed="true"]{background:var(--s800);color:var(--text)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;font:600 16px Barlow;border-radius:10px;padding:12px 20px;border:1px solid transparent;cursor:pointer;transition:transform .15s,background .15s,border-color .15s,color .15s;white-space:nowrap}
+.btn svg{width:18px;height:18px;flex:none}
+.btn:active{transform:translateY(1px)}
+.btn-p{background:var(--pat);color:var(--ink)}
+.btn-p:hover{background:var(--pathi);color:var(--ink)}
+.btn-g{background:var(--s850);border-color:var(--line);color:var(--text)}
+.btn-g:hover{border-color:#3B4853;color:var(--text);background:var(--s800)}
+.btn-sm{padding:8px 14px;font-size:14.5px;border-radius:8px}
+.menu{display:none;background:none;border:1px solid var(--line);color:var(--text);border-radius:8px;width:40px;height:38px;cursor:pointer}
+
+/* Portada */
+.hero{position:relative;padding:86px 0 40px;isolation:isolate}
+.hero::before{content:"";position:absolute;inset:-120px 0 auto;height:760px;z-index:-1;background:radial-gradient(700px 420px at 22% 18%,rgba(91,181,162,.16),transparent 70%),radial-gradient(620px 380px at 85% 30%,rgba(208,104,47,.10),transparent 70%)}
+.hero-grid{display:grid;grid-template-columns:minmax(0,1.02fr) minmax(0,1fr);gap:56px;align-items:center}
+.pill{display:inline-flex;align-items:center;gap:10px;font:500 13.5px Barlow;color:var(--t2);background:var(--s900);border:1px solid var(--line);border-radius:99px;padding:6px 14px 6px 8px}
+.pill b{font:700 11px/1 Barlow;letter-spacing:.1em;color:var(--amb);background:var(--ambw);padding:4px 7px;border-radius:99px}
+h1{font:700 clamp(46px,6.4vw,84px)/.95 var(--fc);letter-spacing:-.005em;margin:22px 0 22px;text-wrap:balance}
+h1 em{font-style:normal;color:var(--pat)}
+.lead{font-size:20px;line-height:1.55;color:var(--t2);margin:0 0 30px;max-width:560px;text-wrap:pretty}
+.ctas{display:flex;flex-wrap:wrap;gap:12px}
+.facts{display:flex;flex-wrap:wrap;gap:8px 20px;margin-top:28px;padding:0;list-style:none;color:var(--muted);font-size:15px}
+.facts li{display:flex;align-items:center;gap:8px}
+.facts svg{width:16px;height:16px;color:var(--pat)}
+.shot-frame{position:relative;border-radius:16px;background:var(--s900);border:1px solid var(--line);box-shadow:0 40px 100px -20px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.02) inset;overflow:hidden}
+.shot-frame .bar{display:flex;align-items:center;gap:7px;padding:11px 14px;border-bottom:1px solid var(--soft);background:var(--s950)}
+.shot-frame .bar i{width:10px;height:10px;border-radius:50%;background:#2E3942}
+.shot-frame .bar span{margin-left:10px;font:12.5px var(--fm);color:var(--muted)}
+.hero-shot{transform:perspective(1600px) rotateY(-9deg) rotateX(3deg);transform-origin:left center;transition:transform .6s cubic-bezier(.2,.7,.2,1)}
+.hero-shot:hover{transform:perspective(1600px) rotateY(-3deg) rotateX(1deg)}
+.hero-shot img{aspect-ratio:1440/900;object-fit:cover;object-position:left top;width:100%}
+
+/* Franja */
+.strip{border-block:1px solid var(--soft);background:var(--s950);margin-top:70px}
+.strip .wrap{display:flex;align-items:center;justify-content:space-between;gap:20px;padding-block:22px;flex-wrap:wrap}
+.strip p{margin:0;color:var(--t2);font-size:16.5px}
+.strip p b{color:var(--text)}
+.strip ul{display:flex;flex-wrap:wrap;gap:8px;margin:0;padding:0;list-style:none}
+.strip li{font:500 14px Barlow;color:var(--muted);border:1px dashed var(--line);border-radius:99px;padding:5px 12px;text-decoration:line-through;text-decoration-color:rgba(232,132,76,.7)}
+
+/* Secciones */
+section{padding:110px 0 0}
+.eyebrow{font:500 13px var(--fm);letter-spacing:.14em;text-transform:uppercase;color:var(--pat);display:inline-flex;align-items:center;gap:10px;margin:0}
+.eyebrow::before{content:"";width:22px;height:1px;background:currentColor}
+h2{font:700 clamp(38px,4.6vw,60px)/1 var(--fc);margin:16px 0 16px;text-wrap:balance}
+.sub{color:var(--t2);font-size:19px;max-width:680px;margin:0;text-wrap:pretty}
+
+/* Pilares */
+.pillars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin-top:48px}
+.pillar{background:var(--s900);border:1px solid var(--soft);border-radius:var(--r);padding:26px 24px 22px;position:relative;overflow:hidden}
+.pillar::after{content:"";position:absolute;inset:0 0 auto;height:2px;background:var(--c,var(--pat));opacity:.85}
+.pillar .ic{width:44px;height:44px;border-radius:11px;display:grid;place-items:center;background:color-mix(in srgb,var(--c,var(--pat)) 14%,transparent);color:var(--c,var(--pat));margin-bottom:18px}
+.pillar .ic svg{width:22px;height:22px}
+.pillar h3{font:700 27px/1 var(--fc);margin:0 0 6px}
+.pillar>p{color:var(--muted);margin:0 0 16px;font-size:15.5px}
+.pillar ul{list-style:none;margin:0;padding:0;display:grid;gap:9px}
+.pillar li{display:flex;gap:10px;font-size:15.5px;color:var(--t2);line-height:1.45}
+.pillar li::before{content:"";flex:none;width:6px;height:6px;border-radius:50%;background:var(--c,var(--pat));margin-top:8px}
+
+/* Recorrido */
+.tour{margin-top:44px}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:18px}
+.tab{background:var(--s900);border:1px solid var(--soft);color:var(--t2);font:600 15px Barlow;padding:9px 16px;border-radius:99px;cursor:pointer;transition:all .15s}
+.tab:hover{color:var(--text);border-color:var(--line)}
+.tab[aria-selected="true"]{background:var(--patw);border-color:rgba(91,181,162,.5);color:var(--pathi)}
+.tour-body{display:grid;grid-template-columns:minmax(0,1fr) 320px;gap:28px;align-items:center}
+.tour-img{aspect-ratio:1440/900;width:100%;object-fit:cover;object-position:left top;transition:opacity .25s}
+.tour-txt h3{font:700 32px/1.05 var(--fc);margin:0 0 12px}
+.tour-txt p{color:var(--t2);margin:0 0 16px}
+.tour-txt ul{margin:0;padding-left:18px;color:var(--t2);display:grid;gap:6px;font-size:16px}
+
+/* Destacados */
+.spot{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.15fr);gap:56px;align-items:center;margin-top:90px}
+.spot.rev{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr)}
+.spot.rev .spot-txt{order:2}
+.spot-txt h3{font:700 clamp(32px,3.4vw,44px)/1 var(--fc);margin:14px 0 14px}
+.spot-txt p{color:var(--t2);margin:0 0 18px;font-size:18px}
+.tag{display:inline-flex;align-items:center;gap:8px;font:600 12.5px Barlow;letter-spacing:.08em;text-transform:uppercase;color:var(--c,var(--pat))}
+.tag::before{content:"";width:8px;height:8px;border-radius:2px;background:currentColor}
+.checks{list-style:none;padding:0;margin:0;display:grid;gap:10px}
+.checks li{display:flex;gap:12px;color:var(--t2);font-size:16.5px}
+.checks svg{flex:none;width:20px;height:20px;color:var(--pat);margin-top:2px}
+.cmd{font:14px var(--fm);background:var(--s950);border:1px solid var(--soft);border-radius:var(--rs);padding:12px 14px;color:var(--t2);margin-top:18px;overflow-x:auto;white-space:nowrap}
+.cmd b{color:var(--pathi);font-weight:400}
+
+/* Más funciones */
+.more{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--soft);border:1px solid var(--soft);border-radius:var(--r);overflow:hidden;margin-top:48px}
+.more div{background:var(--bg);padding:24px 24px 22px}
+.more h4{font:600 19px Barlow;margin:0 0 6px;display:flex;align-items:center;gap:10px}
+.more h4 svg{width:19px;height:19px;color:var(--pat)}
+.more p{margin:0;color:var(--muted);font-size:15.5px}
+
+/* Por qué */
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px;margin-top:44px}
+.why div{border-left:2px solid var(--pat);padding:4px 0 4px 20px}
+.why h4{font:700 25px/1.1 var(--fc);margin:0 0 8px}
+.why p{margin:0;color:var(--t2)}
+
+/* Instalación */
+.install{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:48px;margin-top:44px;align-items:start}
+.os{display:flex;gap:8px;margin-bottom:16px}
+.term{background:var(--s950);border:1px solid var(--line);border-radius:var(--r);overflow:hidden}
+.term .bar{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;border-bottom:1px solid var(--soft);font:12.5px var(--fm);color:var(--muted)}
+.term pre{margin:0;padding:18px 18px 20px;font:14.5px/1.75 var(--fm);color:var(--t2);overflow-x:auto}
+.term pre .c{color:#62707A}
+.term pre .p{color:var(--pat)}
+.copy{background:none;border:1px solid var(--line);color:var(--t2);font:500 12.5px Barlow;border-radius:6px;padding:4px 10px;cursor:pointer}
+.copy:hover{color:var(--text)}
+.steps{list-style:none;margin:0;padding:0;display:grid;gap:22px;counter-reset:s}
+.steps li{display:grid;grid-template-columns:44px minmax(0,1fr);gap:16px;counter-increment:s}
+.steps li::before{content:counter(s,decimal-leading-zero);font:600 15px var(--fm);color:var(--pat);border:1px solid rgba(91,181,162,.4);border-radius:10px;height:44px;display:grid;place-items:center}
+.steps h4{margin:2px 0 4px;font:600 19px Barlow}
+.steps p{margin:0;color:var(--muted);font-size:16px;overflow-wrap:anywhere}
+.req{margin-top:26px;font-size:15px;color:var(--muted)}
+
+/* FAQ */
+.faq{max-width:860px;margin-top:40px}
+.faq details{border-bottom:1px solid var(--soft)}
+.faq summary{list-style:none;cursor:pointer;padding:22px 40px 22px 0;font:600 19px Barlow;position:relative}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"";position:absolute;right:6px;top:50%;width:10px;height:10px;border-right:2px solid var(--muted);border-bottom:2px solid var(--muted);transform:translateY(-70%) rotate(45deg);transition:transform .2s}
+.faq details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+.faq details p{margin:0 0 22px;color:var(--t2);max-width:760px}
+
+/* Apoyo */
+.support{margin:120px 0 0;position:relative;border:1px solid var(--line);border-radius:22px;padding:56px;background:radial-gradient(600px 300px at 15% 0%,rgba(91,181,162,.14),transparent 70%),var(--s950);display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);gap:40px;align-items:center;overflow:hidden}
+.support h2{margin-top:0}
+.support .acts{display:grid;gap:12px}
+.support .btn{justify-content:flex-start}
+.kofi{background:#FF5E5B;color:#fff}
+.kofi:hover{background:#ff7471;color:#fff}
+
+footer{margin-top:100px;border-top:1px solid var(--soft);padding:36px 0 48px;color:var(--muted);font-size:14.5px}
+footer .wrap{display:flex;justify-content:space-between;gap:24px;flex-wrap:wrap}
+footer nav{display:flex;gap:20px;flex-wrap:wrap}
+footer a{color:var(--t2)}
+footer small{display:block;margin-top:8px;max-width:620px}
+
+/* Animación al hacer scroll */
+.rv{opacity:0;transform:translateY(18px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.rv.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.rv{opacity:1;transform:none}.hero-shot{transform:none}}
+
+@media (max-width:1060px){
+  .hero-grid,.spot,.spot.rev,.install,.support,.tour-body{grid-template-columns:minmax(0,1fr)}
+  .spot.rev .spot-txt{order:0}
+  .pillars{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .more,.why{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .hero-shot{transform:none}
+  .nav{display:none}
+}
+@media (max-width:640px){
+  body{font-size:16px}
+  .wrap{padding:0 20px}
+  .top .right .btn-g{display:none}
+  .pillars,.more,.why{grid-template-columns:1fr}
+  .support{padding:32px 24px}
+  section{padding-top:80px}
+  .spot{margin-top:64px}
+  .lead{font-size:18px}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main" data-t="skip">Skip to content</a>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 24 24"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z" fill="none" stroke="#5BB5A2" stroke-width="2.1" stroke-linejoin="round"/><circle cx="12" cy="12" r="3.5" fill="none" stroke="#5BB5A2" stroke-width="2.1"/></symbol>
+  <symbol id="check" viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></symbol>
+  <symbol id="dl" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></symbol>
+  <symbol id="gh" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-3.16 19.49c.5.09.68-.22.68-.48v-1.7c-2.78.6-3.37-1.34-3.37-1.34-.45-1.16-1.11-1.47-1.11-1.47-.91-.62.07-.61.07-.61 1 .07 1.53 1.03 1.53 1.03.89 1.53 2.34 1.09 2.91.83.09-.65.35-1.09.63-1.34-2.22-.25-4.55-1.11-4.55-4.94 0-1.09.39-1.98 1.03-2.68-.1-.25-.45-1.27.1-2.65 0 0 .84-.27 2.75 1.02a9.5 9.5 0 0 1 5 0c1.91-1.29 2.75-1.02 2.75-1.02.55 1.38.2 2.4.1 2.65.64.7 1.03 1.59 1.03 2.68 0 3.84-2.34 4.68-4.57 4.93.36.31.68.92.68 1.85v2.74c0 .27.18.58.69.48A10 10 0 0 0 12 2z"/></symbol>
+  <symbol id="cup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8h13v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-6-6z"/><path d="M17 9h1.5a2.5 2.5 0 0 1 0 5H17M8 2v3M12 2v3"/></symbol>
+  <symbol id="star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/></symbol>
+  <symbol id="bug" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="7" y="7" width="10" height="13" rx="5"/><path d="M12 11v9M7 13H3M21 13h-4M7 17l-3 2M17 17l3 2M8 8 6 5M16 8l2-3M9 7a3 3 0 0 1 6 0"/></symbol>
+  <symbol id="i-setup" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></symbol>
+  <symbol id="i-run" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></symbol>
+  <symbol id="i-mod" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="M9 12l2 2 4-4" stroke-linecap="round"/></symbol>
+  <symbol id="i-grow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></symbol>
+  <symbol id="i-dot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/></symbol>
+</svg>
+
+<header class="top" id="top">
+  <div class="wrap">
+    <a class="brand" href="#" aria-label="Oxidian"><svg><use href="#logo"/></svg>Oxidian<span class="beta">BETA</span></a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#features" data-t="nav.features">Features</a>
+      <a href="#tour" data-t="nav.tour">Tour</a>
+      <a href="#install" data-t="nav.install">Install</a>
+      <a href="#faq" data-t="nav.faq">FAQ</a>
+    </nav>
+    <div class="right">
+      <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="en" aria-pressed="true">EN</button><button type="button" data-lang="es" aria-pressed="false">ES</button></div>
+      <a class="btn btn-g btn-sm" href="https://github.com/jvlsile/oxidian" rel="noopener"><svg><use href="#gh"/></svg>GitHub</a>
+      <a class="btn btn-p btn-sm" href="https://github.com/jvlsile/oxidian/releases" rel="noopener" data-t="cta.downloadShort">Download</a>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+  <div class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="pill rv"><b>BETA</b><span data-t="hero.pill">Free &amp; open source · v1.0.0 beta 1</span></span>
+        <h1 class="rv" data-t-html="hero.title">Your Rust server, <em>fully under control.</em></h1>
+        <p class="lead rv" data-t="hero.lead">Oxidian is a free, self-hosted web panel that installs, runs, moderates and grows your Rust server. Live map, F7 report tickets, in-game staff tools, a Discord bot and Tebex delivery, all in one place.</p>
+        <div class="ctas rv">
+          <a class="btn btn-p" href="https://github.com/jvlsile/oxidian/releases" rel="noopener"><svg><use href="#dl"/></svg><span data-t="cta.download">Download the beta</span></a>
+          <a class="btn btn-g" href="https://github.com/jvlsile/oxidian" rel="noopener"><svg><use href="#gh"/></svg><span data-t="cta.github">View on GitHub</span></a>
+        </div>
+        <ul class="facts rv">
+          <li><svg><use href="#check"/></svg><span data-t="fact.free">Free forever (MIT)</span></li>
+          <li><svg><use href="#check"/></svg><span data-t="fact.os">Windows &amp; Linux</span></li>
+          <li><svg><use href="#check"/></svg><span data-t="fact.self">Your own or rented servers</span></li>
+          <li><svg><use href="#check"/></svg><span data-t="fact.lang">EN · ES · PT · FR</span></li>
+        </ul>
+      </div>
+      <div class="rv">
+        <div class="shot-frame hero-shot">
+          <div class="bar"><i></i><i></i><i></i><span>localhost:8080/#map</span></div>
+          <img src="assets/shots/map.webp" width="1440" height="900" alt="Oxidian live map showing players, teams, monuments, roads, rails and events" data-t-alt="alt.hero">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="strip">
+    <div class="wrap">
+      <p data-t-html="strip.text"><b>One panel instead of five tools.</b> No more juggling:</p>
+      <ul>
+        <li data-t="strip.a">Paid RCON dashboard</li>
+        <li data-t="strip.b">Separate Discord bot</li>
+        <li data-t="strip.c">Store plugin</li>
+        <li data-t="strip.d">Wipe scripts</li>
+        <li data-t="strip.e">Manual installs</li>
+      </ul>
+    </div>
+  </div>
+
+  <section id="features">
+    <div class="wrap">
+      <p class="eyebrow rv" data-t="feat.eyebrow">What it does</p>
+      <h2 class="rv" data-t="feat.title">Everything a Rust admin needs</h2>
+      <p class="sub rv" data-t="feat.sub">From the first download to wipe day, with your mods and admins working from the same place.</p>
+      <div class="pillars">
+        <article class="pillar rv" style="--c:#5BB5A2">
+          <div class="ic"><svg><use href="#i-setup"/></svg></div>
+          <h3 data-t="p1.t">Set up</h3>
+          <p data-t="p1.s">Ready in minutes, no command line.</p>
+          <ul><li data-t="p1.a">SteamCMD and server in one click</li><li data-t="p1.b">Oxide or Carbon, or back to vanilla</li><li data-t="p1.c">Progress bar with speed and ETA</li><li data-t="p1.d">Or import yours, or connect to a rented one</li></ul>
+        </article>
+        <article class="pillar rv" style="--c:#4E86D0">
+          <div class="ic"><svg><use href="#i-run"/></svg></div>
+          <h3 data-t="p2.t">Run</h3>
+          <p data-t="p2.s">Keep it online and fast.</p>
+          <ul><li data-t="p2.a">Live console, FPS, CPU and RAM</li><li data-t="p2.b">Restarts with in-game countdown</li><li data-t="p2.c">Wipe planner that knows forced wipe</li><li data-t="p2.d">Backups, stats and startup tips</li></ul>
+        </article>
+        <article class="pillar rv" style="--c:#E0A93B">
+          <div class="ic"><svg><use href="#i-mod"/></svg></div>
+          <h3 data-t="p3.t">Moderate</h3>
+          <p data-t="p3.s">Catch problems before players leave.</p>
+          <ul><li data-t="p3.a">F7 reports become tickets</li><li data-t="p3.b">In-game <code>/staff</code> menu</li><li data-t="p3.c">Chat filter that blocks before sending</li><li data-t="p3.d">Cheat alerts and Steam checks</li></ul>
+        </article>
+        <article class="pillar rv" style="--c:#E8844C">
+          <div class="ic"><svg><use href="#i-grow"/></svg></div>
+          <h3 data-t="p4.t">Grow</h3>
+          <p data-t="p4.s">Bring players in and keep them.</p>
+          <ul><li data-t="p4.a">Public server page with Connect</li><li data-t="p4.b">Two-way Discord bot</li><li data-t="p4.c">Tebex delivery, no plugin</li><li data-t="p4.d">VIP that expires on its own</li></ul>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="tour">
+    <div class="wrap">
+      <p class="eyebrow rv" data-t="tour.eyebrow">Take a look</p>
+      <h2 class="rv" data-t="tour.title">Real screens, no mockups</h2>
+      <div class="tour rv">
+        <div class="tabs" role="tablist" aria-label="Screens" id="tourTabs"></div>
+        <div class="tour-body">
+          <div class="shot-frame"><div class="bar"><i></i><i></i><i></i><span id="tourUrl">localhost:8080</span></div><img class="tour-img" id="tourImg" src="assets/shots/map.webp" width="1440" height="900" alt="" loading="lazy"></div>
+          <div class="tour-txt" id="tourTxt" aria-live="polite"></div>
+        </div>
+      </div>
+
+      <div class="spot rv">
+        <div class="spot-txt">
+          <span class="tag" style="--c:#E0A93B" data-t="s1.tag">Moderation</span>
+          <h3 data-t="s1.t">Every F7 report becomes a ticket</h3>
+          <p data-t="s1.p">Reports about the same player are grouped, so you see at a glance who five people are complaining about. Take the ticket, leave notes for your team and close it with a sanction.</p>
+          <ul class="checks">
+            <li><svg><use href="#check"/></svg><span data-t="s1.a">Warn, mute, kick, temp ban or ban in one click</span></li>
+            <li><svg><use href="#check"/></svg><span data-t="s1.b">Reporters get a private "thank you" in game</span></li>
+            <li><svg><use href="#check"/></svg><span data-t="s1.c"><code>/tickets</code> in Discord for your staff</span></li>
+          </ul>
+        </div>
+        <div class="shot-frame"><div class="bar"><i></i><i></i><i></i><span>localhost:8080/#tickets</span></div><img src="assets/shots/ticket.webp" width="1440" height="900" alt="F7 report ticket with reports, staff notes and sanction options" data-t-alt="alt.ticket" loading="lazy"></div>
+      </div>
+
+      <div class="spot rev rv">
+        <div class="spot-txt">
+          <span class="tag" style="--c:#5BB5A2" data-t="s2.tag">In-game staff</span>
+          <h3 data-t="s2.t">Your mods work without leaving Rust</h3>
+          <p data-t="s2.p">Add someone as moderator or admin in the panel and they type <code>/staff</code> in game. A window with players, reports and world controls opens, and every action lands in the activity log.</p>
+          <ul class="checks">
+            <li><svg><use href="#check"/></svg><span data-t="s2.a">Moderators: reports, warn, mute, kick, teleport to</span></li>
+            <li><svg><use href="#check"/></svg><span data-t="s2.b">Admins: bans, bring, heal, time, weather, events</span></li>
+            <li><svg><use href="#check"/></svg><span data-t="s2.c">Nobody needs the RCON password</span></li>
+          </ul>
+        </div>
+        <div class="shot-frame"><div class="bar"><i></i><i></i><i></i><span>localhost:8080/#staff</span></div><img src="assets/shots/staff.webp" width="1440" height="900" alt="In-game staff settings with moderator and admin levels" data-t-alt="alt.staff" loading="lazy"></div>
+      </div>
+
+      <div class="spot rv">
+        <div class="spot-txt">
+          <span class="tag" style="--c:#E8844C" data-t="s3.tag">Monetization</span>
+          <h3 data-t="s3.t">Tebex purchases delivered automatically</h3>
+          <p data-t="s3.p">Paste your Tebex secret key and the panel runs each package's commands over RCON. No Tebex plugin and no open ports. Offline players get their items when they join.</p>
+          <div class="cmd"><b>oxidian.vip</b> {id} vip 30 <span style="color:#62707A">  # <span data-t="s3.cmd">30-day VIP that removes itself</span></span></div>
+        </div>
+        <div class="shot-frame"><div class="bar"><i></i><i></i><i></i><span>localhost:8080/#store</span></div><img src="assets/shots/store.webp" width="1440" height="900" alt="Tebex store connection and delivery log" data-t-alt="alt.store" loading="lazy"></div>
+      </div>
+
+      <div class="spot rev rv">
+        <div class="spot-txt">
+          <span class="tag" style="--c:#4E86D0" data-t="s4.tag">For your players</span>
+          <h3 data-t="s4.t">A public page for your server</h3>
+          <p data-t="s4.p">Share one link with status, a Connect with Steam button, the wipe countdown, rates, activity, the map and your rules. It never shows player positions, IPs or SteamIDs.</p>
+          <ul class="checks">
+            <li><svg><use href="#check"/></svg><span data-t="s4.a">In 4 languages, picked automatically</span></li>
+            <li><svg><use href="#check"/></svg><span data-t="s4.b">Links to your Discord and store</span></li>
+          </ul>
+        </div>
+        <div class="shot-frame"><div class="bar"><i></i><i></i><i></i><span>your-server:8080/server</span></div><img src="assets/shots/public-page.webp" width="1440" height="900" alt="Public server page with status, wipe countdown and connect button" data-t-alt="alt.public" loading="lazy"></div>
+      </div>
+
+      <div class="more rv">
+        <div><h4><svg><use href="#i-dot"/></svg><span data-t="m1.t">Live map</span></h4><p data-t="m1.p">Teams, sleepers, cargo, heli, Bradley, roads, rails, rivers and grid.</p></div>
+        <div><h4><svg><use href="#i-dot"/></svg><span data-t="m2.t">Wipe planner</span></h4><p data-t="m2.p">Forced wipe plus weekly or biweekly, with warnings, backup and new seed.</p></div>
+        <div><h4><svg><use href="#i-dot"/></svg><span data-t="m3.t">Rates in one click</span></h4><p data-t="m3.p">PvP/PvE, gather, craft, decay, time of day, weather and events.</p></div>
+        <div><h4><svg><use href="#i-dot"/></svg><span data-t="m4.t">Cheat watch</span></h4><p data-t="m4.p">Headshot rates, impossible distances, antihack, ban evasion, shared IPs.</p></div>
+        <div><h4><svg><use href="#i-dot"/></svg><span data-t="m5.t">Discord bot</span></h4><p data-t="m5.p">Chat bridge, status, players, wipe, and staff commands. No extra installs.</p></div>
+        <div><h4><svg><use href="#i-dot"/></svg><span data-t="m6.t">Team and roles</span></h4><p data-t="m6.p">Owner, admin, moderator and viewer, with 2FA and a full activity log.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="why">
+    <div class="wrap">
+      <p class="eyebrow rv" data-t="why.eyebrow">Why self-hosted</p>
+      <h2 class="rv" data-t="why.title">Your server, your data, your rules</h2>
+      <div class="why">
+        <div class="rv"><h4 data-t="w1.t">No subscription</h4><p data-t="w1.p">Free and open source under the MIT license. No paywalled features, no ads.</p></div>
+        <div class="rv"><h4 data-t="w2.t">Your data stays home</h4><p data-t="w2.p">Chat logs, player history and keys live on your machine, not on someone else's cloud.</p></div>
+        <div class="rv"><h4 data-t="w3.t">Made for Rust</h4><p data-t="w3.p">Built around how Rust servers really work: wipes, F7, teams, Oxide and Carbon.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="install">
+    <div class="wrap">
+      <p class="eyebrow rv" data-t="ins.eyebrow">Get started</p>
+      <h2 class="rv" data-t="ins.title">Up and running in three steps</h2>
+      <div class="install">
+        <ol class="steps rv">
+          <li><div><h4 data-t="st1.t">Download</h4><p data-t-html="st1.p">Grab the latest zip from <a href="https://github.com/jvlsile/oxidian/releases" rel="noopener">GitHub Releases</a> and extract it.</p></div></li>
+          <li><div><h4 data-t="st2.t">Run the installer</h4><p data-t="st2.p">It installs Node.js and the dependencies and opens the firewall ports for you.</p></div></li>
+          <li><div><h4 data-t="st3.t">Open the panel</h4><p data-t-html="st3.p">Go to <code>http://localhost:8080</code>, create your account and click <b>Install server</b>. The built-in wiki guides you from there.</p></div></li>
+        </ol>
+        <div class="rv">
+          <div class="os" role="tablist" aria-label="Operating system">
+            <button class="tab" type="button" role="tab" data-os="win" aria-selected="true">Windows</button>
+            <button class="tab" type="button" role="tab" data-os="lin" aria-selected="false">Linux</button>
+          </div>
+          <div class="term">
+            <div class="bar"><span id="termName">PowerShell</span><button class="copy" type="button" id="copyBtn" data-t="copy">Copy</button></div>
+            <pre id="termCode"></pre>
+          </div>
+          <p class="req" data-t-html="ins.existing"><b>Already have a server?</b> Import its folder without reinstalling, or connect to a rented one over RCON. Both options are at the top of the Install screen.</p>
+          <p class="req" data-t="req">Needs 64-bit Windows 10/11, Windows Server 2019+, Ubuntu 22.04/24.04 or Debian 12, Node.js 18+, about 12 GB of free RAM and 20 GB of disk.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="faq">
+    <div class="wrap">
+      <p class="eyebrow rv" data-t="faq.eyebrow">Questions</p>
+      <h2 class="rv" data-t="faq.title">Frequently asked</h2>
+      <div class="faq rv">
+        <details><summary data-t="q1">Is it really free?</summary><p data-t="a1">Yes. Oxidian is open source under the MIT license: no subscription, no paid tier and no ads. If it helps you, you can support development on Ko-fi.</p></details>
+        <details><summary data-t="q2">Do I need Oxide or Carbon?</summary><p data-t="a2">Not for the basics: installing, console, players, chat, restarts, wipes, statistics, the Discord bot and the public page work on vanilla. The live map, inventories, F7 tickets, /staff, rates and cheat detection need Oxide or Carbon; the panel installs its companion plugin automatically.</p></details>
+        <details><summary data-t="q3">Does it work with a rented server?</summary><p data-t="a3">Yes. Run Oxidian on your PC or any machine and use remote mode: enter the IP, RCON port and password from your host. Console, players, chat, moderation, F7 tickets, /staff, statistics, Discord, Tebex, VIP and rates all work over RCON. Add your host's FTP or SFTP details and plugins work too, with the companion plugin uploaded for you. Installing, backups and wipes stay with your host.</p></details>
+        <details><summary data-t="q7">I already have a server. Do I have to reinstall it?</summary><p data-t="a7">No. Choose "I already have one here", point to its folder and Oxidian reads your start script to keep the same ports, identity, RCON password, map and plugins. If it is already running, the panel connects to it.</p></details>
+        <details><summary data-t="q4">Is it safe to open to the Internet?</summary><p data-t="a4">Passwords are hashed with scrypt, two-factor authentication is available and every action is logged. For remote access, put it behind HTTPS (Caddy or Nginx) or use a VPN. The RCON port never needs to be opened.</p></details>
+        <details><summary data-t="q5">What does "beta" mean here?</summary><p data-t="a5">Everything works, but it's new and you may find bugs. Use the Report a bug button in the panel: it opens GitHub with the technical details already filled in. The panel tells you when a new version is out.</p></details>
+        <details><summary data-t="q6">Is it affiliated with Facepunch?</summary><p data-t="a6">No. Oxidian is an independent community project. Rust is a trademark of Facepunch Studios.</p></details>
+      </div>
+
+      <div class="support rv">
+        <div>
+          <p class="eyebrow" data-t="sup.eyebrow">Open source</p>
+          <h2 data-t="sup.title">Built by an admin, for admins</h2>
+          <p class="sub" data-t="sup.p">Oxidian is made in spare time and will stay free. A star, a bug report or a coffee all help it keep up with every Rust update.</p>
+        </div>
+        <div class="acts">
+          <a class="btn btn-g" href="https://github.com/jvlsile/oxidian" rel="noopener"><svg><use href="#star"/></svg><span data-t="sup.star">Star it on GitHub</span></a>
+          <a class="btn kofi" href="https://ko-fi.com/oxidian" rel="noopener"><svg><use href="#cup"/></svg><span data-t="sup.kofi">Buy me a coffee on Ko-fi</span></a>
+          <a class="btn btn-g" href="https://github.com/jvlsile/oxidian/issues/new/choose" rel="noopener"><svg><use href="#bug"/></svg><span data-t="sup.bug">Report a bug or suggest an idea</span></a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <a class="brand" href="#"><svg><use href="#logo"/></svg>Oxidian</a>
+      <small data-t="foot.legal">MIT License. Rust is a trademark of Facepunch Studios. Oxidian is not affiliated with or endorsed by Facepunch, Valve, uMod, Carbon or Tebex.</small>
+    </div>
+    <nav aria-label="Links">
+      <a href="https://github.com/jvlsile/oxidian" rel="noopener">GitHub</a>
+      <a href="https://github.com/jvlsile/oxidian/releases" rel="noopener" data-t="foot.releases">Releases</a>
+      <a href="https://github.com/jvlsile/oxidian/blob/main/CHANGELOG.md" rel="noopener" data-t="foot.changelog">Changelog</a>
+      <a href="https://ko-fi.com/oxidian" rel="noopener">Ko-fi</a>
+    </nav>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var T = {
+    es: {
+      'skip': 'Saltar al contenido',
+      'nav.features': 'Funciones', 'nav.tour': 'Recorrido', 'nav.install': 'Instalar', 'nav.faq': 'Preguntas',
+      'cta.downloadShort': 'Descargar', 'cta.download': 'Descargar la beta', 'cta.github': 'Ver en GitHub',
+      'hero.pill': 'Gratis y de código abierto · v1.0.0 beta 1',
+      'hero.title': 'Tu servidor de Rust, <em>bajo control.</em>',
+      'hero.lead': 'Oxidian es un panel web gratuito que instala, administra, modera y hace crecer tu servidor de Rust desde tu propio equipo. Mapa en vivo, tickets de reportes F7, herramientas de staff dentro del juego, bot de Discord y entregas de Tebex, todo en un sitio.',
+      'fact.free': 'Gratis para siempre (MIT)', 'fact.os': 'Windows y Linux', 'fact.self': 'Servidores propios o alquilados', 'fact.lang': 'ES · EN · PT · FR',
+      'alt.hero': 'Mapa en vivo de Oxidian con jugadores, equipos, monumentos, carreteras, vías y eventos',
+      'strip.text': '<b>Un panel en lugar de cinco herramientas.</b> Se acabó ir saltando entre:',
+      'strip.a': 'Panel RCON de pago', 'strip.b': 'Bot de Discord aparte', 'strip.c': 'Plugin de tienda', 'strip.d': 'Scripts de wipe', 'strip.e': 'Instalaciones a mano',
+      'feat.eyebrow': 'Qué hace', 'feat.title': 'Todo lo que necesita un admin de Rust', 'feat.sub': 'Desde la primera descarga hasta el día del wipe, con tus moderadores y admins trabajando desde el mismo sitio.',
+      'p1.t': 'Instala', 'p1.s': 'Listo en minutos, sin línea de comandos.', 'p1.a': 'SteamCMD y servidor en un clic', 'p1.b': 'Oxide o Carbon, o vuelta a vanilla', 'p1.c': 'Barra de progreso con velocidad y tiempo', 'p1.d': 'O importa el tuyo, o conecta uno alquilado',
+      'p2.t': 'Administra', 'p2.s': 'Siempre en marcha y rápido.', 'p2.a': 'Consola en vivo, FPS, CPU y RAM', 'p2.b': 'Reinicios con cuenta atrás en el juego', 'p2.c': 'Planificador que conoce el wipe forzado', 'p2.d': 'Copias, estadísticas y consejos de arranque',
+      'p3.t': 'Modera', 'p3.s': 'Corta los problemas antes de que se vayan jugadores.', 'p3.a': 'Los F7 se convierten en tickets', 'p3.b': 'Menú <code>/staff</code> dentro del juego', 'p3.c': 'Filtro que bloquea antes de enviar', 'p3.d': 'Alertas de trampas y perfiles de Steam',
+      'p4.t': 'Crece', 'p4.s': 'Atrae jugadores y que se queden.', 'p4.a': 'Web pública con botón Conectar', 'p4.b': 'Bot de Discord en los dos sentidos', 'p4.c': 'Entregas de Tebex sin plugin', 'p4.d': 'VIP que caduca solo',
+      'tour.eyebrow': 'Échale un vistazo', 'tour.title': 'Pantallas reales, sin maquetas',
+      's1.tag': 'Moderación', 's1.t': 'Cada reporte F7 se convierte en un ticket', 's1.p': 'Los reportes sobre el mismo jugador se agrupan, así ves de un vistazo de quién se quejan cinco personas. Quédate el ticket, deja notas a tu equipo y ciérralo con una sanción.',
+      's1.a': 'Advertir, silenciar, expulsar o banear en un clic', 's1.b': 'Quien reportó recibe un "gracias" privado en el juego', 's1.c': '<code>/tickets</code> en Discord para tu staff',
+      's2.tag': 'Staff en el juego', 's2.t': 'Tus moderadores trabajan sin salir de Rust', 's2.p': 'Añade a alguien como moderador o admin en el panel y escribe <code>/staff</code> en el juego. Se abre una ventana con jugadores, reportes y controles del mundo, y cada acción queda en el registro.',
+      's2.a': 'Moderadores: reportes, advertir, silenciar, expulsar, ir hacia', 's2.b': 'Admins: baneos, traer, curar, hora, clima, eventos', 's2.c': 'Nadie necesita la contraseña de RCON',
+      's3.tag': 'Monetización', 's3.t': 'Compras de Tebex entregadas solas', 's3.p': 'Pega la clave secreta de Tebex y el panel ejecuta por RCON los comandos de cada paquete. Sin plugin de Tebex y sin abrir puertos. Si el jugador no está conectado, lo recibe al entrar.', 's3.cmd': 'VIP de 30 días que se quita solo',
+      's4.tag': 'Para tus jugadores', 's4.t': 'Una web pública para tu servidor', 's4.p': 'Comparte un enlace con el estado, botón para conectar con Steam, cuenta atrás del wipe, rates, actividad, el mapa y tus normas. Nunca muestra posiciones, IPs ni SteamIDs.',
+      's4.a': 'En 4 idiomas, elegido automáticamente', 's4.b': 'Enlaces a tu Discord y tu tienda',
+      'm1.t': 'Mapa en vivo', 'm1.p': 'Equipos, durmientes, carguero, heli, Bradley, carreteras, vías, ríos y cuadrícula.',
+      'm2.t': 'Planificador de wipes', 'm2.p': 'Wipe forzado y semanal o quincenal, con avisos, copia y semilla nueva.',
+      'm3.t': 'Rates en un clic', 'm3.p': 'PvP/PvE, recolección, crafteo, decay, hora, clima y eventos.',
+      'm4.t': 'Vigilancia de trampas', 'm4.p': 'Tiros a la cabeza, distancias imposibles, antihack, evasión de baneos, IPs compartidas.',
+      'm5.t': 'Bot de Discord', 'm5.p': 'Puente de chat, estado, jugadores, wipe y comandos de staff. Sin instalar nada más.',
+      'm6.t': 'Equipo y roles', 'm6.p': 'Propietario, admin, moderador y observador, con 2FA y registro completo.',
+      'why.eyebrow': 'Por qué en tu equipo', 'why.title': 'Tu servidor, tus datos, tus reglas',
+      'w1.t': 'Sin suscripción', 'w1.p': 'Gratis y de código abierto con licencia MIT. Sin funciones de pago ni anuncios.',
+      'w2.t': 'Tus datos se quedan en casa', 'w2.p': 'El chat, el historial de jugadores y las claves viven en tu equipo, no en la nube de otro.',
+      'w3.t': 'Hecho para Rust', 'w3.p': 'Pensado para cómo funcionan de verdad los servidores de Rust: wipes, F7, equipos, Oxide y Carbon.',
+      'ins.eyebrow': 'Empieza', 'ins.title': 'En marcha en tres pasos',
+      'st1.t': 'Descarga', 'st1.p': 'Baja el zip de la última versión en <a href="https://github.com/jvlsile/oxidian/releases" rel="noopener">GitHub Releases</a> y descomprímelo.',
+      'st2.t': 'Ejecuta el instalador', 'st2.p': 'Instala Node.js y las dependencias y abre los puertos del firewall por ti.',
+      'st3.t': 'Abre el panel', 'st3.p': 'Entra en <code>http://localhost:8080</code>, crea tu cuenta y pulsa <b>Instalar servidor</b>. La wiki integrada te guía desde ahí.',
+      'copy': 'Copiar', 'copied': 'Copiado',
+      'ins.existing': '<b>¿Ya tienes un servidor?</b> Importa su carpeta sin reinstalar o conéctate por RCON a uno alquilado. Las dos opciones están arriba en la pantalla de Instalación.',
+      'req': 'Necesita Windows 10/11, Windows Server 2019+, Ubuntu 22.04/24.04 o Debian 12 de 64 bits, Node.js 18+, unos 12 GB de RAM libres y 20 GB de disco.',
+      'faq.eyebrow': 'Dudas', 'faq.title': 'Preguntas frecuentes',
+      'q1': '¿De verdad es gratis?', 'a1': 'Sí. Oxidian es de código abierto con licencia MIT: sin suscripción, sin versión de pago y sin anuncios. Si te ayuda, puedes apoyar el desarrollo en Ko-fi.',
+      'q2': '¿Necesito Oxide o Carbon?', 'a2': 'No para lo básico: instalar, consola, jugadores, chat, reinicios, wipes, estadísticas, el bot de Discord y la web pública funcionan en vanilla. El mapa en vivo, los inventarios, los tickets F7, /staff, los rates y la detección de trampas necesitan Oxide o Carbon; el panel instala su complemento solo.',
+      'q3': '¿Funciona con un servidor alquilado?', 'a3': 'Sí. Ejecuta Oxidian en tu PC o en cualquier equipo y usa el modo remoto: pon la IP, el puerto RCON y la contraseña de tu hosting. Consola, jugadores, chat, moderación, tickets F7, /staff, estadísticas, Discord, Tebex, VIP y rates funcionan por RCON. Añade el FTP o SFTP del hosting y también gestionas los plugins, con el complemento subido automáticamente. Instalar, copias y wipes siguen en tu hosting.',
+      'q7': 'Ya tengo un servidor. ¿Tengo que reinstalarlo?', 'a7': 'No. Elige «Ya tengo uno en este equipo», indica su carpeta y Oxidian lee tu script de arranque para usar los mismos puertos, identidad, contraseña de RCON, mapa y plugins. Si ya está encendido, el panel se conecta a él.',
+      'q4': '¿Es seguro abrirlo a Internet?', 'a4': 'Las contraseñas se guardan con scrypt, hay verificación en dos pasos y cada acción queda registrada. Para acceder desde fuera, ponlo detrás de HTTPS (Caddy o Nginx) o usa una VPN. El puerto de RCON nunca hace falta abrirlo.',
+      'q5': '¿Qué significa "beta"?', 'a5': 'Todo funciona, pero es nuevo y puede que encuentres fallos. Usa el botón Reportar un fallo del panel: abre GitHub con los datos técnicos ya rellenados. El panel te avisa cuando sale una versión nueva.',
+      'q6': '¿Está relacionado con Facepunch?', 'a6': 'No. Oxidian es un proyecto independiente de la comunidad. Rust es una marca de Facepunch Studios.',
+      'sup.eyebrow': 'Código abierto', 'sup.title': 'Hecho por un admin, para admins', 'sup.p': 'Oxidian se hace en el tiempo libre y seguirá siendo gratis. Una estrella, un reporte de fallo o un café ayudan a mantenerlo al día con cada actualización de Rust.',
+      'sup.star': 'Dale una estrella en GitHub', 'sup.kofi': 'Invítame a un café en Ko-fi', 'sup.bug': 'Reporta un fallo o sugiere una idea',
+      'foot.legal': 'Licencia MIT. Rust es una marca de Facepunch Studios. Oxidian no está afiliado ni respaldado por Facepunch, Valve, uMod, Carbon ni Tebex.',
+      'foot.releases': 'Versiones', 'foot.changelog': 'Cambios',
+      'alt.ticket': 'Ticket de reporte F7 con reportes, notas del staff y opciones de sanción', 'alt.staff': 'Ajustes del staff en el juego con niveles de moderador y admin',
+      'alt.store': 'Conexión con la tienda Tebex y registro de entregas', 'alt.public': 'Web pública del servidor con estado, cuenta atrás del wipe y botón de conectar'
+    }
+  };
+  var TOUR = [
+    { id: 'map', en: ['Live map', 'See every player, team and event in real time on your real map, with roads, rails, rivers and monuments. Click a player to locate, kick or open their file.'], es: ['Mapa en vivo', 'Ve a cada jugador, equipo y evento en tiempo real sobre tu mapa, con carreteras, vías, ríos y monumentos. Haz clic en un jugador para localizarlo, expulsarlo o abrir su ficha.'] },
+    { id: 'dashboard', en: ['Dashboard', 'Players, queue, FPS, entities, CPU and RAM at a glance, a live activity feed, and restarts with in-game countdown warnings.'], es: ['Resumen', 'Jugadores, cola, FPS, entidades, CPU y RAM de un vistazo, actividad en directo y reinicios con cuenta atrás en el juego.'] },
+    { id: 'tickets', en: ['F7 reports', 'Reports grouped by player, sorted by how many different people reported them.'], es: ['Reportes F7', 'Reportes agrupados por jugador y ordenados por cuántas personas distintas lo han reportado.'] },
+    { id: 'watch', en: ['Cheat watch', 'Real-time alerts for suspicious aim, distances and antihack violations, with a ranking of players to keep an eye on.'], es: ['Vigilancia', 'Alertas en tiempo real de puntería sospechosa, distancias y antihack, con un ranking de jugadores a vigilar.'] },
+    { id: 'rates', en: ['Rates & world', 'PvP/PvE in one click, gather and craft multipliers, decay and upkeep, plus time of day, weather and events.'], es: ['Rates y mundo', 'PvP/PvE en un clic, multiplicadores de recolección y crafteo, decay y upkeep, además de hora, clima y eventos.'] },
+    { id: 'wipes', en: ['Wipe planner', 'Knows Facepunch\'s forced wipe and runs your weekly or biweekly wipes with warnings, backup, update and a new seed.'], es: ['Wipes', 'Conoce el wipe forzado de Facepunch y hace tus wipes semanales o quincenales con avisos, copia, actualización y semilla nueva.'] },
+    { id: 'players', en: ['Players', 'Online players, bans, teams and inventories with real item icons. Kick, ban, give items or open a player\'s history.'], es: ['Jugadores', 'Conectados, baneados, equipos e inventarios con los iconos reales. Expulsa, banea, da objetos o abre el historial de un jugador.'] },
+    { id: 'wiki', en: ['Built-in wiki', 'Every feature explained inside the panel, searchable, in English, Spanish, Portuguese and French.'], es: ['Wiki integrada', 'Cada función explicada dentro del panel, con buscador, en español, inglés, portugués y francés.'] }
+  ];
+  var INSTALL = {
+    win: { name: 'PowerShell', code: '<span class="c"># 1. Extract oxidian.zip, e.g. to C:\\Oxidian</span>\n<span class="c"># 2. Right-click install-windows.ps1 → Run with PowerShell</span>\n<span class="c">#    or from a terminal in that folder:</span>\n<span class="p">PS&gt;</span> powershell -ExecutionPolicy Bypass -File .\\install-windows.ps1\n\n<span class="c"># 3. Open the panel</span>\n<span class="p">PS&gt;</span> start http://localhost:8080', copy: 'powershell -ExecutionPolicy Bypass -File .\\install-windows.ps1' },
+    lin: { name: 'bash', code: '<span class="c"># Download and extract the latest release, then:</span>\n<span class="p">$</span> cd oxidian\n<span class="p">$</span> sudo bash install.sh\n\n<span class="c"># Runs as a systemd service on port 8080</span>\n<span class="p">$</span> systemctl status oxidian', copy: 'cd oxidian && sudo bash install.sh' }
+  };
+  var INSTALL_ES = {
+    win: '<span class="c"># 1. Descomprime oxidian.zip, por ejemplo en C:\\Oxidian</span>\n<span class="c"># 2. Clic derecho en install-windows.ps1 → Ejecutar con PowerShell</span>\n<span class="c">#    o desde una terminal en esa carpeta:</span>\n<span class="p">PS&gt;</span> powershell -ExecutionPolicy Bypass -File .\\install-windows.ps1\n\n<span class="c"># 3. Abre el panel</span>\n<span class="p">PS&gt;</span> start http://localhost:8080',
+    lin: '<span class="c"># Descarga y descomprime la última versión, y luego:</span>\n<span class="p">$</span> cd oxidian\n<span class="p">$</span> sudo bash install.sh\n\n<span class="c"># Queda como servicio systemd en el puerto 8080</span>\n<span class="p">$</span> systemctl status oxidian'
+  };
+
+  var $ = function (s, el) { return (el || document).querySelector(s); };
+  var $$ = function (s, el) { return Array.prototype.slice.call((el || document).querySelectorAll(s)); };
+  var lang = 'en', tour = 'map', os = 'win';
+
+  // Guarda los textos en inglés del HTML para poder volver a ellos
+  $$('[data-t]').forEach(function (el) { el.dataset.en = el.textContent; });
+  $$('[data-t-html]').forEach(function (el) { el.dataset.enHtml = el.innerHTML; });
+  $$('[data-t-alt]').forEach(function (el) { el.dataset.enAlt = el.alt; });
+
+  function setLang(l) {
+    lang = l === 'es' ? 'es' : 'en';
+    document.documentElement.lang = lang;
+    var d = T[lang] || {};
+    $$('[data-t]').forEach(function (el) { var k = el.dataset.t; el.textContent = lang === 'en' ? el.dataset.en : (d[k] || el.dataset.en); });
+    $$('[data-t-html]').forEach(function (el) { var k = el.dataset.tHtml; el.innerHTML = lang === 'en' ? el.dataset.enHtml : (d[k] || el.dataset.enHtml); });
+    $$('[data-t-alt]').forEach(function (el) { var k = el.dataset.tAlt; el.alt = lang === 'en' ? el.dataset.enAlt : (d[k] || el.dataset.enAlt); });
+    // Los textos con <code> dentro (p3.b, s1.c, s2.p) se traducen como HTML
+    ['p3.b', 's1.c', 's2.p'].forEach(function (k) { var el = $('[data-t="' + k + '"]'); if (el && lang === 'es' && d[k]) el.innerHTML = d[k]; else if (el && lang === 'en') el.innerHTML = el.dataset.enRaw || el.innerHTML; });
+    $$('.lang button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.dataset.lang === lang)); });
+    document.title = lang === 'es' ? 'Oxidian · Panel web gratuito para servidores de Rust' : 'Oxidian · Free web panel for Rust servers';
+    try { localStorage.setItem('oxidian-site-lang', lang); } catch (e) {}
+    renderTour(); renderOs();
+  }
+  // Conserva el HTML original (con <code>) de los textos en inglés que lo llevan
+  ['p3.b', 's1.c', 's2.p'].forEach(function (k) { var el = $('[data-t="' + k + '"]'); if (el) el.dataset.enRaw = el.innerHTML; });
+
+  function renderTour() {
+    var tabs = $('#tourTabs');
+    tabs.innerHTML = TOUR.map(function (t) {
+      return '<button class="tab" type="button" role="tab" aria-selected="' + (t.id === tour) + '" data-tour="' + t.id + '">' + t[lang][0] + '</button>';
+    }).join('');
+    var cur = TOUR.filter(function (t) { return t.id === tour; })[0];
+    var img = $('#tourImg');
+    img.style.opacity = .25;
+    var next = new Image();
+    next.onload = function () { img.src = next.src; img.alt = cur[lang][0]; img.style.opacity = 1; };
+    next.src = 'assets/shots/' + cur.id + '.webp';
+    $('#tourUrl').textContent = 'localhost:8080/#' + cur.id;
+    $('#tourTxt').innerHTML = '<h3>' + cur[lang][0] + '</h3><p>' + cur[lang][1] + '</p>';
+  }
+  function renderOs() {
+    var c = INSTALL[os];
+    $('#termName').textContent = c.name;
+    $('#termCode').innerHTML = lang === 'es' ? INSTALL_ES[os] : c.code;
+    $$('[data-os]').forEach(function (b) { b.setAttribute('aria-selected', String(b.dataset.os === os)); });
+  }
+
+  document.addEventListener('click', function (e) {
+    var b = e.target.closest('[data-tour]'); if (b) { tour = b.dataset.tour; renderTour(); return; }
+    var o = e.target.closest('[data-os]'); if (o) { os = o.dataset.os; renderOs(); return; }
+    var l = e.target.closest('[data-lang]'); if (l) { setLang(l.dataset.lang); return; }
+  });
+  $('#copyBtn').addEventListener('click', function () {
+    var btn = this, txt = INSTALL[os].copy;
+    var done = function () { btn.textContent = (T[lang] && T[lang].copied) || 'Copied'; setTimeout(function () { btn.textContent = lang === 'es' ? T.es.copy : 'Copy'; }, 1600); };
+    try { navigator.clipboard.writeText(txt).then(done, done); } catch (e) { done(); }
+  });
+
+  // Barra superior con borde al hacer scroll
+  var top = $('#top');
+  var onScroll = function () { top.classList.toggle('scrolled', window.scrollY > 10); };
+  window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
+
+  // Aparición suave al hacer scroll
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (es) { es.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } }); }, { rootMargin: '0px 0px -8% 0px' });
+    $$('.rv').forEach(function (el) { io.observe(el); });
+  } else $$('.rv').forEach(function (el) { el.classList.add('in'); });
+
+  // Idioma: ?lang=, el último elegido o el del navegador
+  var q = (location.search.match(/[?&]lang=(\w+)/) || [])[1];
+  var saved = null; try { saved = localStorage.getItem('oxidian-site-lang'); } catch (e) {}
+  setLang(q || saved || ((navigator.language || 'en').slice(0, 2) === 'es' ? 'es' : 'en'));
+})();
+</script>
+</body>
+</html>

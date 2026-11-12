@@ -1,0 +1,45 @@
+{
+  "name": "oxidian",
+  "version": "1.0.0-beta.1",
+  "description": "Free self-hosted web panel to install, run, moderate and grow Rust dedicated servers (Oxide/Carbon, live map, F7 tickets, Discord, Tebex).",
+  "keywords": [
+    "rust",
+    "rust-server",
+    "game-server",
+    "rcon",
+    "oxide",
+    "carbon",
+    "umod",
+    "admin-panel",
+    "facepunch",
+    "tebex",
+    "discord-bot"
+  ],
+  "homepage": "https://jvlsile.github.io/oxidian/",
+  "bugs": {
+    "url": "https://github.com/jvlsile/oxidian/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jvlsile/oxidian.git"
+  },
+  "funding": "https://ko-fi.com/oxidian",
+  "license": "MIT",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "check:i18n": "node tools/check-i18n.js"
+  },
+  "dependencies": {
+    "adm-zip": "^0.6.1",
+    "basic-ftp": "^6.2.6",
+    "express": "^5.3.0",
+    "qrcode": "^1.5.4",
+    "ssh2-sftp-client": "^12.1.1",
+    "ws": "^8.22.1"
+  },
+  "engines": {
+    "node": ">=18.20.4"
+  },
+  "private": false
+}

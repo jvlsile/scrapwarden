@@ -1,0 +1,340 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<base href="/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Servidor de Rust</title>
+<meta name="description" content="Estado del servidor, próximo wipe, rates y normas.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235BB5A2' stroke-width='2'%3E%3Cpath d='M12 2l8.66 5v10L12 22l-8.66-5V7z'/%3E%3Ccircle cx='12' cy='12' r='3.5'/%3E%3C/svg%3E">
+<style>
+@font-face { font-family: "Barlow"; src: url(fonts/barlow-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url(fonts/barlow-latin-500-normal.woff2) format("woff2"); font-weight: 500; font-display: swap; }
+@font-face { font-family: "Barlow"; src: url(fonts/barlow-latin-600-normal.woff2) format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Barlow Condensed"; src: url(fonts/barlow-condensed-latin-600-normal.woff2) format("woff2"); font-weight: 600; font-display: swap; }
+@font-face { font-family: "Barlow Condensed"; src: url(fonts/barlow-condensed-latin-700-normal.woff2) format("woff2"); font-weight: 700; font-display: swap; }
+@font-face { font-family: "JetBrains Mono"; src: url(fonts/jetbrains-mono-latin-400-normal.woff2) format("woff2"); font-weight: 400; font-display: swap; }
+:root { --accent: #5BB5A2; --bg: #0E1316; --s950: #12171B; --s900: #171D22; --s850: #1B2228; --s800: #20282F; --line: #2C3640; --soft: #232C34; --text: #E6EBEE; --t2: #B4BFC6; --muted: #8E9AA3; --oxide: #E8844C; --amber: #E0B252; --fc: "Barlow Condensed", "Barlow", system-ui, sans-serif; --fm: "JetBrains Mono", ui-monospace, monospace; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.55 "Barlow", system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+a { color: var(--accent); }
+.wrap { max-width: 1120px; margin: 0 auto; padding: 0 22px; }
+.top { display: flex; justify-content: space-between; align-items: center; gap: 12px; padding: 16px 0; }
+.top .mark { display: flex; align-items: center; gap: 10px; font: 600 15px var(--fc); color: var(--muted); letter-spacing: .08em; text-transform: uppercase; }
+.top .mark svg { width: 22px; height: 22px; color: var(--accent); }
+.top select { background: var(--s900); color: var(--text); border: 1px solid var(--line); border-radius: 8px; padding: 6px 10px; font: inherit; font-size: 14px; min-height: 36px; }
+.hero { position: relative; padding: 46px 0 34px; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: -40% -10% auto; height: 520px; background: radial-gradient(ellipse 50% 50% at 50% 50%, color-mix(in srgb, var(--accent) 20%, transparent), transparent 70%); pointer-events: none; }
+.status { position: relative; display: inline-flex; align-items: center; gap: 9px; padding: 6px 14px 6px 10px; border-radius: 99px; background: var(--s900); border: 1px solid var(--line); font-size: 14px; font-weight: 600; }
+.status i { width: 9px; height: 9px; border-radius: 50%; background: var(--muted); }
+.status.on i { background: #4FD18B; box-shadow: 0 0 0 0 rgba(79,209,139,.6); animation: ping 1.8s infinite; }
+@keyframes ping { 70% { box-shadow: 0 0 0 9px rgba(79,209,139,0); } 100% { box-shadow: 0 0 0 0 rgba(79,209,139,0); } }
+h1 { position: relative; margin: 18px 0 8px; font: 700 clamp(38px, 6vw, 72px)/1 var(--fc); text-transform: uppercase; letter-spacing: .005em; word-break: break-word; }
+.tagline { position: relative; margin: 0; font-size: clamp(17px, 2vw, 21px); color: var(--t2); max-width: 760px; }
+.chips { position: relative; display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+.chip { padding: 5px 12px; border-radius: 99px; background: var(--s900); border: 1px solid var(--line); font-size: 14px; font-weight: 600; color: var(--t2); }
+.chip.pvp { color: var(--oxide); border-color: rgba(232,132,76,.45); }
+.chip.pve { color: #74C9B6; border-color: rgba(116,201,182,.45); }
+.chip.acc { color: var(--accent); border-color: color-mix(in srgb, var(--accent) 45%, transparent); }
+.cards { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 30px; }
+.card { background: linear-gradient(180deg, var(--s900), var(--s950)); border: 1px solid var(--soft); border-radius: 16px; padding: 22px; min-width: 0; }
+.card small { display: block; font-size: 13px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; font-weight: 600; }
+.big { font: 700 52px/1.05 var(--fc); font-variant-numeric: tabular-nums; margin-top: 6px; }
+.big span { font-size: 26px; color: var(--muted); }
+.sub { color: var(--t2); font-size: 14.5px; margin-top: 4px; }
+.count { display: flex; gap: 8px; margin-top: 10px; }
+.count div { flex: 1; text-align: center; padding: 8px 4px; border-radius: 10px; background: var(--bg); border: 1px solid var(--soft); }
+.count b { display: block; font: 700 30px/1 var(--fc); font-variant-numeric: tabular-nums; }
+.count em { display: block; font-style: normal; font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: .08em; margin-top: 3px; }
+.btns { display: flex; flex-direction: column; gap: 10px; margin-top: 12px; }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 9px; min-height: 48px; padding: 0 18px; border-radius: 10px; font: 600 16px "Barlow", sans-serif; text-decoration: none; border: 1px solid var(--line); background: var(--s800); color: var(--text); cursor: pointer; transition: transform .15s, background .15s; }
+.btn:hover { transform: translateY(-1px); background: var(--s850); }
+.btn.pri { background: var(--accent); border-color: var(--accent); color: #0D1A17; }
+.btn.pri:hover { filter: brightness(1.08); background: var(--accent); }
+.btn svg { width: 18px; height: 18px; }
+.addr { font: 13px var(--fm); color: var(--t2); text-align: center; margin-top: 2px; overflow-wrap: anywhere; }
+section { padding: 40px 0 6px; }
+h2 { font: 700 30px var(--fc); text-transform: uppercase; margin: 0 0 16px; letter-spacing: .01em; }
+.grid2 { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr); gap: 16px; }
+.chart { height: 190px; position: relative; }
+.chart svg { width: 100%; height: 100%; display: block; overflow: visible; }
+.chart text { fill: var(--muted); font: 11.5px "Barlow", sans-serif; }
+.kpis { display: flex; gap: 22px; flex-wrap: wrap; margin-top: 10px; }
+.kpis div b { display: block; font: 700 28px var(--fc); }
+.kpis div span { font-size: 13px; color: var(--muted); }
+.map { position: relative; border-radius: 16px; overflow: hidden; border: 1px solid var(--soft); background: #1C3A4A; }
+.map img { display: block; width: 100%; height: auto; }
+.map svg.paths { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.mon { position: absolute; transform: translate(-50%, -50%); display: flex; align-items: center; gap: 4px; pointer-events: none; }
+.mon span { font: 600 11px "Barlow", sans-serif; color: #fff; text-shadow: 0 1px 2px #000, 0 0 4px #000; white-space: nowrap; }
+.mon-ic { display: inline-grid; place-items: center; width: 20px; height: 20px; border-radius: 50%; background: rgba(14,19,22,.82); border: 1.5px solid rgba(255,255,255,.85); flex: none; }
+.mon-ic svg { width: 12px; height: 12px; fill: none; stroke: #fff; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.map-note { font-size: 13px; color: var(--muted); margin-top: 8px; }
+ol.rules { margin: 0; padding: 0; list-style: none; counter-reset: r; display: flex; flex-direction: column; gap: 10px; }
+ol.rules li { counter-increment: r; display: grid; grid-template-columns: 34px 1fr; gap: 10px; align-items: start; padding: 12px 14px; border-radius: 12px; background: var(--s900); border: 1px solid var(--soft); }
+ol.rules li::before { content: counter(r); font: 700 20px/1.2 var(--fc); color: var(--accent); }
+.rank { list-style: none; margin: 0; padding: 0; }
+.rank li { display: grid; grid-template-columns: 26px 1fr auto; gap: 10px; padding: 9px 0; border-bottom: 1px solid var(--soft); font-size: 15px; }
+.rank li:last-child { border-bottom: 0; }
+.rank li i { font-style: normal; color: var(--muted); font-variant-numeric: tabular-nums; }
+.rank li b { font-weight: 600; font-variant-numeric: tabular-nums; }
+.rank .nm { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.links { display: flex; flex-wrap: wrap; gap: 10px; }
+.names { display: flex; flex-wrap: wrap; gap: 6px; }
+.names span { padding: 4px 10px; border-radius: 99px; background: var(--s900); border: 1px solid var(--soft); font-size: 14px; }
+.desc { color: var(--t2); white-space: pre-line; margin: 0 0 16px; }
+.empty { color: var(--muted); font-size: 14.5px; }
+footer { margin-top: 50px; padding: 24px 0 40px; border-top: 1px solid var(--soft); color: var(--muted); font-size: 13px; display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.toast { position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); background: var(--s800); border: 1px solid var(--line); padding: 10px 16px; border-radius: 10px; font-size: 14px; opacity: 0; transition: opacity .2s; pointer-events: none; }
+.toast.on { opacity: 1; }
+@media (max-width: 900px) { .cards, .grid2 { grid-template-columns: 1fr; } }
+@media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <span class="mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/><circle cx="12" cy="12" r="3.5"/></svg><span data-t="pub.kicker"></span></span>
+    <label><span class="sr" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)" data-t="pub.language"></span><select id="lang"><option value="es">Español</option><option value="en">English</option><option value="pt">Português</option><option value="fr">Français</option></select></label>
+  </div>
+
+  <header class="hero">
+    <span class="status" id="status"><i></i><span></span></span>
+    <h1 id="name">—</h1>
+    <p class="tagline" id="tagline"></p>
+    <div class="chips" id="chips"></div>
+    <div class="cards">
+      <div class="card">
+        <small data-t="pub.players"></small>
+        <div class="big" id="players">—</div>
+        <div class="sub" id="playersSub"></div>
+      </div>
+      <div class="card">
+        <small id="wipeLabel" data-t="pub.nextWipe"></small>
+        <div class="count" id="count"></div>
+        <div class="sub" id="wipeSub"></div>
+      </div>
+      <div class="card">
+        <small data-t="pub.join"></small>
+        <div class="btns">
+          <a class="btn pri" id="connect" href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 4.5v15l12-7.5z"/></svg><span data-t="pub.connect"></span></a>
+          <button class="btn" id="copy" type="button"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="9" y="9" width="11" height="11" rx="2"/><path d="M5 15V5a1 1 0 0 1 1-1h9"/></svg><span data-t="pub.copy"></span></button>
+        </div>
+        <div class="addr" id="addr"></div>
+      </div>
+    </div>
+  </header>
+
+  <section id="secAbout" hidden>
+    <h2 data-t="pub.about"></h2>
+    <p class="desc" id="desc"></p>
+    <div class="links" id="links"></div>
+  </section>
+
+  <section id="secActivity" hidden>
+    <h2 data-t="pub.activity"></h2>
+    <div class="grid2">
+      <div class="card"><small data-t="pub.chart"></small><div class="chart" id="chart"></div></div>
+      <div class="card"><small data-t="pub.week"></small><div class="kpis" id="kpis"></div><p class="sub" id="bestTime"></p></div>
+    </div>
+  </section>
+
+  <section id="secMap" hidden>
+    <h2 data-t="pub.map"></h2>
+    <div class="map" id="map"><img id="mapImg" alt=""><svg class="paths" id="mapPaths" aria-hidden="true"></svg></div>
+    <p class="map-note" id="mapNote"></p>
+  </section>
+
+  <section id="secRank" hidden>
+    <h2 data-t="pub.rankings"></h2>
+    <div class="grid2">
+      <div class="card"><small data-t="pub.topPlay"></small><ol class="rank" id="rankPlay"></ol></div>
+      <div class="card"><small data-t="pub.topKills"></small><ol class="rank" id="rankKills"></ol></div>
+    </div>
+  </section>
+
+  <section id="secPlayers" hidden>
+    <h2 data-t="pub.online"></h2>
+    <div class="names" id="names"></div>
+  </section>
+
+  <section id="secRules" hidden>
+    <h2 data-t="pub.rules"></h2>
+    <ol class="rules" id="rules"></ol>
+  </section>
+
+  <footer><span id="updated"></span><span data-t="pub.powered"></span></footer>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="mapshared.js"></script>
+<script>
+const $ = (s) => document.querySelector(s);
+const esc = (s) => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+let STR = {}, LANG = 'es', D = null;
+const t = (k, p = {}) => String(STR[k] ?? k).replace(/\{(\w+)\}/g, (_, x) => p[x] ?? '');
+const LOC = { es: 'es-ES', en: 'en-GB', pt: 'pt-BR', fr: 'fr-FR' };
+const fmtX = (n) => `${String(n).replace('.', LANG === 'en' ? '.' : ',')}x`;
+
+async function setLang(l) {
+  LANG = ['es', 'en', 'pt', 'fr'].includes(l) ? l : 'en';
+  document.documentElement.lang = LANG;
+  try { STR = (await (await fetch(`i18n/${LANG}.json`)).json()).strings || {}; } catch { STR = {}; }
+  $('#lang').value = LANG;
+  document.querySelectorAll('[data-t]').forEach(e => { e.textContent = t(e.dataset.t); });
+  if (D) render();
+}
+$('#lang').onchange = (e) => { try { localStorage.setItem('pub_lang', e.target.value); } catch {} setLang(e.target.value); };
+
+function toast(msg) { const el = $('#toast'); el.textContent = msg; el.classList.add('on'); setTimeout(() => el.classList.remove('on'), 2200); }
+
+function address() {
+  const s = D.server;
+  if (s.address) return /:\d+$/.test(s.address) ? s.address : `${s.address}:${s.port}`;
+  return `${location.hostname}:${s.port}`;
+}
+
+function render() {
+  const s = D.server, st = D.settings;
+  document.documentElement.style.setProperty('--accent', st.accent || '#5BB5A2');
+  document.title = s.name;
+  const stEl = $('#status');
+  stEl.className = 'status' + (s.online ? ' on' : '');
+  stEl.querySelector('span').textContent = s.online ? t('pub.online.on') : s.status === 'starting' ? t('pub.online.starting') : t('pub.online.off');
+  $('#name').textContent = s.name;
+  $('#tagline').textContent = st.tagline || '';
+  const r = s.rates, mult = Math.max(r.gather, r.pickup);
+  const chips = [
+    `<span class="chip ${s.pve ? 'pve' : 'pvp'}">${s.pve ? 'PvE' : 'PvP'}</span>`,
+    `<span class="chip acc">${mult > 1 || s.framework !== 'none' ? esc(t('pub.rates', { x: fmtX(mult) })) : esc(t('pub.vanilla'))}</span>`,
+    s.teamLimit ? `<span class="chip">${esc(t('pub.teamLimit', { n: s.teamLimit }))}</span>` : '',
+    `<span class="chip">${esc(['Procedural Map', 'Barren'].includes(s.level) ? t('pub.mapSize', { n: s.worldSize }) : s.level)}</span>`,
+    r.craft > 1 ? `<span class="chip">${esc(t('pub.craft', { x: fmtX(r.craft) }))}</span>` : '',
+    s.framework !== 'none' ? `<span class="chip">${esc(t('pub.modded'))}</span>` : '',
+  ];
+  $('#chips').innerHTML = chips.join('');
+  $('#players').innerHTML = s.online ? `${s.players}<span> / ${s.maxPlayers}</span>` : '—';
+  $('#playersSub').textContent = !s.online ? t('pub.offline') : s.queued ? t('pub.queue', { n: s.queued }) : t('pub.noQueue');
+  // Conectar
+  const a = address();
+  $('#connect').href = `steam://connect/${a}`;
+  $('#addr').textContent = `client.connect ${a}`;
+  // Wipe
+  renderCount();
+  const w = D.wipe;
+  $('#wipeSub').textContent = w.next ? `${new Date(w.next.at).toLocaleString(LOC[LANG], { weekday: 'long', day: 'numeric', month: 'long', hour: '2-digit', minute: '2-digit' })} · ${t(w.next.forced ? 'pub.forced' : 'pub.scheduled')}${w.next.bp ? ' · ' + t('pub.bp') : ''}` : '';
+  // Sobre el servidor
+  const L = st.links || {};
+  const links = [['discord', 'Discord'], ['store', t('pub.store')], ['website', t('pub.website')], ['steam', t('pub.steam')]].filter(([k]) => L[k]).map(([k, label]) => `<a class="btn" href="${esc(L[k])}" target="_blank" rel="noopener">${esc(label)}</a>`);
+  $('#desc').textContent = st.description || '';
+  $('#links').innerHTML = links.join('');
+  $('#secAbout').hidden = !st.description && !links.length;
+  // Actividad
+  $('#secActivity').hidden = !st.showChart || D.stats.series.length < 3;
+  if (!$('#secActivity').hidden) renderChart();
+  // Mapa (sin jugadores: solo terreno, rutas y monumentos)
+  $('#secMap').hidden = !D.map;
+  if (D.map) renderMap();
+  // Rankings
+  const rk = D.rankings;
+  $('#secRank').hidden = !rk || (!rk.play.length && !rk.kills.length);
+  if (rk) {
+    $('#rankPlay').innerHTML = rk.play.length ? rk.play.map((p, i) => `<li><i>${i + 1}</i><span class="nm">${esc(p.name)}</span><b>${esc(t('pub.hours', { n: String(p.hours).replace('.', ',') }))}</b></li>`).join('') : `<li class="empty">${esc(t('pub.noData'))}</li>`;
+    $('#rankKills').innerHTML = rk.kills.length ? rk.kills.map((p, i) => `<li><i>${i + 1}</i><span class="nm">${esc(p.name)}</span><b>${esc(t('pub.kills', { n: p.kills }))}</b></li>`).join('') : `<li class="empty">${esc(t('pub.noData'))}</li>`;
+  }
+  // Conectados
+  $('#secPlayers').hidden = !st.showPlayers || !s.online;
+  $('#names').innerHTML = D.playersList.length ? D.playersList.map(n => `<span>${esc(n)}</span>`).join('') : `<span class="empty">${esc(t('pub.nobody'))}</span>`;
+  // Normas
+  $('#secRules').hidden = !st.rules.length;
+  $('#rules').innerHTML = st.rules.map(x => `<li><span>${esc(x)}</span></li>`).join('');
+  $('#updated').textContent = t('pub.updated', { t: new Date(D.t).toLocaleTimeString(LOC[LANG], { hour: '2-digit', minute: '2-digit' }) });
+}
+
+function renderCount() {
+  const w = D?.wipe?.next;
+  if (!w) { $('#count').innerHTML = `<div><b>—</b></div>`; return; }
+  let s = Math.max(0, Math.floor((w.at - Date.now()) / 1000));
+  const parts = [[Math.floor(s / 86400), t('pub.u.d')], [Math.floor(s % 86400 / 3600), t('pub.u.h')], [Math.floor(s % 3600 / 60), t('pub.u.m')], [s % 60, t('pub.u.s')]];
+  $('#count').innerHTML = parts.map(([n, u]) => `<div><b>${String(n).padStart(2, '0')}</b><em>${esc(u)}</em></div>`).join('');
+}
+
+function renderChart() {
+  const el = $('#chart'), pts = D.stats.series;
+  const W = el.clientWidth || 600, H = el.clientHeight || 190, m = { l: 30, r: 8, t: 10, b: 22 };
+  const x0 = pts[0][0], x1 = pts[pts.length - 1][0];
+  const max = Math.max(4, ...pts.map(p => p[1])) * 1.15;
+  const X = (v) => m.l + (v - x0) / Math.max(1, x1 - x0) * (W - m.l - m.r), Y = (v) => H - m.b - v / max * (H - m.t - m.b);
+  let d = '', prev = null;
+  for (const p of pts) { d += `${prev && p[0] - prev > 3 * 3600e3 ? 'M' : (d ? 'L' : 'M')}${X(p[0]).toFixed(1)} ${Y(p[1]).toFixed(1)}`; prev = p[0]; }
+  const area = `${d}L${X(x1).toFixed(1)} ${Y(0)}L${X(x0).toFixed(1)} ${Y(0)}Z`;
+  let labels = '';
+  for (let i = 0; i <= 6; i++) { const tt = x0 + (x1 - x0) * i / 6; labels += `<text x="${X(tt)}" y="${H - 4}" text-anchor="middle">${esc(new Date(tt).toLocaleDateString(LOC[LANG], { weekday: 'short' }))}</text>`; }
+  labels += `<text x="${m.l - 6}" y="${Y(0) + 4}" text-anchor="end">0</text><text x="${m.l - 6}" y="${Y(max / 1.15) + 4}" text-anchor="end">${Math.round(max / 1.15)}</text>`;
+  el.innerHTML = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(t('pub.chart'))}"><line x1="${m.l}" x2="${W - m.r}" y1="${Y(0)}" y2="${Y(0)}" stroke="#232C34"/><path d="${area}" fill="var(--accent)" fill-opacity=".14"/><path d="${d}" fill="none" stroke="var(--accent)" stroke-width="2" stroke-linejoin="round"/>${labels}</svg>`;
+  const k = D.stats;
+  $('#kpis').innerHTML = [[k.peak, t('pub.peak')], [String(k.avg).replace('.', ','), t('pub.avg')], [k.uniques, t('pub.uniques')]].map(([v, l]) => `<div><b>${esc(v)}</b><span>${esc(l)}</span></div>`).join('');
+  // Mejor hora para encontrar gente: la hora del día con más media
+  const byH = Array(24).fill(0), cnt = Array(24).fill(0);
+  for (const p of pts) { const h = new Date(p[0]).getHours(); byH[h] += p[1]; cnt[h]++; }
+  let best = -1, bv = -1; byH.forEach((v, h) => { const a = cnt[h] ? v / cnt[h] : 0; if (a > bv) { bv = a; best = h; } });
+  $('#bestTime').textContent = best >= 0 && bv > 0 ? t('pub.bestTime', { h: `${String(best).padStart(2, '0')}:00` }) : '';
+}
+
+function renderMap() {
+  const m = D.map, box = $('#map');
+  const mx = m.oceanMargin ?? 500, w = m.width - 2 * mx, h = m.height - 2 * mx, half = m.worldSize / 2;
+  const toImg = (x, z) => [mx + (x + half) / m.worldSize * w, mx + (half - z) / m.worldSize * h];
+  const img = $('#mapImg');
+  const want = `public-api/map.jpg?v=${m.v}`;
+  if (!img.src.endsWith(want)) img.src = want;
+  img.alt = t('pub.map');
+  // Recorta el océano sobrante para que la isla ocupe la caja
+  const crop = Math.max(0, mx - 120);
+  box.style.aspectRatio = `${m.width - 2 * crop} / ${m.height - 2 * crop}`;
+  img.style.cssText = `position:absolute;left:${-crop / (m.width - 2 * crop) * 100}%;top:${-crop / (m.height - 2 * crop) * 100}%;width:${m.width / (m.width - 2 * crop) * 100}%;height:auto`;
+  const svg = $('#mapPaths');
+  svg.setAttribute('viewBox', `${crop} ${crop} ${m.width - 2 * crop} ${m.height - 2 * crop}`);
+  let out = '';
+  if (m.paths) for (const layer of ['rivers', 'roads', 'rails']) {
+    const d = (m.paths[layer] || []).map(seg => { let s = ''; for (let i = 0; i < seg.length; i += 2) { const [x, y] = toImg(seg[i], seg[i + 1]); s += `${i ? 'L' : 'M'}${x.toFixed(1)} ${y.toFixed(1)}`; } return s; }).join('');
+    if (d) out += PATH_STYLE[layer].map(([c, sw, dash, o]) => `<path d="${d}" fill="none" stroke="${c}" stroke-width="${sw}" stroke-opacity="${o}" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"${dash ? ` stroke-dasharray="${dash}"` : ''}/>`).join('');
+  }
+  svg.innerHTML = out;
+  box.querySelectorAll('.mon').forEach(e => e.remove());
+  for (const mon of m.monuments) {
+    const [x, y] = toImg(mon.x, mon.z);
+    const el = document.createElement('span');
+    el.className = 'mon';
+    el.style.left = `${(x - crop) / (m.width - 2 * crop) * 100}%`; el.style.top = `${(y - crop) / (m.height - 2 * crop) * 100}%`;
+    el.innerHTML = `<i class="mon-ic">${monIcon(mon)}</i><span>${esc(mon.name)}</span>`;
+    box.append(el);
+  }
+  $('#mapNote').textContent = t('pub.mapNote');
+}
+
+$('#copy').onclick = async () => {
+  const txt = `client.connect ${address()}`;
+  try { await navigator.clipboard.writeText(txt); toast(t('pub.copied')); } catch { toast(txt); }
+};
+
+async function load() {
+  try {
+    const r = await fetch('public-api/data', { cache: 'no-store' });
+    if (!r.ok) throw new Error();
+    D = await r.json();
+    if (!STR['pub.kicker']) {
+      let l = 'auto';
+      try { l = localStorage.getItem('pub_lang') || D.settings.lang || 'auto'; } catch { l = D.settings.lang || 'auto'; }
+      if (l === 'auto') l = (navigator.language || 'en').slice(0, 2);
+      await setLang(l);
+    } else render();
+  } catch { $('#name').textContent = '—'; }
+}
+load();
+setInterval(load, 30000);
+setInterval(renderCount, 1000);
+addEventListener('resize', () => { if (D && !$('#secActivity').hidden) renderChart(); });
+</script>
+</body>
+</html>

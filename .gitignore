@@ -1,0 +1,10 @@
+node_modules/
+data/
+server/
+steamcmd/
+backups/
+*.log
+.env
+.DS_Store
+Thumbs.db
+oxidian.zip

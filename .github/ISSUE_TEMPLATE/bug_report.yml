@@ -1,0 +1,51 @@
+name: Bug report
+description: Something doesn't work as expected
+labels: [bug]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to report this. Please **remove passwords, tokens, IPs and SteamIDs** from anything you paste.
+  - type: textarea
+    id: what
+    attributes:
+      label: What happened?
+      description: What did you do, what did you expect, and what happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Go to …
+        2. Click …
+        3. See …
+  - type: input
+    id: version
+    attributes:
+      label: Oxidian version
+      description: Shown at the bottom of the panel's side menu.
+      placeholder: e.g. 1.0.0-beta.1
+    validations:
+      required: true
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options: [Windows, Linux]
+    validations:
+      required: true
+  - type: dropdown
+    id: framework
+    attributes:
+      label: Framework
+      options: [Vanilla, Oxide, Carbon]
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Technical details and logs
+      description: Filled in automatically when you use **Report a bug** in the panel. Add any relevant lines from the panel console or the server log.
+      render: text

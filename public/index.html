@@ -1,0 +1,1441 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <title>Oxidian</title>
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%235BB5A2' stroke-width='2.2' stroke-linejoin='round'%3E%3Cpath d='M12 2l8.66 5v10L12 22l-8.66-5V7z'/%3E%3Ccircle cx='12' cy='12' r='3.5'/%3E%3C/svg%3E">
+  <link rel="preload" href="fonts/barlow-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="fonts/barlow-condensed-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-logo" viewBox="0 0 24 24"><path d="M12 2l8.66 5v10L12 22l-8.66-5V7z"/><circle cx="12" cy="12" r="3.5"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></symbol>
+      <symbol id="i-sunrise" viewBox="0 0 24 24"><path d="M5 18a7 7 0 0 1 14 0"/><path d="M2 18h20M12 3v5M9 6l3-3 3 3M4.2 11.2l1.4 1.4M19.8 11.2l-1.4 1.4"/></symbol>
+      <symbol id="i-sunset" viewBox="0 0 24 24"><path d="M5 18a7 7 0 0 1 14 0"/><path d="M2 18h20M12 8V3M9 5l3 3 3-3M4.2 11.2l1.4 1.4M19.8 11.2l-1.4 1.4"/></symbol>
+      <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M7 18a4.5 4.5 0 1 1 .8-8.9A6 6 0 0 1 19 11a3.5 3.5 0 0 1-.5 7z"/></symbol>
+      <symbol id="i-rain" viewBox="0 0 24 24"><path d="M7 15a4.5 4.5 0 1 1 .8-8.9A6 6 0 0 1 19 8a3.5 3.5 0 0 1-.5 7z"/><path d="M8 18l-1 3M12 18l-1 3M16 18l-1 3"/></symbol>
+      <symbol id="i-storm" viewBox="0 0 24 24"><path d="M7 15a4.5 4.5 0 1 1 .8-8.9A6 6 0 0 1 19 8a3.5 3.5 0 0 1-.5 7"/><path d="M13 12l-3 5h4l-3 5"/></symbol>
+      <symbol id="i-fog" viewBox="0 0 24 24"><path d="M4 9h16M2 13h20M5 17h14M8 5h8"/></symbol>
+      <symbol id="i-ship" viewBox="0 0 24 24"><path d="M3 15l2 5h14l2-5z"/><path d="M6 15V9h12v6M9 9V5h6v4"/></symbol>
+      <symbol id="i-heli" viewBox="0 0 24 24"><path d="M3 5h18M12 5v3"/><path d="M5 13a5 5 0 0 1 5-5h4a4 4 0 0 1 0 8h-4a5 5 0 0 1-5-3z"/><path d="M5 13H2M9 16l-1 3h8l-1-3"/></symbol>
+      <symbol id="i-parachute" viewBox="0 0 24 24"><path d="M3 11a9 9 0 0 1 18 0z"/><path d="M3 11l7 7M21 11l-7 7M12 11v7"/><rect x="9.5" y="18" width="5" height="4" rx="1"/></symbol>
+      <symbol id="i-chinook" viewBox="0 0 24 24"><path d="M2 5h8M14 5h8M6 5v3M18 5v3"/><rect x="3" y="8" width="18" height="7" rx="3.5"/><path d="M7 15v3M17 15v3"/></symbol>
+      <symbol id="i-pulse" viewBox="0 0 24 24"><path d="M3 12h4l2-6 4 12 2-6h6"/></symbol>
+      <symbol id="i-web" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/><circle cx="6.5" cy="6.5" r=".6"/><circle cx="9" cy="6.5" r=".6"/></symbol>
+      <symbol id="i-bot" viewBox="0 0 24 24"><rect x="4" y="8" width="16" height="11" rx="3"/><path d="M12 4v4M9 13h.01M15 13h.01M9.5 16h5"/><circle cx="12" cy="3.5" r="1"/></symbol>
+      <symbol id="i-chart" viewBox="0 0 24 24"><path d="M4 20V4"/><path d="M4 20h16"/><path d="M7 15l4-5 3 3 5-6"/></symbol>
+      <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/><path d="M8 14h3v3H8z"/></symbol>
+      <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M12 14l4-4"/><path d="M3.3 19a9 9 0 1 1 17.4 0"/></symbol>
+      <symbol id="i-terminal" viewBox="0 0 24 24"><path d="M4 17l6-5-6-5"/><path d="M12 19h8"/></symbol>
+      <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21v-1a6 6 0 0 1 12 0v1"/><path d="M16 4a4 4 0 0 1 0 8"/><path d="M22 21v-1a6 6 0 0 0-4-5.6"/></symbol>
+      <symbol id="i-plug" viewBox="0 0 24 24"><path d="M9 2v6M15 2v6"/><path d="M6 8h12v4a6 6 0 0 1-12 0z"/><path d="M12 18v4"/></symbol>
+      <symbol id="i-key" viewBox="0 0 24 24"><circle cx="7.5" cy="15.5" r="4.5"/><path d="M10.7 12.3L21 2"/><path d="M16 7l3 3"/><path d="M18.5 4.5l2 2"/></symbol>
+      <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="i-archive" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="5" rx="1"/><path d="M4 8v11a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8"/><path d="M10 12h4"/></symbol>
+      <symbol id="i-download" viewBox="0 0 24 24"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></symbol>
+      <symbol id="i-logout" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><path d="M16 17l5-5-5-5"/><path d="M21 12H9"/></symbol>
+      <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12-7.5z"/></symbol>
+      <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M21 12a9 9 0 1 1-3-6.7L21 8"/><path d="M21 3v5h-5"/></symbol>
+      <symbol id="i-stop" viewBox="0 0 24 24"><rect x="5.5" y="5.5" width="13" height="13" rx="1.5"/></symbol>
+      <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 2v10"/><path d="M18.4 6.6a9 9 0 1 1-12.8 0"/></symbol>
+      <symbol id="i-save" viewBox="0 0 24 24"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><path d="M17 21v-8H7v8M7 3v5h8"/></symbol>
+      <symbol id="i-send" viewBox="0 0 24 24"><path d="M22 2L11 13"/><path d="M22 2l-7 20-4-9-9-4z"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></symbol>
+      <symbol id="i-upload" viewBox="0 0 24 24"><path d="M12 21V9"/><path d="M7 14l5-5 5 5"/><path d="M5 3h14"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6L6 18M6 6l12 12"/></symbol>
+      <symbol id="i-trash" viewBox="0 0 24 24"><path d="M3 6h18"/><path d="M8 6V4h8v2"/><path d="M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></symbol>
+      <symbol id="i-megaphone" viewBox="0 0 24 24"><path d="M3 11v3a1 1 0 0 0 1 1h3l6 5V5L7 10H4a1 1 0 0 0-1 1z"/><path d="M17 8a5 5 0 0 1 0 8"/></symbol>
+      <symbol id="i-external" viewBox="0 0 24 24"><path d="M15 3h6v6"/><path d="M10 14L21 3"/><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/></symbol>
+      <symbol id="i-eraser" viewBox="0 0 24 24"><path d="M7 21h10"/><path d="M5.5 15.5l9-9a2 2 0 0 1 2.8 0l2.2 2.2a2 2 0 0 1 0 2.8L12 19H8z"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24"><path d="M3 6h18M3 12h18M3 18h18"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6L9 17l-5-5"/></symbol>
+      <symbol id="i-alert" viewBox="0 0 24 24"><path d="M12 3l10 18H2z"/><path d="M12 10v5M12 18v.5"/></symbol>
+      <symbol id="i-refresh" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="M12 8v4M12 16v.5"/></symbol>
+      <symbol id="i-backpack" viewBox="0 0 24 24"><path d="M5 10a4 4 0 0 1 4-4h6a4 4 0 0 1 4 4v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2z"/><path d="M9 6V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/><path d="M8 14h8v4H8z"/></symbol>
+      <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></symbol>
+      <symbol id="i-map" viewBox="0 0 24 24"><path d="M9 4L3 6v14l6-2 6 2 6-2V4l-6 2z"/><path d="M9 4v14M15 6v14"/></symbol>
+      <symbol id="i-team" viewBox="0 0 24 24"><circle cx="12" cy="7" r="3"/><circle cx="5" cy="10" r="2.2"/><circle cx="19" cy="10" r="2.2"/><path d="M7 20v-1a5 5 0 0 1 10 0v1"/><path d="M1.5 19a3.5 3.5 0 0 1 5.5-3M22.5 19a3.5 3.5 0 0 0-5.5-3"/></symbol>
+      <symbol id="i-admins" viewBox="0 0 24 24"><circle cx="9" cy="8" r="4"/><path d="M2 21v-1a7 7 0 0 1 11-5.7"/><path d="M18 14l1 2 2 .3-1.5 1.5.4 2.2-1.9-1-1.9 1 .4-2.2L15 16.3l2-.3z"/></symbol>
+      <symbol id="i-steam" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="15.5" cy="9.5" r="2.5"/><path d="M4 14l5 2"/><circle cx="9.5" cy="16" r="1.8"/></symbol>
+      <symbol id="i-locate" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4"/><circle cx="12" cy="12" r="7"/></symbol>
+      <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 21l1.8-5.2A8 8 0 1 1 21 12z"/><path d="M8.5 11h7M8.5 14h4"/></symbol>
+      <symbol id="i-mute" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 21l1.8-5.2A8 8 0 0 1 17.6 6.4"/><path d="M3 3l18 18"/></symbol>
+      <symbol id="i-flag" viewBox="0 0 24 24"><path d="M5 21V4"/><path d="M5 4h11l-2 4 2 4H5"/></symbol>
+      <symbol id="i-note" viewBox="0 0 24 24"><path d="M5 3h10l4 4v14H5z"/><path d="M14 3v5h5M8 12h8M8 16h6"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/><path d="M12 14v3"/></symbol>
+      <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+      <symbol id="i-cart" viewBox="0 0 24 24"><circle cx="9" cy="20" r="1.5"/><circle cx="18" cy="20" r="1.5"/><path d="M2 3h3l2.6 12.4a2 2 0 0 0 2 1.6h8.2a2 2 0 0 0 2-1.5L22 8H6"/></symbol>
+      <symbol id="i-crown" viewBox="0 0 24 24"><path d="M3 7l4.5 4L12 4l4.5 7L21 7l-2 12H5z"/><path d="M5 19h14"/></symbol>
+      <symbol id="i-gift" viewBox="0 0 24 24"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5C11 3 12 8 12 8s1-5 4.5-5a2.5 2.5 0 0 1 0 5"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><path d="M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></symbol>
+      <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5V5a2 2 0 0 1 2-2h14v16H6a2 2 0 0 0-2 2.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-3"/><path d="M8 7h8M8 11h6"/></symbol>
+      <symbol id="i-gauge" viewBox="0 0 24 24"><path d="M4 16a8 8 0 1 1 16 0"/><path d="M12 16l4.5-5"/><circle cx="12" cy="16" r="1.4"/><path d="M6.5 10.5l1 .8M12 6.5v1.3M17.5 10.5l-1 .8"/></symbol>
+      <symbol id="i-swords" viewBox="0 0 24 24"><path d="M14.5 17.5L3 6V3h3l11.5 11.5"/><path d="M13 19l6-6M16 16l4 4M19 21l2-2"/><path d="M9.5 6.5L11 5l1.5-1.5 3 0 0 3-6.5 6.5"/></symbol>
+      <symbol id="i-dove" viewBox="0 0 24 24"><path d="M12 21a9 9 0 0 0 9-9V5l-5 3-4-4-4 4-5-3v7a9 9 0 0 0 9 9z"/><path d="M9 13l2 2 4-4"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14"/><path d="M13 6l6 6-6 6"/></symbol>
+    </defs>
+  </svg>
+
+  <!-- Animación de arranque -->
+  <div id="splash" class="splash" aria-hidden="true">
+    <div class="splash-core">
+      <svg class="splash-mark" viewBox="0 0 120 120">
+        <path class="sp-glow" d="M60 10l43.3 25v50L60 110l-43.3-25V35z" pathLength="1"/>
+        <path class="sp-hex" d="M60 10l43.3 25v50L60 110l-43.3-25V35z" pathLength="1"/>
+        <path class="sp-hex2" d="M60 26l29.4 17v34L60 94l-29.4-17V43z" pathLength="1"/>
+        <circle class="sp-dot" cx="60" cy="60" r="15"/>
+      </svg>
+      <div class="splash-word"><span>Oxi</span><span>dian</span></div>
+      <div class="splash-bar"><i></i></div>
+    </div>
+  </div>
+
+  <!-- Acceso -->
+  <div id="auth" class="auth" hidden>
+    <div class="auth-lang"><label class="lang-select"><svg class="i"><use href="#i-globe"/></svg><select class="langSel" data-i18n-aria="lang.choose"></select></label></div>
+    <form id="authForm" class="auth-box">
+      <div class="brand brand--lg"><svg class="i"><use href="#i-logo"/></svg>Oxidian</div>
+      <h1 id="authTitle" class="auth-title"></h1>
+      <p id="authHint" class="auth-hint"></p>
+      <label class="field"><span data-i18n="auth.username"></span><input id="authUser" autocomplete="username" autocapitalize="off" spellcheck="false" required></label>
+      <label class="field"><span data-i18n="auth.password"></span><input type="password" id="authPw" autocomplete="current-password" required></label>
+      <label class="field" id="authPw2Wrap" hidden><span data-i18n="auth.repeat"></span><input type="password" id="authPw2" autocomplete="new-password"></label>
+      <p id="authErr" class="form-error" role="alert"></p>
+      <button class="btn btn-primary btn-block" type="submit" id="authBtn"></button>
+    </form>
+    <form id="auth2fa" class="auth-box" hidden>
+      <div class="brand brand--lg"><svg class="i"><use href="#i-logo"/></svg>Oxidian</div>
+      <h1 class="auth-title" data-i18n="tfa.loginTitle"></h1>
+      <p class="auth-hint" data-i18n="tfa.loginHint"></p>
+      <label class="field"><span data-i18n="tfa.code"></span><input id="tfaCode" inputmode="numeric" autocomplete="one-time-code" maxlength="9" class="code-input" required></label>
+      <p class="small" data-i18n="tfa.recoveryHint"></p>
+      <p id="tfaErr" class="form-error" role="alert"></p>
+      <button class="btn btn-primary btn-block" data-i18n="tfa.verify"></button>
+      <button type="button" class="btn btn-quiet btn-block" id="tfaBack" data-i18n="tfa.back"></button>
+    </form>
+  </div>
+
+  <div id="app" class="app" hidden>
+    <aside class="rail" id="rail">
+      <div class="brand"><svg class="i"><use href="#i-logo"/></svg>Oxidian<span class="beta-tag" id="betaTag" hidden>BETA</span></div>
+      <nav id="nav" data-i18n-aria="nav.sections">
+        <p class="nav-group" data-i18n="nav.g.server"></p>
+        <a data-view="dashboard"><svg class="i"><use href="#i-gauge"/></svg><span data-i18n="nav.dashboard"></span></a>
+        <a data-view="console"><svg class="i"><use href="#i-terminal"/></svg><span data-i18n="nav.console"></span></a>
+        <a data-view="chat"><svg class="i"><use href="#i-chat"/></svg><span data-i18n="nav.chat"></span></a>
+        <a data-view="map"><svg class="i"><use href="#i-map"/></svg><span data-i18n="nav.map"></span></a>
+        <a data-view="stats"><svg class="i"><use href="#i-chart"/></svg><span data-i18n="nav.stats"></span></a>
+        <a data-view="perf"><svg class="i"><use href="#i-pulse"/></svg><span data-i18n="nav.perf"></span><span class="nav-count nav-count--alert" id="navPerf"></span></a>
+        <a data-view="players"><svg class="i"><use href="#i-users"/></svg><span data-i18n="nav.players"></span><span class="nav-count" id="navPlayers"></span></a>
+        <a data-view="watch"><svg class="i"><use href="#i-shield"/></svg><span data-i18n="nav.watch"></span><span class="nav-count nav-count--alert" id="navAlerts"></span></a>
+        <a data-view="tickets"><svg class="i"><use href="#i-flag"/></svg><span data-i18n="nav.tickets"></span><span class="nav-count nav-count--alert" id="navTickets"></span></a>
+        <p class="nav-group" data-i18n="nav.g.modding"></p>
+        <a data-view="plugins"><svg class="i"><use href="#i-plug"/></svg><span data-i18n="nav.plugins"></span><span class="nav-count" id="navUpdates"></span></a>
+        <a data-view="perms"><svg class="i"><use href="#i-key"/></svg><span data-i18n="nav.perms"></span></a>
+        <a data-view="vip"><svg class="i"><use href="#i-crown"/></svg><span data-i18n="nav.vip"></span><span class="nav-count" id="navVip"></span></a>
+        <a data-view="store"><svg class="i"><use href="#i-cart"/></svg><span data-i18n="nav.store"></span></a>
+        <a data-view="staff"><svg class="i"><use href="#i-team"/></svg><span data-i18n="nav.staff"></span></a>
+        <p class="nav-group" data-i18n="nav.g.maintenance"></p>
+        <a data-view="config"><svg class="i"><use href="#i-sliders"/></svg><span data-i18n="nav.config"></span></a>
+        <a data-view="rates"><svg class="i"><use href="#i-gauge"/></svg><span data-i18n="nav.rates"></span></a>
+        <a data-view="schedule"><svg class="i"><use href="#i-clock"/></svg><span data-i18n="nav.schedule"></span></a>
+        <a data-view="discord"><svg class="i"><use href="#i-bot"/></svg><span data-i18n="nav.discord"></span><span class="nav-count" id="navDiscord"></span></a>
+        <a data-view="public"><svg class="i"><use href="#i-web"/></svg><span data-i18n="nav.public"></span></a>
+        <a data-view="wipes"><svg class="i"><use href="#i-calendar"/></svg><span data-i18n="nav.wipes"></span><span class="nav-count" id="navWipe"></span></a>
+        <a data-view="backups"><svg class="i"><use href="#i-archive"/></svg><span data-i18n="nav.backups"></span></a>
+        <a data-view="install"><svg class="i"><use href="#i-download"/></svg><span data-i18n="nav.install"></span><span class="nav-count nav-count--busy" id="navInstall"></span></a>
+        <a data-view="admins" data-perm-any="users,audit"><svg class="i"><use href="#i-admins"/></svg><span data-i18n="nav.admins"></span></a>
+        <p class="nav-group" data-i18n="nav.g.help"></p>
+        <a data-view="wiki"><svg class="i"><use href="#i-book"/></svg><span data-i18n="nav.wiki"></span></a>
+      </nav>
+      <div class="rail-foot">
+        <a class="upd-pill" id="updPill" target="_blank" rel="noopener" hidden><svg class="i"><use href="#i-download"/></svg><span id="updPillText"></span></a>
+        <label class="lang-select lang-select--rail"><svg class="i"><use href="#i-globe"/></svg><select class="langSel" data-i18n-aria="lang.choose"></select></label>
+        <a data-view="settings"><svg class="i"><use href="#i-user"/></svg><span class="me"><span id="meName"></span><small id="meRole"></small></span></a>
+        <button type="button" id="bugBtn"><svg class="i"><use href="#i-alert"/></svg><span data-i18n="bug.button"></span></button>
+        <button type="button" id="logoutBtn"><svg class="i"><use href="#i-logout"/></svg><span data-i18n="nav.logout"></span></button>
+        <div class="rail-meta"><a class="rail-ver" id="railVer" href="https://github.com/jvlsile/oxidian" target="_blank" rel="noopener"></a><a class="rail-kofi" href="https://ko-fi.com/oxidian" target="_blank" rel="noopener" data-i18n-title="support.title"><span aria-hidden="true">☕</span> <span data-i18n="support.link"></span></a></div>
+      </div>
+    </aside>
+
+    <div class="main">
+      <header class="srv">
+        <button class="btn btn-quiet btn-icon rail-toggle" id="railToggle" data-i18n-aria="nav.open"><svg class="i"><use href="#i-menu"/></svg></button>
+        <div class="srv-id">
+          <div class="srv-state"><span class="lamp" id="lamp"></span><span id="srvState">—</span><span class="srv-uptime" id="srvUptime"></span></div>
+          <h1 class="srv-name" id="srvName">—</h1>
+          <div class="srv-meta">
+            <button class="addr" id="srvAddr" data-i18n-title="srv.copyConnect"><code id="srvAddrText">—</code><svg class="i"><use href="#i-copy"/></svg></button>
+            <span id="srvMap"></span>
+            <span id="srvFw"></span>
+            <button class="mode-chip" id="srvMode" data-goto="rates" hidden></button>
+            <button class="mode-chip wipe-chip" id="srvWipe" data-goto="wipes" hidden></button>
+            <button class="mini-progress" id="srvProgress" data-goto="install" hidden><span class="mini-progress-bar"><span id="srvProgressFill"></span></span><span id="srvProgressText"></span></button>
+          </div>
+        </div>
+        <div class="srv-actions" data-perm="server.control">
+          <button class="btn btn-primary" data-act="start"><svg class="i"><use href="#i-play"/></svg><span data-i18n="act.start"></span></button>
+          <button class="btn" data-act="restart"><svg class="i"><use href="#i-rotate"/></svg><span data-i18n="act.restart"></span></button>
+          <button class="btn btn-danger-outline" data-act="stop"><svg class="i"><use href="#i-stop"/></svg><span data-i18n="act.stop"></span></button>
+        </div>
+      </header>
+
+      <div class="view">
+        <!-- RESUMEN -->
+        <section data-section="dashboard" hidden>
+          <div class="telemetry" id="telemetry">
+            <div class="metric" data-metric="players"><div class="metric-label" data-i18n="dash.players"></div><div class="metric-value" id="mPlayers">—</div><div class="metric-sub" id="mPlayersSub"></div><svg class="spark" preserveAspectRatio="none"></svg></div>
+            <div class="metric" data-metric="fps"><div class="metric-label" data-i18n="dash.fps"></div><div class="metric-value" id="mFps">—</div><div class="metric-sub" id="mFpsSub"></div><svg class="spark" preserveAspectRatio="none"></svg></div>
+            <div class="metric" data-metric="cpu"><div class="metric-label" data-i18n="dash.cpu"></div><div class="metric-value" id="mCpu">—</div><div class="metric-sub" id="mCpuSub"></div><svg class="spark" preserveAspectRatio="none"></svg></div>
+            <div class="metric" data-metric="ram"><div class="metric-label" data-i18n="dash.ram"></div><div class="metric-value" id="mRam">—</div><div class="metric-sub" id="mRamSub"></div><svg class="spark" preserveAspectRatio="none"></svg></div>
+          </div>
+          <p class="telemetry-note" data-i18n="dash.trendNote"></p>
+
+          <div class="dash">
+            <div class="panel dash-console">
+              <div class="panel-head"><h3 data-i18n="dash.activity"></h3><button class="link" data-goto="console" data-i18n="dash.openConsole"></button></div>
+              <pre id="miniConsole" class="console console--flush"></pre>
+            </div>
+            <div class="dash-side">
+              <div class="panel">
+                <div class="panel-head"><h3 data-i18n="dash.sayTitle"></h3></div>
+                <form class="panel-body input-row" id="quickSayForm" data-perm-form="players.kick">
+                  <input id="quickSay" data-i18n-ph="dash.sayPh" maxlength="200">
+                  <button class="btn btn-icon" data-i18n-aria="dash.send"><svg class="i"><use href="#i-send"/></svg></button>
+                </form>
+              </div>
+              <div class="panel">
+                <div class="panel-head"><h3 data-i18n="dash.ops"></h3></div>
+                <div class="panel-body ops" data-perm="server.control">
+                  <button class="op" id="saveBtn"><svg class="i"><use href="#i-save"/></svg><span><b data-i18n="dash.save"></b><small data-i18n="dash.saveSub"></small></span></button>
+                  <div class="op op--split">
+                    <svg class="i"><use href="#i-megaphone"/></svg>
+                    <span><b data-i18n="dash.warned"></b><small data-i18n="dash.warnedSub"></small></span>
+                    <select id="warnMins" data-i18n-aria="dash.warnMins"><option value="1">1 min</option><option value="5">5 min</option><option value="10" selected>10 min</option><option value="15">15 min</option></select>
+                    <button class="btn btn-sm" id="warnRestartBtn" data-i18n="dash.schedule"></button>
+                  </div>
+                  <button class="op op--danger" data-act="kill"><svg class="i"><use href="#i-power"/></svg><span><b data-i18n="dash.kill"></b><small data-i18n="dash.killSub"></small></span></button>
+                </div>
+              </div>
+              <div class="panel">
+                <div class="panel-head"><h3 data-i18n="dash.details"></h3></div>
+                <dl id="infoList" class="facts panel-body"></dl>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- CONSOLA -->
+        <section data-section="console" hidden>
+          <div class="panel console-panel">
+            <div class="toolbar">
+              <div class="seg" role="group" data-i18n-aria="con.filter">
+                <label><input type="checkbox" id="fServer" checked><span data-i18n="con.server"></span></label>
+                <label><input type="checkbox" id="fChat" checked><span data-i18n="con.chat"></span></label>
+                <label><input type="checkbox" id="fPanel" checked><span data-i18n="con.panel"></span></label>
+              </div>
+              <div class="toolbar-end">
+                <label class="check"><input type="checkbox" id="fAuto" checked> <span data-i18n="con.follow"></span></label>
+                <div class="search"><svg class="i"><use href="#i-search"/></svg><input id="consoleFilter" data-i18n-ph="con.filterPh"></div>
+              </div>
+            </div>
+            <pre id="console" class="console console--full"></pre>
+            <form id="rconForm" class="console-input" data-perm="console">
+              <span class="prompt">&gt;</span>
+              <input id="rconInput" data-i18n-ph="con.inputPh" autocomplete="off" spellcheck="false">
+              <button class="btn btn-primary btn-sm" data-i18n="con.run"></button>
+            </form>
+          </div>
+        </section>
+
+        <!-- JUGADORES -->
+        <section data-section="players" hidden>
+          <div class="panel">
+            <div class="panel-head"><h3><span data-i18n="pl.online"></span> <span class="count" id="playersCount"></span></h3><button class="btn btn-sm btn-quiet" id="refreshPlayers"><svg class="i"><use href="#i-refresh"/></svg><span data-i18n="common.refresh"></span></button></div>
+            <table class="table" id="playersTbl"><thead><tr><th data-i18n="pl.player"></th><th>SteamID</th><th class="num" data-i18n="pl.ping"></th><th class="num" data-i18n="pl.connected"></th><th class="num" data-i18n="pl.health"></th><th></th></tr></thead><tbody></tbody></table>
+          </div>
+          <div class="cols">
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="pl.manage"></h3></div>
+              <div class="panel-body form-stack">
+                <label class="field"><span>SteamID64</span><input id="paId" inputmode="numeric" placeholder="76561198000000000"></label>
+                <div class="field-row">
+                  <label class="field"><span><span data-i18n="pl.name"></span> <em data-i18n="common.optional"></em></span><input id="paName"></label>
+                  <label class="field"><span><span data-i18n="pl.reason"></span> <em data-i18n="common.optional"></em></span><input id="paReason"></label>
+                </div>
+                <div class="btn-group">
+                  <button class="btn btn-sm" data-pa="kick" data-perm="players.kick" data-i18n="pl.kick"></button>
+                  <button class="btn btn-sm btn-danger-outline" data-pa="ban" data-perm="players.ban" data-i18n="pl.ban"></button>
+                  <button class="btn btn-sm" data-pa="unban" data-perm="players.ban" data-i18n="pl.unban"></button>
+                </div>
+                <div class="btn-group" data-perm="players.admin">
+                  <button class="btn btn-sm" data-pa="owner" data-perm="players.admin" data-i18n="pl.owner"></button>
+                  <button class="btn btn-sm" data-pa="moderator" data-perm="players.admin" data-i18n="pl.moderator"></button>
+                  <button class="btn btn-sm btn-quiet" data-pa="removeowner" data-perm="players.admin" data-i18n="pl.removeowner"></button>
+                  <button class="btn btn-sm btn-quiet" data-pa="removemoderator" data-perm="players.admin" data-i18n="pl.removemoderator"></button>
+                </div>
+                <div class="divider" data-perm="players.give"></div>
+                <div class="field-row field-row--give" data-perm="players.give">
+                  <label class="field"><span data-i18n="pl.item"></span><input id="paItem" placeholder="rifle.ak"></label>
+                  <label class="field"><span data-i18n="pl.amount"></span><input id="paAmount" type="number" value="1" min="1"></label>
+                  <button class="btn" data-pa="give" data-perm="players.give"><svg class="i"><use href="#i-gift"/></svg><span data-i18n="pl.give"></span></button>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><h3><span data-i18n="pl.banned"></span> <span class="count" id="bansCount"></span></h3><button class="btn btn-sm btn-quiet btn-icon" id="refreshBans" data-i18n-aria="common.refresh"><svg class="i"><use href="#i-refresh"/></svg></button></div>
+              <table class="table" id="bansTbl"><thead><tr><th data-i18n="pl.player"></th><th data-i18n="pl.reason"></th><th></th></tr></thead><tbody></tbody></table>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head">
+              <h3><span data-i18n="team.title"></span> <span class="count" id="teamsCount"></span></h3>
+              <div class="btn-group"><span class="small" id="teamsInfo"></span><button class="btn btn-sm btn-quiet" id="teamsRefresh"><svg class="i"><use href="#i-refresh"/></svg><span data-i18n="common.refresh"></span></button></div>
+            </div>
+            <div id="teamsBody" class="teams"></div>
+          </div>
+        </section>
+
+        <!-- (equipos dentro de Jugadores) -->
+        <!-- VIGILANCIA -->
+        <section data-section="watch" hidden>
+          <div id="bridgeCallout" class="callout" hidden>
+            <svg class="i"><use href="#i-alert"/></svg>
+            <div class="callout-body"><span id="bridgeText"></span></div>
+            <button class="btn btn-sm btn-primary" id="bridgeInstall" data-perm="watch.settings" data-i18n="watch.installBridge" hidden></button>
+          </div>
+          <div class="watch">
+            <div class="panel watch-feed">
+              <div class="panel-head">
+                <h3><span data-i18n="watch.alerts"></span> <span class="count" id="alertsCount"></span></h3>
+                <div class="btn-group">
+                  <div class="seg seg--radio" role="radiogroup" data-i18n-aria="watch.filter">
+                    <label><input type="radio" name="afilter" value="new" checked><span data-i18n="watch.fNew"></span></label>
+                    <label><input type="radio" name="afilter" value="high"><span data-i18n="watch.fHigh"></span></label>
+                    <label><input type="radio" name="afilter" value="all"><span data-i18n="watch.fAll"></span></label>
+                  </div>
+                  <button class="btn btn-sm btn-quiet" id="alertsReadAll" data-perm="watch.review" data-i18n="watch.readAll"></button>
+                </div>
+              </div>
+              <ul class="alerts" id="alertsList"></ul>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="watch.suspects"></h3><button class="btn btn-sm btn-quiet btn-icon" id="suspectsRefresh" data-i18n-aria="common.refresh"><svg class="i"><use href="#i-refresh"/></svg></button></div>
+              <table class="table table--compact" id="suspectsTbl"><thead><tr><th data-i18n="pl.player"></th><th class="num" data-i18n="watch.colHead" data-i18n-title="watch.colHeadTip"></th><th class="num" data-i18n="watch.colMax" data-i18n-title="watch.colMaxTip"></th><th class="num" data-i18n="watch.colAh" data-i18n-title="watch.colAhTip"></th><th class="num" data-i18n="watch.colReports"></th><th></th></tr></thead><tbody></tbody></table>
+            </div>
+          </div>
+          <form id="watchForm" class="settings watch-settings" data-perm-form="watch.settings">
+            <fieldset class="setting-group">
+              <legend><b data-i18n="watch.thresholds"></b><span data-i18n="watch.thresholdsSub"></span></legend>
+              <div class="grid-fields">
+                <label class="switch span-2"><input type="checkbox" name="enabled"><span class="switch-ui"></span><span data-i18n="watch.enabled"></span></label>
+                <span></span>
+                <label class="field"><span data-i18n="watch.hsRatio"></span><input name="headshotRatio" type="number" min="20" max="100" step="5"></label>
+                <label class="field"><span data-i18n="watch.minHits"></span><input name="minHits" type="number" min="5" max="200"></label>
+                <label class="field"><span data-i18n="watch.kills"></span><input name="killsPer10Min" type="number" min="2"></label>
+                <label class="field"><span data-i18n="watch.longShot"></span><input name="longShot" type="number" min="50"></label>
+                <label class="field"><span data-i18n="watch.shortShot"></span><input name="shortWeaponShot" type="number" min="20"></label>
+                <label class="field"><span data-i18n="watch.violations"></span><input name="violationsBurst" type="number" min="1"></label>
+                <label class="field"><span data-i18n="watch.reports"></span><input name="reportsForHigh" type="number" min="1"></label>
+                <label class="switch span-2"><input type="checkbox" name="sharedIp"><span class="switch-ui"></span><span data-i18n="watch.sharedIp"></span></label>
+              </div>
+            </fieldset>
+            <fieldset class="setting-group">
+              <legend><b data-i18n="team.settings"></b><span data-i18n="team.settingsSub"></span></legend>
+              <div class="grid-fields">
+                <label class="field"><span data-i18n="team.limit"></span><input name="teamLimit" type="number" min="0" max="100"></label>
+                <label class="switch span-2"><input type="checkbox" name="cupboardGroups"><span class="switch-ui"></span><span data-i18n="team.cupboards"></span></label>
+              </div>
+            </fieldset>
+            <fieldset class="setting-group">
+              <legend><b data-i18n="watch.discord"></b><span data-i18n="watch.discordSub"></span></legend>
+              <div class="grid-fields">
+                <label class="field span-2"><span data-i18n="watch.webhook"></span><input name="discordWebhook" placeholder="https://discord.com/api/webhooks/…" autocomplete="off" spellcheck="false" class="mono"></label>
+                <label class="field"><span data-i18n="watch.minSev"></span><select name="discordMinSeverity"><option value="low" data-i18n="sev.low"></option><option value="medium" data-i18n="sev.medium"></option><option value="high" data-i18n="sev.high"></option></select></label>
+                <div><button type="button" class="btn" id="testDiscord"><svg class="i"><use href="#i-send"/></svg><span data-i18n="watch.test"></span></button></div>
+              </div>
+            </fieldset>
+            <div class="savebar"><span></span><button class="btn btn-primary" data-i18n="watch.save"></button></div>
+          </form>
+
+          <form id="steamForm" class="settings watch-settings" data-perm-form="watch.settings">
+            <fieldset class="setting-group">
+              <legend><b data-i18n="steam.title"></b><span data-i18n-html="steam.sub"></span></legend>
+              <div class="form-stack">
+                <div class="grid-fields">
+                  <label class="switch span-2"><input type="checkbox" name="enabled"><span class="switch-ui"></span><span data-i18n="steam.enabled"></span></label>
+                  <span></span>
+                  <label class="field span-2"><span data-i18n="steam.key"></span><input name="apiKey" autocomplete="off" spellcheck="false" class="mono" placeholder="XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"></label>
+                  <div class="key-state"><span id="steamKeyState" class="small"></span><button type="button" class="btn btn-sm btn-quiet" id="steamClearKey" data-i18n="steam.clearKey" hidden></button></div>
+                </div>
+                <table class="rules">
+                  <thead><tr><th data-i18n="steam.rule"></th><th data-i18n="steam.value"></th><th data-i18n="steam.action"></th></tr></thead>
+                  <tbody>
+                    <tr><td data-i18n="steam.rVac"></td><td><label class="unit"><input name="vacDays" type="number" min="1"><span data-i18n="steam.days"></span></label></td><td><select name="vacMode" class="modeSel"></select></td></tr>
+                    <tr><td data-i18n="steam.rCommunity"></td><td>—</td><td><select name="communityMode" class="modeSel"></select></td></tr>
+                    <tr><td data-i18n="steam.rNew"></td><td><label class="unit"><input name="newDays" type="number" min="1"><span data-i18n="steam.days"></span></label></td><td><select name="newMode" class="modeSel"></select></td></tr>
+                    <tr><td data-i18n="steam.rHours"></td><td><label class="unit"><input name="minHours" type="number" min="1"><span data-i18n="steam.hours"></span></label></td><td><select name="hoursMode" class="modeSel"></select></td></tr>
+                    <tr><td data-i18n="steam.rPrivate"></td><td>—</td><td><select name="privateMode" class="modeSel"></select></td></tr>
+                  </tbody>
+                </table>
+                <label class="field"><span data-i18n="steam.whitelist"></span><textarea name="whitelist" rows="3" class="mono" data-i18n-ph="steam.whitelistPh"></textarea></label>
+                <div class="input-row input-row--test"><input id="steamTestId" inputmode="numeric" placeholder="76561198000000000" data-i18n-aria="steam.testLabel"><button type="button" class="btn" id="steamTest"><svg class="i"><use href="#i-steam"/></svg><span data-i18n="steam.test"></span></button></div>
+              </div>
+            </fieldset>
+            <div class="savebar"><span></span><button class="btn btn-primary" data-i18n="steam.save"></button></div>
+          </form>
+          <form id="ipForm" class="settings watch-settings" data-perm-form="watch.settings">
+            <fieldset class="setting-group">
+              <legend><b data-i18n="ipc.title"></b><span data-i18n-html="ipc.sub"></span></legend>
+              <div class="form-stack">
+                <div class="grid-fields">
+                  <label class="switch span-2"><input type="checkbox" name="enabled"><span class="switch-ui"></span><span data-i18n="ipc.enabled"></span></label>
+                  <span></span>
+                  <label class="field"><span data-i18n="ipc.provider"></span><select name="provider"><option value="proxycheck">proxycheck.io</option><option value="ipapi">ip-api.com</option></select></label>
+                  <label class="field" id="ipKeyWrap"><span data-i18n="ipc.key"></span><input name="apiKey" autocomplete="off" spellcheck="false" class="mono" placeholder="xxxxxx-xxxxxx-xxxxxx-xxxxxx"></label>
+                  <div class="key-state" id="ipKeyStateWrap"><span id="ipKeyState" class="small"></span><button type="button" class="btn btn-sm btn-quiet" id="ipClearKey" data-i18n="steam.clearKey" hidden></button></div>
+                </div>
+                <p class="small" id="ipProvHint"></p>
+                <table class="rules">
+                  <thead><tr><th data-i18n="steam.rule"></th><th data-i18n="steam.value"></th><th data-i18n="steam.action"></th></tr></thead>
+                  <tbody>
+                    <tr><td data-i18n="ipc.rVpn"></td><td>—</td><td><select name="vpnMode" class="modeSel"></select></td></tr>
+                    <tr><td data-i18n="ipc.rHosting"></td><td>—</td><td><select name="hostingMode" class="modeSel"></select></td></tr>
+                    <tr><td data-i18n="ipc.rCountry"></td><td><div class="ip-country"><select name="countryList"><option value="block" data-i18n="ipc.listBlock"></option><option value="allow" data-i18n="ipc.listAllow"></option></select><input name="countries" class="mono" spellcheck="false" placeholder="RU, CN, BR" data-i18n-aria="ipc.countries"></div></td><td><select name="countryMode" class="modeSel"></select></td></tr>
+                  </tbody>
+                </table>
+                <label class="field"><span data-i18n="steam.whitelist"></span><textarea name="whitelist" rows="2" class="mono" data-i18n-ph="steam.whitelistPh"></textarea></label>
+                <div class="input-row input-row--test"><input id="ipTestIp" spellcheck="false" placeholder="203.0.113.10" data-i18n-aria="ipc.testLabel"><button type="button" class="btn" id="ipTest"><svg class="i"><use href="#i-globe"/></svg><span data-i18n="ipc.test"></span></button></div>
+              </div>
+            </fieldset>
+            <div class="savebar"><span></span><button class="btn btn-primary" data-i18n="ipc.save"></button></div>
+          </form>
+        </section>
+
+        <!-- PLUGINS -->
+        <section data-section="plugins" hidden>
+          <div id="pluginsNoFw" class="callout" hidden>
+            <svg class="i"><use href="#i-alert"/></svg>
+            <div data-i18n-html="plg.noFw"></div>
+          </div>
+          <div class="tabs" id="pluginTabs" role="tablist">
+            <button class="tab" data-ptab="installed" aria-selected="true"><span data-i18n="plg.tabInstalled"></span> <span class="count" id="pluginCount"></span></button>
+            <button class="tab" data-ptab="browse" aria-selected="false" data-i18n="plg.tabBrowse"></button>
+            <button class="tab" data-ptab="upload" aria-selected="false" data-i18n="plg.tabUpload" data-perm="plugins"></button>
+          </div>
+          <div class="panel" data-ptab-panel="installed">
+            <div class="panel-head">
+              <h3 data-i18n="plg.serverPlugins"></h3>
+              <div class="btn-group" data-perm="plugins">
+                <button class="btn btn-sm btn-quiet" id="checkUpdates"><svg class="i"><use href="#i-refresh"/></svg><span data-i18n="plg.checkUpdates"></span></button>
+                <button class="btn btn-sm" id="reloadAll" data-i18n="plg.reloadAll"></button>
+              </div>
+            </div>
+            <table class="table table--plugins" id="pluginsTbl"><thead><tr><th data-i18n="plg.plugin"></th><th data-i18n="plg.version"></th><th data-i18n="plg.author"></th><th data-i18n="plg.state"></th><th></th></tr></thead><tbody></tbody></table>
+          </div>
+          <div class="panel" data-ptab-panel="browse" hidden>
+            <form id="umodForm" class="toolbar">
+              <div class="search search--wide"><svg class="i"><use href="#i-search"/></svg><input id="umodQ" data-i18n-ph="plg.searchPh"></div>
+              <div class="toolbar-end">
+                <select id="umodSort" data-i18n-aria="plg.sort"><option value="downloads" data-i18n="plg.sortDl"></option><option value="title" data-i18n="plg.sortName"></option><option value="updated_at" data-i18n="plg.sortUpdated"></option></select>
+                <button class="btn btn-primary" data-i18n="common.search"></button>
+              </div>
+            </form>
+            <ul id="umodResults" class="catalog"></ul>
+            <div class="pager" id="umodPager"></div>
+          </div>
+          <div class="panel" data-ptab-panel="upload" hidden>
+            <div class="panel-body">
+              <label class="drop" id="drop">
+                <input type="file" id="pluginFile" accept=".cs" multiple hidden>
+                <svg class="i"><use href="#i-upload"/></svg>
+                <b data-i18n="plg.dropTitle"></b>
+                <span data-i18n="plg.dropSub"></span>
+              </label>
+            </div>
+          </div>
+        </section>
+
+        <!-- PERMISOS -->
+        <section data-section="perms" hidden>
+          <div class="cols">
+            <div class="stack" data-perm="perms">
+              <div class="panel">
+                <div class="panel-head"><h3 data-i18n="perm.grantTitle"></h3></div>
+                <div class="panel-body form-stack">
+                  <div class="field-row field-row--type">
+                    <label class="field"><span data-i18n="perm.for"></span><select id="pmType"><option value="user" data-i18n="perm.user"></option><option value="group" data-i18n="perm.group"></option></select></label>
+                    <label class="field"><span data-i18n="perm.target"></span><input id="pmTarget" data-i18n-ph="perm.targetPh"></label>
+                  </div>
+                  <label class="field"><span data-i18n="perm.perm"></span><input id="pmPerm" placeholder="kits.vip"></label>
+                  <div class="btn-group"><button class="btn btn-primary" data-pm="grant" data-i18n="perm.grant"></button><button class="btn btn-danger-outline" data-pm="revoke" data-i18n="perm.revoke"></button></div>
+                </div>
+              </div>
+              <div class="panel">
+                <div class="panel-head"><h3 data-i18n="perm.groups"></h3></div>
+                <div class="panel-body form-stack">
+                  <label class="field"><span data-i18n="perm.groupName"></span><input id="pgName" placeholder="vip"></label>
+                  <div class="btn-group"><button class="btn" data-pm="addgroup" data-i18n="perm.createGroup"></button><button class="btn btn-quiet" data-pm="removegroup" data-i18n="perm.deleteGroup"></button></div>
+                  <label class="field"><span data-i18n="perm.member"></span><input id="pgUser"></label>
+                  <div class="btn-group"><button class="btn" data-pm="usergroup-add" data-i18n="perm.addToGroup"></button><button class="btn btn-quiet" data-pm="usergroup-remove" data-i18n="perm.removeFromGroup"></button></div>
+                </div>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="perm.query"></h3></div>
+              <div class="panel-body form-stack">
+                <div class="field-row field-row--query">
+                  <label class="field"><span data-i18n="perm.show"></span><select id="psType"><option value="perms" data-i18n="perm.showPerms"></option><option value="groups" data-i18n="perm.showGroups"></option><option value="user" data-i18n="perm.showUser"></option><option value="group" data-i18n="perm.showGroup"></option><option value="perm" data-i18n="perm.showPerm"></option></select></label>
+                  <label class="field"><span><span data-i18n="pl.name"></span> <em data-i18n="common.optional"></em></span><input id="psTarget"></label>
+                  <button class="btn" id="psBtn" data-i18n="perm.run"></button>
+                </div>
+                <pre id="permsOut" class="console console--box" data-i18n="perm.outPh"></pre>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- AJUSTES DEL SERVIDOR -->
+        <section data-section="config" hidden>
+          <form id="cfgForm" class="settings" data-perm-form="server.config">
+            <fieldset class="setting-group">
+              <legend><b data-i18n="cfg.gIdentity"></b><span data-i18n="cfg.gIdentitySub"></span></legend>
+              <div class="grid-fields">
+                <label class="field span-2"><span data-i18n="cfg.hostname"></span><input name="hostname"></label>
+                <label class="field span-2"><span data-i18n="cfg.description"></span><textarea name="description" rows="3"></textarea></label>
+                <label class="field"><span data-i18n="cfg.url"></span><input name="url" placeholder="https://"></label>
+                <label class="field"><span data-i18n="cfg.headerimage"></span><input name="headerimage" placeholder="https://…/banner.png"></label>
+                <label class="field"><span data-i18n="cfg.maxplayers"></span><input name="maxplayers" type="number" min="1"></label>
+                <label class="field"><span data-i18n="cfg.identity"></span><input name="identity"></label>
+              </div>
+            </fieldset>
+            <fieldset class="setting-group">
+              <legend><b data-i18n="cfg.gMap"></b><span data-i18n="cfg.gMapSub"></span></legend>
+              <div class="grid-fields">
+                <label class="field"><span data-i18n="cfg.level"></span><select name="level"><option>Procedural Map</option><option>Barren</option><option>HapisIsland</option><option>CraggyIsland</option><option>SavasIsland</option><option>SavasIsland_koth</option></select></label>
+                <label class="field"><span data-i18n="cfg.worldsize"></span><input name="worldsize" type="number" min="1000" max="6000" step="250"></label>
+                <label class="field"><span data-i18n="cfg.seed"></span><span class="input-row"><input name="seed" type="number"><button type="button" class="btn btn-icon" id="randSeed" data-i18n-title="cfg.randomSeed" data-i18n-aria="cfg.randomSeed"><svg class="i"><use href="#i-refresh"/></svg></button></span></label>
+                <label class="field"><span data-i18n="cfg.saveinterval"></span><input name="saveinterval" type="number"></label>
+                <label class="field"><span data-i18n="cfg.tickrate"></span><input name="tickrate" type="number"></label>
+                <label class="switch"><input type="checkbox" name="pve"><span class="switch-ui"></span><span data-i18n="cfg.pve"></span></label>
+              </div>
+            </fieldset>
+            <fieldset class="setting-group">
+              <legend><b data-i18n="cfg.gNet"></b><span data-i18n="cfg.gNetSub"></span></legend>
+              <div class="grid-fields">
+                <label class="field"><span data-i18n="cfg.port"></span><input name="port" type="number"></label>
+                <label class="field"><span data-i18n="cfg.queryPort"></span><input name="queryPort" type="number"></label>
+                <label class="field"><span data-i18n="cfg.appPort"></span><input name="appPort" type="number"></label>
+                <label class="field"><span data-i18n="cfg.rconPort"></span><input name="rconPort" type="number"></label>
+                <label class="field"><span data-i18n="cfg.rconPassword"></span><input name="rconPassword" autocomplete="off"></label>
+                <label class="field"><span data-i18n="cfg.branch"></span><select name="branch"><option value="public">public</option><option value="staging">staging</option><option value="aux01">aux01</option><option value="aux02">aux02</option></select></label>
+              </div>
+            </fieldset>
+            <fieldset class="setting-group">
+              <legend><b data-i18n="cfg.gStart"></b><span data-i18n="cfg.gStartSub"></span></legend>
+              <div class="grid-fields">
+                <label class="field span-2"><span data-i18n="cfg.extraArgs"></span><input name="extraArgs" placeholder="+decay.scale 0.5 +server.radiation false" spellcheck="false" class="mono"></label>
+                <label class="switch"><input type="checkbox" name="autostart"><span class="switch-ui"></span><span data-i18n="cfg.autostart"></span></label>
+                <label class="switch"><input type="checkbox" name="autoRestartOnCrash"><span class="switch-ui"></span><span data-i18n="cfg.autoRestartOnCrash"></span></label>
+              </div>
+            </fieldset>
+            <div class="savebar"><span data-i18n="cfg.applyNote"></span><button class="btn btn-primary" data-i18n="cfg.save"></button></div>
+          </form>
+        </section>
+
+        <!-- PROGRAMADOR -->
+        <!-- ESTADÍSTICAS -->
+        <section data-section="stats" hidden>
+          <div class="st-toolbar">
+            <div class="seg" role="group" data-i18n-aria="st.range" id="stRange">
+              <button type="button" data-range="24h">24 h</button>
+              <button type="button" data-range="7d">7 d</button>
+              <button type="button" data-range="30d">30 d</button>
+              <button type="button" data-range="90d">90 d</button>
+              <button type="button" data-range="wipe" data-i18n="st.thisWipe"></button>
+            </div>
+            <span class="st-note" id="stNote"></span>
+          </div>
+          <div class="st-kpis" id="stKpis"></div>
+          <div class="panel">
+            <div class="panel-head"><h3 data-i18n="st.playersTitle"></h3><span class="st-sub" id="stPlayersSub"></span></div>
+            <div class="panel-body"><div class="chart" id="chPlayers"></div></div>
+          </div>
+          <div class="cols cols--even st-cols">
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="st.heatTitle"></h3></div>
+              <div class="panel-body"><div id="stHeat"></div></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="st.dailyTitle"></h3></div>
+              <div class="panel-body"><div class="chart chart--short" id="chDaily"></div></div>
+            </div>
+          </div>
+          <div class="cols cols--even st-cols">
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="st.fpsTitle"></h3></div>
+              <div class="panel-body"><div class="chart chart--short" id="chFps"></div></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="st.entTitle"></h3></div>
+              <div class="panel-body"><div class="chart chart--short" id="chEnt"></div></div>
+            </div>
+          </div>
+          <div class="cols cols--even st-cols">
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="st.topPlay"></h3></div>
+              <div class="table-wrap"><table class="table" id="stTopPlay"><thead><tr><th>#</th><th data-i18n="st.player"></th><th class="num" data-i18n="st.hours"></th><th class="num" data-i18n="st.sessions"></th><th data-i18n="st.since"></th></tr></thead><tbody></tbody></table></div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="st.topKills"></h3></div>
+              <div class="table-wrap"><table class="table" id="stTopKills"><thead><tr><th>#</th><th data-i18n="st.player"></th><th class="num" data-i18n="st.kills"></th><th class="num" data-i18n="st.deaths"></th><th class="num">K/D</th><th class="num" data-i18n="st.hs"></th></tr></thead><tbody></tbody></table></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- RENDIMIENTO -->
+        <section data-section="perf" hidden>
+          <div class="panel pf-boot">
+            <div class="panel-head"><h3 data-i18n="pf.lastBoot"></h3><span class="st-sub" id="pfBootWhen"></span></div>
+            <div class="panel-body">
+              <div class="pf-top">
+                <div class="pf-total"><small data-i18n="pf.total"></small><b id="pfTotal">—</b><span id="pfVerdict"></span></div>
+                <div class="pf-facts" id="pfFacts"></div>
+              </div>
+              <div class="pf-bar" id="pfBar" role="img"></div>
+              <ul class="pf-phases" id="pfPhases"></ul>
+            </div>
+          </div>
+          <div class="cols cols--wide-left st-cols">
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="pf.tips"></h3></div>
+              <ul class="pf-tips" id="pfTips"></ul>
+              <div class="panel-body pf-prio" data-perm-form="server.config">
+                <label class="switch"><input type="checkbox" id="pfPriority"><span class="switch-ui"></span><span><span data-i18n="pf.priority"></span><small class="field-hint" data-i18n="pf.priorityHint"></small></span></label>
+              </div>
+            </div>
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="pf.machine"></h3></div>
+              <div class="panel-body"><dl class="facts" id="pfSys"></dl></div>
+            </div>
+          </div>
+          <div class="cols cols--wide-left st-cols">
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="pf.history"></h3></div>
+              <div class="table-wrap"><table class="table" id="pfHist"><thead><tr><th data-i18n="wp.h.date"></th><th class="num" data-i18n="pf.h.total"></th><th data-i18n="pf.h.map"></th><th class="num" data-i18n="pf.h.plugins"></th><th class="num" data-i18n="pf.h.tips"></th><th data-i18n="wp.h.result"></th></tr></thead><tbody></tbody></table></div>
+            </div>
+            <form class="panel" id="perfForm" data-perm-form="server.config">
+              <div class="panel-head"><h3 data-i18n="pf.alerts"></h3></div>
+              <div class="panel-body form-stack">
+                <label class="switch"><input type="checkbox" name="enabled"><span class="switch-ui"></span><span data-i18n="pf.enabled"></span></label>
+                <div class="grid-fields">
+                  <label class="field"><span data-i18n="pf.fpsMin"></span><input type="number" name="fpsMin" min="1" max="200"></label>
+                  <label class="field"><span data-i18n="pf.fpsMinutes"></span><input type="number" name="fpsMinutes" min="1" max="60"></label>
+                  <label class="field"><span data-i18n="pf.ramPct"></span><input type="number" name="ramPct" min="50" max="99"></label>
+                  <label class="field"><span data-i18n="pf.hangMinutes"></span><input type="number" name="hangMinutes" min="1" max="30"></label>
+                </div>
+                <label class="switch"><input type="checkbox" name="autoRestartHang"><span class="switch-ui"></span><span data-i18n="pf.autoHang"></span></label>
+                <label class="switch"><input type="checkbox" name="autoRestartFps"><span class="switch-ui"></span><span data-i18n="pf.autoFps"></span></label>
+                <label class="switch"><input type="checkbox" name="discord"><span class="switch-ui"></span><span data-i18n="pf.discord"></span></label>
+                <div class="savebar savebar--inline"><button class="btn btn-primary" data-i18n="common.save"></button></div>
+              </div>
+            </form>
+          </div>
+          <div class="panel st-cols">
+            <div class="panel-head"><h3 data-i18n="pf.events"></h3></div>
+            <ul class="pf-events" id="pfEvents"></ul>
+          </div>
+        </section>
+
+        <!-- BOT DE DISCORD -->
+        <section data-section="discord" hidden>
+          <div class="dc-status" id="dcStatus"><span class="dc-dot"></span><div><b id="dcState"></b><small id="dcDetail"></small></div><a class="btn btn-sm btn-primary" id="dcInvite" target="_blank" rel="noopener" hidden data-i18n="dc.invite"></a></div>
+          <div class="cols cols--wide-left st-cols">
+            <form class="panel" id="dcForm" data-perm-form="server.config">
+              <div class="panel-head"><h3 data-i18n="dc.title"></h3></div>
+              <div class="panel-body form-stack">
+                <label class="switch"><input type="checkbox" name="enabled"><span class="switch-ui"></span><span data-i18n="dc.enabled"></span></label>
+                <label class="field"><span data-i18n="dc.token"></span><input name="token" type="password" autocomplete="off" spellcheck="false"><small class="field-hint" id="dcTokenHint"></small></label>
+                <label class="field"><span data-i18n="dc.channel"></span><input name="chatChannelId" inputmode="numeric" spellcheck="false" placeholder="123456789012345678"><small class="field-hint" data-i18n="dc.channelHint"></small></label>
+                <div class="grid-fields">
+                  <label class="switch"><input type="checkbox" name="relayToDiscord"><span class="switch-ui"></span><span data-i18n="dc.relayToDiscord"></span></label>
+                  <label class="switch"><input type="checkbox" name="relayToGame"><span class="switch-ui"></span><span data-i18n="dc.relayToGame"></span></label>
+                  <label class="switch"><input type="checkbox" name="commands"><span class="switch-ui"></span><span data-i18n="dc.commands"></span></label>
+                  <label class="switch"><input type="checkbox" name="presence"><span class="switch-ui"></span><span data-i18n="dc.presence"></span></label>
+                </div>
+                <div class="savebar savebar--inline"><button class="btn btn-primary" data-i18n="common.save"></button><button type="button" class="btn btn-quiet" id="dcClear" data-i18n="dc.clearToken"></button></div>
+              </div>
+            </form>
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="dc.guide"></h3></div>
+              <div class="panel-body"><ol class="dc-steps" data-i18n-html="dc.steps"></ol>
+                <h4 class="dc-h4" data-i18n="dc.cmdsTitle"></h4>
+                <ul class="dc-cmds" data-i18n-html="dc.cmdsList"></ul>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TICKETS DE REPORTES F7 -->
+        <section data-section="tickets" hidden>
+          <div class="tk-kpis" id="tkKpis"></div>
+          <div class="panel">
+            <div class="panel-head">
+              <h3 data-i18n="tk.title"></h3>
+              <div class="seg" role="group" data-i18n-aria="tk.filter" id="tkFilter">
+                <button type="button" data-st="active" data-i18n="tk.f.active"></button>
+                <button type="button" data-st="open" data-i18n="tk.f.open"></button>
+                <button type="button" data-st="progress" data-i18n="tk.f.progress"></button>
+                <button type="button" data-st="closed" data-i18n="tk.f.closed"></button>
+              </div>
+            </div>
+            <div class="table-wrap"><table class="table tk-table" id="tkTable"><thead><tr><th>#</th><th data-i18n="tk.h.player"></th><th data-i18n="tk.h.reports"></th><th data-i18n="tk.h.reason"></th><th data-i18n="tk.h.assignee"></th><th data-i18n="tk.h.updated"></th><th data-i18n="tk.h.status"></th></tr></thead><tbody></tbody></table></div>
+          </div>
+          <p class="field-hint tk-note" data-i18n="tk.bridgeNote"></p>
+        </section>
+
+        <!-- VIP CON CADUCIDAD -->
+        <section data-section="vip" hidden>
+          <div class="callout callout--warn" id="vipVanilla" hidden><svg class="i"><use href="#i-alert"/></svg><div class="callout-body" data-i18n-html="vip.vanilla"></div></div>
+          <div class="cols cols--wide-left">
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="vip.title"></h3><span class="tag" id="vipCount"></span></div>
+              <div class="table-wrap"><table class="table" id="vipTable"><thead><tr><th data-i18n="vip.h.player"></th><th data-i18n="vip.h.group"></th><th data-i18n="vip.h.ends"></th><th data-i18n="vip.h.by"></th><th></th></tr></thead><tbody></tbody></table></div>
+            </div>
+            <form class="panel" id="vipGrant" data-perm-form="perms">
+              <div class="panel-head"><h3 data-i18n="vip.grant"></h3></div>
+              <div class="panel-body form-stack">
+                <label class="field"><span data-i18n="vip.player"></span><input name="player" list="vipPlayers" required spellcheck="false" data-i18n-ph="vip.playerPh"><datalist id="vipPlayers"></datalist></label>
+                <div class="grid-fields">
+                  <label class="field"><span data-i18n="vip.group"></span><select name="group" id="vipGroupSel"></select></label>
+                  <label class="field"><span data-i18n="vip.days"></span><input name="days" type="number" min="0" max="3650" required><small class="field-hint" data-i18n="vip.daysHint"></small></label>
+                </div>
+                <div class="vip-presets" id="vipPresets"><button type="button" class="btn btn-sm" data-days="7">7 d</button><button type="button" class="btn btn-sm" data-days="30">30 d</button><button type="button" class="btn btn-sm" data-days="90">90 d</button><button type="button" class="btn btn-sm" data-days="0" data-i18n="vip.permanent"></button></div>
+                <label class="field"><span data-i18n="vip.note"></span><input name="note" maxlength="200" data-i18n-ph="vip.notePh"></label>
+                <div class="savebar savebar--inline"><button class="btn btn-primary"><svg class="i"><use href="#i-crown"/></svg><span data-i18n="vip.grantBtn"></span></button></div>
+              </div>
+            </form>
+          </div>
+          <div class="cols">
+            <form class="panel" id="vipSettings" data-perm-form="perms">
+              <div class="panel-head"><h3 data-i18n="vip.settings"></h3></div>
+              <div class="panel-body form-stack">
+                <label class="field"><span data-i18n="vip.groups"></span><input name="groups" spellcheck="false" placeholder="vip, vip+, mvp"><small class="field-hint" data-i18n="vip.groupsHint"></small></label>
+                <div class="grid-fields">
+                  <label class="field"><span data-i18n="vip.defaultDays"></span><input name="defaultDays" type="number" min="1" max="3650"></label>
+                  <label class="field"><span data-i18n="vip.warnHours"></span><input name="warnHours" type="number" min="0" max="168"><small class="field-hint" data-i18n="vip.warnHint"></small></label>
+                </div>
+                <label class="switch"><input type="checkbox" name="notify"><span class="switch-ui"></span><span data-i18n="vip.notify"></span></label>
+                <label class="switch"><input type="checkbox" name="skipQueue"><span class="switch-ui"></span><span data-i18n="vip.skipQueue"></span></label>
+                <p class="field-hint" data-i18n-html="vip.skipQueueHint"></p>
+                <p class="field-hint" data-i18n-html="vip.howto"></p>
+                <div class="savebar savebar--inline"><button class="btn btn-primary" data-i18n="common.save"></button></div>
+              </div>
+            </form>
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="vip.history"></h3></div>
+              <ul class="wp-list" id="vipHist"></ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- STAFF EN EL JUEGO -->
+        <section data-section="staff" hidden>
+          <div class="cols cols--wide-left">
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="stf.title"></h3><button type="button" class="btn btn-sm" id="stfSync" data-perm="perms"><svg class="i"><use href="#i-refresh"/></svg><span data-i18n="stf.sync"></span></button></div>
+              <p class="stf-warn" id="stfWarn" hidden></p>
+              <div class="table-wrap"><table class="table" id="stfTable"><thead><tr><th data-i18n="stf.h.player"></th><th data-i18n="stf.h.level"></th><th data-i18n="stf.h.since"></th><th></th></tr></thead><tbody></tbody></table></div>
+            </div>
+            <form class="panel" id="stfForm" data-perm-form="perms">
+              <div class="panel-head"><h3 data-i18n="stf.add"></h3></div>
+              <div class="panel-body form-stack">
+                <label class="field"><span data-i18n="vip.player"></span><input name="player" list="stfPlayers" required spellcheck="false" data-i18n-ph="vip.playerPh"><datalist id="stfPlayers"></datalist></label>
+                <div class="wp-sched stf-levels" role="radiogroup" data-i18n-aria="stf.h.level">
+                  <label class="wp-opt"><input type="radio" name="level" value="mod" checked><span><b data-i18n="stf.lvl.mod"></b><small data-i18n="stf.lvl.modSub"></small></span></label>
+                  <label class="wp-opt"><input type="radio" name="level" value="admin"><span><b data-i18n="stf.lvl.admin"></b><small data-i18n="stf.lvl.adminSub"></small></span></label>
+                </div>
+                <div class="savebar savebar--inline"><button class="btn btn-primary"><svg class="i"><use href="#i-plus"/></svg><span data-i18n="stf.addBtn"></span></button></div>
+              </div>
+            </form>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3 data-i18n="stf.toolsTitle"></h3></div>
+            <div class="panel-body stf-tools">
+              <div><h4><span class="tag stf-lvl stf-lvl--mod" data-i18n="stf.lvl.mod"></span></h4><ul data-i18n-html="stf.toolsMod"></ul></div>
+              <div><h4><span class="tag stf-lvl stf-lvl--admin" data-i18n="stf.lvl.admin"></span></h4><ul data-i18n-html="stf.toolsAdmin"></ul></div>
+              <div class="stf-how"><h4 data-i18n="stf.howTitle"></h4><ol data-i18n-html="stf.how"></ol></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- TIENDA (TEBEX) -->
+        <section data-section="store" hidden>
+          <div class="callout callout--warn" id="shVanilla" hidden><svg class="i"><use href="#i-alert"/></svg><div class="callout-body" data-i18n-html="sh.vanilla"></div></div>
+          <div class="dc-status" id="shStatus"><span class="dc-dot"></span><div><b id="shState"></b><small id="shDetail"></small></div><button type="button" class="btn btn-sm" id="shCheck" data-perm="server.config"><svg class="i"><use href="#i-refresh"/></svg><span data-i18n="sh.checkNow"></span></button></div>
+          <div class="cols cols--wide-left st-cols">
+            <form class="panel" id="shForm" data-perm-form="server.config">
+              <div class="panel-head"><h3 data-i18n="sh.title"></h3></div>
+              <div class="panel-body form-stack">
+                <p class="muted-p" data-i18n-html="sh.sub"></p>
+                <label class="switch"><input type="checkbox" name="enabled"><span class="switch-ui"></span><span data-i18n="sh.enabled"></span></label>
+                <label class="field"><span data-i18n="sh.secret"></span><input name="secret" type="password" autocomplete="off" spellcheck="false"><small class="field-hint" id="shSecretHint"></small></label>
+                <div class="grid-fields">
+                  <label class="switch"><input type="checkbox" name="announce"><span class="switch-ui"></span><span data-i18n="sh.announce"></span></label>
+                  <label class="switch"><input type="checkbox" name="discord"><span class="switch-ui"></span><span data-i18n="sh.discord"></span></label>
+                </div>
+                <div class="savebar savebar--inline"><button class="btn btn-primary" data-i18n="common.save"></button><button type="button" class="btn" id="shTest" data-i18n="sh.test"></button><button type="button" class="btn btn-quiet" id="shClear" data-i18n="sh.clear"></button></div>
+              </div>
+            </form>
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="sh.guide"></h3></div>
+              <div class="panel-body"><ol class="dc-steps" data-i18n-html="sh.steps"></ol>
+                <h4 class="dc-h4" data-i18n="sh.cmdsTitle"></h4>
+                <div class="sh-cmds" id="shCmds"></div>
+              </div>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3 data-i18n="sh.deliveries"></h3><span class="tag" id="shTotals"></span></div>
+            <div class="table-wrap"><table class="table" id="shTable"><thead><tr><th data-i18n="sh.h.date"></th><th data-i18n="sh.h.player"></th><th data-i18n="sh.h.payment"></th><th data-i18n="sh.h.commands"></th><th data-i18n="sh.h.result"></th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <!-- WEB PÚBLICA -->
+        <section data-section="public" hidden>
+          <div class="cols cols--wide-left">
+            <form class="panel" id="pubForm" data-perm-form="server.config">
+              <div class="panel-head"><h3 data-i18n="pb.title"></h3><span class="tag" id="pbState"></span></div>
+              <div class="panel-body form-stack">
+                <p class="muted-p" data-i18n="pb.sub"></p>
+                <label class="switch"><input type="checkbox" name="enabled"><span class="switch-ui"></span><span data-i18n="pb.enabled"></span></label>
+                <div class="pb-url" id="pbUrl" hidden><code id="pbUrlText"></code><button type="button" class="btn btn-sm" id="pbCopy" data-i18n="pb.copyUrl" data-perm-free></button><a class="btn btn-sm btn-primary" id="pbOpen" target="_blank" rel="noopener" data-i18n="pb.open"></a></div>
+                <div class="grid-fields">
+                  <label class="field"><span data-i18n="pb.address"></span><input name="address" placeholder="mi-servidor.com:28015" spellcheck="false"><small class="field-hint" data-i18n="pb.addressHint"></small></label>
+                  <label class="field"><span data-i18n="pb.lang"></span><select name="lang"><option value="auto" data-i18n="pb.langAuto"></option><option value="es">Español</option><option value="en">English</option><option value="pt">Português</option><option value="fr">Français</option></select></label>
+                </div>
+                <label class="field"><span data-i18n="pb.tagline"></span><input name="tagline" maxlength="140"></label>
+                <label class="field"><span data-i18n="pb.description"></span><textarea name="description" rows="4" maxlength="2000"></textarea></label>
+                <label class="field"><span data-i18n="pb.rules"></span><textarea name="rules" rows="5" data-i18n-ph="pb.rulesPh"></textarea></label>
+                <div class="grid-fields">
+                  <label class="field"><span>Discord</span><input name="discord" type="url" placeholder="https://discord.gg/…"></label>
+                  <label class="field"><span data-i18n="pb.store"></span><input name="store" type="url" placeholder="https://…"></label>
+                  <label class="field"><span data-i18n="pb.website"></span><input name="website" type="url" placeholder="https://…"></label>
+                  <label class="field"><span data-i18n="pb.steam"></span><input name="steam" type="url" placeholder="https://steamcommunity.com/groups/…"></label>
+                </div>
+                <div class="grid-fields">
+                  <label class="switch"><input type="checkbox" name="showMap"><span class="switch-ui"></span><span data-i18n="pb.showMap"></span></label>
+                  <label class="switch"><input type="checkbox" name="showChart"><span class="switch-ui"></span><span data-i18n="pb.showChart"></span></label>
+                  <label class="switch"><input type="checkbox" name="showRankings"><span class="switch-ui"></span><span data-i18n="pb.showRankings"></span></label>
+                  <label class="switch"><input type="checkbox" name="showPlayers"><span class="switch-ui"></span><span data-i18n="pb.showPlayers"></span></label>
+                  <label class="field pb-color"><span data-i18n="pb.accent"></span><input type="color" name="accent"></label>
+                </div>
+                <p class="field-hint" data-i18n="pb.privacy"></p>
+                <div class="savebar savebar--inline"><button class="btn btn-primary" data-i18n="common.save"></button></div>
+              </div>
+            </form>
+            <div class="panel pb-preview-panel">
+              <div class="panel-head"><h3 data-i18n="pb.preview"></h3></div>
+              <div class="pb-preview"><iframe id="pbFrame" title="Preview" loading="lazy"></iframe><p class="pb-off" id="pbOff" data-i18n="pb.offPreview"></p></div>
+            </div>
+          </div>
+        </section>
+
+        <!-- PLANIFICADOR DE WIPES -->
+        <section data-section="wipes" hidden>
+          <div class="wp-hero" id="wpHero">
+            <div class="wp-hero-text">
+              <span class="wp-kicker" id="wpKicker"></span>
+              <h2 class="wp-when" id="wpWhen"></h2>
+              <div class="wp-tags" id="wpTags"></div>
+            </div>
+            <div class="wp-count" id="wpCount" aria-live="off"></div>
+          </div>
+          <div class="cols cols--wide-left">
+            <form id="wipeForm" class="panel" data-perm-form="wipe">
+              <div class="panel-head"><h3 data-i18n="wp.settings"></h3></div>
+              <div class="panel-body form-stack">
+                <label class="switch"><input type="checkbox" name="enabled"><span class="switch-ui"></span><span data-i18n="wp.enabled"></span></label>
+                <div class="wp-sched" role="radiogroup" data-i18n-aria="wp.schedule">
+                  <label class="wp-opt"><input type="radio" name="schedule" value="forced"><span><b data-i18n="wp.s.forced"></b><small data-i18n="wp.s.forcedSub"></small></span></label>
+                  <label class="wp-opt"><input type="radio" name="schedule" value="weekly"><span><b data-i18n="wp.s.weekly"></b><small data-i18n="wp.s.weeklySub"></small></span></label>
+                  <label class="wp-opt"><input type="radio" name="schedule" value="biweekly"><span><b data-i18n="wp.s.biweekly"></b><small data-i18n="wp.s.biweeklySub"></small></span></label>
+                </div>
+                <div class="grid-fields" id="wpDayTime">
+                  <label class="field"><span data-i18n="wp.weekday"></span><select name="weekday" id="wpWeekday"></select></label>
+                  <label class="field"><span data-i18n="wp.time"></span><input type="time" name="time"></label>
+                </div>
+                <div class="grid-fields">
+                  <label class="field"><span data-i18n="wp.bp"></span><select name="bp"><option value="forced" data-i18n="wp.bp.forced"></option><option value="always" data-i18n="wp.bp.always"></option><option value="never" data-i18n="wp.bp.never"></option></select></label>
+                  <label class="field"><span data-i18n="wp.delay"></span><input type="number" name="forcedDelay" min="0" max="240" step="5"><small class="field-hint" data-i18n="wp.delayHint"></small></label>
+                </div>
+                <div class="grid-fields">
+                  <label class="switch"><input type="checkbox" name="newSeed"><span class="switch-ui"></span><span data-i18n="wp.newSeed"></span></label>
+                  <label class="switch"><input type="checkbox" name="backup"><span class="switch-ui"></span><span data-i18n="wp.backup"></span></label>
+                  <label class="switch"><input type="checkbox" name="update"><span class="switch-ui"></span><span data-i18n="wp.update"></span></label>
+                  <label class="switch"><input type="checkbox" name="announce"><span class="switch-ui"></span><span data-i18n="wp.announce"></span></label>
+                  <label class="switch"><input type="checkbox" name="discord"><span class="switch-ui"></span><span data-i18n="wp.discord"></span></label>
+                </div>
+                <div class="savebar savebar--inline"><button class="btn btn-primary" data-i18n="wp.save"></button><span class="field-hint" id="wpTz"></span></div>
+              </div>
+            </form>
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="wp.next"></h3></div>
+              <ul class="wp-list" id="wpList"></ul>
+            </div>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3 data-i18n="wp.history"></h3></div>
+            <div class="table-wrap"><table class="table" id="wpHist"><thead><tr><th data-i18n="wp.h.date"></th><th data-i18n="wp.h.type"></th><th data-i18n="wp.h.bp"></th><th data-i18n="wp.h.seed"></th><th data-i18n="wp.h.result"></th></tr></thead><tbody></tbody></table></div>
+          </div>
+        </section>
+
+        <!-- RATES Y MODO -->
+        <section data-section="rates" hidden>
+          <div class="rates">
+            <div class="mode-card" id="modeCard">
+              <div class="mode-text">
+                <h3 data-i18n="rt.mode"></h3>
+                <p data-i18n="rt.modeSub"></p>
+                <p class="mode-live" id="modeLive"></p>
+              </div>
+              <div class="mode-switch" role="radiogroup" data-i18n-aria="rt.mode">
+                <button type="button" class="mode-opt mode-opt--pvp" data-mode="pvp" role="radio"><svg class="i"><use href="#i-swords"/></svg><b>PvP</b><span data-i18n="rt.pvpSub"></span></button>
+                <button type="button" class="mode-opt mode-opt--pve" data-mode="pve" role="radio"><svg class="i"><use href="#i-dove"/></svg><b>PvE</b><span data-i18n="rt.pveSub"></span></button>
+              </div>
+            </div>
+
+            <div class="panel" id="worldPanel" data-perm-form="server.control">
+              <div class="panel-head"><h3 data-i18n="wd.title"></h3><span class="wd-clock" id="wdClock"></span></div>
+              <div class="panel-body world">
+                <div class="wd-group">
+                  <h4 data-i18n="wd.time"></h4>
+                  <div class="wd-btns">
+                    <button type="button" class="wd-btn" data-time="dawn"><svg class="i"><use href="#i-sunrise"/></svg><span data-i18n="wd.t.dawn"></span></button>
+                    <button type="button" class="wd-btn" data-time="noon"><svg class="i"><use href="#i-sun"/></svg><span data-i18n="wd.t.noon"></span></button>
+                    <button type="button" class="wd-btn" data-time="dusk"><svg class="i"><use href="#i-sunset"/></svg><span data-i18n="wd.t.dusk"></span></button>
+                    <button type="button" class="wd-btn" data-time="night"><svg class="i"><use href="#i-moon"/></svg><span data-i18n="wd.t.night"></span></button>
+                  </div>
+                  <label class="switch"><input type="checkbox" id="wdFreeze"><span class="switch-ui"></span><span data-i18n="wd.freeze"></span></label>
+                </div>
+                <div class="wd-group">
+                  <h4 data-i18n="wd.weather"></h4>
+                  <div class="wd-btns">
+                    <button type="button" class="wd-btn" data-weather="clear"><svg class="i"><use href="#i-sun"/></svg><span data-i18n="wd.w.clear"></span></button>
+                    <button type="button" class="wd-btn" data-weather="rain"><svg class="i"><use href="#i-rain"/></svg><span data-i18n="wd.w.rain"></span></button>
+                    <button type="button" class="wd-btn" data-weather="storm"><svg class="i"><use href="#i-storm"/></svg><span data-i18n="wd.w.storm"></span></button>
+                    <button type="button" class="wd-btn" data-weather="fog"><svg class="i"><use href="#i-fog"/></svg><span data-i18n="wd.w.fog"></span></button>
+                    <button type="button" class="wd-btn" data-weather="auto"><svg class="i"><use href="#i-cloud"/></svg><span data-i18n="wd.w.auto"></span></button>
+                  </div>
+                </div>
+                <div class="wd-group">
+                  <h4 data-i18n="wd.events"></h4>
+                  <div class="wd-btns">
+                    <button type="button" class="wd-btn" data-event="cargo"><svg class="i"><use href="#i-ship"/></svg><span data-i18n="wd.e.cargo"></span></button>
+                    <button type="button" class="wd-btn" data-event="heli"><svg class="i"><use href="#i-heli"/></svg><span data-i18n="wd.e.heli"></span></button>
+                    <button type="button" class="wd-btn" data-event="airdrop"><svg class="i"><use href="#i-parachute"/></svg><span data-i18n="wd.e.airdrop"></span></button>
+                    <button type="button" class="wd-btn" data-event="chinook"><svg class="i"><use href="#i-chinook"/></svg><span data-i18n="wd.e.chinook"></span></button>
+                  </div>
+                  <p class="field-hint" id="wdEvHint"></p>
+                </div>
+              </div>
+            </div>
+
+            <form id="ratesForm" data-perm-form="server.config">
+              <div class="panel">
+                <div class="panel-head"><h3 data-i18n="rt.mult"></h3><span class="rt-badge" id="rtBridge"></span></div>
+                <div class="panel-body">
+                  <p class="muted-p" data-i18n="rt.multSub"></p>
+                  <div class="callout callout--warn" id="rtNeedFw" hidden><svg class="i"><use href="#i-alert"/></svg><div class="callout-body" id="rtNeedFwText"></div></div>
+                  <div class="presets" role="group" data-i18n-aria="rt.presets">
+                    <span class="presets-label" data-i18n="rt.presets"></span>
+                    <button type="button" class="preset" data-preset="1">Vanilla</button>
+                    <button type="button" class="preset" data-preset="2">2x</button>
+                    <button type="button" class="preset" data-preset="3">3x</button>
+                    <button type="button" class="preset" data-preset="5">5x</button>
+                    <button type="button" class="preset" data-preset="10">10x</button>
+                  </div>
+                  <div class="rate-grid">
+                    <label class="rate"><span class="rate-head"><b data-i18n="rt.gather"></b><output id="o_gather"></output></span><span class="rate-sub" data-i18n="rt.gatherSub"></span><input type="range" name="gather" min="1" max="20" step="0.5"></label>
+                    <label class="rate"><span class="rate-head"><b data-i18n="rt.pickup"></b><output id="o_pickup"></output></span><span class="rate-sub" data-i18n="rt.pickupSub"></span><input type="range" name="pickup" min="1" max="20" step="0.5"></label>
+                    <label class="rate"><span class="rate-head"><b data-i18n="rt.quarry"></b><output id="o_quarry"></output></span><span class="rate-sub" data-i18n="rt.quarrySub"></span><input type="range" name="quarry" min="1" max="20" step="0.5"></label>
+                    <label class="rate"><span class="rate-head"><b data-i18n="rt.craft"></b><output id="o_craft"></output></span><span class="rate-sub" data-i18n="rt.craftSub"></span><input type="range" name="craft" min="1" max="20" step="0.5"></label>
+                  </div>
+                </div>
+              </div>
+
+              <div class="panel">
+                <div class="panel-head"><h3 data-i18n="rt.vanilla"></h3><span class="rt-badge rt-badge--ok" data-i18n="rt.noPlugin"></span></div>
+                <div class="panel-body">
+                  <div class="grid-fields">
+                    <label class="field"><span data-i18n="rt.decay"></span><input name="decayScale" type="number" min="0" max="10" step="0.1"><small class="field-hint" data-i18n="rt.decayHint"></small></label>
+                    <label class="field"><span data-i18n="rt.crate"></span><input name="crateSeconds" type="number" min="0" max="3600" step="30"><small class="field-hint" data-i18n="rt.crateHint"></small></label>
+                    <label class="switch"><input type="checkbox" name="upkeep"><span class="switch-ui"></span><span data-i18n="rt.upkeep"></span></label>
+                    <label class="switch"><input type="checkbox" name="radiation"><span class="switch-ui"></span><span data-i18n="rt.radiation"></span></label>
+                    <label class="switch"><input type="checkbox" name="stability"><span class="switch-ui"></span><span data-i18n="rt.stability"></span></label>
+                    <label class="switch"><input type="checkbox" name="announce"><span class="switch-ui"></span><span data-i18n="rt.announce"></span></label>
+                  </div>
+                </div>
+              </div>
+              <div class="savebar"><span id="ratesState"></span><button class="btn btn-primary"><svg class="i"><use href="#i-check"/></svg><span data-i18n="rt.save"></span></button></div>
+            </form>
+          </div>
+        </section>
+
+        <section data-section="schedule" hidden>
+          <form id="schedForm" class="settings" data-perm-form="schedule">
+            <fieldset class="setting-group">
+              <legend><b data-i18n="sch.restarts"></b><span data-i18n="sch.restartsSub"></span></legend>
+              <div class="form-stack">
+                <div id="restartList" class="times"></div>
+                <div class="input-row input-row--narrow"><input type="time" id="newRestart" data-i18n-aria="sch.newTime"><button type="button" class="btn" id="addRestart"><svg class="i"><use href="#i-plus"/></svg><span data-i18n="sch.addTime"></span></button></div>
+                <div class="grid-fields">
+                  <label class="field"><span data-i18n="sch.warn"></span><input name="restartWarningMinutes" type="number" min="1" max="60"></label>
+                  <label class="field"><span data-i18n="sch.keep"></span><input name="keepBackups" type="number" min="1"></label>
+                  <span></span>
+                  <label class="switch"><input type="checkbox" name="autoBackupOnRestart"><span class="switch-ui"></span><span data-i18n="sch.autoBackup"></span></label>
+                  <label class="switch span-2"><input type="checkbox" name="autoUpdateOnRestart"><span class="switch-ui"></span><span data-i18n="sch.autoUpdate"></span></label>
+                </div>
+              </div>
+            </fieldset>
+            <fieldset class="setting-group">
+              <legend><b data-i18n="sch.ann"></b><span data-i18n="sch.annSub"></span></legend>
+              <div class="form-stack">
+                <div id="annList" class="form-stack"></div>
+                <div><button type="button" class="btn btn-sm" id="addAnn"><svg class="i"><use href="#i-plus"/></svg><span data-i18n="sch.addAnn"></span></button></div>
+              </div>
+            </fieldset>
+            <div class="savebar"><span id="schedNext"></span><button class="btn btn-primary" data-i18n="sch.save"></button></div>
+          </form>
+        </section>
+
+        <!-- COPIAS Y WIPE -->
+        <section data-section="backups" hidden>
+          <div class="cols cols--wide-left">
+            <div class="panel">
+              <div class="panel-head"><h3><span data-i18n="bk.title"></span> <span class="count" id="backupsCount"></span></h3><button class="btn btn-sm btn-primary" id="mkBackup" data-perm="backups"><svg class="i"><use href="#i-plus"/></svg><span data-i18n="bk.create"></span></button></div>
+              <table class="table" id="backupsTbl"><thead><tr><th data-i18n="bk.backup"></th><th class="num" data-i18n="bk.size"></th><th data-i18n="bk.date"></th><th></th></tr></thead><tbody></tbody></table>
+            </div>
+            <div class="panel panel--danger" data-perm="wipe">
+              <div class="panel-head"><h3>Wipe</h3></div>
+              <div class="panel-body form-stack">
+                <p class="text-2" data-i18n="bk.wipeSub"></p>
+                <label class="switch"><input type="checkbox" id="wBp"><span class="switch-ui"></span><span data-i18n="bk.wipeBp"></span></label>
+                <label class="switch"><input type="checkbox" id="wSeed" checked><span class="switch-ui"></span><span data-i18n="bk.wipeSeed"></span></label>
+                <label class="switch"><input type="checkbox" id="wBackup" checked><span class="switch-ui"></span><span data-i18n="bk.wipeBackup"></span></label>
+                <button class="btn btn-danger" id="wipeBtn"><svg class="i"><use href="#i-eraser"/></svg><span data-i18n="bk.wipe"></span></button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- INSTALACIÓN -->
+        <section data-section="install" hidden>
+          <div class="mode-pick" role="tablist" data-i18n-aria="mode.title">
+            <button type="button" class="mode-card" role="tab" data-mode="new"><svg class="i"><use href="#i-download"/></svg><span><b data-i18n="mode.new"></b><small data-i18n="mode.newSub"></small></span></button>
+            <button type="button" class="mode-card" role="tab" data-mode="import"><svg class="i"><use href="#i-archive"/></svg><span><b data-i18n="mode.import"></b><small data-i18n="mode.importSub"></small></span></button>
+            <button type="button" class="mode-card" role="tab" data-mode="remote"><svg class="i"><use href="#i-globe"/></svg><span><b data-i18n="mode.remote"></b><small data-i18n="mode.remoteSub"></small></span></button>
+          </div>
+
+          <!-- Importar un servidor que ya está en este equipo -->
+          <div id="insImport" hidden>
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="imp.title"></h3></div>
+              <div class="panel-body form-stack">
+                <p class="muted-p" data-i18n-html="imp.sub"></p>
+                <label class="field"><span data-i18n="imp.folder"></span>
+                  <div class="imp-row"><input id="impDir" spellcheck="false" autocomplete="off" data-i18n-ph="imp.folderPh"><button type="button" class="btn" id="impBrowse" data-i18n="imp.browse"></button><button type="button" class="btn btn-primary" id="impScan" data-i18n="imp.scan"></button></div>
+                </label>
+                <div class="imp-browser" id="impBrowser" hidden>
+                  <div class="imp-path"><button type="button" class="btn btn-sm btn-quiet" id="impUp" data-i18n="imp.up"></button><code id="impCur"></code><button type="button" class="btn btn-sm btn-primary" id="impPick" data-i18n="imp.pick" hidden></button></div>
+                  <ul id="impDirs"></ul>
+                </div>
+                <div id="impResult" hidden></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Servidor alquilado o en otra máquina: solo RCON -->
+          <div id="insRemote" hidden>
+            <div class="cols cols--wide-left">
+              <div class="form-stack">
+              <form class="panel" id="remoteForm" data-perm-form="server.config">
+                <div class="panel-head"><h3 data-i18n="rem.title"></h3><span class="tag" id="remState"></span></div>
+                <div class="panel-body form-stack">
+                  <p class="muted-p" data-i18n-html="rem.sub"></p>
+                  <div class="grid-fields">
+                    <label class="field"><span data-i18n="rem.host"></span><input name="host" spellcheck="false" autocomplete="off" placeholder="123.45.67.89" required></label>
+                    <label class="field"><span data-i18n="rem.port"></span><input name="rconPort" type="number" min="1" max="65535" value="28016" required></label>
+                  </div>
+                  <label class="field"><span data-i18n="rem.password"></span><input name="rconPassword" type="password" autocomplete="off"><small class="field-hint" id="remPassHint"></small></label>
+                  <div class="savebar savebar--inline"><button class="btn btn-primary" data-i18n="rem.connect"></button><button type="button" class="btn" id="remTest" data-i18n="rem.test"></button><button type="button" class="btn btn-quiet" id="remOff" data-i18n="rem.disable" hidden></button></div>
+                </div>
+              </form>
+              <form class="panel" id="filesForm" data-perm-form="server.config">
+                <div class="panel-head"><h3 data-i18n="rf.title"></h3><span class="tag" id="rfState"></span></div>
+                <div class="panel-body form-stack">
+                  <p class="muted-p" data-i18n-html="rf.sub"></p>
+                  <div class="grid-fields">
+                    <label class="field"><span data-i18n="rf.protocol"></span><select name="protocol"><option value="off" data-i18n="rf.off"></option><option value="sftp">SFTP</option><option value="ftp">FTP</option><option value="ftps">FTPS (TLS)</option></select></label>
+                    <label class="field"><span data-i18n="rf.port"></span><input name="port" type="number" min="1" max="65535" placeholder="21 / 22"></label>
+                  </div>
+                  <div class="rf-fields form-stack">
+                    <label class="field"><span data-i18n="rf.host"></span><input name="host" spellcheck="false" autocomplete="off"><small class="field-hint" data-i18n="rf.hostHint"></small></label>
+                    <div class="grid-fields">
+                      <label class="field"><span data-i18n="rf.user"></span><input name="user" spellcheck="false" autocomplete="off"></label>
+                      <label class="field"><span data-i18n="rf.password"></span><input name="password" type="password" autocomplete="new-password"><small class="field-hint" id="rfPassHint"></small></label>
+                    </div>
+                    <label class="field"><span data-i18n="rf.root"></span><input name="root" spellcheck="false" placeholder="/"><small class="field-hint" data-i18n="rf.rootHint"></small></label>
+                  </div>
+                  <div id="rfResult" class="callout" hidden></div>
+                  <div class="savebar savebar--inline"><button class="btn btn-primary" data-i18n="rf.save"></button><button type="button" class="btn" id="rfTest" data-i18n="rf.test"></button></div>
+                </div>
+              </form>
+              </div>
+              <div class="panel">
+                <div class="panel-head"><h3 data-i18n="rem.whatTitle"></h3></div>
+                <div class="panel-body">
+                  <h4 class="dc-h4" data-i18n="rem.works"></h4><ul class="rem-list rem-list--ok" data-i18n-html="rem.worksList"></ul>
+                  <h4 class="dc-h4" data-i18n="rem.not"></h4><ul class="rem-list" data-i18n-html="rem.notList"></ul>
+                  <h4 class="dc-h4" data-i18n="rem.bridgeTitle"></h4><p class="muted-p" data-i18n-html="rem.bridgeText"></p>
+                  <a class="btn btn-sm" href="/api/bridge/file" download><svg class="i"><use href="#i-download"/></svg><span data-i18n="rem.bridgeDl"></span></a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="insNew">
+          <div class="platform">
+            <div class="platform-text">
+              <b data-i18n="ins.os"></b>
+              <span id="platHint"></span>
+            </div>
+            <div class="os-choice" data-perm-form="install" role="radiogroup" data-i18n-aria="ins.os">
+              <label><input type="radio" name="plat" value="windows"><span class="os"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M3 5.1l7.4-1v7.2H3zM11.4 4l9.6-1.4v8.7h-9.6zM3 12.7h7.4v7.2L3 18.9zM11.4 12.7H21v8.7l-9.6-1.4z"/></svg><span>Windows<small>RustDedicated.exe</small></span></span></label>
+              <label><input type="radio" name="plat" value="linux"><span class="os"><svg class="i" aria-hidden="true"><use href="#i-terminal"/></svg><span>Linux<small>RustDedicated</small></span></span></label>
+            </div>
+          </div>
+          <div id="platWarn" class="callout" hidden style="margin-bottom:20px">
+            <svg class="i"><use href="#i-alert"/></svg>
+            <div id="platWarnText"></div>
+          </div>
+
+          <div class="progress-card" id="progressCard" hidden>
+            <div class="progress-top">
+              <div>
+                <div class="progress-task" id="progTask"></div>
+                <div class="progress-phase" id="progPhase"></div>
+              </div>
+              <div class="progress-pct" id="progPct">0 %</div>
+            </div>
+            <div class="progress-bar" role="progressbar" aria-valuemin="0" aria-valuemax="100" id="progBar"><span id="progFill"></span></div>
+            <div class="progress-meta"><span id="progDetail"></span><span id="progEta"></span></div>
+          </div>
+
+          <ol class="steps" data-perm-form="install">
+            <li class="step" id="stepServer">
+              <div class="step-mark"><span>1</span></div>
+              <div class="step-body">
+                <h3 data-i18n="ins.s1"></h3>
+                <p data-i18n="ins.s1Sub"></p>
+                <p class="step-status" id="instServer">—</p>
+                <div class="btn-group">
+                  <button class="btn btn-primary" id="instServerBtn"></button>
+                  <label class="check"><input type="checkbox" id="instValidate" checked> <span data-i18n="ins.validate"></span></label>
+                </div>
+              </div>
+            </li>
+            <li class="step" id="stepFw">
+              <div class="step-mark"><span>2</span></div>
+              <div class="step-body">
+                <h3><span data-i18n="ins.s2"></span> <em data-i18n="common.optional"></em></h3>
+                <p data-i18n="ins.s2Sub"></p>
+                <p class="step-status" id="instFw">—</p>
+                <div class="btn-group">
+                  <button class="btn" data-fw="oxide" data-i18n="ins.oxide"></button>
+                  <button class="btn" data-fw="carbon" data-i18n="ins.carbon"></button>
+                  <button class="btn btn-quiet" data-fw="none" data-i18n="ins.vanilla"></button>
+                </div>
+              </div>
+            </li>
+            <li class="step" id="stepStart">
+              <div class="step-mark"><span>3</span></div>
+              <div class="step-body">
+                <h3 data-i18n="ins.s3"></h3>
+                <p data-i18n-html="ins.s3Sub"></p>
+                <dl class="facts facts--inline" id="portsInfo"></dl>
+              </div>
+            </li>
+          </ol>
+          <div class="panel">
+            <div class="panel-head"><h3 id="fwTitle"></h3><button class="btn btn-sm btn-quiet" id="copyFw"><svg class="i"><use href="#i-copy"/></svg><span data-i18n="ins.copyCmds"></span></button></div>
+            <pre id="fwCmds" class="console console--flush"></pre>
+          </div>
+          <div class="panel">
+            <div class="panel-head"><h3 data-i18n="ins.log"></h3><span class="tag" id="instBusy"></span></div>
+            <pre id="instLog" class="console console--flush console--short"></pre>
+          </div>
+          </div>
+        </section>
+
+        <!-- CHAT -->
+        <section data-section="chat" hidden>
+          <div class="chat-layout">
+            <div class="panel chat-panel">
+              <div class="toolbar">
+                <div class="seg seg--radio" role="radiogroup" data-i18n-aria="chat.channel">
+                  <label><input type="radio" name="chch" value="all" checked><span data-i18n="chat.all"></span></label>
+                  <label><input type="radio" name="chch" value="global"><span data-i18n="chat.global"></span></label>
+                  <label><input type="radio" name="chch" value="team"><span data-i18n="chat.team"></span></label>
+                  <label><input type="radio" name="chch" value="flagged"><span data-i18n="chat.flagged"></span></label>
+                  <label><input type="radio" name="chch" value="pm"><span data-i18n="chat.pm"></span></label>
+                </div>
+                <div class="toolbar-end">
+                  <span class="chip" id="chatPlayerChip" hidden><span id="chatPlayerName"></span><button type="button" id="chatPlayerClear" data-i18n-aria="common.remove"><svg class="i"><use href="#i-x"/></svg></button></span>
+                  <div class="search"><svg class="i"><use href="#i-search"/></svg><input id="chatSearch" data-i18n-ph="chat.searchPh"></div>
+                </div>
+              </div>
+              <div class="chat-feed" id="chatFeed" tabindex="0" aria-live="polite"></div>
+              <form class="chat-compose" id="chatForm" data-perm="players.kick">
+                <select id="chatTarget" data-i18n-aria="chat.to"></select>
+                <input id="chatInput" maxlength="300" autocomplete="off">
+                <button class="btn btn-primary"><svg class="i"><use href="#i-send"/></svg><span data-i18n="chat.send"></span></button>
+              </form>
+            </div>
+            <div class="chat-side">
+              <div class="panel">
+                <div class="panel-head"><h3 data-i18n="mod.activeTitle"></h3></div>
+                <ul class="sanctions" id="sanctionsList"></ul>
+              </div>
+              <form class="panel" id="filterForm" data-perm-form="watch.settings">
+                <div class="panel-head"><h3 data-i18n="mod.filterTitle"></h3></div>
+                <div class="panel-body form-stack">
+                  <p class="small" data-i18n="mod.filterSub"></p>
+                  <label class="field"><span data-i18n="mod.words"></span><textarea name="words" rows="4" class="mono" data-i18n-ph="mod.wordsPh"></textarea></label>
+                  <label class="switch"><input type="checkbox" name="block"><span class="switch-ui"></span><span data-i18n="mod.block"></span></label>
+                  <div class="field-row">
+                    <label class="field"><span data-i18n="mod.filterAction"></span><select name="action"><option value="none" data-i18n="mod.fa.none"></option><option value="warn" data-i18n="mod.fa.warn"></option><option value="mute" data-i18n="mod.fa.mute"></option><option value="kick" data-i18n="mod.fa.kick"></option></select></label>
+                    <label class="field"><span data-i18n="mod.muteMinutes"></span><input name="muteMinutes" type="number" min="1"></label>
+                  </div>
+                  <div class="savebar savebar--inline"><button class="btn btn-primary btn-sm" data-i18n="common.save"></button></div>
+                </div>
+              </form>
+              <form class="panel" id="policyForm" data-perm-form="watch.settings">
+                <div class="panel-head"><h3 data-i18n="mod.policyTitle"></h3></div>
+                <div class="panel-body form-stack">
+                  <p class="small" data-i18n="mod.policySub"></p>
+                  <label class="field"><span data-i18n="mod.expireDays"></span><input name="expireDays" type="number" min="0"></label>
+                  <div id="policySteps" class="form-stack"></div>
+                  <div class="btn-group"><button type="button" class="btn btn-sm" id="addStep"><svg class="i"><use href="#i-plus"/></svg><span data-i18n="mod.addStep"></span></button></div>
+                  <div class="savebar savebar--inline"><button class="btn btn-primary btn-sm" data-i18n="common.save"></button></div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="chat-menu" id="chatMenu" hidden></div>
+        </section>
+
+        <!-- MAPA -->
+        <section data-section="map" hidden>
+          <div class="map-wrap">
+            <div class="map-toolbar">
+              <div class="search"><svg class="i"><use href="#i-search"/></svg><input id="mapSearch" list="mapPlayers" data-i18n-ph="map.searchPh"><datalist id="mapPlayers"></datalist></div>
+              <div class="seg seg--toggles" role="group" data-i18n-aria="map.layers">
+                <label><input type="checkbox" id="mlNames" checked><span data-i18n="map.names"></span></label>
+                <label><input type="checkbox" id="mlSleepers"><span data-i18n="map.sleepers"></span></label>
+                <label><input type="checkbox" id="mlEvents" checked><span data-i18n="map.events"></span></label>
+                <label><input type="checkbox" id="mlMonuments" checked><span data-i18n="map.monuments"></span></label>
+                <label><input type="checkbox" id="mlGrid" checked><span data-i18n="map.grid"></span></label>
+                <label><input type="checkbox" id="mlRoads" checked><span data-i18n="map.roads"></span></label>
+                <label><input type="checkbox" id="mlRails" checked><span data-i18n="map.rails"></span></label>
+                <label><input type="checkbox" id="mlRivers" checked><span data-i18n="map.rivers"></span></label>
+                <label><input type="checkbox" id="mlPower"><span data-i18n="map.power"></span></label>
+              </div>
+              <div class="toolbar-end">
+                <span class="small" id="mapStatus"></span>
+                <button class="btn btn-sm btn-quiet btn-icon" id="mapFit" data-i18n-title="map.fit" data-i18n-aria="map.fit"><svg class="i"><use href="#i-locate"/></svg></button>
+                <button class="btn btn-sm btn-quiet" id="mapRender"><svg class="i"><use href="#i-refresh"/></svg><span data-i18n="map.render"></span></button>
+              </div>
+            </div>
+            <div class="map-main">
+            <div class="map-stage" id="mapStage" tabindex="0" data-i18n-aria="map.stage">
+              <div class="map-layer" id="mapLayer"><img id="mapImg" alt="" draggable="false"><svg class="map-paths" id="mapPaths" aria-hidden="true"></svg></div>
+              <svg class="map-grid" id="mapGrid"></svg>
+              <div class="map-markers" id="mapMarkers"></div>
+              <div class="map-hover" id="mapHover" hidden></div>
+              <div class="map-empty" id="mapEmpty" hidden></div>
+              <aside class="map-card" id="mapCard" hidden></aside>
+            </div>
+            <aside class="map-key" id="mapKey" data-i18n-aria="map.key.title">
+              <h3 data-i18n="map.key.title"></h3>
+              <div class="mk-sec">
+                <h4 data-i18n="map.key.players"></h4>
+                <ul class="mk-list">
+                  <li><span class="kx"><i class="kdot" style="--c:var(--text)"></i></span><span data-i18n="map.key.noTeam"></span><b id="mkNoTeam"></b></li>
+                  <li><span class="kx"><i class="kdot" style="--c:hsl(160 70% 62%)"></i><i class="kdot" style="--c:hsl(40 70% 62%);margin-left:-4px"></i></span><span data-i18n="map.key.team"></span><b id="mkTeamed"></b></li>
+                  <li><span class="kx"><i class="kdot kdot--dead" style="--c:var(--text)"></i></span><span data-i18n="map.key.dead"></span><b id="mkDead"></b></li>
+                  <li><span class="kx"><i class="kdot kdot--sleep"></i></span><span><span data-i18n="map.key.sleeper"></span><small class="mk-hint" id="mkSleepHint" data-i18n="map.key.sleeperOff"></small></span><b id="mkSleep"></b></li>
+                  <li><span class="kx"><i class="kdot kdot--sel" style="--c:var(--text)"></i></span><span data-i18n="map.key.selected"></span></li>
+                </ul>
+                <div class="mk-teams" id="mkTeams"></div>
+              </div>
+              <div class="mk-sec">
+                <h4 data-i18n="map.key.events"></h4>
+                <ul class="mk-list">
+                  <li><span class="kx"><span class="kev">CS</span></span><span data-i18n="map.ev.cargo"></span><b id="mkEv_cargo"></b></li>
+                  <li><span class="kx"><span class="kev kev--hot">HE</span></span><span data-i18n="map.ev.heli"></span><b id="mkEv_heli"></b></li>
+                  <li><span class="kx"><span class="kev kev--hot">BR</span></span><span data-i18n="map.ev.bradley"></span><b id="mkEv_bradley"></b></li>
+                  <li><span class="kx"><span class="kev">CH</span></span><span data-i18n="map.ev.chinook"></span><b id="mkEv_chinook"></b></li>
+                </ul>
+              </div>
+              <div class="mk-sec">
+                <h4 data-i18n="map.key.map"></h4>
+                <ul class="mk-list">
+                  <li><span class="kx"><span class="kmon-ic" id="mkMonIcon"></span></span><span data-i18n="map.key.monument"></span></li>
+                  <li><span class="kx"><svg class="kline" viewBox="0 0 28 10"><path d="M1 5h26" stroke="#3D3526" stroke-width="5"/><path d="M1 5h26" stroke="#D9C79A" stroke-width="3"/></svg></span><span data-i18n="map.roads"></span></li>
+                  <li><span class="kx"><svg class="kline" viewBox="0 0 28 10"><path d="M1 5h26" stroke="#2A2A2A" stroke-width="4"/><path d="M1 5h26" stroke="#CFCFCF" stroke-width="2" stroke-dasharray="4 3"/></svg></span><span data-i18n="map.rails"></span></li>
+                  <li><span class="kx"><svg class="kline" viewBox="0 0 28 10"><path d="M1 6c5-4 9 3 14 0s9-4 12-1" fill="none" stroke="#4F8FB3" stroke-width="3"/></svg></span><span data-i18n="map.rivers"></span></li>
+                  <li><span class="kx"><svg class="kline" viewBox="0 0 28 10"><path d="M1 5h26" stroke="#E0B252" stroke-width="1.5" stroke-dasharray="2 4"/></svg></span><span data-i18n="map.power"></span></li>
+                  <li id="mkPathsHint" hidden><span class="kx"></span><small class="mk-hint" data-i18n="map.key.pathsUpdate"></small><b></b></li>
+                  <li><span class="kx"><span class="kgrid">G7</span></span><span data-i18n="map.key.grid"></span></li>
+                  <li><span class="kx"><span class="kland"></span></span><span data-i18n="map.key.terrain"></span></li>
+                </ul>
+              </div>
+              <div class="mk-sec mk-sec--help">
+                <h4 data-i18n="map.key.controls"></h4>
+                <ul class="mk-help">
+                  <li data-i18n-html="map.key.drag"></li>
+                  <li data-i18n-html="map.key.zoom"></li>
+                  <li data-i18n-html="map.key.click"></li>
+                  <li data-i18n-html="map.key.fit"></li>
+                </ul>
+              </div>
+            </aside>
+            </div>
+          </div>
+        </section>
+
+        <!-- ADMINISTRADORES -->
+        <section data-section="admins" hidden>
+          <div class="cols cols--wide-left" data-perm="users">
+            <div class="panel">
+              <div class="panel-head"><h3><span data-i18n="adm.users"></span> <span class="count" id="usersCount"></span></h3></div>
+              <table class="table" id="usersTbl"><thead><tr><th data-i18n="adm.user"></th><th data-i18n="adm.role"></th><th>2FA</th><th data-i18n="adm.lastLogin"></th><th></th></tr></thead><tbody></tbody></table>
+            </div>
+            <form class="panel" id="userForm">
+              <div class="panel-head"><h3 data-i18n="adm.create"></h3></div>
+              <div class="panel-body form-stack">
+                <label class="field"><span data-i18n="auth.username"></span><input name="username" autocomplete="off" autocapitalize="off" spellcheck="false" required></label>
+                <label class="field"><span data-i18n="auth.password"></span><input name="password" type="password" autocomplete="new-password" minlength="8" required></label>
+                <label class="field"><span data-i18n="adm.role"></span><select name="role" class="roleSel"></select></label>
+                <p class="small" id="roleHelp"></p>
+                <div><button class="btn btn-primary" data-i18n="adm.createBtn"></button></div>
+              </div>
+            </form>
+          </div>
+          <div class="panel" data-perm="audit">
+            <div class="panel-head">
+              <h3 data-i18n="audit.title"></h3>
+              <div class="btn-group">
+                <select id="auditUser" data-i18n-aria="audit.filterUser"></select>
+                <button class="btn btn-sm btn-quiet btn-icon" id="auditRefresh" data-i18n-aria="common.refresh"><svg class="i"><use href="#i-refresh"/></svg></button>
+              </div>
+            </div>
+            <table class="table table--compact" id="auditTbl"><thead><tr><th data-i18n="audit.when"></th><th data-i18n="adm.user"></th><th data-i18n="audit.action"></th><th data-i18n="audit.details"></th><th data-i18n="audit.result"></th></tr></thead><tbody></tbody></table>
+          </div>
+        </section>
+
+        <!-- WIKI -->
+        <section data-section="wiki" hidden>
+          <div class="wiki">
+            <aside class="wiki-toc">
+              <div class="search"><svg class="i"><use href="#i-search"/></svg><input id="wikiSearch" data-i18n-ph="wiki.searchPh"></div>
+              <nav id="wikiToc" data-i18n-aria="wiki.toc"></nav>
+            </aside>
+            <article class="wiki-body" id="wikiBody"></article>
+          </div>
+        </section>
+
+        <!-- CUENTA -->
+        <section data-section="settings" hidden>
+          <div class="settings">
+            <form id="langForm">
+              <fieldset class="setting-group">
+                <legend><b data-i18n="acc.lang"></b><span data-i18n="acc.langSub"></span></legend>
+                <div class="grid-fields">
+                  <label class="field"><span data-i18n="acc.uiLang"></span><select class="langSel"></select></label>
+                  <label class="field" data-perm="server.config"><span data-i18n="acc.notifyLang"></span><select id="notifyLang"></select></label>
+                </div>
+              </fieldset>
+            </form>
+            <fieldset class="setting-group">
+              <legend><b data-i18n="acc.sound"></b><span data-i18n="acc.soundSub"></span></legend>
+              <div class="sound-row">
+                <label class="switch"><input type="checkbox" id="soundOn"><span class="switch-ui"></span><span data-i18n="acc.soundOn"></span></label>
+                <button type="button" class="btn btn--ghost btn--sm" id="soundTest"><svg class="i"><use href="#i-play"/></svg><span data-i18n="acc.soundTest"></span></button>
+              </div>
+            </fieldset>
+            <form id="iconForm" data-perm="server.config">
+              <fieldset class="setting-group">
+                <legend><b data-i18n="acc.icons"></b><span data-i18n="acc.iconsSub"></span></legend>
+                <div class="form-stack">
+                  <label class="field"><span data-i18n="acc.iconsUrl"></span><input id="iconUrl" spellcheck="false" autocomplete="off" placeholder="https://…/{shortname}.png"></label>
+                  <p class="icon-hint" data-i18n-html="acc.iconsHint"></p>
+                  <div class="icon-btns"><button class="btn btn-primary" type="submit" data-i18n="common.save"></button><button class="btn btn-quiet" type="button" id="iconReset" data-i18n="acc.iconsReset"></button></div>
+                </div>
+              </fieldset>
+            </form>
+            <fieldset class="setting-group" id="updGroup">
+              <legend><b data-i18n="upd.title"></b><span id="updState"></span></legend>
+              <div class="form-stack">
+                <label class="switch" data-perm="server.config"><input type="checkbox" id="updOn"><span class="switch-ui"></span><span data-i18n="upd.auto"></span></label>
+                <p class="icon-hint" data-i18n-html="upd.hint"></p>
+                <p class="icon-hint beta-note" id="updBeta" hidden data-i18n-html="upd.betaNote"></p>
+                <div class="icon-btns"><button class="btn" type="button" id="updCheck" data-i18n="upd.checkNow"></button><a class="btn btn-primary" id="updGet" target="_blank" rel="noopener" hidden data-i18n="upd.download"></a></div>
+              </div>
+            </fieldset>
+            <div class="setting-group" id="tfaGroup">
+              <div class="legend-like"><b data-i18n="tfa.title"></b><span data-i18n="tfa.sub"></span></div>
+              <div class="form-stack narrow">
+                <p id="tfaState" class="tfa-state"></p>
+                <div class="btn-group" id="tfaButtons"></div>
+              </div>
+            </div>
+            <form id="pwForm">
+              <fieldset class="setting-group">
+                <legend><b data-i18n="acc.pw"></b><span data-i18n="acc.pwSub"></span></legend>
+                <div class="form-stack narrow">
+                  <label class="field"><span data-i18n="acc.current"></span><input type="password" name="current" autocomplete="current-password" required></label>
+                  <label class="field"><span data-i18n="acc.new"></span><input type="password" name="password" autocomplete="new-password" minlength="8" required></label>
+                  <div><button class="btn btn-primary" data-i18n="acc.change"></button></div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </section>
+      </div>
+    </div>
+  </div>
+
+  <div id="dialog" class="dialog-backdrop" hidden>
+    <div class="dialog" role="dialog" aria-modal="true" aria-labelledby="dialogTitle">
+      <div class="dialog-head"><h2 id="dialogTitle"></h2><button class="btn btn-quiet btn-icon" id="dialogClose" data-i18n-aria="common.close"><svg class="i"><use href="#i-x"/></svg></button></div>
+      <div class="dialog-body" id="dialogBody"></div>
+      <div class="dialog-foot" id="dialogFoot"></div>
+    </div>
+  </div>
+  <div id="toasts" aria-live="polite"></div>
+  <script src="mapshared.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
