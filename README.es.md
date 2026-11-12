@@ -35,6 +35,7 @@ Panel web para **instalar y administrar servidores dedicados de Rust**, con inst
 | **Equipos** | Equipos con sus miembros, alerta si superan el límite (p. ej. «Max 3») y detección de grupos que comparten armarios para saltárselo. |
 | **Perfiles de Steam** | Al conectarse, comprueba baneos VAC o de juego, antigüedad de la cuenta, perfil privado y horas en Rust. Por regla: no hacer nada, avisar o expulsar. Lista blanca. |
 | **Administradores** | Varios usuarios con roles (propietario, administrador, moderador, observador), **verificación en dos pasos (TOTP)** con códigos de recuperación y registro de actividad de quién hizo qué. |
+| **Baneos compartidos** | Oxidian hace de servidor del **Centralized Banning** oficial de Rust: un baneo en un servidor vale para todos, también en vanilla y sin plugins. Una clave secreta por servidor y listas externas opcionales (otro Oxidian, Server Armour) en modo aviso o bloqueo. |
 | **Vigilancia** | Alertas en tiempo real de posibles trampas y comportamientos extraños, ranking de jugadores a vigilar, historial por jugador y avisos en Discord. Detección de VPN, proxy, IPs de hosting y país. |
 | **Inventarios** | Visor del inventario de cualquier jugador (conectado o durmiendo) con la **imagen de cada objeto**: ropa, cinturón y mochila, con estado, munición, accesorios y skins. Quitar objetos o vaciar el inventario. |
 | **Rates y mundo** | **PvP/PvE en un clic** sin reiniciar. Multiplicadores de recolección, recogida, canteras y velocidad de crafteo con preajustes (1x, 2x, 3x, 5x, 10x). Decay, upkeep, radiación, estabilidad y tiempo de la caja bloqueada. **Hora del día**, **clima** y **eventos** (carguero, helicóptero, lanzamiento aéreo, Chinook). |
@@ -154,6 +155,10 @@ Los permisos se comprueban en el servidor, no solo ocultando botones. El **regis
 **Si actualizas desde una versión anterior** (una sola contraseña): tu usuario es `admin` con la misma contraseña.
 
 **Contraseña olvidada:** otro propietario puede cambiarla en Administradores. Si el único propietario la olvida, detén el panel, borra la lista `"users"` de `data/config.json` y al entrar podrás crear un propietario nuevo.
+
+## Baneos compartidos
+
+**Baneos compartidos** convierte el panel en un servidor del [Centralized Banning](https://wiki.facepunch.com/rust/centralized-banning) de Rust. Al activarlo, el panel configura `server.bansServerEndpoint` en su servidor. Para otros servidores, pon la dirección pública del panel, añade un servidor para obtener su comando (cada uno con su propia clave de 256 bits, que puedes cambiar o quitar) y pégalo en su consola y su `server.cfg`. La lista incluye los baneos del servidor, los añadidos en el panel y, si quieres, los silencios. Se pueden consultar listas externas con el mismo formato en modo aviso o bloqueo; solo se envía el SteamID. Por defecto, si el panel está apagado los jugadores pueden entrar igualmente, así que tus servidores nunca dependen de él.
 
 ## Detección de VPN y país
 

@@ -139,6 +139,7 @@
         <a data-view="players"><svg class="i"><use href="#i-users"/></svg><span data-i18n="nav.players"></span><span class="nav-count" id="navPlayers"></span></a>
         <a data-view="watch"><svg class="i"><use href="#i-shield"/></svg><span data-i18n="nav.watch"></span><span class="nav-count nav-count--alert" id="navAlerts"></span></a>
         <a data-view="tickets"><svg class="i"><use href="#i-flag"/></svg><span data-i18n="nav.tickets"></span><span class="nav-count nav-count--alert" id="navTickets"></span></a>
+        <a data-view="bans"><svg class="i"><use href="#i-lock"/></svg><span data-i18n="nav.bans"></span></a>
         <p class="nav-group" data-i18n="nav.g.modding"></p>
         <a data-view="plugins"><svg class="i"><use href="#i-plug"/></svg><span data-i18n="nav.plugins"></span><span class="nav-count" id="navUpdates"></span></a>
         <a data-view="perms"><svg class="i"><use href="#i-key"/></svg><span data-i18n="nav.perms"></span></a>
@@ -704,7 +705,70 @@
           <p class="field-hint tk-note" data-i18n="tk.bridgeNote"></p>
         </section>
 
-        <!-- VIP CON CADUCIDAD -->
+        <!-- BANEOS COMPARTIDOS -->
+        <section data-section="bans" hidden>
+          <div class="callout callout--info" id="blIntro"><svg class="i"><use href="#i-lock"/></svg><div class="callout-body" data-i18n-html="bl.intro"></div></div>
+          <div class="cols cols--wide-left">
+            <div class="panel">
+              <div class="panel-head"><h3 data-i18n="bl.listTitle"></h3><span class="tag" id="blCount"></span><input class="input-sm bl-search" id="blSearch" type="search" data-i18n-ph="bl.searchPh" spellcheck="false"></div>
+              <div class="table-wrap"><table class="table" id="blTable"><thead><tr><th data-i18n="bl.h.player"></th><th data-i18n="bl.h.reason"></th><th data-i18n="bl.h.origin"></th><th data-i18n="bl.h.ends"></th><th></th></tr></thead><tbody></tbody></table></div>
+            </div>
+            <div class="form-stack">
+              <form class="panel" id="blAdd" data-perm-form="players.ban">
+                <div class="panel-head"><h3 data-i18n="bl.addTitle"></h3></div>
+                <div class="panel-body form-stack">
+                  <label class="field"><span data-i18n="bl.steamid"></span><input name="steamId" list="blPlayers" required pattern="7656\d{13}" spellcheck="false" placeholder="7656119…"><datalist id="blPlayers"></datalist></label>
+                  <label class="field"><span data-i18n="bl.name"></span><input name="name" maxlength="64"></label>
+                  <label class="field"><span data-i18n="bl.reason"></span><input name="reason" maxlength="200" required><small class="field-hint" data-i18n="bl.reasonHint"></small></label>
+                  <div class="grid-fields">
+                    <label class="field"><span data-i18n="bl.duration"></span><select name="minutes"><option value="60">1 h</option><option value="1440">1 d</option><option value="10080">7 d</option><option value="43200">30 d</option><option value="0" selected data-i18n="bl.permanent"></option></select></label>
+                    <label class="field"><span data-i18n="bl.type"></span><select name="isMute"><option value="" data-i18n="bl.typeBan"></option><option value="1" data-i18n="bl.typeMute"></option></select></label>
+                  </div>
+                  <div class="savebar savebar--inline"><button class="btn btn-primary"><svg class="i"><use href="#i-lock"/></svg><span data-i18n="bl.addBtn"></span></button></div>
+                </div>
+              </form>
+              <form class="panel" id="blCheck" data-perm-form="players.ban">
+                <div class="panel-head"><h3 data-i18n="bl.checkTitle"></h3></div>
+                <div class="panel-body form-stack">
+                  <div class="inline-form"><input name="steamId" required pattern="7656\d{13}" spellcheck="false" placeholder="7656119…" aria-label="SteamID"><button class="btn"><svg class="i"><use href="#i-search"/></svg><span data-i18n="bl.checkBtn"></span></button></div>
+                  <div id="blCheckOut" class="callout" hidden></div>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="cols">
+            <form class="panel" id="blForm" data-perm-form="server.config">
+              <div class="panel-head"><h3 data-i18n="bl.setTitle"></h3><span class="tag" id="blState"></span></div>
+              <div class="panel-body form-stack">
+                <label class="switch"><input type="checkbox" name="enabled"><span class="switch-ui"></span><span data-i18n="bl.enabled"></span></label>
+                <label class="switch"><input type="checkbox" name="applyLocal"><span class="switch-ui"></span><span data-i18n="bl.applyLocal"></span></label>
+                <label class="switch"><input type="checkbox" name="shareMutes"><span class="switch-ui"></span><span data-i18n="bl.shareMutes"></span></label>
+                <label class="field"><span data-i18n="bl.failure"></span><select name="failureMode"><option value="0" data-i18n="bl.failure0"></option><option value="1" data-i18n="bl.failure1"></option></select><small class="field-hint" data-i18n="bl.failureHint"></small></label>
+                <label class="field"><span data-i18n="bl.publicUrl"></span><input name="publicUrl" spellcheck="false" placeholder="http://203.0.113.10:8080"><small class="field-hint" data-i18n-html="bl.publicUrlHint"></small></label>
+                <div id="blApplyErr" class="callout callout--warn" hidden></div>
+                <div class="savebar savebar--inline"><button class="btn btn-primary" data-i18n="common.save"></button></div>
+              </div>
+            </form>
+            <div class="panel" data-perm-form="server.config">
+              <div class="panel-head"><h3 data-i18n="bl.keysTitle"></h3></div>
+              <div class="panel-body form-stack">
+                <p class="muted-p" data-i18n-html="bl.keysSub"></p>
+                <ul class="wp-list bl-keys" id="blKeys"></ul>
+                <form class="inline-form" id="blKeyAdd"><input name="name" maxlength="40" required data-i18n-ph="bl.keyNamePh"><button class="btn"><svg class="i"><use href="#i-plus"/></svg><span data-i18n="bl.keyAdd"></span></button></form>
+              </div>
+            </div>
+          </div>
+          <form class="panel" id="blSources" data-perm-form="server.config">
+            <div class="panel-head"><h3 data-i18n="bl.srcTitle"></h3></div>
+            <div class="panel-body form-stack">
+              <p class="muted-p" data-i18n-html="bl.srcSub"></p>
+              <div id="blSrcRows" class="bl-src-rows"></div>
+              <div class="savebar savebar--inline"><button type="button" class="btn" id="blSrcAdd"><svg class="i"><use href="#i-plus"/></svg><span data-i18n="bl.srcAdd"></span></button><button class="btn btn-primary" data-i18n="common.save"></button></div>
+            </div>
+          </form>
+        </section>
+
+        <!-- VIP -->
         <section data-section="vip" hidden>
           <div class="callout callout--warn" id="vipVanilla" hidden><svg class="i"><use href="#i-alert"/></svg><div class="callout-body" data-i18n-html="vip.vanilla"></div></div>
           <div class="cols cols--wide-left">

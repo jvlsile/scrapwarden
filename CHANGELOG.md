@@ -11,6 +11,7 @@ First public beta.
 - Live map with roads, rails, rivers, power lines, monuments, events and a legend.
 - Moderation: notes, warnings with automatic sanctions, timed mutes and temp bans, word filter.
 - Watch: cheat alerts, Steam profile checks (including recent game bans), ban evasion and shared IP detection.
+- Shared bans: Oxidian serves Rust's official Centralized Banning API (works on vanilla), with a secret key per server and optional external lists in alert or block mode.
 - VPN, proxy, hosting-IP and country detection (proxycheck.io or ip-api.com) with alert or kick.
 - F7 report tickets, in-game staff menu (`/staff`) and VIP with expiry and queue priority.
 - Tebex store delivery without the Tebex plugin.

@@ -28,15 +28,16 @@ for (const m of pubPage.matchAll(/t\([\w.]+ \? '([\w.]+)' : '([\w.]+)'/g)) { add
 
 // Claves dinámicas conocidas
 const dyn = {
+  'bl.src.': ['server', 'manual', 'mute', 'ext'],
   'status.': ['running', 'starting', 'stopping', 'stopped'],
   'sev.': ['low', 'medium', 'high'],
-  'kind.': ['antihack', 'report', 'aim', 'distance', 'kills', 'evasion', 'shared-ip', 'log', 'steam', 'team', 'ip'],
+  'kind.': ['antihack', 'report', 'aim', 'distance', 'kills', 'evasion', 'shared-ip', 'log', 'steam', 'team', 'ip', 'banlist'],
   'role.': ['owner', 'admin', 'moderator', 'viewer'],
   'role.help.': ['owner', 'admin', 'moderator', 'viewer'],
   'steam.mode.': ['off', 'alert', 'kick'],
   'map.ev.': ['cargo', 'heli', 'bradley', 'chinook'],
   'kick.': ['steam_ban', 'steam_community', 'steam_new', 'steam_private', 'steam_hours'],
-  'audit.a.': ['password', 'user_create', 'user_update', 'user_delete', 'notify_lang', 'config', 'schedule', 'platform', 'install_server', 'install_framework', 'server_start', 'server_stop', 'server_restart', 'server_kill', 'server_restart_warned', 'server_save', 'rcon', 'say', 'player_kick', 'player_ban', 'player_unban', 'player_owner', 'player_moderator', 'player_removeowner', 'player_removemoderator', 'player_give', 'inventory_remove', 'inventory_clear', 'alerts', 'steam_check', 'watch_bridge', 'watch_test_discord', 'watch_settings', 'steam_settings', 'plugin_install', 'plugin_upload', 'plugin_enable', 'plugin_disable', 'plugin_reload', 'plugin_delete', 'plugin_config', 'perm_grant', 'perm_revoke', 'perm_addgroup', 'perm_removegroup', 'perm_usergroup_add', 'perm_usergroup_remove', 'backup_create', 'backup_restore', 'backup_delete', 'wipe', '2fa_enable', '2fa_disable', '2fa_recovery', 'chat_pm', 'mod_note', 'mod_warn', 'mod_mute', 'mod_unmute', 'mod_note_delete', 'mod_warn_delete', 'mod_tempban', 'mod_policy', 'mod_filter', 'item_icons', 'rates', 'pve_mode', 'world_time', 'world_weather', 'world_event', 'wipe_plan', 'wipe_skip', 'perf', 'public_page', 'discord_bot', 'discord_say', 'ticket_assign', 'ticket_unassign', 'ticket_comment', 'ticket_reopen', 'ticket_close', 'vip_grant', 'vip_remove', 'vip_settings', 'staff_add', 'staff_remove', 'ingame_tp', 'ingame_bring', 'ingame_heal', 'ingame_warn', 'ingame_mute', 'ingame_unmute', 'ingame_kick', 'ingame_tempban1', 'ingame_tempban7', 'ingame_ban', 'ingame_ticket', 'ingame_world', 'store_settings', 'store_delivery', 'update_check', 'server_import', 'remote_mode', 'remote_disable', 'ipcheck_settings', 'remote_files'],
+  'audit.a.': ['password', 'user_create', 'user_update', 'user_delete', 'notify_lang', 'config', 'schedule', 'platform', 'install_server', 'install_framework', 'server_start', 'server_stop', 'server_restart', 'server_kill', 'server_restart_warned', 'server_save', 'rcon', 'say', 'player_kick', 'player_ban', 'player_unban', 'player_owner', 'player_moderator', 'player_removeowner', 'player_removemoderator', 'player_give', 'inventory_remove', 'inventory_clear', 'alerts', 'steam_check', 'watch_bridge', 'watch_test_discord', 'watch_settings', 'steam_settings', 'plugin_install', 'plugin_upload', 'plugin_enable', 'plugin_disable', 'plugin_reload', 'plugin_delete', 'plugin_config', 'perm_grant', 'perm_revoke', 'perm_addgroup', 'perm_removegroup', 'perm_usergroup_add', 'perm_usergroup_remove', 'backup_create', 'backup_restore', 'backup_delete', 'wipe', '2fa_enable', '2fa_disable', '2fa_recovery', 'chat_pm', 'mod_note', 'mod_warn', 'mod_mute', 'mod_unmute', 'mod_note_delete', 'mod_warn_delete', 'mod_tempban', 'mod_policy', 'mod_filter', 'item_icons', 'rates', 'pve_mode', 'world_time', 'world_weather', 'world_event', 'wipe_plan', 'wipe_skip', 'perf', 'public_page', 'discord_bot', 'discord_say', 'ticket_assign', 'ticket_unassign', 'ticket_comment', 'ticket_reopen', 'ticket_close', 'vip_grant', 'vip_remove', 'vip_settings', 'staff_add', 'staff_remove', 'ingame_tp', 'ingame_bring', 'ingame_heal', 'ingame_warn', 'ingame_mute', 'ingame_unmute', 'ingame_kick', 'ingame_tempban1', 'ingame_tempban7', 'ingame_ban', 'ingame_ticket', 'ingame_world', 'store_settings', 'store_delivery', 'update_check', 'server_import', 'remote_mode', 'remote_disable', 'ipcheck_settings', 'remote_files', 'banlist_settings', 'banlist_sources', 'banlist_key_add', 'banlist_key_reveal', 'banlist_key_rotate', 'banlist_key_remove', 'banlist_ban', 'banlist_unban'],
   'task.': ['server', 'oxide', 'carbon'],
   'phase.': ['starting', 'steamcmd_dl', 'steamcmd_update', 'allocating', 'downloading', 'verifying', 'committing', 'framework_dl', 'framework_extract'],
   'act.done.': ['start', 'stop', 'restart', 'kill'],
@@ -92,7 +93,7 @@ const dyn = {
   'log.vip_': ['expired', 'removed', 'granted', 'granted_perm', 'extended'],
 };
 for (const [p, list] of Object.entries(dyn)) list.forEach(x => add(p + x));
-for (const code of ['antihack_high', 'antihack', 'report_many', 'report', 'aim', 'distance', 'distance_head', 'kills', 'evasion', 'shared_ip', 'log_kick', 'log_antihack', 'test', 'steam_ban', 'steam_community', 'steam_new', 'steam_private', 'steam_hours', 'team_size', 'team_group', 'ip_vpn', 'ip_hosting', 'ip_country']) {
+for (const code of ['antihack_high', 'antihack', 'report_many', 'report', 'aim', 'distance', 'distance_head', 'kills', 'evasion', 'shared_ip', 'log_kick', 'log_antihack', 'test', 'steam_ban', 'steam_community', 'steam_new', 'steam_private', 'steam_hours', 'team_size', 'team_group', 'ip_vpn', 'ip_hosting', 'ip_country', 'banlist_hit']) {
   add(`alert.${code}.title`); add(`alert.${code}.detail`);
 }
 
@@ -104,7 +105,7 @@ for (const m of backend.matchAll(/\bL\('([\w]+)'/g)) add('log.' + m[1]);
 for (const m of backend.matchAll(/\bL\(\w+ \? '([\w]+)' : '([\w]+)'/g)) { add('log.' + m[1]); add('log.' + m[2]); }
 for (const m of read('lib/bridge/OxidianBridge.cs').matchAll(/error = "(\w+)"/g)) add('err.bridge_' + m[1]);
 for (const m of read('server.js').matchAll(/^\s+(\w+): '(?:str|int|port|bool|id|platform)'/gm)) add('cfg.' + m[1]);
-['session_expired', 'bad_request_json', 'forbidden', 'map_not_ready', 'bridge_map_render'].forEach(k => add('err.' + k));
+['banlist_apply_failed', 'banlist_need_public_url', 'session_expired', 'bad_request_json', 'forbidden', 'map_not_ready', 'bridge_map_render'].forEach(k => add('err.' + k));
 add('alert.kicked');
 
 for (const k of [...used]) if (/[._-]$/.test(k) || used.has(k + '_one') || ['watch.review', 'watch.settings'].includes(k)) used.delete(k);

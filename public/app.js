@@ -248,7 +248,7 @@ $('#logoutBtn').onclick = async () => { await api('/logout', { body: {} }).catch
 // ======================================================================
 // Navegación
 // ======================================================================
-const VIEWS = ['dashboard', 'stats', 'perf', 'console', 'chat', 'map', 'players', 'watch', 'tickets', 'vip', 'store', 'staff', 'plugins', 'perms', 'config', 'rates', 'schedule', 'wipes', 'public', 'discord', 'backups', 'install', 'admins', 'wiki', 'settings'];
+const VIEWS = ['dashboard', 'stats', 'perf', 'console', 'chat', 'map', 'players', 'watch', 'tickets', 'bans', 'vip', 'store', 'staff', 'plugins', 'perms', 'config', 'rates', 'schedule', 'wipes', 'public', 'discord', 'backups', 'install', 'admins', 'wiki', 'settings'];
 function go(view) {
   if (!VIEWS.includes(view) || (view === 'admins' && !can('users') && !can('audit'))) view = 'dashboard';
   if (state.view === 'map' && view !== 'map') mapStop();
@@ -258,7 +258,7 @@ function go(view) {
   document.title = `${t('nav.' + view)} | Oxidian`;
   history.replaceState(null, '', '#' + view);
   $('#rail').classList.remove('open');
-  const loaders = { dashboard: renderMini, console: renderConsole, players: loadPlayers, watch: loadWatch, plugins: loadPlugins, config: loadConfig, schedule: loadConfig, rates: loadRates, stats: loadStats, wipes: loadWipes, perf: loadPerf, public: loadPublic, discord: loadDiscord, tickets: loadTickets, vip: loadVip, store: loadStore, staff: loadStaff, backups: loadBackups, install: loadInstall, wiki: renderWiki, settings: loadAccount, map: mapStart, admins: loadAdmins, chat: loadChat };
+  const loaders = { dashboard: renderMini, console: renderConsole, players: loadPlayers, watch: loadWatch, plugins: loadPlugins, config: loadConfig, schedule: loadConfig, rates: loadRates, stats: loadStats, wipes: loadWipes, perf: loadPerf, public: loadPublic, discord: loadDiscord, tickets: loadTickets, bans: loadBans, vip: loadVip, store: loadStore, staff: loadStaff, backups: loadBackups, install: loadInstall, wiki: renderWiki, settings: loadAccount, map: mapStart, admins: loadAdmins, chat: loadChat };
   loaders[view]?.();
 }
 $$('.rail a[data-view]').forEach(a => { a.href = '#' + a.dataset.view; a.onclick = (e) => { e.preventDefault(); go(a.dataset.view); }; });
@@ -1986,6 +1986,149 @@ async function impApply() {
   }
 }
 
+
+// ======================================================================
+// Baneos compartidos (Centralized Banning de Rust)
+// ======================================================================
+const bl = { data: null };
+async function loadBans() {
+  try { bl.data = await api('/banlist'); } catch (e) { toast(e.message, true); return; }
+  renderBans();
+  api('/players').then(l => { $('#blPlayers').innerHTML = (l || []).map(p => `<option value="${esc(p.SteamID)}">${esc(p.DisplayName)}</option>`).join(''); }).catch(() => {});
+}
+function renderBans() {
+  const d = bl.data;
+  const f = $('#blForm').elements;
+  f.enabled.checked = d.enabled; f.applyLocal.checked = d.applyLocal; f.shareMutes.checked = d.shareMutes;
+  f.failureMode.value = String(d.failureMode); f.publicUrl.value = d.publicUrl || '';
+  const st = !d.enabled ? [t('bl.st.off'), ''] : d.applied.ok ? [t('bl.st.on'), ' tag--ok'] : d.applyLocal ? [t('bl.st.pending'), ' tag--busy'] : [t('bl.st.shared'), ' tag--ok'];
+  $('#blState').textContent = st[0]; $('#blState').className = 'tag' + st[1];
+  const err = d.enabled && d.applyLocal && d.applied.error;
+  $('#blApplyErr').hidden = !err;
+  if (err) $('#blApplyErr').innerHTML = `<svg class="i"><use href="#i-alert"/></svg><div>${esc(t('err.' + d.applied.error))}</div>`;
+  renderBanTable();
+  // Claves: una por servidor o por amigo que use la lista
+  $('#blKeys').innerHTML = d.keys.map(k => `<li>
+    <div class="bl-key-main"><b>${esc(k.local ? t('bl.keyLocal') : k.name)}</b><small><code>${esc(k.hint)}</code> · ${esc(k.lastUsed ? t('bl.keyUsed', { when: fmtDate(k.lastUsed), n: fmtNum(k.hits) }) : t('bl.keyNever'))}</small></div>
+    <button class="btn btn-sm" data-bl-copy="${esc(k.id)}"><svg class="i"><use href="#i-copy"/></svg>${esc(t('bl.keyCopy'))}</button>
+    <button class="btn btn-sm btn-quiet" data-bl-rotate="${esc(k.id)}" title="${esc(t('bl.keyRotateHint'))}"><svg class="i"><use href="#i-rotate"/></svg>${esc(t('bl.keyRotate'))}</button>
+    ${k.local ? '' : `<button class="btn btn-sm btn-quiet btn-icon" data-bl-revoke="${esc(k.id)}" data-name="${esc(k.name)}" title="${esc(t('bl.keyRevoke'))}" aria-label="${esc(t('bl.keyRevoke'))}"><svg class="i"><use href="#i-trash"/></svg></button>`}
+  </li>`).join('');
+  bl.sources = d.sources.map(x => ({ ...x }));
+  renderSources();
+  applyPerms($('[data-section="bans"]'));
+}
+function renderBanTable() {
+  const q = ($('#blSearch').value || '').trim().toLowerCase();
+  const all = bl.data.entries;
+  const list = q ? all.filter(e => (e.steamId + ' ' + (e.name || '') + ' ' + (e.reason || '')).toLowerCase().includes(q)) : all;
+  $('#blCount').textContent = fmtNum(all.length);
+  $('#blTable tbody').innerHTML = list.length ? list.map(e => {
+    const left = e.expiry ? (e.expiry - Date.now()) / 1000 : null;
+    const ends = e.expiry ? `<b>${esc(fmtDur(left))}</b><small>${esc(fmtDate(e.expiry))}</small>` : `<b>${esc(t('bl.permanent'))}</b>`;
+    const type = e.isMute ? `<span class="tag">${esc(t('bl.typeMute'))}</span> ` : '';
+    return `<tr><td class="who"><b>${esc(e.name || e.steamId)}</b><small><code>${esc(e.steamId)}</code></small></td>
+      <td>${type}${esc(e.reason || '—')}</td>
+      <td>${esc(t('bl.src.' + e.source))}${e.by ? `<small>${esc(e.by)}</small>` : ''}</td>
+      <td>${ends}</td>
+      <td class="row-actions" data-perm="players.ban">${e.source === 'mute' ? '' : `<button class="btn btn-sm btn-quiet btn-icon" data-bl-del="${esc(e.steamId)}" data-name="${esc(e.name || e.steamId)}" data-source="${esc(e.source)}" title="${esc(t('bl.remove'))}" aria-label="${esc(t('bl.remove'))}"><svg class="i"><use href="#i-trash"/></svg></button>`}</td></tr>`;
+  }).join('') : `<tr class="empty"><td colspan="5"><b>${esc(t('bl.empty'))}</b>${esc(t('bl.emptySub'))}</td></tr>`;
+  applyPerms($('#blTable'));
+}
+$('#blSearch').oninput = () => renderBanTable();
+function renderSources() {
+  $('#blSrcRows').innerHTML = bl.sources.length ? bl.sources.map((x, i) => `<div class="bl-src" data-i="${i}">
+    <input name="name" maxlength="40" value="${esc(x.name || '')}" placeholder="${esc(t('bl.srcName'))}" aria-label="${esc(t('bl.srcName'))}">
+    <input name="url" spellcheck="false" value="${esc(x.url || '')}" placeholder="https://…/rustbans/" aria-label="URL">
+    <select name="mode" aria-label="${esc(t('bl.srcMode'))}"><option value="alert"${x.mode !== 'block' ? ' selected' : ''}>${esc(t('bl.srcAlert'))}</option><option value="block"${x.mode === 'block' ? ' selected' : ''}>${esc(t('bl.srcBlock'))}</option></select>
+    <label class="switch"><input type="checkbox" name="enabled"${x.enabled !== false ? ' checked' : ''}><span class="switch-ui"></span><span>${esc(t('bl.srcOn'))}</span></label>
+    <button type="button" class="btn btn-sm" data-bl-test="${i}">${esc(t('bl.srcTest'))}</button>
+    <button type="button" class="btn btn-sm btn-quiet btn-icon" data-bl-src-del="${i}" aria-label="${esc(t('bl.remove'))}"><svg class="i"><use href="#i-trash"/></svg></button>
+  </div>`).join('') : `<p class="muted-p">${esc(t('bl.srcEmpty'))}</p>`;
+}
+function readSources() {
+  return [...$('#blSrcRows').querySelectorAll('.bl-src')].map(r => ({
+    id: bl.sources[+r.dataset.i]?.id, name: r.querySelector('[name=name]').value.trim(), url: r.querySelector('[name=url]').value.trim(),
+    mode: r.querySelector('[name=mode]').value, enabled: r.querySelector('[name=enabled]').checked,
+  }));
+}
+$('#blSrcAdd').onclick = () => { bl.sources = [...readSources(), { name: '', url: '', mode: 'alert', enabled: true }]; renderSources(); };
+$('#blSrcRows').onclick = async (e) => {
+  const del = e.target.closest('[data-bl-src-del]'), test = e.target.closest('[data-bl-test]');
+  if (del) { const l = readSources(); l.splice(+del.dataset.blSrcDel, 1); bl.sources = l; renderSources(); }
+  if (test) {
+    const url = readSources()[+test.dataset.blTest].url;
+    test.disabled = true;
+    const r = await act(() => api('/banlist/sources/test', { body: { url } }));
+    test.disabled = false;
+    if (r && r !== true) toast(t('bl.srcTestOk', { ms: r.ms }));
+  }
+};
+$('#blSources').onsubmit = async (e) => {
+  e.preventDefault();
+  const r = await act(() => api('/banlist/sources', { method: 'PUT', body: { sources: readSources() } }), t('bl.saved'));
+  if (r && r !== true) loadBans();
+};
+$('#blForm').onsubmit = async (e) => {
+  e.preventDefault();
+  const f = e.target.elements;
+  const r = await act(() => api('/banlist', { method: 'PUT', body: { enabled: f.enabled.checked, applyLocal: f.applyLocal.checked, shareMutes: f.shareMutes.checked, failureMode: f.failureMode.value, publicUrl: f.publicUrl.value.trim() } }), t('bl.saved'));
+  if (r && r !== true) loadBans();
+};
+$('#blAdd').onsubmit = async (e) => {
+  e.preventDefault();
+  const f = e.target.elements;
+  const body = { steamId: f.steamId.value.trim(), name: f.name.value.trim(), reason: f.reason.value.trim(), minutes: f.minutes.value, isMute: !!f.isMute.value };
+  const r = await act(() => api('/banlist/bans', { body }), t('bl.added'));
+  if (r && r !== true) { e.target.reset(); f.minutes.value = '0'; loadBans(); }
+};
+$('#blCheck').onsubmit = async (e) => {
+  e.preventDefault();
+  const id = e.target.elements.steamId.value.trim(), box = $('#blCheckOut');
+  const r = await act(() => api('/banlist/check/' + encodeURIComponent(id)));
+  if (!r || r === true) return;
+  const lines = [];
+  if (r.local) lines.push(`<b>${esc(r.local.isMute ? t('bl.chkMuted') : t('bl.chkBanned'))}</b> ${esc(t('bl.src.' + r.local.source))}: ${esc(r.local.reason || '—')}`);
+  for (const x of r.external) lines.push(`<b>${esc(x.source)}</b> (${esc(x.mode === 'block' ? t('bl.srcBlock') : t('bl.srcAlert'))}): ${esc(x.reason || '—')}`);
+  const bad = lines.length > 0;
+  box.className = 'callout ' + (bad ? 'callout--warn' : 'callout--ok');
+  box.innerHTML = `<svg class="i"><use href="#i-${bad ? 'alert' : 'check'}"/></svg><div>${bad ? lines.join('<br>') : esc(t('bl.chkClean'))}</div>`;
+  box.hidden = false;
+};
+$('#blTable').onclick = async (e) => {
+  const b = e.target.closest('[data-bl-del]'); if (!b) return;
+  const body = b.dataset.source === 'server' ? t('bl.removeServerBody', { name: b.dataset.name }) : t('bl.removeBody', { name: b.dataset.name });
+  if (!await confirmDialog({ title: t('bl.remove'), body: esc(body), confirm: t('bl.remove'), danger: true })) return;
+  const r = await act(() => api('/banlist/bans/' + b.dataset.blDel, { method: 'DELETE' }), t('bl.removed'));
+  if (r) loadBans();
+};
+async function showKey(r) {
+  const cmd = r.command;
+  try { await navigator.clipboard.writeText(cmd); } catch {}
+  await openDialog({
+    title: t('bl.keyDlgTitle'),
+    body: `<p>${esc(r.needsPublicUrl ? t('bl.keyDlgNeedUrl') : t('bl.keyDlgBody'))}</p><pre class="bl-cmd">${esc(cmd)}</pre><p class="field-hint">${esc(t('bl.keyDlgSecret'))}</p>`,
+    actions: [{ label: t('common.close'), value: true, cls: 'btn-primary' }],
+  });
+}
+$('#blKeys').onclick = async (e) => {
+  const c = e.target.closest('[data-bl-copy]'), rot = e.target.closest('[data-bl-rotate]'), rev = e.target.closest('[data-bl-revoke]');
+  if (c) { const r = await act(() => api(`/banlist/keys/${c.dataset.blCopy}/reveal`, { body: {} })); if (r && r !== true) showKey(r); }
+  if (rot) {
+    if (!await confirmDialog({ title: t('bl.keyRotate'), body: esc(t('bl.keyRotateBody')), confirm: t('bl.keyRotate'), danger: true })) return;
+    const r = await act(() => api(`/banlist/keys/${rot.dataset.blRotate}/rotate`, { body: {} })); if (r && r !== true) { showKey(r); loadBans(); }
+  }
+  if (rev) {
+    if (!await confirmDialog({ title: t('bl.keyRevoke'), body: esc(t('bl.keyRevokeBody', { name: rev.dataset.name })), confirm: t('bl.keyRevoke'), danger: true })) return;
+    if (await act(() => api(`/banlist/keys/${rev.dataset.blRevoke}`, { method: 'DELETE' }), t('bl.keyRevoked'))) loadBans();
+  }
+};
+$('#blKeyAdd').onsubmit = async (e) => {
+  e.preventDefault();
+  const r = await act(() => api('/banlist/keys', { body: { name: e.target.elements.name.value.trim() } }));
+  if (r && r !== true) { e.target.reset(); await loadBans(); const k = await act(() => api(`/banlist/keys/${r.id}/reveal`, { body: {} })); if (k && k !== true) showKey(k); }
+};
+
 // --- Modo remoto ---
 async function loadRemote() {
   let r; try { r = await api('/remote'); } catch { return; }
@@ -3227,6 +3370,7 @@ function connectWs() {
     if (type === 'update') { renderUpdate(data); toast(t('upd.toast', { v: data.latest })); }
     if (type === 'tickets') { setTicketBadge(data); if (state.view === 'tickets' && $('#dialog').hidden) loadTickets(); }
     if (type === 'vip') $('#navVip').textContent = data.active || '';
+    if (type === 'banlist' && state.view === 'bans') loadBans();
     if (type === 'store' && data.purchase?.ok && data.purchase.name) toast(t('sh.toast', { name: data.purchase.name }));
     if (type === 'store' && state.view === 'store') loadStore();
     if (type === 'progress') onProgress(data);

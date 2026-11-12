@@ -38,6 +38,7 @@ Most Rust admins juggle several tools: one to install the server, a paid RCON da
 | **Players & teams** | Kick, ban, owner/moderator, give items, inventory viewer with item icons. Team-size limit alerts. |
 | **F7 report tickets** | Every in-game F7 opens a ticket, grouped by reported player. Assign, add staff notes, close with a sanction and thank the reporters. |
 | **In-game staff (`/staff`)** | A UI inside Rust for your mods and admins: reports, warn, mute, kick, ban, teleport, heal, time, weather, events. Two levels, everything logged. |
+| **Shared bans** | Oxidian acts as a server for Rust's official **Centralized Banning**: a ban on one server applies to all of them, vanilla included, no plugins. One secret key per server, optional external lists (another Oxidian, Server Armour) in alert or block mode. |
 | **Moderation** | Notes, warnings with automatic escalation, timed mutes and temp bans, word filter with wildcards. |
 | **Watch** | Alerts for suspicious headshot rates, impossible distances, antihack violations, kill streaks, shared IPs and ban evasion. Steam checks (VAC, recent game bans, account age, private profile, hours). VPN, proxy, hosting-IP and country detection. |
 | **Rates & world** | One-click PvP/PvE, gather / pickup / quarry / craft multipliers, decay, upkeep, radiation, time of day, weather and events. |
@@ -117,6 +118,10 @@ The built-in **Wiki** walks you through everything else.
 **FTP/SFTP access (optional).** In remote mode, add your host's FTP, FTPS or SFTP details and the folder that contains `RustDedicated`, then press **Test**. The **Plugins** section then works as usual (uMod install, upload, enable/disable, config editor) and the panel uploads and updates `OxidianBridge.cs` itself. Without it, download `OxidianBridge.cs` from the panel and upload it to `oxide/plugins` or `carbon/plugins` with your host's file manager. Prefer SFTP: plain FTP sends the password unencrypted.
 
  Scheduled restarts warn players, save and shut the server down so your host can start it again.
+
+## Shared bans
+
+**Shared bans** turns the panel into an endpoint for Rust's [Centralized Banning](https://wiki.facepunch.com/rust/centralized-banning). Enable it and the panel sets `server.bansServerEndpoint` on its own server. For other servers, set the panel's public address, add a server to get its command (each one has its own 256-bit key you can rotate or revoke) and paste it into that server's console and `server.cfg`. The list contains your server's native bans, bans added in the panel and, optionally, mutes. External lists in the same format can be checked in alert or block mode; only the SteamID is sent. With the default failure mode, players can still join if the panel is down, so your servers never depend on it.
 
 ## VPN and country detection
 

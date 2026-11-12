@@ -1208,3 +1208,18 @@ td.empty { color: var(--muted); text-align: center; padding: 20px; }
 .callout--ok { background: var(--patina-wash); border-color: rgba(91,181,162,.3); }
 .callout--ok .i { color: var(--patina); }
 #rfResult small { display: block; margin-top: 6px; word-break: break-word; }
+
+/* Baneos compartidos */
+.inline-form { display: flex; gap: 10px; align-items: stretch; }
+.inline-form input { flex: 1; min-width: 0; }
+.bl-search { width: 200px; margin-left: auto; padding-top: 6px; padding-bottom: 6px; }
+#blTable td.who small, #blTable td small { display: block; color: var(--muted); }
+.bl-keys li { flex-wrap: wrap; }
+.bl-keys .bl-key-main { flex: 1; min-width: 160px; }
+.bl-keys .bl-key-main small { display: block; color: var(--muted); }
+.bl-src-rows { display: flex; flex-direction: column; gap: 10px; }
+.bl-src { display: grid; grid-template-columns: 1fr 2.2fr 150px auto auto auto; gap: 10px; align-items: center; }
+.bl-src .switch { white-space: nowrap; }
+@media (max-width: 900px) { .bl-src { grid-template-columns: 1fr 1fr; } .bl-src input[name=url] { grid-column: 1 / -1; } .bl-search { width: 140px; } }
+.bl-cmd { white-space: pre-wrap; word-break: break-all; background: var(--steel-900, #12171B); border: 1px solid var(--line-soft); border-radius: 8px; padding: 12px 14px; font: 13px var(--font-mono); margin: 12px 0; }
+[data-section="bans"] > * + * { margin-top: 20px; }

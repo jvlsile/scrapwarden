@@ -33,6 +33,7 @@ const update = require('./lib/update');
 const importer = require('./lib/importer');
 const ipcheck = require('./lib/ipcheck');
 const files = require('./lib/files');
+const banlist = require('./lib/banlist');
 const staff = require('./lib/staff');
 const { can } = require('./lib/roles');
 const { bus, consoleBuffer, log } = require('./lib/bus');
@@ -72,6 +73,8 @@ app.get('/public-api/map.jpg', (req, res) => {
   try { res.set('Cache-Control', 'public, max-age=300'); res.sendFile(publicPage.mapImage()); }
   catch (e) { res.status(404).json({ error: e.message, code: e.code }); }
 });
+// Baneos compartidos: lo consultan los servidores de Rust (server.bansServerEndpoint), con clave secreta en la ruta
+app.get('/rustbans/:token/:steamid', (req, res) => { banlist.handle(req, res).catch(() => { if (!res.headersSent) res.status(500).end(); }); });
 app.post('/api/login', (req, res) => auth.login(req, res, req.body.username, req.body.password));
 app.post('/api/login/2fa', (req, res) => auth.login2fa(req, res, req.body.ticket, req.body.code));
 app.post('/api/logout', (req, res) => auth.logout(res));
@@ -101,6 +104,7 @@ const ACL = [
   ['GET', /^\/api\/remote$/, 'server.config'],
   ['GET', /^\/api\/remote\/files$/, 'server.config'],
   ['GET', /^\/api\/staff$/, 'perms'],
+  ['GET', /^\/api\/banlist\/check\/\d{17}$/, 'players.ban'],
   ['GET', /./, 'view'],
   ['POST', /^\/api\/password$/, null, 'password'],
   ['POST', /^\/api\/2fa\/setup$/, null, null],
@@ -139,6 +143,14 @@ const ACL = [
   ['POST', /^\/api\/update\/check$/, 'view', null],
   ['POST', /^\/api\/store\/(test|check)$/, 'server.config', null],
   ['POST', /^\/api\/staff$/, 'perms', 'staff_add'],
+  ['PUT', /^\/api\/banlist$/, 'server.config', 'banlist_settings'],
+  ['PUT', /^\/api\/banlist\/sources$/, 'server.config', 'banlist_sources'],
+  ['POST', /^\/api\/banlist\/sources\/test$/, 'server.config', null],
+  ['POST', /^\/api\/banlist\/keys$/, 'server.config', 'banlist_key_add'],
+  ['POST', /^\/api\/banlist\/keys\/[^/]+\/(reveal|rotate)$/, 'server.config', 'banlist_key_$1'],
+  ['DELETE', /^\/api\/banlist\/keys\//, 'server.config', 'banlist_key_remove'],
+  ['POST', /^\/api\/banlist\/bans$/, 'players.ban', 'banlist_ban'],
+  ['DELETE', /^\/api\/banlist\/bans\//, 'players.ban', 'banlist_unban'],
   ['POST', /^\/api\/staff\/sync$/, 'perms', null],
   ['DELETE', /^\/api\/staff\//, 'perms', 'staff_remove'],
   ['POST', /^\/api\/wipes\/skip$/, 'wipe', 'wipe_skip'],
@@ -281,6 +293,19 @@ function remoteInput(b, needPass) {
 const remoteView = () => { const r = config.get().remote; return { enabled: config.isRemote(), host: r.host, rconPort: r.rconPort, hasPassword: !!r.rconPassword, files: files.available() }; };
 app.get('/api/remote', h(() => remoteView()));
 app.get('/api/remote/files', h(() => files.view()));
+
+// ---------- Baneos compartidos ----------
+app.get('/api/banlist', h(() => ({ ...banlist.view(), entries: banlist.entries() })));
+app.put('/api/banlist', h((req) => banlist.update(req.body || {})));
+app.put('/api/banlist/sources', h((req) => banlist.setSources(req.body.sources)));
+app.post('/api/banlist/sources/test', h((req) => banlist.testSource(req.body.url)));
+app.post('/api/banlist/keys', h((req) => banlist.addKey(req.body.name)));
+app.post('/api/banlist/keys/:id/reveal', h((req) => banlist.revealKey(req.params.id)));
+app.post('/api/banlist/keys/:id/rotate', h((req) => banlist.rotateKey(req.params.id)));
+app.delete('/api/banlist/keys/:id', h((req) => banlist.removeKey(req.params.id)));
+app.post('/api/banlist/bans', h((req) => banlist.addBan(req.body || {}, req.user?.username)));
+app.delete('/api/banlist/bans/:id', h((req) => banlist.removeBan(req.params.id)));
+app.get('/api/banlist/check/:id', h((req) => banlist.check(req.params.id)));
 app.post('/api/remote/files/test', h((req) => files.test(req.body || {})));
 app.put('/api/remote/files', h(async (req) => {
   const v = files.update(req.body || {});
@@ -676,6 +701,7 @@ bus.on('tickets', (e) => broadcast('tickets', e));
 bus.on('vip', (e) => broadcast('vip', e));
 bus.on('store', (e) => broadcast('store', e));
 bus.on('update', (e) => broadcast('update', e));
+bus.on('banlist', (e) => broadcast('banlist', e));
 bus.on('alert', (a) => broadcast('alert', a));
 bus.on('progress', (p) => broadcast('progress', p));
 bus.on('chatmsg', (m) => broadcast('chatmsg', m));
@@ -698,6 +724,7 @@ httpServer.listen(port, () => {
   update.start();
   server.watchExternal();
   staff.start();
+  banlist.start();
   discordBot.start();
   if (!config.isRemote() && config.get().server.autostart && fs.existsSync(config.serverPaths().exe)) {
     // Si el servidor ya está encendido (arrancado fuera del panel) no se lanza otro: se adopta
