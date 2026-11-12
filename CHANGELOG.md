@@ -4,6 +4,8 @@
 
 First public beta.
 
+- OxidianBridge 1.6.2: fixes a compile error on current Rust builds (`PlayerMetabolism.SendChangesToClient` was removed). The panel updates the plugin automatically.
+
 - Installer for SteamCMD, Rust, Oxide and Carbon (Windows and Linux) with progress.
 - Import an existing server on the same machine (reads its start script and `server.cfg`) and attach to it if it's already running.
 - Remote mode: manage a rented server over RCON, with optional FTP/FTPS/SFTP access to manage plugins and upload the companion plugin automatically.

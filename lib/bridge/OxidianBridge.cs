@@ -16,7 +16,7 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("OxidianBridge", "Oxidian", "1.6.1")]
+    [Info("OxidianBridge", "Oxidian", "1.6.2")]
     [Description("Puente entre Oxidian y el servidor: inventarios, equipos, mapa en vivo, vigilancia, rates, eventos y herramientas de staff")]
     public class OxidianBridge : RustPlugin
     {
@@ -761,7 +761,7 @@ namespace Oxide.Plugins
                 {
                     target.metabolism.bleeding.value = 0f;
                     target.metabolism.radiation_poison.value = 0f;
-                    target.metabolism.SendChangesToClient();
+                    // Rust ya no expone SendChangesToClient: el metabolismo envía los cambios solo en su siguiente actualización
                 }
                 target.SendNetworkUpdate();
                 staff.ChatMessage(T("done.heal").Replace("{name}", name));
