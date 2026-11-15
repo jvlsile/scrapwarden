@@ -16,7 +16,7 @@ using UnityEngine;
 
 namespace Oxide.Plugins
 {
-    [Info("ScrapwardenBridge", "Scrapwarden", "1.7.0")]
+    [Info("ScrapwardenBridge", "Scrapwarden", "1.7.1")]
     [Description("Puente entre Scrapwarden y el servidor: inventarios, equipos, mapa en vivo, vigilancia, rates, eventos y herramientas de staff")]
     public class ScrapwardenBridge : RustPlugin
     {
@@ -272,6 +272,10 @@ namespace Oxide.Plugins
 
         #region Mapa en vivo
 
+        private static byte[] mapCache;
+        private static string mapCacheKey;
+        private static int mapCacheW, mapCacheH;
+
         [ConsoleCommand("scrapwarden.map")]
         private void CmdMap(ConsoleSystem.Arg arg)
         {
@@ -281,8 +285,21 @@ namespace Oxide.Plugins
             // Valores por defecto de MapImageRenderer: 0,5 píxeles por metro y 500 PÍXELES de océano a cada lado
             const float scale = 0.5f;
             const int oceanMargin = 500;
-            var bytes = MapImageRenderer.Render(out width, out height, out background);
-            if (bytes == null) { arg.ReplyWith(Reply(new { error = "map_render" })); return; }
+            // El render tarda 1-3 s en el hilo principal: se guarda y solo se repite si cambia el mundo
+            // o el panel lo pide con "scrapwarden.map refresh"
+            var key = World.Seed + ":" + World.Size;
+            var refresh = arg.Args != null && arg.Args.Any(a => a == "refresh");
+            byte[] bytes;
+            if (!refresh && mapCache != null && mapCacheKey == key)
+            {
+                bytes = mapCache; width = mapCacheW; height = mapCacheH;
+            }
+            else
+            {
+                bytes = MapImageRenderer.Render(out width, out height, out background);
+                if (bytes == null) { arg.ReplyWith(Reply(new { error = "map_render" })); return; }
+                mapCache = bytes; mapCacheKey = key; mapCacheW = width; mapCacheH = height;
+            }
             var monuments = TerrainMeta.Path != null
                 ? TerrainMeta.Path.Monuments.Where(m => m != null && m.displayPhrase != null && !string.IsNullOrEmpty(m.displayPhrase.english))
                     .Select(m => (object)new { name = m.displayPhrase.english, prefab = m.name, x = Math.Round(m.transform.position.x), z = Math.Round(m.transform.position.z) }).ToList()

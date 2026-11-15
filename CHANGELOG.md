@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.0-beta.2
+
+- Fixed "Map not available: unexpected server response" on real servers. Rust sends log lines printed while an RCON command runs with the same id as the reply, and Oxide's slow-call warning (`Calling 'CmdMap' ... took 2268ms`) arrived before the map data. The panel now skips those lines and waits for the real reply.
+- `ScrapwardenBridge` 1.7.1 keeps the rendered map in memory and only renders it again when the world changes or you press refresh, so opening the map no longer stalls the server for 2-3 seconds.
+
 ## 1.0.0-beta.1
 
 First public beta.

@@ -1,6 +1,6 @@
 {
   "name": "scrapwarden",
-  "version": "1.0.0-beta.1",
+  "version": "1.0.0-beta.2",
   "description": "Free self-hosted web panel to install, run, moderate and grow Rust dedicated servers (Oxide/Carbon, live map, F7 tickets, Discord, Tebex).",
   "keywords": [
     "rust",
